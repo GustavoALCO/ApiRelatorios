@@ -1,0 +1,32 @@
+version: "3.9"
+
+services:
+  apirelatorios.webapi:
+    image: ${DOCKER_REGISTRY-}apirelatorioswebapi
+    build:
+      context: .
+      dockerfile: APIRelatorios.WebAPI/Dockerfile
+    depends_on:
+      - postgres-db
+    environment:
+      ConnectionStrings__Host: postgres-db
+      ConnectionStrings__Port: "5432"
+      ConnectionStrings__Database: RelatorioDB
+      ConnectionStrings__User: AdminTeste
+      ConnectionStrings__Password: Teste123
+    ports:
+      - "8080:8080" # ajuste para a porta real da sua API
+
+  postgres-db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: RelatorioDB
+      POSTGRES_USER: AdminTeste
+      POSTGRES_PASSWORD: Teste123
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

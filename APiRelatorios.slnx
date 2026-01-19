@@ -1,0 +1,11 @@
+<Solution>
+  <Project Path="APIRelatorios.Application/APIRelatorios.Application.csproj" />
+  <Project Path="APIRelatorios.Dommain/APIRelatorios.Dommain.csproj" />
+  <Project Path="APIRelatorios.Infra/APIRelatorios.Infra.csproj" />
+  <Project Path="APIRelatorios.IOC/APIRelatorios.IOC.csproj" />
+  <Project Path="APIRelatorios.Testes/APIRelatorios.Testes.csproj" />
+  <Project Path="APIRelatorios.WebAPI/APIRelatorios.WebAPI.csproj" />
+  <Project Path="docker-compose.dcproj">
+    <Build />
+  </Project>
+</Solution>

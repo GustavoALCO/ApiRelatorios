@@ -1,0 +1,53 @@
+# ===============================
+# VS Code
+# ===============================
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# ===============================
+# .NET / Visual Studio
+# ===============================
+bin/
+obj/
+[Bb]uild/
+[Dd]ebug/
+[Rr]elease/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# ===============================
+# Logs
+# ===============================
+*.log
+
+# ===============================
+# AppSettings (configs sensíveis)
+# ===============================
+appsettings.json
+appsettings.*.json
+
+# Caso queira versionar apenas um exemplo
+!appsettings.Example.json
+
+# ===============================
+# Secrets
+# ===============================
+secrets.json
+*.secret.json
+
+# ===============================
+# OS
+# ===============================
+.DS_Store
+Thumbs.db
+
+# ===============================
+# Rider / Outros IDEs
+# ===============================
+.idea/
+*.iml
