@@ -6,6 +6,8 @@ public class Imagem
 
     public int RotaID { get; set; }
 
+    public string Alimentador { get; set; }
+
     public string? Descricao { get; set; }
 
     public required string ImageURL { get; set; }

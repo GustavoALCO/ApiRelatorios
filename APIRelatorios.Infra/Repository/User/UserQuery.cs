@@ -15,7 +15,20 @@ public class UserQuery : IUserQuery
 
     public async Task<Dommain.Entities.User> BuscarFiscalNome(string nome)
     {
-        return await _context.Fiscais.FindAsync(nome);
+        return await _context.Fiscais.FirstOrDefaultAsync(x=> x.Nome == nome);
+    }
+
+    public async Task<ICollection<Dommain.Entities.User>> BuscarListaFiscalIds(ICollection<int> idFiscal)
+    {
+        return await _context.Fiscais.
+                            Where(x => idFiscal.Contains(x.UserId))
+                            .ToListAsync();
+    }
+
+    public async Task<Dommain.Entities.User> BuscarListaFiscalId(int idFiscal)
+    {
+        return await _context.Fiscais.
+                            FirstOrDefaultAsync(x => x.UserId == idFiscal);
     }
 
     public async Task<ICollection<Dommain.Entities.User>> BuscarTodosFiscais()

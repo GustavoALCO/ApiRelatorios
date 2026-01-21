@@ -9,13 +9,16 @@ services:
     depends_on:
       - postgres-db
     environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:8080
+
       ConnectionStrings__Host: postgres-db
       ConnectionStrings__Port: "5432"
       ConnectionStrings__Database: RelatorioDB
       ConnectionStrings__User: AdminTeste
       ConnectionStrings__Password: Teste123
     ports:
-      - "8080:8080" # ajuste para a porta real da sua API
+      - "8080:8080"
 
   postgres-db:
     image: postgres:16

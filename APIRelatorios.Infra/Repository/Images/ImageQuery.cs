@@ -16,6 +16,15 @@ public class ImageQuery : IImageQuery
         _Context = context;
     }
 
+    public async Task<Imagem> GetImageId(int imageId)
+    {
+       
+        var image = await _Context.Imagem.FirstOrDefaultAsync(i => i.ImagemId == imageId);
+
+        return image;
+        
+    }
+
     async Task<ICollection<Imagem>> IImageQuery.GetImagemAsync(int RodaId)
     {
         try

@@ -11,4 +11,15 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Contracts\" />
+    <Folder Include="Features\Querys\Images\Handler\" />
+    <Folder Include="Features\Querys\Rota\Handler\" />
+    <Folder Include="Features\Querys\User\Handler\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\APIRelatorios.Dommain\APIRelatorios.Dommain.csproj" />
+  </ItemGroup>
+
 </Project>

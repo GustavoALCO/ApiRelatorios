@@ -46,4 +46,19 @@ public class ImageCommands : IImageCommands
                 ex);
         }
     }
+
+    public async Task UpdateImageAsync(Imagem img)
+    {
+        try
+        {
+            _databaseContext.Imagem.Update(img);
+
+            await _databaseContext.SaveChangesAsync();
+        }
+        catch (DbUpdateException ex)
+        {
+            throw new RepositoryException("Não foi Possivel Adicionar Imagem do Banco de dados",
+                ex);
+        }
+    }
 }
