@@ -6,5 +6,6 @@ public class UsuarioRota
     public Rota Rota { get; set; } = null!;
 
     public int UserID { get; set; }
+
     public User User { get; set; } = null!;
 }

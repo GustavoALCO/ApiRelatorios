@@ -1,6 +1,7 @@
 ﻿using APIRelatorios.Application.Features.Commands.Images.Handler;
 using APIRelatorios.Application.Features.Commands.Rota.Handler;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Settings;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -8,9 +9,11 @@ using APIRelatorios.Dommain.Interfaces.Services;
 using APIRelatorios.Dommain.Interfaces.User;
 using APIRelatorios.Infra.Auth;
 using APIRelatorios.Infra.Database;
+using APIRelatorios.Infra.Relatorios.Index;
 using APIRelatorios.Infra.Repository.Images;
 using APIRelatorios.Infra.Repository.Rota;
 using APIRelatorios.Infra.Repository.User;
+using APIRelatorios.Infra.Requets;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Service;
 using Microsoft.EntityFrameworkCore;
@@ -65,8 +68,8 @@ public static class DependencyInjection
 
     public static IServiceCollection DeclareInterfaces(this IServiceCollection services)
     {
-        services.AddScoped<IImageCommands, ImageCommands>();
-        services.AddScoped<IImageQuery, ImageQuery>();
+        services.AddScoped<IEvidenciaRotaCommands, EvidenciaRotaCommands>();
+        services.AddScoped<IEvidenciaRotaQuery, EvidenciaRotaQuery>();
 
         services.AddScoped<IUserCommands, UserCommands>();
         services.AddScoped<IUserQuery, UserQuery>();
@@ -83,12 +86,16 @@ public static class DependencyInjection
 
         services.AddScoped<ISavedImages, SavedImage>();
 
+        services.AddScoped<IRelatorioDeIrregularidades, RelatorioDeIrregulariedades>();
+
+        services.AddScoped<IBuscarByteImagem, BuscarByteImagem>();
+
         return services;
     }
 
     public static IServiceCollection DeclareHandlerAplication(this IServiceCollection services)
     {
-        services.AddScoped<CreateImage>();
+        services.AddScoped<CreateImageHandler>();
         services.AddScoped<DeleteImageHandler>();
         services.AddScoped<UpdateDescricaoImageHandler>();
 
@@ -97,6 +104,7 @@ public static class DependencyInjection
         services.AddScoped<DeleteRotaHandler>();
         services.AddScoped<RemoveFiscalRotaHandler>();
         services.AddScoped<UpdateNomeRotaHandler>();
+        services.AddScoped<CreateRelatorioHandler>();
 
         services.AddScoped<LoginHandler>();
         services.AddScoped<DeleteUsuarioHandler>();

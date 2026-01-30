@@ -20,7 +20,7 @@ public class UpdateNomeRotaHandler
         var rota = await _query.BuscarRotaID(updNome.rotaId) ??
             throw new Exception("Erro ao Encontrar Rota no Banco de dados"); ;
 
-        rota.NomeRota = updNome.nomeRota;
+        rota.AlterarNomeRota(updNome.nomeRota);
 
         await _commands.UpdateRotaAsync(rota);
     }

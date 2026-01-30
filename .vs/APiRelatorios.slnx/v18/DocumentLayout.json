@@ -1,7 +1,20 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\alves\\source\\repos\\APiRelatorios\\",
-  "Documents": [],
+  "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\index\\relatoriodeirregulariedades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\index\\relatoriodeirregulariedades.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\rowimagescomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\rowimagescomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\corpo\\bodyrelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\corpo\\bodyrelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,11 +22,50 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "RelatorioDeIrregulariedades.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Index\\RelatorioDeIrregulariedades.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Index\\RelatorioDeIrregulariedades.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Index\\RelatorioDeIrregulariedades.cs",
+              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Index\\RelatorioDeIrregulariedades.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAqwC4AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T12:26:33.073Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "RowImagesComponentes.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\RowImagesComponentes.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\RowImagesComponentes.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\RowImagesComponentes.cs",
+              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\RowImagesComponentes.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAuwBIAAAAlAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T12:20:48.445Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BodyRelatorio.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
+              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-01-30T12:20:20.749Z",
+              "EditorCaption": ""
             }
           ]
         }

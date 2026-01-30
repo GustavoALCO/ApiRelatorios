@@ -22,16 +22,21 @@ namespace APIRelatorios.Infra.Migrations
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("APIRelatorios.Dommain.Entities.Imagem", b =>
+            modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>
                 {
-                    b.Property<int>("ImagemId")
+                    b.Property<int>("EvidenciaRotaId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("ImagemId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EvidenciaRotaId"));
 
-                    b.Property<int>("Cep")
-                        .HasColumnType("integer");
+                    b.Property<string>("Alimentador")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("Cep")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<string>("Descricao")
                         .HasColumnType("text");
@@ -59,13 +64,16 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<int?>("RotaId")
                         .HasColumnType("integer");
 
-                    b.HasKey("ImagemId");
+                    b.Property<int>("TemaFiscalizacao")
+                        .HasColumnType("integer");
+
+                    b.HasKey("EvidenciaRotaId");
 
                     b.HasIndex("RotaID");
 
                     b.HasIndex("RotaId");
 
-                    b.ToTable("Imagem");
+                    b.ToTable("EvidenciaRota");
                 });
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.Rota", b =>
@@ -132,7 +140,7 @@ namespace APIRelatorios.Infra.Migrations
                     b.ToTable("UsuarioRotas");
                 });
 
-            modelBuilder.Entity("APIRelatorios.Dommain.Entities.Imagem", b =>
+            modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>
                 {
                     b.HasOne("APIRelatorios.Dommain.Entities.Rota", "Rota")
                         .WithMany()

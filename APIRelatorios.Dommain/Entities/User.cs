@@ -1,4 +1,6 @@
-﻿namespace APIRelatorios.Dommain.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace APIRelatorios.Dommain.Entities;
 
 public class User
 {
@@ -12,5 +14,6 @@ public class User
 
     public required bool IsActive { get; set; }
 
+    [JsonIgnore]
     public ICollection<UsuarioRota> usuarioRotas { get; set; } = new List<UsuarioRota>();
 }

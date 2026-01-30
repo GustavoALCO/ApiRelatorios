@@ -1,6 +1,8 @@
-﻿using APIRelatorios.Dommain.Interfaces.Rota;
+﻿using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Exeptions;
+using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
 namespace APIRelatorios.Infra.Repository.Rota;
@@ -12,6 +14,21 @@ public class RotaCommands : IRotaCommands
     public RotaCommands(DatabaseContext context)
     {
         _context = context;
+    }
+
+    public async Task AdicionarFiscalRota(UsuarioRota usuarioRota)
+    {
+        try
+        {
+            await _context.AddAsync(usuarioRota);
+
+            await _context.SaveChangesAsync();
+        }
+        catch (DbException ex)
+        {
+            throw new RepositoryException("Erro ao remover Usuario da Rota",
+                ex);
+        }
     }
 
     public async Task CreateRotaAsync(Dommain.Entities.Rota rota)
@@ -40,6 +57,24 @@ public class RotaCommands : IRotaCommands
         catch (DbException ex)
         {
             throw new RepositoryException("Erro ao remover Rota ao banco de dados",
+                ex);
+        }
+    }
+
+    public async Task RemoverFiscalRota(int userId, int idrota)
+    {
+        try
+        {
+
+            var user = await _context.UsuarioRotas.FirstOrDefaultAsync(x => x.UserID == userId && x.RotaID == idrota);
+
+            _context.Remove(user);
+
+            await _context.SaveChangesAsync();
+        }
+        catch (DbException ex)
+        {
+            throw new RepositoryException("Erro ao remover Usuario da Rota",
                 ex);
         }
     }

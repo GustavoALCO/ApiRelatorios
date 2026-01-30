@@ -12,7 +12,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Contracts\" />
     <Folder Include="Features\Querys\Images\Handler\" />
     <Folder Include="Features\Querys\Rota\Handler\" />
     <Folder Include="Features\Querys\User\Handler\" />

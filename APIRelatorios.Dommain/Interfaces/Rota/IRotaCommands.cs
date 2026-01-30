@@ -1,4 +1,6 @@
-﻿namespace APIRelatorios.Dommain.Interfaces.Rota;
+﻿using APIRelatorios.Dommain.Entities;
+
+namespace APIRelatorios.Dommain.Interfaces.Rota;
 
 public interface IRotaCommands
 {
@@ -7,4 +9,8 @@ public interface IRotaCommands
     Task DeleteRotaAsync(Entities.Rota rota);
 
     Task UpdateRotaAsync(Entities.Rota rota);
+
+    Task RemoverFiscalRota(int userId, int idrota);
+
+    Task AdicionarFiscalRota(UsuarioRota usuarioRota);
 }

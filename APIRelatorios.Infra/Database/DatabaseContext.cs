@@ -9,7 +9,7 @@ public class DatabaseContext : DbContext
     {
     }
 
-    public DbSet<Imagem> Imagem { get; set; }
+    public DbSet<EvidenciaRota> EvidenciaRota { get; set; }
 
     public DbSet<Rota> Rota { get; set; }
 
@@ -19,10 +19,10 @@ public class DatabaseContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Imagem>()
-            .HasKey(x => x.ImagemId);
+        modelBuilder.Entity<EvidenciaRota>()
+            .HasKey(x => x.EvidenciaRotaId);
 
-        modelBuilder.Entity<Imagem>()
+        modelBuilder.Entity<EvidenciaRota>()
             .HasOne(rota => rota.Rota)
             .WithMany()
             .HasForeignKey(r => r.RotaID)

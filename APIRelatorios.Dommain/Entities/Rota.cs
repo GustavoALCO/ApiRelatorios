@@ -1,36 +1,40 @@
-﻿namespace APIRelatorios.Dommain.Entities;
+﻿using System.Text.Json.Serialization;
+
+namespace APIRelatorios.Dommain.Entities;
 
 public class Rota
 {
-    public int RotaId { get; set; }
+    public int RotaId { get; private set; }
 
-    public string? NomeRota { get; set; }
+    public string? NomeRota { get; private set; }
 
-    public required DateTime DataInicio { get; set; }
+    public DateTime DataInicio { get; set; }
 
     public DateTime? DataFinal {  get; set; }
 
-    public ICollection<Imagem> Images { get; set; } = new List<Imagem>();
+    public ICollection<EvidenciaRota> Images { get; set; } 
 
-    public ICollection<UsuarioRota> Fiscais { get; set; } = new List<UsuarioRota>();
+    public ICollection<UsuarioRota> Fiscais { get; set; } 
 
+    public Rota()
+    {
+        
+    }
+    public Rota(string nomeRota, DateTime dataInicio)
+    {
+        NomeRota = nomeRota;
+        DataInicio = dataInicio;
+        Fiscais = new List<UsuarioRota>();
+    }
     public void AdicionarFiscal(int userId)
     {
-        if (Fiscais.Any(f => f.UserID == userId))
-            return; // ou throw, depende da regra
-
         Fiscais.Add(new UsuarioRota
         {
             UserID = userId
         });
     }
-    public void RemoverFiscal(int userId)
+    public void AlterarNomeRota(string nomeRota)
     {
-        var fiscal = Fiscais.FirstOrDefault(f => f.UserID == userId);
-
-        if (fiscal is null)
-            return; // ou throw, conforme sua regra
-
-        Fiscais.Remove(fiscal);
+        NomeRota = nomeRota;    
     }
 }

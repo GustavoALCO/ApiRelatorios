@@ -4,8 +4,8 @@ namespace APIRelatorios.Application.Features.Commands.Rota;
 
 public readonly record struct CreateRotaCommand
 (
-    string? NomeRota, 
+    string NomeRota, 
 
-    ICollection<int> Fiscais 
+    List<int> Fiscais 
 
 );

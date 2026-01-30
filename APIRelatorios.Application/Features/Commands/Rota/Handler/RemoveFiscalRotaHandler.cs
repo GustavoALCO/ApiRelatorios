@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Interfaces.Rota;
+﻿using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Interfaces.Rota;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
@@ -19,11 +20,11 @@ public class RemoveFiscalRotaHandler
         var rota = await _query.BuscarRotaID(rmfisc.rotaId) 
             ?? throw new Exception("Erro Ao buscar Rota no banco de dados");
 
-        foreach(var fiscais in rmfisc.fiscaisId)
+
+        foreach (var userId in rmfisc.fiscaisId)
         {
-            rota.RemoverFiscal(fiscais);
+            await _commands.RemoverFiscalRota(userId ,rmfisc.rotaId);
         }
 
-        await _commands.UpdateRotaAsync(rota);
     }
 }
