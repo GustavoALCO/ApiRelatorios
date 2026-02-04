@@ -31,7 +31,6 @@ namespace APIRelatorios.Infra.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EvidenciaRotaId"));
 
                     b.Property<string>("Alimentador")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Cep")
@@ -83,6 +82,10 @@ namespace APIRelatorios.Infra.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RotaId"));
+
+                    b.Property<string>("Alimentador")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DataFinal")
                         .HasColumnType("timestamp with time zone");

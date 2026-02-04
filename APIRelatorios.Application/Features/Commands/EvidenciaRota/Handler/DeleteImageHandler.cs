@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Interfaces.Images;
+﻿using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Dommain.Interfaces.Images;
 
 namespace APIRelatorios.Application.Features.Commands.Images.Handler;
 
@@ -7,14 +8,21 @@ public class DeleteImageHandler
     private readonly IEvidenciaRotaQuery _query;
 
     private readonly IEvidenciaRotaCommands _commands;
-    public DeleteImageHandler(IEvidenciaRotaQuery query, IEvidenciaRotaCommands commands)
+
+    private readonly IValidateIds _validateids;
+
+    public DeleteImageHandler(IEvidenciaRotaQuery query, IEvidenciaRotaCommands commands, IValidateIds validateids)
     {
         _query = query;
         _commands = commands;
+        _validateids = validateids;
     }
 
     public async Task Handler(DeleteImageCommands updateDescricao)
     {
+        if (await _validateids.EvidenciaExisteAsync(updateDescricao.idImage) is false)
+            throw new Exception("Id invalido");
+
         var image = await _query.GetImageId(updateDescricao.idImage) ?? throw new Exception("Erro ao Encontrar imagem");
 
         await _commands.DeleteImage(image);

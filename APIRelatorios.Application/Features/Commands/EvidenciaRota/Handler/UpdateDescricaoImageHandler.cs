@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Interfaces.Images;
+﻿using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Dommain.Interfaces.Images;
 
 namespace APIRelatorios.Application.Features.Commands.Images.Handler;
 
@@ -7,15 +8,23 @@ public class UpdateDescricaoImageHandler
     private readonly IEvidenciaRotaQuery _query;
 
     private readonly IEvidenciaRotaCommands _commands;
-    public UpdateDescricaoImageHandler(IEvidenciaRotaQuery query, IEvidenciaRotaCommands commands)
+
+    private readonly IValidateIds _validateids;
+
+    public UpdateDescricaoImageHandler(IEvidenciaRotaQuery query, IEvidenciaRotaCommands commands, IValidateIds validateids)
     {
         _query = query;
         _commands = commands;
+        _validateids = validateids;
     }
 
     public async Task Handler(UpdateDescricaoImageCommands updateDescricao)
     {
-        var image = await _query.GetImageId(updateDescricao.idMensage) ?? throw new Exception("Erro ao Encontrar imagem");
+
+        if (await _validateids.EvidenciaExisteAsync(updateDescricao.idDescricao) is false)
+            throw new Exception("Id invalido");
+
+        var image = await _query.GetImageId(updateDescricao.idDescricao) ?? throw new Exception("Erro ao Encontrar imagem");
 
         image.AlterarDescricao(updateDescricao.descricao);
 

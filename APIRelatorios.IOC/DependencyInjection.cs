@@ -1,7 +1,11 @@
 ﻿using APIRelatorios.Application.Features.Commands.Images.Handler;
 using APIRelatorios.Application.Features.Commands.Rota.Handler;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
+using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
+using APIRelatorios.Application.Features.Querys.Rota.Handler;
+using APIRelatorios.Application.Features.Querys.User.Handler;
 using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Application.Services;
 using APIRelatorios.Application.Settings;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -16,10 +20,12 @@ using APIRelatorios.Infra.Repository.User;
 using APIRelatorios.Infra.Requets;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Service;
+using FluentValidation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using System.Reflection;
 
 namespace APIRelatorios.IOC;
 
@@ -90,6 +96,10 @@ public static class DependencyInjection
 
         services.AddScoped<IBuscarByteImagem, BuscarByteImagem>();
 
+        services.AddScoped<IValidateBase64, ValidateBase64>();
+
+        services.AddScoped<IValidateIds, ValidateIds>();
+
         return services;
     }
 
@@ -98,6 +108,8 @@ public static class DependencyInjection
         services.AddScoped<CreateImageHandler>();
         services.AddScoped<DeleteImageHandler>();
         services.AddScoped<UpdateDescricaoImageHandler>();
+        services.AddScoped<BuscarEvidenciaPorIdHandler>();
+        services.AddScoped<BuscarTodasAsEvidenciasRotaHandler>();
 
         services.AddScoped<AddFiscalRotaHandler>();
         services.AddScoped<CreateRotaHandler>();
@@ -105,11 +117,20 @@ public static class DependencyInjection
         services.AddScoped<RemoveFiscalRotaHandler>();
         services.AddScoped<UpdateNomeRotaHandler>();
         services.AddScoped<CreateRelatorioHandler>();
+        services.AddScoped<BuscarUsuarioIdHandler>();
 
         services.AddScoped<LoginHandler>();
         services.AddScoped<DeleteUsuarioHandler>();
         services.AddScoped<UpdateUsuarioHandler>();
         services.AddScoped<CreateUserHandler>();
+        services.AddScoped<BuscarRotaPorFiscalHandler>();
+
+        return services;
+    }
+
+    public static IServiceCollection DeclareFluentValidate(this IServiceCollection services)
+    {
+        services.AddValidatorsFromAssembly(Assembly.Load("APIRelatorios.Application"));
 
         return services;
     }

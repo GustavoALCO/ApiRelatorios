@@ -2,6 +2,7 @@
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Exeptions;
+using DocumentFormat.OpenXml.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIRelatorios.Infra.Repository.Rota;
@@ -18,10 +19,7 @@ public class RotaQuery : IRotaQuery
     public async Task<Dommain.Entities.Rota> BuscarRotaID(int id)
     {
         
-            var image = await _context.Rota.FindAsync(id);
-
-            if (image == null)
-                throw new RepositoryException("Erro ao buscar informações da imagem no banco de dados.");
+            var image = await _context.Rota.FirstOrDefaultAsync(x => x.RotaId == id);
 
             return image;
     }
@@ -35,8 +33,25 @@ public class RotaQuery : IRotaQuery
         return rotas;
     }
 
+    public async Task<ICollection<Dommain.Entities.Rota>> BuscarRotasPorFiscal(int Fiscais, int page, int pageSize)
+    {
+        var rotas = await _context.Rota.Where(x => x.Fiscais.Any(f => f.UserID == Fiscais))
+                                            .Skip((page - 1) * pageSize)
+                                            .Take(pageSize)
+                                            .ToListAsync();
+
+        return rotas;
+    }
+
     public async Task<ICollection<Dommain.Entities.Rota>> BuscarTodasRotas()
     {
         return await _context.Rota.ToListAsync();
+    }
+
+    public async Task<string> BuscarAlimentador(int id)
+    {
+        var rota =  await _context.Rota.FirstOrDefaultAsync(x => x.RotaId == id);
+
+        return rota.Alimentador;
     }
 }

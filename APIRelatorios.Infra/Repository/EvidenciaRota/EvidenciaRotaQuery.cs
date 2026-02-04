@@ -39,4 +39,22 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
                 ex);
         }
     }
+
+    public async Task<ICollection<EvidenciaRota>> GetEvidenciasPagination(int RotaID, int page, int pagesize)
+    {
+        try
+        {
+            var image = await _Context.EvidenciaRota.Where(i => i.RotaID == RotaID)
+                .Skip((page - 1) * pagesize)
+                .Take(pagesize)
+                .ToListAsync();
+
+            return image;
+        }
+        catch (InvalidOperationException ex)
+        {
+            throw new RepositoryException("Erro ao buscar informações da imagem no banco de dados.",
+                ex);
+        }
+    }
 }

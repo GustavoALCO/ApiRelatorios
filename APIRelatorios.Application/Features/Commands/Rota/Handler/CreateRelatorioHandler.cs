@@ -16,16 +16,28 @@ public class CreateRelatorioHandler
 
     private readonly IBuscarByteImagem _ByteImage;
 
-    public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagem byteImage)
+    private readonly IValidateIds _validateIds;
+
+    private readonly IRotaQuery _rotaQuery;
+
+    public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagem byteImage, IValidateIds validateIds, IRotaQuery rotaquery)
     {
         _RotaQuery = rotaQuery;
         _relatorio = relatorio;
         _ByteImage = byteImage;
+        _validateIds = validateIds;
+        _rotaQuery = rotaquery;
     }
 
     public async Task<byte[]> Handler(CreateRelatorioWordCommand command)
     {
         ICollection<DadosRelatorioDTO> evidencias = [];
+
+        foreach(var rota in command.Ids)
+        {
+            if (await _validateIds.RotaExisteAsync(rota) is false)
+                throw new Exception("Erro na lista de ids");
+        }
 
         for (int i = 0; i < command.Ids.Length; i++)
         {
@@ -39,7 +51,7 @@ public class CreateRelatorioHandler
                     // Buscar os bytes da imagem 
                     Foto = await _ByteImage.BaixarImagemAsync(evidendciasloop.ImageURL),
                     Dsc =
-                    $"{evidendciasloop.Alimentador ?? "ALIMENTADOR VAZIO"} " +
+                    $"{evidendciasloop.Alimentador ?? await _rotaQuery.BuscarAlimentador(evidendciasloop.RotaID)} " +
                     $"{evidendciasloop.Descricao ?? "DSC VAZIO"} " +
                     $"{evidendciasloop.Endereco ?? "ENDEREÇO VAZIO"} " +
                     $"{evidendciasloop.Cep ?? "CEP VAZIO"}",

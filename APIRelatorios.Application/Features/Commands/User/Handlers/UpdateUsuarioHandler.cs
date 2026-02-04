@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Interfaces.User;
+﻿using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Dommain.Interfaces.User;
 
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
@@ -8,14 +9,19 @@ public class UpdateUsuarioHandler
 
     private readonly IUserQuery _query;
 
-    public UpdateUsuarioHandler(IUserQuery query, IUserCommands commands)
+    private readonly IValidateIds _validateIds;
+    public UpdateUsuarioHandler(IUserQuery query, IUserCommands commands, IValidateIds validateIds)
     {
         _query = query;
         _commands = commands;
+        _validateIds = validateIds;
     }
 
     public async Task Handler(AlterarUsuarioCommand alterUser)
     {
+        if (await _validateIds.UserExisteAsync(alterUser.userId) is false)
+            throw new Exception("Id invalido");
+
         var user = await _query.BuscarListaFiscalId(alterUser.userId)
             ?? throw new Exception("Erro ao Encontrar Usuario");
 

@@ -1,98 +1,81 @@
-﻿using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Drawing;
-using DocumentFormat.OpenXml.Drawing.Pictures;
-using DocumentFormat.OpenXml.Drawing.Wordprocessing;
+﻿using APIRelatorios.Infra.Relatorios.Context;
+using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using A = DocumentFormat.OpenXml.Drawing;
+using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
+using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
 
 namespace APIRelatorios.Infra.Relatorios.Componentes;
 
 internal static class ImageCellComponentes
 {
-    public static DocumentFormat.OpenXml.Wordprocessing.TableCell Criar(
-        MainDocumentPart mainPart,
+    private static uint _docId = 1;
+
+    public static TableCell Criar(
+        RelatorioContext ctx,
         byte[] imageBytes,
         long larguraEmus,
-        long alturaEmus,
-        ImagePartType imageType = ImagePartType.Jpeg)
+        long alturaEmus)
     {
-        // 1️⃣ Cria ImagePart
-        var imagePart = mainPart.AddImagePart(imageType);
+        if (imageBytes == null || imageBytes.Length == 0)
+            return new TableCell(new Paragraph());
+
+        var imageType = DetectImageType(imageBytes);
+        var imagePart = ctx.MainPart.AddImagePart(imageType);
 
         using (var stream = new MemoryStream(imageBytes))
-        {
             imagePart.FeedData(stream);
-        }
 
-        var relId = mainPart.GetIdOfPart(imagePart);
+        var relId = ctx.MainPart.GetIdOfPart(imagePart);
+        var id = _docId++;
 
-        // 2️⃣ Cria Drawing
-        var drawing = CriarDrawing(relId, larguraEmus, alturaEmus);
-
-        // 3️⃣ Retorna célula pronta
-        return new DocumentFormat.OpenXml.Wordprocessing.TableCell(
-            new DocumentFormat.OpenXml.Wordprocessing.TableCellProperties(
-                new TableCellVerticalAlignment
+        // 🔥 ELEMENTO CORRETO DO WORD
+        var drawing = new Drawing(
+            new DW.Inline(
+                new DW.Extent { Cx = larguraEmus, Cy = alturaEmus },
+                new DW.EffectExtent
                 {
-                    Val = TableVerticalAlignmentValues.Center
+                    LeftEdge = 0,
+                    TopEdge = 0,
+                    RightEdge = 0,
+                    BottomEdge = 0
                 },
-                new Shading
+                new DW.DocProperties
                 {
-                    Val = ShadingPatternValues.Clear,
-                    Fill = "F8F8FF" // fundo claro
-                }
-            ),
-            new DocumentFormat.OpenXml.Wordprocessing.Paragraph(
-                new DocumentFormat.OpenXml.Wordprocessing.ParagraphProperties(
-                    new Justification { Val = JustificationValues.Center }
+                    Id = id,
+                    Name = $"Imagem_{id}"
+                },
+                new DW.NonVisualGraphicFrameDrawingProperties(
+                    new A.GraphicFrameLocks { NoChangeAspect = true }
                 ),
-                new DocumentFormat.OpenXml.Wordprocessing.Run(drawing)
-            )
-        );
-    }
-
-    private static Drawing CriarDrawing(string relId, long larguraEmus, long alturaEmus)
-    {
-        return new Drawing(
-            new Inline(
-                new Extent { Cx = larguraEmus, Cy = alturaEmus },
-                new EffectExtent(),
-                new DocProperties
-                {
-                    Id = 1U,
-                    Name = "Imagem"
-                },
-                new Graphic(
-                    new GraphicData(
-                        new DocumentFormat.OpenXml.Drawing.Picture(
-                            new DocumentFormat.OpenXml.Drawing.NonVisualPictureProperties(
-                                new DocumentFormat.OpenXml.Drawing.NonVisualDrawingProperties
+                new A.Graphic(
+                    new A.GraphicData(
+                        new PIC.Picture(
+                            new PIC.NonVisualPictureProperties(
+                                new PIC.NonVisualDrawingProperties
                                 {
-                                    Id = 0U,
-                                    Name = "Imagem"
+                                    Id = 0,
+                                    Name = $"Imagem_{id}"
                                 },
-                                new DocumentFormat.OpenXml.Drawing.NonVisualPictureDrawingProperties()
+                                new PIC.NonVisualPictureDrawingProperties()
                             ),
-                            new DocumentFormat.OpenXml.Drawing.BlipFill(
-                                new Blip
+                            new PIC.BlipFill(
+                                new A.Blip
                                 {
                                     Embed = relId,
-                                    CompressionState = BlipCompressionValues.Print
+                                    CompressionState = A.BlipCompressionValues.Print
                                 },
-                                new Stretch(new FillRectangle())
+                                new A.Stretch(new A.FillRectangle())
                             ),
-                            new DocumentFormat.OpenXml.Drawing.ShapeProperties(
-                                new Transform2D(
-                                    new Offset { X = 0, Y = 0 },
-                                    new Extents
-                                    {
-                                        Cx = larguraEmus,
-                                        Cy = alturaEmus
-                                    }
+                            new PIC.ShapeProperties(
+                                new A.Transform2D(
+                                    new A.Offset { X = 0, Y = 0 },
+                                    new A.Extents { Cx = larguraEmus, Cy = alturaEmus }
                                 ),
-                                new PresetGeometry(new AdjustValueList())
+                                new A.PresetGeometry(new A.AdjustValueList())
                                 {
-                                    Preset = ShapeTypeValues.Rectangle
+                                    Preset = A.ShapeTypeValues.Rectangle
                                 }
                             )
                         )
@@ -103,5 +86,46 @@ internal static class ImageCellComponentes
                 )
             )
         );
+
+        return new TableCell(
+            new TableCellProperties(
+                new TableCellVerticalAlignment
+                {
+                    Val = TableVerticalAlignmentValues.Center
+                }
+            ),
+            new Paragraph(
+                new ParagraphProperties(
+                    new Justification
+                    {
+                        Val = JustificationValues.Center
+                    }
+                ),
+                new Run(drawing)
+            )
+        );
+    }
+
+    private static ImagePartType DetectImageType(byte[] bytes)
+    {
+        if (bytes.Length > 4 &&
+            bytes[0] == 0x89 &&
+            bytes[1] == 0x50 &&
+            bytes[2] == 0x4E &&
+            bytes[3] == 0x47)
+            return ImagePartType.Png;
+
+        if (bytes.Length > 2 &&
+            bytes[0] == 0xFF &&
+            bytes[1] == 0xD8)
+            return ImagePartType.Jpeg;
+
+        if (bytes.Length > 3 &&
+            bytes[0] == 0x47 &&
+            bytes[1] == 0x49 &&
+            bytes[2] == 0x46)
+            return ImagePartType.Gif;
+
+        throw new InvalidOperationException("Formato de imagem não suportado");
     }
 }

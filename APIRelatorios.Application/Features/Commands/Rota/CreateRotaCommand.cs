@@ -6,6 +6,8 @@ public readonly record struct CreateRotaCommand
 (
     string NomeRota, 
 
+    string Alimentador,
+
     List<int> Fiscais 
 
 );

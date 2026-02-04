@@ -2,6 +2,6 @@
 
 public readonly record struct UpdateDescricaoImageCommands
 (
-    int idMensage,
+    int idDescricao,
     string descricao
 );

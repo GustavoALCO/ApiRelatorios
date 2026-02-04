@@ -1,7 +1,7 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Infra.Relatorios.Context;
 using APIRelatorios.Infra.Relatorios.Templates;
 using DocumentFormat.OpenXml;
-using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace APIRelatorios.Infra.Relatorios.Componentes;
@@ -9,11 +9,12 @@ namespace APIRelatorios.Infra.Relatorios.Componentes;
 internal class RowImagesComponentes
 {
     internal static Table CriarTabelasImagem(
-    MainDocumentPart mainPart,
-    IEnumerable<DadosRelatorioDTO> relatorioDTOs)
+        RelatorioContext ctx,
+        IEnumerable<DadosRelatorioDTO> relatorioDTOs)
     {
         var table = CriarTabelaBase();
 
+        // Quebra em grupos de 3
         var grupos = relatorioDTOs.Chunk(3);
 
         foreach (var grupo in grupos)
@@ -23,12 +24,7 @@ internal class RowImagesComponentes
             foreach (var item in grupo)
             {
                 rowImages.Append(
-                    ImageCellComponentes.Criar(
-                        mainPart,
-                        item.Foto,
-                        2400000,
-                        1800000
-                    )
+                    ImageCellComponentes.Criar(ctx, item.Foto, 1800000, 1800000)
                 );
             }
             PreencherCelulasVazias(rowImages);
@@ -38,9 +34,7 @@ internal class RowImagesComponentes
             var rowDesc = new TableRow();
             foreach (var item in grupo)
             {
-                rowDesc.Append(
-                    CellComponentes.Texto(item.Dsc)
-                );
+                rowDesc.Append(CellComponentes.Texto($"{item.NumeroImagem} - {item.Dsc}"));
             }
             PreencherCelulasVazias(rowDesc);
             table.Append(rowDesc);
@@ -49,20 +43,12 @@ internal class RowImagesComponentes
         return table;
     }
 
-
     private static Table CriarTabelaBase()
     {
         var table = new Table(
             new TableProperties(
-                new TableWidth
-                {
-                    Type = TableWidthUnitValues.Dxa,
-                    Width = "9170"
-                },
-                new TableLayout
-                {
-                    Type = TableLayoutValues.Fixed
-                },
+                new TableWidth { Type = TableWidthUnitValues.Dxa, Width = "9170" },
+                new TableLayout { Type = TableLayoutValues.Fixed },
                 new TableBorders(
                     new TopBorder { Val = BorderValues.Single, Size = 4 },
                     new BottomBorder { Val = BorderValues.Single, Size = 4 },
@@ -74,13 +60,12 @@ internal class RowImagesComponentes
             )
         );
 
-        table.AppendChild(
-            new TableGrid(
-                new GridColumn { Width = "3050" },
-                new GridColumn { Width = "3050" },
-                new GridColumn { Width = "3050" }
-            )
-        );
+        // Colunas fixas
+        table.AppendChild(new TableGrid(
+            new GridColumn { Width = "3050" },
+            new GridColumn { Width = "3050" },
+            new GridColumn { Width = "3050" }
+        ));
 
         return table;
     }
@@ -92,4 +77,5 @@ internal class RowImagesComponentes
             row.Append(CellComponentes.Texto(""));
         }
     }
+
 }

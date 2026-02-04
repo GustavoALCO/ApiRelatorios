@@ -1,5 +1,6 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Infra.Relatorios.Componentes;
+using APIRelatorios.Infra.Relatorios.Context;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
@@ -8,7 +9,7 @@ namespace APIRelatorios.Infra.Relatorios.Corpo;
 internal class BodyRelatorio
 {
     internal static Body Criar(
-                
+                RelatorioContext ctx,
                 IDictionary<string, IEnumerable<DadosRelatorioDTO>> dadosPorTema
         )
     {
@@ -26,20 +27,19 @@ internal class BodyRelatorio
 
         }
 
-        //foreach (var tema in dadosPorTema)
-        //{
-        //    // Título do tema
-        //    body.Append(CriarTituloTema(tema.Key));
+        foreach (var tema in dadosPorTema)
+        {
+            // Título do tema
+            body.Append(CriarTituloTema(tema.Key));
 
-        //    // Tabela do tema
-        //    body.Append(
-        //        RowImagesComponentes.CriarTabelasImagem(
-        //            mainPart,
-        //            tema.Value)
-        //    );
+            // Tabela do tema
+            body.Append(
+                RowImagesComponentes.CriarTabelasImagem(ctx,
+                    tema.Value)
+            );
 
-        //}
-        
+        }
+
 
         // Propriedades finais do documento
         body.Append(new SectionProperties());

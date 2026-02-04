@@ -1,6 +1,7 @@
 using APIRelatorios.Application.Settings;
 using APIRelatorios.IOC;
 using ChatApplication.Application.Settings;
+using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,8 +17,12 @@ builder.Services.AddOptions<JWTSettings>()
     .Bind(builder.Configuration.GetRequiredSection("Jwt"))
     .ValidateDataAnnotations();
 
+builder.Services.AddFluentValidationAutoValidation();
+
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+builder.Services.DeclareFluentValidate();
 
 builder.Services.AddInfra(builder.Configuration);
 

@@ -1,5 +1,8 @@
 ﻿using APIRelatorios.Application.Features.Commands.Images;
 using APIRelatorios.Application.Features.Commands.Images.Handler;
+using APIRelatorios.Application.Features.Querys.EvidenciaRota;
+using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
+using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -14,11 +17,47 @@ public class EvidenciaRotaController : ControllerBase
 
     private readonly UpdateDescricaoImageHandler _updateDescricaoImageHandler;
 
-    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateImageHandler createImageHandler)
+    private readonly BuscarTodasAsEvidenciasRotaHandler _buscarEvidencias;
+
+    private readonly BuscarEvidenciaPorIdHandler _buscarId;
+
+    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateImageHandler createImageHandler, BuscarTodasAsEvidenciasRotaHandler buscarEvidencias, BuscarEvidenciaPorIdHandler buscarId)
     {
         _updateDescricaoImageHandler = updateDescricaoImageHandler;
         _deleteImageHandler = deleteImageHandler;
         _createImageHandler = createImageHandler;
+        _buscarEvidencias = buscarEvidencias;
+        _buscarId = buscarId;
+    }
+
+    [HttpGet("Id")]
+    public async Task<IActionResult> BuscarPorId([FromQuery] BuscarEvidenciaPorIDCommands commands)
+    {
+        try
+        {
+            var evidencias = await _buscarId.Handler(commands);
+
+            return Ok(evidencias);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("TodasEvidencias")]
+    public async Task<IActionResult> BuscarTodas([FromQuery] BuscarTodasEvidenciasRotaCommands commands)
+    {
+        try
+        {
+            var user = await _buscarEvidencias.Handler(commands);
+
+            return Ok(user);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPost]

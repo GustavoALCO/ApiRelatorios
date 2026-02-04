@@ -35,6 +35,7 @@ namespace APIRelatorios.Infra.Migrations
                     RotaId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     NomeRota = table.Column<string>(type: "text", nullable: true),
+                    Alimentador = table.Column<string>(type: "text", nullable: false),
                     DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DataFinal = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
                 },
@@ -51,7 +52,7 @@ namespace APIRelatorios.Infra.Migrations
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     RotaID = table.Column<int>(type: "integer", nullable: false),
                     TemaFiscalizacao = table.Column<int>(type: "integer", nullable: false),
-                    Alimentador = table.Column<string>(type: "text", nullable: false),
+                    Alimentador = table.Column<string>(type: "text", nullable: true),
                     Descricao = table.Column<string>(type: "text", nullable: true),
                     ImageURL = table.Column<string>(type: "text", nullable: false),
                     Endereco = table.Column<string>(type: "text", nullable: false),

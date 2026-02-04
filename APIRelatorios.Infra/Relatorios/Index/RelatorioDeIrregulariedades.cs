@@ -1,6 +1,7 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Dommain.Helpers;
 using APIRelatorios.Dommain.Interfaces.Services;
+using APIRelatorios.Infra.Relatorios.Context;
 using APIRelatorios.Infra.Relatorios.Corpo;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
@@ -20,24 +21,25 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
             true))
         {
             var mainPart = doc.AddMainDocumentPart();
-            mainPart.Document = new Document();
-            var body = mainPart.Document.AppendChild(new Body());
+            mainPart.Document = new Document(new Body());
 
-            // Agrupa os dados
+            var ctx = new RelatorioContext(mainPart);
+
             var dadosAgrupados = dto
                 .GroupBy(d => d.Tema)
                 .ToDictionary(
-                    grupo => grupo.Key.ToDescricao(),
-                    grupo => grupo.AsEnumerable()
+                    g => g.Key.ToDescricao(),
+                    g => g.AsEnumerable()
                 );
 
-            // Cria o body do relatório
-            var bodyRelatorio = BodyRelatorio.Criar(dadosAgrupados);
+            var bodyRelatorio = BodyRelatorio.Criar(ctx, dadosAgrupados);
+            var bodyFinal = mainPart.Document.Body;
 
-            // Adiciona todos os elementos ao body real
-            foreach (var element in bodyRelatorio.Elements())
+            // ⬇️ MOVE os elementos (remove do pai antigo antes)
+            foreach (var element in bodyRelatorio.Elements().ToList())
             {
-                body.Append(element.CloneNode(true));
+                element.Remove();
+                bodyFinal.Append(element);
             }
 
             mainPart.Document.Save();
@@ -45,4 +47,5 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
 
         return ms.ToArray();
     }
+
 }

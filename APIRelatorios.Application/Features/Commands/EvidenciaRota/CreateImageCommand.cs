@@ -8,7 +8,7 @@ int rotaID,
 
 TemaFiscalizacao TemaFiscalizacao,
 
-string Alimentador,
+string? Alimentador,
 
 string Descricao,
 

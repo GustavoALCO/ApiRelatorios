@@ -8,13 +8,8 @@
 
   <ItemGroup>
     <PackageReference Include="Azure.Storage.Blobs" Version="12.27.0" />
+    <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Features\Querys\Images\Handler\" />
-    <Folder Include="Features\Querys\Rota\Handler\" />
-    <Folder Include="Features\Querys\User\Handler\" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,6 +8,8 @@ public class Rota
 
     public string? NomeRota { get; private set; }
 
+    public string Alimentador { get; private set; }
+
     public DateTime DataInicio { get; set; }
 
     public DateTime? DataFinal {  get; set; }
@@ -20,9 +22,10 @@ public class Rota
     {
         
     }
-    public Rota(string nomeRota, DateTime dataInicio)
+    public Rota(string nomeRota,string alimentador ,DateTime dataInicio)
     {
         NomeRota = nomeRota;
+        Alimentador = alimentador;
         DataInicio = dataInicio;
         Fiscais = new List<UsuarioRota>();
     }

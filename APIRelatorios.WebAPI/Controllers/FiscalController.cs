@@ -1,5 +1,7 @@
 ﻿using APIRelatorios.Application.Features.Commands.User;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
+using APIRelatorios.Application.Features.Querys.User;
+using APIRelatorios.Application.Features.Querys.User.Handler;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -14,11 +16,29 @@ public class FiscalController : ControllerBase
 
     private readonly DeleteUsuarioHandler _deletehandler;
 
-    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser)
+    private readonly BuscarUsuarioIdHandler _buscarUsuarioIdHandler;
+
+    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser, BuscarUsuarioIdHandler buscarUsuarioIdHandler)
     {
         _createHandler = createHandler;
         _deletehandler = deletehandler;
         _updateUser = updateUser;
+        _buscarUsuarioIdHandler = buscarUsuarioIdHandler;
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Get([FromQuery] BuscarUsuarioIdCommands command)
+    {
+        try
+        {
+            var fiscal = await _buscarUsuarioIdHandler.Handler(command);
+
+            return Ok(fiscal);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
     }
 
     [HttpPost]

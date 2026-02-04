@@ -9,10 +9,12 @@ public class EvidenciaRota
     public int EvidenciaRotaId { get; private set; }
 
     public int RotaID { get; private set; }
+
     public Rota Rota { get; set; }
+
     public TemaFiscalizacao TemaFiscalizacao { get; set; }
 
-    public string Alimentador { get; private set; }
+    public string? Alimentador { get; private set; }
 
     public string? Descricao { get; private set; }
 

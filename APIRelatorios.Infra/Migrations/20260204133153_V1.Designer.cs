@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260129132900_V1")]
+    [Migration("20260204133153_V1")]
     partial class V1
     {
         /// <inheritdoc />
@@ -34,7 +34,6 @@ namespace APIRelatorios.Infra.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EvidenciaRotaId"));
 
                     b.Property<string>("Alimentador")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Cep")
@@ -86,6 +85,10 @@ namespace APIRelatorios.Infra.Migrations
                         .HasColumnType("integer");
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RotaId"));
+
+                    b.Property<string>("Alimentador")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<DateTime?>("DataFinal")
                         .HasColumnType("timestamp with time zone");
