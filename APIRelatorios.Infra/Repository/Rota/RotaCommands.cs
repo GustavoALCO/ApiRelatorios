@@ -66,7 +66,7 @@ public class RotaCommands : IRotaCommands
         try
         {
 
-            var user = await _context.UsuarioRotas.FirstOrDefaultAsync(x => x.UserID == userId && x.RotaID == idrota);
+            var user = await _context.UsuarioRotas.FirstOrDefaultAsync(x => x.UserId == userId && x.RotaId == idrota);
 
             _context.Remove(user);
 

@@ -6,7 +6,11 @@ public readonly record struct CreateImageCommand
 (
 int rotaID,
 
+int fiscalId,
+
 TemaFiscalizacao TemaFiscalizacao,
+
+string? Identificacao,
 
 string? Alimentador,
 

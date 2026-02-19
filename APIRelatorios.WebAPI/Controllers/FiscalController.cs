@@ -14,16 +14,22 @@ public class FiscalController : ControllerBase
 
     private readonly UpdateUsuarioHandler _updateUser;
 
+    private readonly UpdatePasswordHandler _updatePassword;
+
     private readonly DeleteUsuarioHandler _deletehandler;
 
     private readonly BuscarUsuarioIdHandler _buscarUsuarioIdHandler;
 
-    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser, BuscarUsuarioIdHandler buscarUsuarioIdHandler)
+    private readonly BuscarTodosUsuariosHandler _buscarTodosUsuariosHandler;
+
+    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser, BuscarUsuarioIdHandler buscarUsuarioIdHandler, BuscarTodosUsuariosHandler buscarTodosUsuariosHandler, UpdatePasswordHandler updatePassword)
     {
         _createHandler = createHandler;
         _deletehandler = deletehandler;
         _updateUser = updateUser;
         _buscarUsuarioIdHandler = buscarUsuarioIdHandler;
+        _buscarTodosUsuariosHandler = buscarTodosUsuariosHandler;
+        _updatePassword = updatePassword;
     }
 
     [HttpGet]
@@ -32,6 +38,21 @@ public class FiscalController : ControllerBase
         try
         {
             var fiscal = await _buscarUsuarioIdHandler.Handler(command);
+
+            return Ok(fiscal);
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpGet("TodosFiscais")]
+    public async Task<IActionResult> GetAll()
+    {
+        try
+        {
+            var fiscal = await _buscarTodosUsuariosHandler.Handler();
 
             return Ok(fiscal);
         }
@@ -62,6 +83,20 @@ public class FiscalController : ControllerBase
         try
         {
             await _updateUser.Handler(upduser);
+            return Ok();
+        }
+        catch (Exception ex)
+        {
+            return BadRequest(ex.Message);
+        }
+    }
+
+    [HttpPatch("Password")]
+    public async Task<IActionResult> PathPassword(UpdatePasswordCommand upduser)
+    {
+        try
+        {
+            await _updatePassword.Handler(upduser);
             return Ok();
         }
         catch (Exception ex)

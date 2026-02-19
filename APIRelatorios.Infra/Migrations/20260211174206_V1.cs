@@ -50,53 +50,49 @@ namespace APIRelatorios.Infra.Migrations
                 {
                     EvidenciaRotaId = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    RotaID = table.Column<int>(type: "integer", nullable: false),
+                    FiscalId = table.Column<int>(type: "integer", nullable: false),
+                    RotaId = table.Column<int>(type: "integer", nullable: false),
                     TemaFiscalizacao = table.Column<int>(type: "integer", nullable: false),
                     Alimentador = table.Column<string>(type: "text", nullable: true),
+                    Identificação = table.Column<string>(type: "text", nullable: true),
                     Descricao = table.Column<string>(type: "text", nullable: true),
                     ImageURL = table.Column<string>(type: "text", nullable: false),
                     Endereco = table.Column<string>(type: "text", nullable: false),
                     Cep = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    RotaId = table.Column<int>(type: "integer", nullable: true)
+                    Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_EvidenciaRota", x => x.EvidenciaRotaId);
                     table.ForeignKey(
-                        name: "FK_EvidenciaRota_Rota_RotaID",
-                        column: x => x.RotaID,
-                        principalTable: "Rota",
-                        principalColumn: "RotaId",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
                         name: "FK_EvidenciaRota_Rota_RotaId",
                         column: x => x.RotaId,
                         principalTable: "Rota",
-                        principalColumn: "RotaId");
+                        principalColumn: "RotaId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
                 name: "UsuarioRotas",
                 columns: table => new
                 {
-                    RotaID = table.Column<int>(type: "integer", nullable: false),
-                    UserID = table.Column<int>(type: "integer", nullable: false)
+                    RotaId = table.Column<int>(type: "integer", nullable: false),
+                    UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_UsuarioRotas", x => new { x.UserID, x.RotaID });
+                    table.PrimaryKey("PK_UsuarioRotas", x => new { x.UserId, x.RotaId });
                     table.ForeignKey(
-                        name: "FK_UsuarioRotas_Fiscais_UserID",
-                        column: x => x.UserID,
+                        name: "FK_UsuarioRotas_Fiscais_UserId",
+                        column: x => x.UserId,
                         principalTable: "Fiscais",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_UsuarioRotas_Rota_RotaID",
-                        column: x => x.RotaID,
+                        name: "FK_UsuarioRotas_Rota_RotaId",
+                        column: x => x.RotaId,
                         principalTable: "Rota",
                         principalColumn: "RotaId",
                         onDelete: ReferentialAction.Cascade);
@@ -108,14 +104,9 @@ namespace APIRelatorios.Infra.Migrations
                 column: "RotaId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_EvidenciaRota_RotaID",
-                table: "EvidenciaRota",
-                column: "RotaID");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_UsuarioRotas_RotaID",
+                name: "IX_UsuarioRotas_RotaId",
                 table: "UsuarioRotas",
-                column: "RotaID");
+                column: "RotaId");
         }
 
         /// <inheritdoc />

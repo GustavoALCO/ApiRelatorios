@@ -10,6 +10,7 @@ public class UpdateUsuarioHandler
     private readonly IUserQuery _query;
 
     private readonly IValidateIds _validateIds;
+
     public UpdateUsuarioHandler(IUserQuery query, IUserCommands commands, IValidateIds validateIds)
     {
         _query = query;
@@ -25,11 +26,15 @@ public class UpdateUsuarioHandler
         var user = await _query.BuscarListaFiscalId(alterUser.userId)
             ?? throw new Exception("Erro ao Encontrar Usuario");
 
-        user.Nome = alterUser.nome ?? user.Nome;
-        user.Senha = alterUser.senha ?? user.Senha;
-        
-        if(alterUser.isAdmin != user.IsAdmin)
-            user.IsAdmin = alterUser.isAdmin ;
+        if (!string.IsNullOrEmpty(alterUser.login))
+            user.UpdateLogin(alterUser.login);
+
+        if (!string.IsNullOrEmpty(alterUser.nome) && !string.IsNullOrEmpty(alterUser.sobreNome))
+            user.UpdateName(alterUser.nome ?? user.Name,
+                            alterUser.sobreNome ?? user.LastName);
+
+        if(alterUser.isAdmin != null)
+            user.AlterAdmin(alterUser.isAdmin);
 
         await _commands.UpdateUser(user);
     }

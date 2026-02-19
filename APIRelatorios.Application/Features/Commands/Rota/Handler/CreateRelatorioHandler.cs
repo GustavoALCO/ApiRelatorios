@@ -51,7 +51,7 @@ public class CreateRelatorioHandler
                     // Buscar os bytes da imagem 
                     Foto = await _ByteImage.BaixarImagemAsync(evidendciasloop.ImageURL),
                     Dsc =
-                    $"{evidendciasloop.Alimentador ?? await _rotaQuery.BuscarAlimentador(evidendciasloop.RotaID)} " +
+                    $"{evidendciasloop.Alimentador ?? await _rotaQuery.BuscarAlimentador(evidendciasloop.RotaId)} " +
                     $"{evidendciasloop.Descricao ?? "DSC VAZIO"} " +
                     $"{evidendciasloop.Endereco ?? "ENDEREÇO VAZIO"} " +
                     $"{evidendciasloop.Cep ?? "CEP VAZIO"}",

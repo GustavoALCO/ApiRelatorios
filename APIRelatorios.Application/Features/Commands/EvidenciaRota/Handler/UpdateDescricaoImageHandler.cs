@@ -26,7 +26,10 @@ public class UpdateDescricaoImageHandler
 
         var image = await _query.GetImageId(updateDescricao.idDescricao) ?? throw new Exception("Erro ao Encontrar imagem");
 
-        image.AlterarDescricao(updateDescricao.descricao);
+        image.AlterarInformacoes(
+            image.Descricao,
+            updateDescricao.descricao,
+            image.Identificação);
 
         await _commands.UpdateImageAsync(image);
     }

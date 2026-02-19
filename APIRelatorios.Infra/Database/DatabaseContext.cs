@@ -24,8 +24,8 @@ public class DatabaseContext : DbContext
 
         modelBuilder.Entity<EvidenciaRota>()
             .HasOne(rota => rota.Rota)
-            .WithMany()
-            .HasForeignKey(r => r.RotaID)
+            .WithMany(r => r.Images)
+            .HasForeignKey(r => r.RotaId)
             .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<User>()
@@ -35,17 +35,17 @@ public class DatabaseContext : DbContext
             .HasKey(x => x.RotaId);
 
         modelBuilder.Entity<UsuarioRota>()
-            .HasKey(ur => new { ur.UserID, ur.RotaID });
+            .HasKey(ur => new { ur.UserId, ur.RotaId });
 
         modelBuilder.Entity<UsuarioRota>()
             .HasOne(ur => ur.User)
             .WithMany(u => u.usuarioRotas)
-            .HasForeignKey(ur => ur.UserID);
+            .HasForeignKey(ur => ur.UserId);
 
         modelBuilder.Entity<UsuarioRota>()
             .HasOne(ur => ur.Rota)
             .WithMany(r => r.Fiscais)
-            .HasForeignKey(ur => ur.RotaID);
+            .HasForeignKey(ur => ur.RotaId);
 
 
     }

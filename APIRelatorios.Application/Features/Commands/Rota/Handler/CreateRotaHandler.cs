@@ -37,7 +37,7 @@ public class CreateRotaHandler
         {
             UsuarioRota usuarioRota = new()
             {
-            UserID = userId
+            UserId = userId
             };
 
             rota.Fiscais.Add(usuarioRota);

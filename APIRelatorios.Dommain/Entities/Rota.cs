@@ -33,7 +33,7 @@ public class Rota
     {
         Fiscais.Add(new UsuarioRota
         {
-            UserID = userId
+            UserId = userId
         });
     }
     public void AlterarNomeRota(string nomeRota)

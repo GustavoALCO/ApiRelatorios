@@ -17,6 +17,7 @@ public class RotaController : ControllerBase
     private readonly UpdateNomeRotaHandler _updateNomeRota;
     private readonly CreateRelatorioHandler _createRelatorio;
     private readonly BuscarRotaPorFiscalHandler _buscarRotaPorFiscal;
+    private readonly BuscarRotaFiltersHandler _buscarRotaFilters;
 
     public RotaController(
         AddFiscalRotaHandler addFiscal,
@@ -25,7 +26,8 @@ public class RotaController : ControllerBase
         RemoveFiscalRotaHandler rmvFiscalRota,
         UpdateNomeRotaHandler updateNomeRota,
         CreateRelatorioHandler createRelatorio,
-        BuscarRotaPorFiscalHandler buscarRotaPorFiscal)
+        BuscarRotaPorFiscalHandler buscarRotaPorFiscal,
+        BuscarRotaFiltersHandler buscarRotaFilters)
     {
         _addFiscal = addFiscal;
         _createRota = createRota;
@@ -34,6 +36,22 @@ public class RotaController : ControllerBase
         _updateNomeRota = updateNomeRota;
         _createRelatorio = createRelatorio;
         _buscarRotaPorFiscal = buscarRotaPorFiscal;
+        _buscarRotaFilters = buscarRotaFilters;
+    }
+
+    [HttpGet("Filters")]
+    public async Task<IActionResult> BuscarPorFiltro(
+        [FromQuery] BuscarRotaFiltersCommands command)
+    {
+        try
+        {
+            var rota = await _buscarRotaFilters.Handler(command);
+            return Ok(rota);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Erro interno ao buscar rotas.\n{ex}");
+        }
     }
 
     [HttpGet]

@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260204133153_V1")]
+    [Migration("20260211174206_V1")]
     partial class V1
     {
         /// <inheritdoc />
@@ -47,8 +47,14 @@ namespace APIRelatorios.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("FiscalId")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime>("Horario")
                         .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Identificação")
+                        .HasColumnType("text");
 
                     b.Property<string>("ImageURL")
                         .IsRequired()
@@ -60,18 +66,13 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("RotaID")
-                        .HasColumnType("integer");
-
-                    b.Property<int?>("RotaId")
+                    b.Property<int>("RotaId")
                         .HasColumnType("integer");
 
                     b.Property<int>("TemaFiscalizacao")
                         .HasColumnType("integer");
 
                     b.HasKey("EvidenciaRotaId");
-
-                    b.HasIndex("RotaID");
 
                     b.HasIndex("RotaId");
 
@@ -133,15 +134,15 @@ namespace APIRelatorios.Infra.Migrations
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.UsuarioRota", b =>
                 {
-                    b.Property<int>("UserID")
+                    b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RotaID")
+                    b.Property<int>("RotaId")
                         .HasColumnType("integer");
 
-                    b.HasKey("UserID", "RotaID");
+                    b.HasKey("UserId", "RotaId");
 
-                    b.HasIndex("RotaID");
+                    b.HasIndex("RotaId");
 
                     b.ToTable("UsuarioRotas");
                 });
@@ -149,14 +150,10 @@ namespace APIRelatorios.Infra.Migrations
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>
                 {
                     b.HasOne("APIRelatorios.Dommain.Entities.Rota", "Rota")
-                        .WithMany()
-                        .HasForeignKey("RotaID")
+                        .WithMany("Images")
+                        .HasForeignKey("RotaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("APIRelatorios.Dommain.Entities.Rota", null)
-                        .WithMany("Images")
-                        .HasForeignKey("RotaId");
 
                     b.Navigation("Rota");
                 });
@@ -165,13 +162,13 @@ namespace APIRelatorios.Infra.Migrations
                 {
                     b.HasOne("APIRelatorios.Dommain.Entities.Rota", "Rota")
                         .WithMany("Fiscais")
-                        .HasForeignKey("RotaID")
+                        .HasForeignKey("RotaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("APIRelatorios.Dommain.Entities.User", "User")
                         .WithMany("usuarioRotas")
-                        .HasForeignKey("UserID")
+                        .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

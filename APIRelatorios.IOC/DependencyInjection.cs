@@ -18,14 +18,18 @@ using APIRelatorios.Infra.Repository.Images;
 using APIRelatorios.Infra.Repository.Rota;
 using APIRelatorios.Infra.Repository.User;
 using APIRelatorios.Infra.Requets;
+using APIRelatorios.Infra.Security;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Service;
 using FluentValidation;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
+using Microsoft.IdentityModel.Tokens;
 using System.Reflection;
+using System.Text;
 
 namespace APIRelatorios.IOC;
 
@@ -100,6 +104,8 @@ public static class DependencyInjection
 
         services.AddScoped<IValidateIds, ValidateIds>();
 
+        services.AddScoped<IPasswordHasher, PasswordHasher>();
+
         return services;
     }
 
@@ -110,12 +116,14 @@ public static class DependencyInjection
         services.AddScoped<UpdateDescricaoImageHandler>();
         services.AddScoped<BuscarEvidenciaPorIdHandler>();
         services.AddScoped<BuscarTodasAsEvidenciasRotaHandler>();
+        services.AddScoped<BuscarRotaFiltersHandler>();
 
         services.AddScoped<AddFiscalRotaHandler>();
         services.AddScoped<CreateRotaHandler>();
         services.AddScoped<DeleteRotaHandler>();
         services.AddScoped<RemoveFiscalRotaHandler>();
         services.AddScoped<UpdateNomeRotaHandler>();
+        services.AddScoped<UpdatePasswordHandler>();
         services.AddScoped<CreateRelatorioHandler>();
         services.AddScoped<BuscarUsuarioIdHandler>();
 
@@ -123,6 +131,7 @@ public static class DependencyInjection
         services.AddScoped<DeleteUsuarioHandler>();
         services.AddScoped<UpdateUsuarioHandler>();
         services.AddScoped<CreateUserHandler>();
+        services.AddScoped<BuscarTodosUsuariosHandler>();
         services.AddScoped<BuscarRotaPorFiscalHandler>();
 
         return services;
@@ -131,6 +140,39 @@ public static class DependencyInjection
     public static IServiceCollection DeclareFluentValidate(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.Load("APIRelatorios.Application"));
+
+        return services;
+    }
+
+    public static IServiceCollection Authentication(this IServiceCollection services, IConfiguration configuration)
+    {
+        var jwtSection = configuration.GetSection("Jwt");
+        var jwtSettings = jwtSection.Get<JWTSettings>();
+
+        services.Configure<JWTSettings>(jwtSection); // Disponibiliza o IOptions<JWTSettings> para injeção
+
+        services.AddAuthentication(options =>
+        {
+            options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+            options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+        })
+        .AddJwtBearer(options =>
+        {
+            options.TokenValidationParameters = new TokenValidationParameters
+            {
+                ValidateIssuer = true,
+                ValidIssuer = jwtSettings.Issuer,
+
+                ValidateAudience = true,
+                ValidAudiences = jwtSettings.Audience, // <- aceita múltiplas audiências
+
+                ValidateLifetime = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),
+                ValidateIssuerSigningKey = true,
+
+                RoleClaimType = "Role" // usa o claim "Role" no token
+            };
+        });
 
         return services;
     }

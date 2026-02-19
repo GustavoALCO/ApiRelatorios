@@ -11,4 +11,8 @@ public interface IRotaQuery
     Task<ICollection<Entities.Rota>> BuscarRotasPorFiscal(int Fiscais, int page, int pageSize);
 
     Task<string> BuscarAlimentador(int id);
+
+    IQueryable<Dommain.Entities.Rota> BuscarQuery();
+
+    Task<ICollection<Dommain.Entities.Rota>> BuscarRotaFiltros(IQueryable<Dommain.Entities.Rota> rotas, int page);
 }

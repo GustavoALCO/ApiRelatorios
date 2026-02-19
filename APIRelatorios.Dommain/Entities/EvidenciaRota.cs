@@ -8,13 +8,18 @@ public class EvidenciaRota
 {
     public int EvidenciaRotaId { get; private set; }
 
-    public int RotaID { get; private set; }
+    public int FiscalId { get; private set; }
+
+    public int RotaId { get; private set; }
 
     public Rota Rota { get; set; }
 
     public TemaFiscalizacao TemaFiscalizacao { get; set; }
 
     public string? Alimentador { get; private set; }
+
+
+    public string? Identificação { get; private set; }
 
     public string? Descricao { get; private set; }
 
@@ -38,18 +43,23 @@ public class EvidenciaRota
     }
 
     public EvidenciaRota(int rotaID,
+        int fiscalId,
         TemaFiscalizacao tema,
         string alimentador,
-        string descricao,
+        string? identificacao,
+        string? descricao,
         string imagem,
         string endereco,
         string cep,
         double lat,
-        double lon)
+        double lon
+        )
     {
-        RotaID = rotaID;
+        RotaId = rotaID;
+        FiscalId = fiscalId;
         TemaFiscalizacao = tema;    
         Alimentador = alimentador;
+        Identificação = identificacao;
         Descricao = descricao;
         ImageURL = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
         Endereco = endereco;
@@ -59,8 +69,10 @@ public class EvidenciaRota
         Horario = DateTime.UtcNow;
     }
 
-    public void AlterarDescricao(string descricao)
+    public void AlterarInformacoes(string? descricao, string? endereco,string? identificacao)
     {
         Descricao = descricao;
+        Endereco = endereco;
+        Identificação = identificacao;
     }
 }

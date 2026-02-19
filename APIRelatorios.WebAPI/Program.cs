@@ -17,6 +17,8 @@ builder.Services.AddOptions<JWTSettings>()
     .Bind(builder.Configuration.GetRequiredSection("Jwt"))
     .ValidateDataAnnotations();
 
+builder.Services.Authentication(builder.Configuration);
+
 builder.Services.AddFluentValidationAutoValidation();
 
 builder.Services.AddEndpointsApiExplorer();

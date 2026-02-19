@@ -32,8 +32,8 @@ public class AddFiscalRotaHandler
         foreach (var fiscalAdd in add.FiscaisId)
         {
             UsuarioRota user = new()
-            { RotaID = add.rotaId,
-            UserID = fiscalAdd};
+            { RotaId = add.rotaId,
+            UserId = fiscalAdd};
 
             await _commands.AdicionarFiscalRota(user);
         }

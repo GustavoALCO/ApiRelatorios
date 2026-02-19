@@ -31,7 +31,6 @@ public class CreateImageValidations : AbstractValidator<CreateImageCommand>
             .NotNull().WithMessage("Deve conter uma mensagem do assunto");
 
         RuleFor(x => x.TemaFiscalizacao)
-            .NotEmpty().WithMessage("Deve Selecionar um assunto para o tema da fiscalização")
             .NotNull().WithMessage("Deve Selecionar um assunto para o tema da fiscalização");
     }
 }

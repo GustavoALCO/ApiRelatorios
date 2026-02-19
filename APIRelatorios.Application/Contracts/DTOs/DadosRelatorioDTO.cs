@@ -7,8 +7,17 @@ public readonly record struct DadosRelatorioDTO
     // Bytes da imagem baixada da azure storage
     byte[] Foto,
 
-    // Descrição formado por Alimentador + Dsc + Endereço + CEP
+    // Alimentador Obtido pela rota ou substituindo na Evidencia
+    string Alimentador,
+
+    // Descrição da evidencia
     string Dsc,
+
+    // Identificação do poste
+    string Identificação,
+
+    // Dados como Rua e CEP
+    string Localização,
 
     // Numero da imagem composta pela equipe selecionada + indice da imagem
     string NumeroImagem,

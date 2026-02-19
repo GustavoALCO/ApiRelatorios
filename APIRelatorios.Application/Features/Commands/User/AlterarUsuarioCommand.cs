@@ -3,7 +3,8 @@
 public readonly record struct AlterarUsuarioCommand
 (
     int userId,
-    string nome,
-    string senha,
-    bool isAdmin
+    string? login,
+    string? nome,
+    string? sobreNome,
+    bool? isAdmin
 );

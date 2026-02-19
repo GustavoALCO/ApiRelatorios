@@ -18,7 +18,7 @@ public class BuscarUsuarioIdHandler
 
         return new UsuarioDTO(
             usuario.UserId,
-            usuario.Nome,
+            usuario.Login,
             usuario.IsAdmin
         );
     }

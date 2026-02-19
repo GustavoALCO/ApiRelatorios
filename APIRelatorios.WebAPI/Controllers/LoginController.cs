@@ -16,7 +16,7 @@ public class LoginController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<IActionResult> login(LoginCommands login)
+    public async Task<IActionResult> login(LoginCommandsCommand login)
     {
         try
         {

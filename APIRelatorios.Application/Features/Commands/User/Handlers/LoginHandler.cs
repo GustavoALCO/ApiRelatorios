@@ -9,20 +9,25 @@ public class LoginHandler
 
     private readonly IJwtTokenService _jwtTokenService;
 
-    public LoginHandler(IUserQuery query, IJwtTokenService jwtTokenService)
+    private readonly IPasswordHasher _passwordHasher;
+
+    public LoginHandler(IUserQuery query, IJwtTokenService jwtTokenService, IPasswordHasher passwordHasher)
     {
         _query = query;
         _jwtTokenService = jwtTokenService;
+        _passwordHasher = passwordHasher;
     }
 
-    public async Task<string> Handler(LoginCommands commands)
+    public async Task<string> Handler(LoginCommandsCommand commands)
     {
         var usuario = await _query.BuscarFiscalNome(commands.Login) 
-            ?? throw new Exception("Usuario não encontrado");
+            ?? throw new Exception("Verifique se o login ou a senha está certa");
 
-        if (usuario.Senha != commands.Senha)
-            throw new Exception("Credenciais inválidas");
+        var isTrue = _passwordHasher.VerifyPassword(commands.Senha, usuario.HashPassword, usuario.Salt);
 
-        return _jwtTokenService.GenerateToken(usuario.UserId, usuario.Nome, usuario.IsAdmin);
+        if (isTrue == false)
+            throw new Exception("Verifique se o login ou a senha está certa");
+
+        return _jwtTokenService.GenerateToken(usuario.UserId, usuario.Login, usuario.IsAdmin);
     }
 }
