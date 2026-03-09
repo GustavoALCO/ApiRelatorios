@@ -35,7 +35,6 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
             var bodyRelatorio = BodyRelatorio.Criar(ctx, dadosAgrupados);
             var bodyFinal = mainPart.Document.Body;
 
-            // ⬇️ MOVE os elementos (remove do pai antigo antes)
             foreach (var element in bodyRelatorio.Elements().ToList())
             {
                 element.Remove();

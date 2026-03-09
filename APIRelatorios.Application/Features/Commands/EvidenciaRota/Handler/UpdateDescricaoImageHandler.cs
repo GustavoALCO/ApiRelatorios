@@ -21,15 +21,15 @@ public class UpdateDescricaoImageHandler
     public async Task Handler(UpdateDescricaoImageCommands updateDescricao)
     {
 
-        if (await _validateids.EvidenciaExisteAsync(updateDescricao.idDescricao) is false)
-            throw new Exception("Id invalido");
+        var image = await _query.GetImageId(updateDescricao.evidenciaId) ?? throw new Exception("Erro ao Encontrar Evidencia");
 
-        var image = await _query.GetImageId(updateDescricao.idDescricao) ?? throw new Exception("Erro ao Encontrar imagem");
-
-        image.AlterarInformacoes(
-            image.Descricao,
+        image.Atualizar(
             updateDescricao.descricao,
-            image.Identificação);
+            updateDescricao.tema,
+            updateDescricao.alimentador,
+            updateDescricao.endereco,
+            updateDescricao.identificacao
+            );
 
         await _commands.UpdateImageAsync(image);
     }

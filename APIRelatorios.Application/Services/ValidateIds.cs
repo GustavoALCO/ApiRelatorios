@@ -22,7 +22,7 @@ public class ValidateIds : IValidateIds
 
     public async Task<bool> UserExisteAsync(int id)
     {
-        var fiscal  = await _userQuery.BuscarListaFiscalId(id);
+        var fiscal  = await _userQuery.BuscarFiscalId(id);
 
         if (fiscal != null)
             return true;

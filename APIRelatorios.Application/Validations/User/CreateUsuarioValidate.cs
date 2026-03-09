@@ -17,7 +17,6 @@ public class CreateUsuarioValidate : AbstractValidator<CreateUsuarioCommand>
             .NotEmpty().WithMessage("Deve passar pelo menos uma senha para o login");
 
         RuleFor(x => x.isAdmin)
-            .NotNull().WithMessage("Deve passar se o usuario vai ser admin ou não")
-            .NotEmpty().WithMessage("Deve passar se o usuario vai ser admin ou não");
+            .NotNull().WithMessage("Deve passar se o usuario vai ser admin ou não");
     }
 }

@@ -1,5 +1,6 @@
 ﻿using APIRelatorios.Application.Features.Commands.User;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -28,5 +29,12 @@ public class LoginController : ControllerBase
         {
             return BadRequest(ex.Message);
         }
+    }
+
+    [HttpGet]
+    [Authorize]
+    public async Task<IActionResult> verifyToken()
+    {
+        return Ok();
     }
 }

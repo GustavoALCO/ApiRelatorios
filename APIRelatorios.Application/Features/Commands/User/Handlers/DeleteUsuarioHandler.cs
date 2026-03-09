@@ -24,7 +24,7 @@ public class DeleteUsuarioHandler
         if (await _validateIds.UserExisteAsync(dltuser.idUser) is false)
             throw new Exception("Id invalido");
 
-        var user = await _query.BuscarListaFiscalId(dltuser.idUser)
+        var user = await _query.BuscarFiscalId(dltuser.idUser)
             ?? throw new Exception("Erro ao Encontrar Usuario");
 
         await _commands.DeleteUser(user);

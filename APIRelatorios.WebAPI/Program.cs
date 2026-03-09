@@ -5,46 +5,64 @@ using FluentValidation.AspNetCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowFlutter",
+        policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
+});
+
+// Kestrel
 builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8080);
 });
 
+// Configurações
 builder.Services.AddOptions<BlobSettings>()
     .Bind(builder.Configuration.GetRequiredSection("BlobConnection"))
     .ValidateDataAnnotations();
+
 builder.Services.AddOptions<JWTSettings>()
     .Bind(builder.Configuration.GetRequiredSection("Jwt"))
     .ValidateDataAnnotations();
 
+// JWT Authentication
 builder.Services.Authentication(builder.Configuration);
 
+// Fluent Validation
 builder.Services.AddFluentValidationAutoValidation();
-
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
 builder.Services.DeclareFluentValidate();
 
+// Swagger com JWT
+builder.Services.AddSwagger();
+
+// Infraestrutura, interfaces e handlers
 builder.Services.AddInfra(builder.Configuration);
-
 builder.Services.DeclareInterfaces();
-
 builder.Services.DeclareInterfacesServices();
-
 builder.Services.DeclareHandlerAplication();
-// Add services to the container.
+
+// Controllers
 builder.Services.AddControllers();
-builder.Services.AddOpenApi();
+builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
-// Configure the HTTP request pipeline.
+
+// Pipeline
+app.UseCors("AllowFlutter");
 
 app.UseSwagger();
-app.UseSwaggerUI();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Relatorio v1");
+});
 
+// 🔹 Autenticação + Autorização
+app.UseAuthentication();
 app.UseAuthorization();
 
-app.MapControllers(); 
+// Map Controllers
+app.MapControllers();
 
 app.Run();

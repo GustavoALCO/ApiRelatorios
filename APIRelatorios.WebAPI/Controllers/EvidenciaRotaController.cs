@@ -2,7 +2,6 @@
 using APIRelatorios.Application.Features.Commands.Images.Handler;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
-using DocumentFormat.OpenXml.Office2010.Excel;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -30,8 +29,9 @@ public class EvidenciaRotaController : ControllerBase
         _buscarId = buscarId;
     }
 
+    
     [HttpGet("Id")]
-    public async Task<IActionResult> BuscarPorId([FromQuery] BuscarEvidenciaPorIDCommands commands)
+    public async Task<IActionResult> BuscarPorId(int commands)
     {
         try
         {
@@ -45,6 +45,7 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
+    
     [HttpGet("TodasEvidencias")]
     public async Task<IActionResult> BuscarTodas([FromQuery] BuscarTodasEvidenciasRotaCommands commands)
     {
@@ -60,6 +61,7 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
+    //[authorize]
     [HttpPost]
     public async Task<IActionResult> CriarEvicencias(CreateImageCommand command)
     {
@@ -71,10 +73,12 @@ public class EvidenciaRotaController : ControllerBase
         }
         catch(Exception ex)
         {
+            Console.WriteLine(ex.Message);
             return BadRequest(ex.Message);
         }
     }
 
+    //[authorize]
     [HttpPatch]
     public async Task<IActionResult> AlterarEvidencias(UpdateDescricaoImageCommands command)
     {
@@ -86,12 +90,14 @@ public class EvidenciaRotaController : ControllerBase
         }
         catch (Exception ex)
         {
+            
             return BadRequest(ex.Message);
         }
     }
 
+    //[authorize]
     [HttpDelete]
-    public async Task<IActionResult> DeletarEvidencias(DeleteImageCommands command)
+    public async Task<IActionResult> DeletarEvidencias(int command)
     {
         try
         {

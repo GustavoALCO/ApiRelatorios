@@ -2,6 +2,7 @@
 using APIRelatorios.Application.Features.Commands.User.Handlers;
 using APIRelatorios.Application.Features.Querys.User;
 using APIRelatorios.Application.Features.Querys.User.Handler;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -18,35 +19,19 @@ public class FiscalController : ControllerBase
 
     private readonly DeleteUsuarioHandler _deletehandler;
 
-    private readonly BuscarUsuarioIdHandler _buscarUsuarioIdHandler;
 
     private readonly BuscarTodosUsuariosHandler _buscarTodosUsuariosHandler;
 
-    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser, BuscarUsuarioIdHandler buscarUsuarioIdHandler, BuscarTodosUsuariosHandler buscarTodosUsuariosHandler, UpdatePasswordHandler updatePassword)
+    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser, BuscarTodosUsuariosHandler buscarTodosUsuariosHandler, UpdatePasswordHandler updatePassword)
     {
         _createHandler = createHandler;
         _deletehandler = deletehandler;
         _updateUser = updateUser;
-        _buscarUsuarioIdHandler = buscarUsuarioIdHandler;
         _buscarTodosUsuariosHandler = buscarTodosUsuariosHandler;
         _updatePassword = updatePassword;
     }
 
-    [HttpGet]
-    public async Task<IActionResult> Get([FromQuery] BuscarUsuarioIdCommands command)
-    {
-        try
-        {
-            var fiscal = await _buscarUsuarioIdHandler.Handler(command);
-
-            return Ok(fiscal);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
-    }
-
+    [Authorize]
     [HttpGet("TodosFiscais")]
     public async Task<IActionResult> GetAll()
     {
@@ -62,6 +47,7 @@ public class FiscalController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Post(CreateUsuarioCommand createuser)
     {
@@ -77,6 +63,7 @@ public class FiscalController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPatch]
     public async Task<IActionResult> Path(AlterarUsuarioCommand upduser)
     {
@@ -91,6 +78,7 @@ public class FiscalController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpPatch("Password")]
     public async Task<IActionResult> PathPassword(UpdatePasswordCommand upduser)
     {
@@ -105,6 +93,7 @@ public class FiscalController : ControllerBase
         }
     }
 
+    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> Delete(DeleteUsuarioCommand deleteuser)
     {

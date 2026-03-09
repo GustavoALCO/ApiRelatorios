@@ -18,12 +18,12 @@ public class DeleteRotaHandler
         _validateIds = validateIds;
     }
 
-    public async Task Handler(DeleteRotaCommand dltrota)
+    public async Task Handler(int dltrota)
     {
-        if (await _validateIds.RotaExisteAsync(dltrota.rotaId) is false)
+        if (await _validateIds.RotaExisteAsync(dltrota) is false)
             throw new Exception("Id invalido");
 
-        var rota = await _query.BuscarRotaID(dltrota.rotaId)
+        var rota = await _query.BuscarRotaID(dltrota)
             ?? throw new Exception("Erro ao buscar rota");
 
         await _commands.DeleteRotaAsync(rota);

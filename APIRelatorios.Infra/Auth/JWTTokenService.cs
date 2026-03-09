@@ -19,23 +19,25 @@ public class JWTTokenService : IJwtTokenService
 
     public string GenerateToken(int userId, string userName, bool isAdmin)
     {
-        var chaveSecreta = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.Key));
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration.Key));
+        var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var credentials = new SigningCredentials(chaveSecreta, SecurityAlgorithms.HmacSha256);
-
-        var claims = new[]
+        var claims = new List<Claim>
         {
-            new Claim("Id", userId.ToString()),
-            new Claim("Username", userName),
-            new Claim("Admin", isAdmin.ToString())
+            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
+            new Claim(JwtRegisteredClaimNames.UniqueName, userName)
         };
+
+        // Adiciona role se for admin
+        if (isAdmin)
+            claims.Add(new Claim("Role", "Admin"));
 
         var token = new JwtSecurityToken(
             issuer: _configuration.Issuer,
-            audience: _configuration.Audience[0],
+            audience: _configuration.Audience[0], // Pega a primeira audience
             claims: claims,
-            expires: DateTime.Now.AddDays(_configuration.ExpireDays),
-            signingCredentials: credentials
+            expires: DateTime.UtcNow.AddDays(_configuration.ExpireDays),
+            signingCredentials: creds
         );
 
         return new JwtSecurityTokenHandler().WriteToken(token);

@@ -23,15 +23,15 @@ public class UpdateUsuarioHandler
         if (await _validateIds.UserExisteAsync(alterUser.userId) is false)
             throw new Exception("Id invalido");
 
-        var user = await _query.BuscarListaFiscalId(alterUser.userId)
+        var user = await _query.BuscarFiscalId(alterUser.userId)
             ?? throw new Exception("Erro ao Encontrar Usuario");
 
         if (!string.IsNullOrEmpty(alterUser.login))
             user.UpdateLogin(alterUser.login);
 
-        if (!string.IsNullOrEmpty(alterUser.nome) && !string.IsNullOrEmpty(alterUser.sobreNome))
-            user.UpdateName(alterUser.nome ?? user.Name,
-                            alterUser.sobreNome ?? user.LastName);
+        if (!string.IsNullOrEmpty(alterUser.nome) || !string.IsNullOrEmpty(alterUser.sobreNome))
+            user.UpdateName(alterUser.nome,
+                            alterUser.sobreNome);
 
         if(alterUser.isAdmin != null)
             user.AlterAdmin(alterUser.isAdmin);

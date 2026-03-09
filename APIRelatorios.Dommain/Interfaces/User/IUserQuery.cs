@@ -4,9 +4,11 @@ public interface IUserQuery
 {
     Task<ICollection<Entities.User>> BuscarTodosFiscais();
 
+    Task<Entities.User> BuscarFiscalLogin(string login);
+
     Task<Entities.User> BuscarFiscalNome(string nome);
 
     Task<ICollection<Entities.User>> BuscarListaFiscalIds(ICollection<int> idFiscal);
 
-    Task<Dommain.Entities.User> BuscarListaFiscalId(int idFiscal);
+    Task<Dommain.Entities.User> BuscarFiscalId(int idFiscal);
 }

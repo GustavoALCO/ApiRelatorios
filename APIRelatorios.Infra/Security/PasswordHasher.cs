@@ -31,7 +31,10 @@ public class PasswordHasher : IPasswordHasher
     {
         string requestPassword = HashPassword(password, salt);
 
-        return requestPassword.Equals(saltPassword);
-        
+       return CryptographicOperations.FixedTimeEquals(
+                     Convert.FromBase64String(requestPassword),
+                     Convert.FromBase64String(saltPassword)
+ );
+
     }
 }

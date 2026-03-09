@@ -2,7 +2,7 @@
 
 namespace APIRelatorios.Application.Features.Commands.Images;
 
-public readonly record struct CreateImageCommand
+public record struct CreateImageCommand
 (
 int rotaID,
 

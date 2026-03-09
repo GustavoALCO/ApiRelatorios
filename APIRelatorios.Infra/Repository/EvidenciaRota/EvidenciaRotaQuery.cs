@@ -29,7 +29,9 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
     {
         try
         {
-            var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID).ToListAsync();
+            var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID)
+                .OrderBy(x => x.Horario)
+                .ToListAsync();
 
             return image;
         }
@@ -45,6 +47,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         try
         {
             var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID)
+                .OrderBy(x => x.Horario)
                 .Skip((page - 1) * pagesize)
                 .Take(pagesize)
                 .ToListAsync();

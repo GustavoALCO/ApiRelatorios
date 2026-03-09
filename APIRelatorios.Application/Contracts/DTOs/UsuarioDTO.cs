@@ -4,7 +4,7 @@ public readonly record struct UsuarioDTO
 (
      int UserId,
 
-     string Nome ,
+     string Login ,
 
      bool IsAdmin
 );

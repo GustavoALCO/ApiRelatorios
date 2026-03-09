@@ -20,7 +20,7 @@ public class UpdatePasswordHandler
 
     public async Task Handler(UpdatePasswordCommand updPassword)
     {
-        var user = await _query.BuscarListaFiscalId(updPassword.idUser)
+        var user = await _query.BuscarFiscalId(updPassword.idUser)
             ?? throw new Exception("Id invalido de Usuario");
 
         user.UpdatePassword(_passwordHasher.HashPassword(updPassword.Password, user.Salt));

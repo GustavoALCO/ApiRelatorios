@@ -6,7 +6,7 @@ public class JWTSettings
 
     public string Issuer { get; set; }
 
-    public string[] Audience { get; set; }
+    public List<string> Audience { get; set; } = new();
 
     public int ExpireDays { get; set; }
 }

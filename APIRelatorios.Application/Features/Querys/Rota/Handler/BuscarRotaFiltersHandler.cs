@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Interfaces.Rota;
+﻿using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
 using System.Globalization;
 
@@ -16,14 +17,14 @@ public class BuscarRotaFiltersHandler
         _userQuery = userQuery;
     }
 
-    public async Task<ICollection<Dommain.Entities.Rota>> Handler(BuscarRotaFiltersCommands commands)
+    public async Task<ICollection<RotaDTO>> Handler(BuscarRotaFiltersCommands commands)
     {
         //valida se o numero e o tamnho da pagina é maior que 0 
         var page = commands.page <= 0 ? 1: commands.page;
         var pagesize = commands.pagesize <= 0 ? 1 : commands.pagesize;
 
         //valida se o fiscal é existente
-        var fiscal = await _userQuery.BuscarListaFiscalId(commands.FiscalId) ?? throw new Exception("Fiscal Invalido"); 
+        var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new Exception("Fiscal Invalido"); 
 
         //Buscar IQueryable para buscar filtros
         var query = _rotaQuery.BuscarQuery();
@@ -78,8 +79,24 @@ public class BuscarRotaFiltersHandler
             query = query.Where(x => x.DataFinal == dataFinal);
         }
 
-        var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, (commands.page - 1) * pagesize);
+        var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, page, pagesize);
 
-        return searchFilters;
+        List<RotaDTO> filtersdto = new();
+
+        foreach(var filters in searchFilters)
+        {
+            RotaDTO dto = new RotaDTO()
+            {
+                RotaId = filters.RotaId,
+                Alimentador = filters.Alimentador,
+                DataFinal = filters.DataFinal?.ToString("dd/MM/yyyy"),
+                DataInicio = filters.DataInicio.ToString("dd/MM/yyyy"),
+                NomeRota = filters.NomeRota
+            };
+
+            filtersdto.Add(dto);
+        }
+
+        return filtersdto;
     }
 }

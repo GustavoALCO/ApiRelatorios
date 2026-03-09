@@ -36,6 +36,7 @@ public class User
         HashPassword = hashPassword;
         Salt = salt;
         IsAdmin = isAdmin ?? false;
+        IsValid = true;
     }
 
     public void UpdatePassword(string password)
@@ -45,8 +46,8 @@ public class User
 
     public void UpdateName(string name, string lastname)
     {
-        Name = name;
-        LastName = lastname;
+        if (name != null) Name = name;
+        if(lastname != null) LastName = lastname;
     }
 
     public void UpdateLogin(string login)

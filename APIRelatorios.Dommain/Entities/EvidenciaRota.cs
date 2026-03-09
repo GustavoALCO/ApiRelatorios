@@ -14,12 +14,11 @@ public class EvidenciaRota
 
     public Rota Rota { get; set; }
 
-    public TemaFiscalizacao TemaFiscalizacao { get; set; }
+    public TemaFiscalizacao TemaFiscalizacao { get; private set; }
 
     public string? Alimentador { get; private set; }
 
-
-    public string? Identificação { get; private set; }
+    public string? Identificacão { get; private set; }
 
     public string? Descricao { get; private set; }
 
@@ -45,34 +44,51 @@ public class EvidenciaRota
     public EvidenciaRota(int rotaID,
         int fiscalId,
         TemaFiscalizacao tema,
-        string alimentador,
+        string? alimentador,
         string? identificacao,
         string? descricao,
         string imagem,
         string endereco,
         string cep,
         double lat,
-        double lon
+        double lon,
+        DateTime horario
         )
     {
         RotaId = rotaID;
         FiscalId = fiscalId;
         TemaFiscalizacao = tema;    
         Alimentador = alimentador;
-        Identificação = identificacao;
+        Identificacão = identificacao;
         Descricao = descricao;
         ImageURL = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
         Endereco = endereco;
         Cep = cep;
         Latitude = lat;
         Longitude = lon;
-        Horario = DateTime.UtcNow;
+        Horario = horario;
     }
 
-    public void AlterarInformacoes(string? descricao, string? endereco,string? identificacao)
+    public void Atualizar(
+     string? descricao,
+     TemaFiscalizacao? tema,
+     string? alimentador,
+     string? endereco,
+     string? identificacao)
     {
-        Descricao = descricao;
-        Endereco = endereco;
-        Identificação = identificacao;
+        if (descricao is not null)
+            Descricao = descricao;
+
+        if (tema.HasValue)
+            TemaFiscalizacao = tema.Value;
+
+        if (alimentador is not null)
+            Alimentador = alimentador;
+
+        if (endereco is not null)
+            Endereco = endereco;
+
+        if (identificacao is not null)
+            Identificacão = identificacao;
     }
 }

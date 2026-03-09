@@ -18,12 +18,12 @@ public class DeleteImageHandler
         _validateids = validateids;
     }
 
-    public async Task Handler(DeleteImageCommands updateDescricao)
+    public async Task Handler(int updateDescricao)
     {
-        if (await _validateids.EvidenciaExisteAsync(updateDescricao.idImage) is false)
+        if (await _validateids.EvidenciaExisteAsync(updateDescricao) is false)
             throw new Exception("Id invalido");
 
-        var image = await _query.GetImageId(updateDescricao.idImage) ?? throw new Exception("Erro ao Encontrar imagem");
+        var image = await _query.GetImageId(updateDescricao) ?? throw new Exception("Erro ao Encontrar imagem");
 
         await _commands.DeleteImage(image);
     }

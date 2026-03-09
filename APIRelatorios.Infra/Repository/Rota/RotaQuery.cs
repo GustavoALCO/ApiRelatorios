@@ -36,6 +36,7 @@ public class RotaQuery : IRotaQuery
     public async Task<ICollection<Dommain.Entities.Rota>> BuscarRotasPorFiscal(int Fiscais, int page, int pageSize)
     {
         var rotas = await _context.Rota.Where(x => x.Fiscais.Any(f => f.UserId == Fiscais))
+                                            .OrderByDescending(x => x.DataInicio)
                                             .Skip((page - 1) * pageSize)
                                             .Take(pageSize)
                                             .ToListAsync();
@@ -55,9 +56,9 @@ public class RotaQuery : IRotaQuery
         return rota.Alimentador;
     }
 
-    public async Task<ICollection<Dommain.Entities.Rota>> BuscarRotaFiltros(IQueryable<Dommain.Entities.Rota> rotas, int page)
+    public async Task<ICollection<Dommain.Entities.Rota>> BuscarRotaFiltros(IQueryable<Dommain.Entities.Rota> rotas, int page, int pagesize)
     {
-        var rota = await rotas.Take(page).ToListAsync();
+        var rota = await rotas.OrderByDescending(x => x.DataInicio).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
 
         return rota;
     }

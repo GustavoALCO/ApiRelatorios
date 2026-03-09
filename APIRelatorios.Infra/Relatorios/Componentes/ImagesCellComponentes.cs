@@ -22,6 +22,7 @@ internal static class ImageCellComponentes
             return new TableCell(new Paragraph());
 
         var imageType = DetectImageType(imageBytes);
+
         var imagePart = ctx.MainPart.AddImagePart(imageType);
 
         using (var stream = new MemoryStream(imageBytes))
@@ -30,7 +31,6 @@ internal static class ImageCellComponentes
         var relId = ctx.MainPart.GetIdOfPart(imagePart);
         var id = _docId++;
 
-        // 🔥 ELEMENTO CORRETO DO WORD
         var drawing = new Drawing(
             new DW.Inline(
                 new DW.Extent { Cx = larguraEmus, Cy = alturaEmus },
@@ -72,9 +72,14 @@ internal static class ImageCellComponentes
                                 new A.Transform2D(
                                     new A.Offset { X = 0, Y = 0 },
                                     new A.Extents { Cx = larguraEmus, Cy = alturaEmus }
-                                ),
+
+                                )
+                                {
+                                    Rotation = 5400000,
+                                },
                                 new A.PresetGeometry(new A.AdjustValueList())
                                 {
+                                    
                                     Preset = A.ShapeTypeValues.Rectangle
                                 }
                             )
@@ -126,6 +131,6 @@ internal static class ImageCellComponentes
             bytes[2] == 0x46)
             return ImagePartType.Gif;
 
-        throw new InvalidOperationException("Formato de imagem não suportado");
+        throw new InvalidOperationException("Formato de imagem não suportado. Erro no ImageCell");
     }
 }

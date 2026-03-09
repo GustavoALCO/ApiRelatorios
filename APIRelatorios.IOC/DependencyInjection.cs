@@ -28,6 +28,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Microsoft.OpenApi;
 using System.Reflection;
 using System.Text;
 
@@ -76,6 +77,40 @@ public static class DependencyInjection
         return services;
     }
 
+    public static IServiceCollection AddSwagger(this IServiceCollection services)
+    {
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "Relatorio",
+                Version = "v1"
+            });
+
+            // Define esquema de segurança Bearer JWT
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                Name = "Authorization",
+                In = ParameterLocation.Header,
+                Type = SecuritySchemeType.Http,
+                Scheme = "bearer",
+                BearerFormat = "JWT",
+                Description = "Digite: Bearer {token}"
+            });
+
+            // Adiciona requisito usando delegate
+            c.AddSecurityRequirement(document =>
+            {
+                return new OpenApiSecurityRequirement
+                {
+                    { new OpenApiSecuritySchemeReference("Bearer"), new List<string>() }
+                };
+            });
+        });
+
+        return services;
+    }
+
     public static IServiceCollection DeclareInterfaces(this IServiceCollection services)
     {
         services.AddScoped<IEvidenciaRotaCommands, EvidenciaRotaCommands>();
@@ -117,6 +152,7 @@ public static class DependencyInjection
         services.AddScoped<BuscarEvidenciaPorIdHandler>();
         services.AddScoped<BuscarTodasAsEvidenciasRotaHandler>();
         services.AddScoped<BuscarRotaFiltersHandler>();
+        services.AddScoped<BuscarRotaIdHandler>();
 
         services.AddScoped<AddFiscalRotaHandler>();
         services.AddScoped<CreateRotaHandler>();
@@ -125,14 +161,12 @@ public static class DependencyInjection
         services.AddScoped<UpdateNomeRotaHandler>();
         services.AddScoped<UpdatePasswordHandler>();
         services.AddScoped<CreateRelatorioHandler>();
-        services.AddScoped<BuscarUsuarioIdHandler>();
 
         services.AddScoped<LoginHandler>();
         services.AddScoped<DeleteUsuarioHandler>();
         services.AddScoped<UpdateUsuarioHandler>();
         services.AddScoped<CreateUserHandler>();
         services.AddScoped<BuscarTodosUsuariosHandler>();
-        services.AddScoped<BuscarRotaPorFiscalHandler>();
 
         return services;
     }
@@ -164,7 +198,7 @@ public static class DependencyInjection
                 ValidIssuer = jwtSettings.Issuer,
 
                 ValidateAudience = true,
-                ValidAudiences = jwtSettings.Audience, // <- aceita múltiplas audiências
+                ValidAudiences = jwtSettings.Audience, 
 
                 ValidateLifetime = true,
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtSettings.Key)),

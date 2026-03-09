@@ -15,8 +15,15 @@ public class UserQuery : IUserQuery
 
     public async Task<Dommain.Entities.User> BuscarFiscalNome(string nome)
     {
-        return await _context.Fiscais.FirstOrDefaultAsync(x=> x.Name == nome);
+        return await _context.Fiscais.FirstOrDefaultAsync(x => x.Login.ToUpper()
+                                                                       .Contains(nome.ToUpper()));
     }
+
+    public async Task<Dommain.Entities.User> BuscarFiscalLogin(string login)
+    {
+        return await _context.Fiscais.FirstOrDefaultAsync(x => x.Login == login);
+    }
+
     public async Task<ICollection<Dommain.Entities.User>> BuscarListaFiscalIds(ICollection<int> idFiscal)
     {
         return await _context.Fiscais.
@@ -24,7 +31,7 @@ public class UserQuery : IUserQuery
                             .ToListAsync();
     }
 
-    public async Task<Dommain.Entities.User> BuscarListaFiscalId(int idFiscal)
+    public async Task<Dommain.Entities.User> BuscarFiscalId(int idFiscal)
     {
         return await _context.Fiscais.
                             FirstOrDefaultAsync(x => x.UserId == idFiscal);

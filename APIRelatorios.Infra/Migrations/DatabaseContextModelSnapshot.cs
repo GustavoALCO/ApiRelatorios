@@ -50,7 +50,7 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<DateTime>("Horario")
                         .HasColumnType("timestamp with time zone");
 
-                    b.Property<string>("Identificação")
+                    b.Property<string>("Identificacão")
                         .HasColumnType("text");
 
                     b.Property<string>("ImageURL")
@@ -110,19 +110,31 @@ namespace APIRelatorios.Infra.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("UserId"));
 
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("boolean");
+                    b.Property<string>("HashPassword")
+                        .IsRequired()
+                        .HasColumnType("text");
 
                     b.Property<bool>("IsAdmin")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Nome")
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("boolean");
+
+                    b.Property<string>("LastName")
                         .IsRequired()
                         .HasColumnType("text");
 
-                    b.Property<string>("Senha")
+                    b.Property<string>("Login")
                         .IsRequired()
                         .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<byte[]>("Salt")
+                        .IsRequired()
+                        .HasColumnType("bytea");
 
                     b.HasKey("UserId");
 

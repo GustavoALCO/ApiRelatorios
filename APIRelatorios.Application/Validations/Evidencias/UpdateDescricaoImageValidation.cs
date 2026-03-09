@@ -8,13 +8,11 @@ public class UpdateDescricaoImageValidation : AbstractValidator<UpdateDescricaoI
 {
     public UpdateDescricaoImageValidation(IValidateIds validateIds)
     {
-        RuleFor(x => x.idDescricao)
+        RuleFor(x => x.evidenciaId)
             .NotEmpty().WithMessage("É obrigatorio passar o Id para modificar a mensagem")
             .NotNull().WithMessage("É obrigatorio passar o Id para modificar a mensagem");
             
 
-        RuleFor(x => x.descricao)
-            .NotNull().WithMessage("Deve passar a nova descrição")
-            .NotNull().WithMessage("Deve passar a nova descrição");
+        
     }
 }

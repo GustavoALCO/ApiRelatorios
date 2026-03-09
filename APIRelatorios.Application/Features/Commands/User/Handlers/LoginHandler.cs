@@ -20,7 +20,7 @@ public class LoginHandler
 
     public async Task<string> Handler(LoginCommandsCommand commands)
     {
-        var usuario = await _query.BuscarFiscalNome(commands.Login) 
+        var usuario = await _query.BuscarFiscalLogin(commands.Login) 
             ?? throw new Exception("Verifique se o login ou a senha está certa");
 
         var isTrue = _passwordHasher.VerifyPassword(commands.Senha, usuario.HashPassword, usuario.Salt);

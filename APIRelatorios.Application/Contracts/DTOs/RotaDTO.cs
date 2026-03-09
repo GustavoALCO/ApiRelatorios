@@ -6,7 +6,8 @@ public readonly record struct RotaDTO
 (
     int RotaId,
     string NomeRota,
-    DateTime DataInicio,
-    DateTime? DataFinal
+    string Alimentador,
+    string DataInicio,
+    string? DataFinal
 );
 

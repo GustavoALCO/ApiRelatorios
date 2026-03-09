@@ -2,6 +2,7 @@
 using APIRelatorios.Application.Features.Commands.Rota.Handler;
 using APIRelatorios.Application.Features.Querys.Rota;
 using APIRelatorios.Application.Features.Querys.Rota.Handler;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -16,8 +17,8 @@ public class RotaController : ControllerBase
     private readonly RemoveFiscalRotaHandler _rmvFiscalRota;
     private readonly UpdateNomeRotaHandler _updateNomeRota;
     private readonly CreateRelatorioHandler _createRelatorio;
-    private readonly BuscarRotaPorFiscalHandler _buscarRotaPorFiscal;
     private readonly BuscarRotaFiltersHandler _buscarRotaFilters;
+    private readonly BuscarRotaIdHandler _buscarRotaIdHandler;
 
     public RotaController(
         AddFiscalRotaHandler addFiscal,
@@ -26,8 +27,8 @@ public class RotaController : ControllerBase
         RemoveFiscalRotaHandler rmvFiscalRota,
         UpdateNomeRotaHandler updateNomeRota,
         CreateRelatorioHandler createRelatorio,
-        BuscarRotaPorFiscalHandler buscarRotaPorFiscal,
-        BuscarRotaFiltersHandler buscarRotaFilters)
+        BuscarRotaFiltersHandler buscarRotaFilters,
+        BuscarRotaIdHandler buscarRotaIdHandler)
     {
         _addFiscal = addFiscal;
         _createRota = createRota;
@@ -35,13 +36,14 @@ public class RotaController : ControllerBase
         _rmvFiscalRota = rmvFiscalRota;
         _updateNomeRota = updateNomeRota;
         _createRelatorio = createRelatorio;
-        _buscarRotaPorFiscal = buscarRotaPorFiscal;
         _buscarRotaFilters = buscarRotaFilters;
+        _buscarRotaIdHandler = buscarRotaIdHandler;
     }
 
-    [HttpGet("Filters")]
+    //[authorize]
+    [HttpGet]
     public async Task<IActionResult> BuscarPorFiltro(
-        [FromQuery] BuscarRotaFiltersCommands command)
+         [FromQuery]BuscarRotaFiltersCommands command)
     {
         try
         {
@@ -54,22 +56,24 @@ public class RotaController : ControllerBase
         }
     }
 
-    [HttpGet]
-    public async Task<IActionResult> BuscarPorFiscais(
-        [FromQuery] BuscarRotaPorFiscalCommands command)
+    //[authorize]
+    [HttpGet("{id}")]
+    public async Task<IActionResult> BuscarPorFiltro(
+        int id)
     {
         try
         {
-            var rota = await _buscarRotaPorFiscal.Handler(command);
+            var rota = await _buscarRotaIdHandler.Handler(id);
             return Ok(rota);
         }
-        catch (Exception)
+        catch (Exception ex)
         {
-            return StatusCode(500, "Erro interno ao buscar rotas.");
+            return StatusCode(500, $"Erro interno ao buscar rotas.\n{ex}");
         }
     }
 
-    [HttpPatch("UPDnome")]
+    //[authorize]
+    [HttpPatch("nome")]
     public async Task<IActionResult> UpdNome(
         [FromBody] UpdateNomeRotaCommand command)
     {
@@ -84,6 +88,7 @@ public class RotaController : ControllerBase
         }
     }
 
+    //[authorize]
     [HttpPatch("AddFiscais")]
     public async Task<IActionResult> AddFiscais(
         [FromBody] AddFiscalRotaCommand command)
@@ -99,7 +104,8 @@ public class RotaController : ControllerBase
         }
     }
 
-    [HttpPatch("RmvFiscais")]
+    //[authorize]
+    [HttpPatch("RemoveFiscais")]
     public async Task<IActionResult> RemoverFiscais(
         [FromBody] RemoveFiscalRotaCommand command)
     {
@@ -114,6 +120,7 @@ public class RotaController : ControllerBase
         }
     }
 
+    //[authorize]
     [HttpPost]
     public async Task<IActionResult> Post(
         [FromBody] CreateRotaCommand command)
@@ -129,13 +136,15 @@ public class RotaController : ControllerBase
         }
     }
 
-    [HttpDelete]
-    public async Task<IActionResult> Delete(
-        [FromBody] DeleteRotaCommand command)
+    //[authorize]
+    [HttpDelete("{rotaId}")]
+    public async Task<IActionResult> Delete( int rotaId)
     {
+        if (rotaId <= 0)
+            return BadRequest("Id invalido");
         try
         {
-            await _deleteRota.Handler(command);
+            await _deleteRota.Handler(rotaId);
             return Ok();
         }
         catch (Exception)
@@ -144,6 +153,7 @@ public class RotaController : ControllerBase
         }
     }
 
+    //[authorize]
     [HttpPost("CriarRelatorio")]
     public async Task<IActionResult> CriarRelatorio(
         [FromBody] CreateRelatorioWordCommand command)
