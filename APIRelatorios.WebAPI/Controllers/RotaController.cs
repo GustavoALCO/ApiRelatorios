@@ -153,7 +153,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    
     [HttpPost("CriarRelatorio")]
     public async Task<IActionResult> CriarRelatorio(
         [FromBody] CreateRelatorioWordCommand command)

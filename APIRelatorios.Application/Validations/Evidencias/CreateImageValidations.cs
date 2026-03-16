@@ -9,10 +9,7 @@ public class CreateImageValidations : AbstractValidator<CreateImageCommand>
 {
     public CreateImageValidations(IValidateBase64 validateBase64)
     {
-        RuleFor(x => x.Cep)
-            .NotEmpty().WithMessage("Cep não pode ser nulo")
-            .NotNull().WithMessage("Cep não pode ser nulo")
-            .Matches(@"^\d{5}-\d{3}$").WithMessage("O CEP deve estar no formato 00000-000");          
+            
 
         RuleFor(x => x.Endereco)
             .NotEmpty().WithMessage("Endereço não pode ser nulo")

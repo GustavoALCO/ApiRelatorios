@@ -25,5 +25,10 @@ public class EvidenciaDTO
 
     public string Cep {  get; set; }
 
-    public string Horario { get;  set; }
+    public double Latitude { get; set; }
+
+
+    public double Longitude { get; set; }
+
+    public DateTime Horario { get;  set; }
 }

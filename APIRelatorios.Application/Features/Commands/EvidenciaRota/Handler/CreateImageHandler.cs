@@ -59,7 +59,6 @@ public class CreateImageHandler
             ,descricao: createImage.Descricao
             ,imagem: urlImage,
             endereco: createImage.Endereco,
-            cep: createImage.Cep,
             lat: createImage.Latitude,
             lon: createImage.Longitude,
             horario: createImage.Horario.AddHours(-3)

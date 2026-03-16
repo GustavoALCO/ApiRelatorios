@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260224175727_v1")]
-    partial class v1
+    [Migration("20260314015745_V1")]
+    partial class V1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -34,10 +34,6 @@ namespace APIRelatorios.Infra.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("EvidenciaRotaId"));
 
                     b.Property<string>("Alimentador")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Cep")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Descricao")

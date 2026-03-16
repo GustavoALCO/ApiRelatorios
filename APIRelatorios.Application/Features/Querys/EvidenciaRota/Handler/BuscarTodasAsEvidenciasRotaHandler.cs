@@ -48,12 +48,13 @@ public class BuscarTodasAsEvidenciasRotaHandler
                 Alimentador = evidencias.Alimentador,
                 Descricao = evidencias.Descricao,
                 Endereco = evidencias.Endereco,
-                Cep  =  evidencias.Cep, 
-                Horario = evidencias.Horario.ToString("dd/MM/yyyy HH:mm"),
+                Horario = evidencias.Horario,
                 ImageURL = evidencias.ImageURL,
                 Identificacao = evidencias.Identificacão,
                 NomeFiscal = $"{fiscal.Name} {fiscal.LastName}",
                 TemaFiscalizacao = ((int)evidencias.TemaFiscalizacao),
+                Latitude = evidencias.Latitude,
+                Longitude = evidencias.Longitude,
             };
 
             evidenciaDTOs.Add(evidenciaDTO);

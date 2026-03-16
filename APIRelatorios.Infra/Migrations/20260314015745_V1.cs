@@ -7,7 +7,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class V1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -61,7 +61,6 @@ namespace APIRelatorios.Infra.Migrations
                     Descricao = table.Column<string>(type: "text", nullable: true),
                     ImageURL = table.Column<string>(type: "text", nullable: false),
                     Endereco = table.Column<string>(type: "text", nullable: false),
-                    Cep = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
                     Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)

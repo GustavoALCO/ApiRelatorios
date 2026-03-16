@@ -3,20 +3,48 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\cellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\cellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\evidenciarota\\handler\\createimagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\evidenciarota\\handler\\createimagehandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{6055DD67-46AB-8F64-42ED-9AE85C3AE1D0}|APIRelatorios.Dommain\\APIRelatorios.Dommain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\entities\\evidenciarota.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6055DD67-46AB-8F64-42ED-9AE85C3AE1D0}|APIRelatorios.Dommain\\APIRelatorios.Dommain.csproj|solutionrelative:apirelatorios.dommain\\entities\\evidenciarota.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\evidenciarota\\createimagecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\evidenciarota\\createimagecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\validations\\evidencias\\createimagevalidations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\validations\\evidencias\\createimagevalidations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\querys\\evidenciarota\\handler\\buscarevidenciaporidhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\querys\\evidenciarota\\handler\\buscarevidenciaporidhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\querys\\evidenciarota\\handler\\buscartodasasevidenciasrotahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\querys\\evidenciarota\\handler\\buscartodasasevidenciasrotahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\rotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\rotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\evidenciarota\\createimagecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\evidenciarota\\createimagecommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\docker-compose.yml||{06C066C6-04A2-4E5D-8202-439FD4234EF1}",
+      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{06C066C6-04A2-4E5D-8202-439FD4234EF1}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\fiscalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\fiscalcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\rota\\handler\\createrelatoriohandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\rota\\handler\\createrelatoriohandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\querys\\evidenciarota\\handler\\buscartodasasevidenciasrotahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\querys\\evidenciarota\\handler\\buscartodasasevidenciasrotahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,11 +54,61 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CellComponentes.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
+              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAAwBgAAAAtAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T18:10:33.516Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "EvidenciaRota.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Entities\\EvidenciaRota.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Entities\\EvidenciaRota.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Entities\\EvidenciaRota.cs",
+              "RelativeToolTip": "APIRelatorios.Dommain\\Entities\\EvidenciaRota.cs",
+              "ViewState": "AgIAADAAAAAAAAAAAAAAADAAAAAYAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T04:26:24.142Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateImageHandler.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAuwDcAAAAvAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T04:26:12.025Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CreateImageValidations.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T04:23:01.796Z"
             },
             {
               "$type": "Document",
@@ -40,49 +118,81 @@
               "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\CreateImageCommand.cs",
               "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\CreateImageCommand.cs",
               "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\CreateImageCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAHAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAABQAAAAQAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T11:30:39.179Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T03:43:20.965Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "CreateImageHandler.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\EvidenciaRota\\Handler\\CreateImageHandler.cs",
-              "ViewState": "AgIAABgAAAAAAAAAAAAAACgAAABBAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "FiscalController.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\FiscalController.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\FiscalController.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\FiscalController.cs",
+              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\FiscalController.cs",
+              "ViewState": "AgIAACQAAAAAAAAAAAAYwDEAAAARAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T11:27:57.7Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T02:22:30.335Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BuscarEvidenciaPorIdHandler.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
-              "ViewState": "AgIAABQAAAAAAAAAAAAEwCMAAAAzAAAAAAAAAA==",
+              "DocumentIndex": 9,
+              "Title": "CreateRelatorioHandler.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "ViewState": "AgIAACsAAAAAAAAAAAAYwDEAAABtAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T10:28:25.332Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T02:06:38.937Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 10,
               "Title": "BuscarTodasAsEvidenciasRotaHandler.cs",
               "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarTodasAsEvidenciasRotaHandler.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarTodasAsEvidenciasRotaHandler.cs",
               "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarTodasAsEvidenciasRotaHandler.cs",
               "RelativeToolTip": "APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarTodasAsEvidenciasRotaHandler.cs",
-              "ViewState": "AgIAABkAAAAAAAAAAAAUwDIAAAAXAAAAAAAAAA==",
+              "ViewState": "AgIAACcAAAAAAAAAAAASwDEAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-08T10:27:08.626Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-03-14T02:00:07.967Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "BuscarEvidenciaPorIdHandler.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Querys\\EvidenciaRota\\Handler\\BuscarEvidenciaPorIdHandler.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAqwCEAAAArAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T02:00:05.652Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "docker-compose.yml",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\docker-compose.yml",
+              "RelativeDocumentMoniker": "docker-compose.yml",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\docker-compose.yml",
+              "RelativeToolTip": "docker-compose.yml",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAuAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
+              "WhenOpened": "2026-03-14T02:35:55.43Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RotaController.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
+              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
+              "ViewState": "AgIAAJQAAAAAAAAAAADwv5sAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-03-14T03:35:23.96Z"
             }
           ]
         }

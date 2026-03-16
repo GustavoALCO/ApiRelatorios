@@ -33,10 +33,6 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<string>("Alimentador")
                         .HasColumnType("text");
 
-                    b.Property<string>("Cep")
-                        .IsRequired()
-                        .HasColumnType("text");
-
                     b.Property<string>("Descricao")
                         .HasColumnType("text");
 

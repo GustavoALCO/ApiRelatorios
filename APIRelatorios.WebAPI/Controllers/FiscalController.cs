@@ -47,7 +47,7 @@ public class FiscalController : ControllerBase
         }
     }
 
-    [Authorize]
+    //[Authorize]
     [HttpPost]
     public async Task<IActionResult> Post(CreateUsuarioCommand createuser)
     {

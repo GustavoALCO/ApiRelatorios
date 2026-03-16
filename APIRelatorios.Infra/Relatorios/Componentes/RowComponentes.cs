@@ -54,9 +54,9 @@ internal class RowComponentes
 
             table.Append(
                 new DocumentFormat.OpenXml.Wordprocessing.TableRow(
-                    CellComponentes.Texto(indice.ToString()),
-                    CellComponentes.Texto(item.Dsc),
-                    CellComponentes.Texto(item.NumeroImagem)
+                    CellComponentes.Texto(indice.ToString(), "", negritoTexto1: true),
+                    CellComponentes.Texto(item.Alimentador ,$" - {item.Dsc}, {item.Identificação}, {item.Localização} ", negritoTexto1: true),
+                    CellComponentes.Texto(item.NumeroImagem,"", negritoTexto1: true)
                 )
             );
         }

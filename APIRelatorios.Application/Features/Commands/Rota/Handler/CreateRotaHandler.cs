@@ -43,6 +43,8 @@ public class CreateRotaHandler
             rota.Fiscais.Add(usuarioRota);
         }
 
+        rota.DataInicio.AddHours(-3);
+
         await _rotaCommands.CreateRotaAsync(rota);
     }
 }

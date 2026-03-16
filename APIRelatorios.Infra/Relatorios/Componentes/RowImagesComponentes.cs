@@ -34,7 +34,7 @@ internal class RowImagesComponentes
             var rowDesc = new TableRow();
             foreach (var item in grupo)
             {
-                rowDesc.Append(CellComponentes.Texto($"{item.NumeroImagem} - {item.Dsc}"));
+                rowDesc.Append(CellComponentes.Texto($"{item.NumeroImagem} - {item.Alimentador} - ", $" {item.Dsc + ","} {item.Identificação +"," ?? ""} {item.Localização}", negritoTexto1: true));
             }
             PreencherCelulasVazias(rowDesc);
             table.Append(rowDesc);
@@ -74,7 +74,7 @@ internal class RowImagesComponentes
     {
         while (row.ChildElements.Count < 3)
         {
-            row.Append(CellComponentes.Texto(""));
+            row.Append(CellComponentes.Texto("",""));
         }
     }
 

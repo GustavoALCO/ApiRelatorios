@@ -20,8 +20,6 @@ string Base64,
 
 string Endereco,
 
-string Cep,
-
 double Latitude,
 
 double Longitude,

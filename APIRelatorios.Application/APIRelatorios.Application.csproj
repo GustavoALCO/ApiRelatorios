@@ -10,6 +10,7 @@
     <PackageReference Include="Azure.Storage.Blobs" Version="12.27.0" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
+    <PackageReference Include="OpenLocationCode" Version="2.1.1" />
   </ItemGroup>
 
   <ItemGroup>

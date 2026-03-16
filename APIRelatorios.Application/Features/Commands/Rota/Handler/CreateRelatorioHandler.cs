@@ -5,6 +5,7 @@ using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.Services;
+using Google.OpenLocationCode;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
@@ -46,16 +47,17 @@ public class CreateRelatorioHandler
             int contagem = 1;
             foreach (var evidendciasloop in evidenciasBruto)
             {
+                string plusCode = OpenLocationCode.Encode(evidendciasloop.Latitude, evidendciasloop.Longitude);
+
                 DadosRelatorioDTO evidendcias = new()
                 {
                     // Buscar os bytes da imagem 
                     Foto = await _ByteImage.BaixarImagemAsync(evidendciasloop.ImageURL),
-                    Dsc =
-                    $"{evidendciasloop.Alimentador ?? await _rotaQuery.BuscarAlimentador(evidendciasloop.RotaId)} " +
-                    $"{evidendciasloop.Descricao ?? "DSC VAZIO"} " +
-                    $"{evidendciasloop.Endereco ?? "ENDEREÇO VAZIO"} " +
-                    $"{evidendciasloop.Cep ?? "CEP VAZIO"}",
-
+                    Dsc = 
+                    $"{evidendciasloop.Descricao ?? "DSC VAZIO"} ",
+                    Alimentador = $"{evidendciasloop.Alimentador ??  "Aliemntador Não Declarado"}",
+                    Identificação = $"{evidendciasloop.Identificacão}",
+                    Localização = $"{evidendciasloop.Endereco ?? "ENDEREÇO VAZIO"} - PlusCode : {plusCode}",
                     NumeroImagem = $"{(EnumLetras)i} - {contagem}" ,
                     Tema = evidendciasloop.TemaFiscalizacao ,
                 };

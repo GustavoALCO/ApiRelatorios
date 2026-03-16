@@ -26,8 +26,6 @@ public class EvidenciaRota
 
     public string Endereco { get; private set; }
 
-    public string Cep { get; private set; }
-
     public double Latitude { get; private set; }
 
     public double Longitude { get; private set; }
@@ -49,7 +47,6 @@ public class EvidenciaRota
         string? descricao,
         string imagem,
         string endereco,
-        string cep,
         double lat,
         double lon,
         DateTime horario
@@ -63,7 +60,6 @@ public class EvidenciaRota
         Descricao = descricao;
         ImageURL = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
         Endereco = endereco;
-        Cep = cep;
         Latitude = lat;
         Longitude = lon;
         Horario = horario;
