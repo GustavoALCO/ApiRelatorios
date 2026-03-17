@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -59,7 +60,7 @@ namespace APIRelatorios.Infra.Migrations
                     Alimentador = table.Column<string>(type: "text", nullable: true),
                     Identificacão = table.Column<string>(type: "text", nullable: true),
                     Descricao = table.Column<string>(type: "text", nullable: true),
-                    ImageURL = table.Column<string>(type: "text", nullable: false),
+                    ImageURL = table.Column<List<string>>(type: "text[]", nullable: false),
                     Endereco = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),

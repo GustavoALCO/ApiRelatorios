@@ -44,7 +44,7 @@ public class ValidateIds : IValidateIds
 
     public async Task<bool> EvidenciaExisteAsync(int id)
     { 
-        var evicencia = await _evidenciaQuery.GetImageId(id);
+        var evicencia = await _evidenciaQuery.GetEvidenciaId(id);
 
         if (evicencia != null)
             return true;

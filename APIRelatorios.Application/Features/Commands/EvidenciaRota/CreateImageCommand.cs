@@ -16,7 +16,7 @@ string? Alimentador,
 
 string Descricao,
 
-string Base64,
+List<string> Base64,
 
 string Endereco,
 

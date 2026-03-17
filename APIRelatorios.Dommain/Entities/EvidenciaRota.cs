@@ -22,7 +22,7 @@ public class EvidenciaRota
 
     public string? Descricao { get; private set; }
 
-    public string ImageURL { get; private set; }
+    public List<string> ImageURL { get; private set; }
 
     public string Endereco { get; private set; }
 
@@ -45,7 +45,7 @@ public class EvidenciaRota
         string? alimentador,
         string? identificacao,
         string? descricao,
-        string imagem,
+        List<string> imagem,
         string endereco,
         double lat,
         double lon,

@@ -1,11 +1,9 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Application.Contracts.Enum;
 using APIRelatorios.Application.Interfaces;
-using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.Services;
-using Google.OpenLocationCode;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
@@ -19,15 +17,12 @@ public class CreateRelatorioHandler
 
     private readonly IValidateIds _validateIds;
 
-    private readonly IRotaQuery _rotaQuery;
-
     public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagem byteImage, IValidateIds validateIds, IRotaQuery rotaquery)
     {
         _RotaQuery = rotaQuery;
         _relatorio = relatorio;
         _ByteImage = byteImage;
         _validateIds = validateIds;
-        _rotaQuery = rotaquery;
     }
 
     public async Task<byte[]> Handler(CreateRelatorioWordCommand command)
@@ -42,29 +37,32 @@ public class CreateRelatorioHandler
 
         for (int i = 0; i < command.Ids.Length; i++)
         {
-            var evidenciasBruto = await _RotaQuery.GetImagemAsync(command.Ids[i]);
+            var evidenciasBruto = await _RotaQuery.GetEvidenciaAsync(command.Ids[i]);
 
             int contagem = 1;
-            foreach (var evidendciasloop in evidenciasBruto)
+            foreach (var evidenciasloop in evidenciasBruto)
             {
-                string plusCode = OpenLocationCode.Encode(evidendciasloop.Latitude, evidendciasloop.Longitude);
 
-                DadosRelatorioDTO evidendcias = new()
+                foreach(var images in evidenciasloop.ImageURL)
                 {
-                    // Buscar os bytes da imagem 
-                    Foto = await _ByteImage.BaixarImagemAsync(evidendciasloop.ImageURL),
-                    Dsc = 
-                    $"{evidendciasloop.Descricao ?? "DSC VAZIO"} ",
-                    Alimentador = $"{evidendciasloop.Alimentador ??  "Aliemntador Não Declarado"}",
-                    Identificação = $"{evidendciasloop.Identificacão}",
-                    Localização = $"{evidendciasloop.Endereco ?? "ENDEREÇO VAZIO"} - PlusCode : {plusCode}",
-                    NumeroImagem = $"{(EnumLetras)i} - {contagem}" ,
-                    Tema = evidendciasloop.TemaFiscalizacao ,
-                };
+                    DadosRelatorioDTO evidendcias = new()
+                    {
+                        // Buscar os bytes da imagem 
+                        Foto = await _ByteImage.BaixarImagemAsync(images),
+                        Dsc =
+                    $"{evidenciasloop.Descricao ?? "DSC VAZIO"} ",
+                        Alimentador = $"{evidenciasloop.Alimentador ?? "Aliemntador Não Declarado"}",
+                        Identificação = $"{evidenciasloop.Identificacão}",
+                        Localização = $"{evidenciasloop.Endereco ?? "ENDEREÇO VAZIO"} - Lat : {evidenciasloop.Latitude} - Long : {evidenciasloop.Longitude}",
+                        NumeroImagem = $"{(EnumLetras)i} - {contagem}",
+                        Tema = evidenciasloop.TemaFiscalizacao,
+                    };
 
+                    evidencias.Add(evidendcias);
+                }
+                
                 contagem++;
-
-                evidencias.Add(evidendcias);
+                
             }
         }
         

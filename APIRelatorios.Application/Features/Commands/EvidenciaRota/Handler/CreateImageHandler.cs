@@ -38,13 +38,13 @@ public class CreateImageHandler
             createImage.Alimentador = rota.Alimentador;
 
 
-        var urlImage = await _uploadImage.UploadBase64ImagesAsync(createImage.Alimentador,
+        var urlImage = await _uploadImage.UploadListBase64ImagesAsync(createImage.Alimentador,
                                                                   fiscal: $"{fiscais.Name}_{fiscais.LastName}",
-                                                                  createImage.Horario.ToString("yyyy_MM_dd__HH_mm"),
+                                                                  createImage.Horario.ToString("yyyy_MM_dd__HH_mm_ff"),
                                                                   createImage.Base64,
                                                                   "imagens");
-        
-            if(string.IsNullOrEmpty(urlImage))
+
+        if (urlImage.Count() == 0)
         {
             Console.WriteLine("Erro ao fazer upload da imagem");
             throw new Exception("Erro ao fazer upload da imagem");

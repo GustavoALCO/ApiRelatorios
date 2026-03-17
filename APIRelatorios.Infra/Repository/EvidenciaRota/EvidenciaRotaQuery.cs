@@ -16,7 +16,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         _Context = context;
     }
 
-    public async Task<EvidenciaRota> GetImageId(int imageId)
+    public async Task<EvidenciaRota> GetEvidenciaId(int imageId)
     {
        
         var image = await _Context.EvidenciaRota.FirstOrDefaultAsync(i => i.EvidenciaRotaId == imageId);
@@ -25,7 +25,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         
     }
 
-    public async Task<ICollection<EvidenciaRota>> GetImagemAsync(int RotaID)
+    public async Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(int RotaID)
     {
         try
         {

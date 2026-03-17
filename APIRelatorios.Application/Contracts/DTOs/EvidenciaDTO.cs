@@ -19,11 +19,9 @@ public class EvidenciaDTO
 
     public string? Descricao { get;  set; }
 
-    public string ImageURL { get;  set; }
+    public List<string> ImageURL { get;  set; }
 
     public string Endereco { get;  set; }
-
-    public string Cep {  get; set; }
 
     public double Latitude { get; set; }
 

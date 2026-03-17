@@ -48,7 +48,12 @@ internal class RowComponentes
     );
 
         int indice = 0;
-        foreach (var item in relatorioDTOs)
+
+        var tabelaAgrupada = relatorioDTOs.GroupBy(x => x.NumeroImagem)
+                                                    .Select(x => x.First())
+                                                    .ToList();
+
+        foreach (var item in tabelaAgrupada)
         {
             indice++;
 

@@ -19,7 +19,7 @@ public class BuscarEvidenciaPorIdHandler
 
     public async Task<EvidenciaDTO> Handler(int commands)
     {
-        var evidencias = await _evidenciaRota.GetImageId(commands) ?? throw new Exception("Não existe Evidencia com esse ID");
+        var evidencias = await _evidenciaRota.GetEvidenciaId(commands) ?? throw new Exception("Não existe Evidencia com esse ID");
  
         
 

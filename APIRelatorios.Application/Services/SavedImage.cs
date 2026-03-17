@@ -20,7 +20,8 @@ public class SavedImage : ISavedImages
     string fiscal,
     string horario,
     string base64Image,
-    string container)
+    string container,
+    int index)
     {
         // 1️⃣ Extrai o tipo da imagem do base64
         var match = Regex.Match(base64Image, @"(?<type>[a-zA-Z0-9]+);base64,");
@@ -42,7 +43,7 @@ public class SavedImage : ISavedImages
 
         string contentType = $"image/{imageType}";
 
-        var fileName = $"{alimentador}_{fiscal}_{horario}{extension}";
+        var fileName = $"{alimentador}_{fiscal}_{horario}_{index}{extension}";
 
         // 3️⃣ Remove prefixo do base64
         var data = Regex.Replace(base64Image, @"^data:image\/[a-zA-Z0-9]+;base64,", "");
@@ -62,6 +63,26 @@ public class SavedImage : ISavedImages
         return blobClient.Uri.AbsoluteUri;
     }
 
+    public async Task<List<string>> UploadListBase64ImagesAsync
+                                    (string alimentador,
+                                    string fiscal,
+                                    string horario,
+                                    List<string> base64Image,
+                                    string container
+                                    )
+    {
+        List<string> images = new();
+        int index = 0;
+        foreach (var item in base64Image)
+        {
+            index++;
+            var url = await UploadBase64ImagesAsync(alimentador,fiscal,horario,item,container,index);
+
+            images.Add(url);
+        }
+
+        return images;
+    }
     public async Task DeleteImagesAsync(string imageNames, int indiceContainer)
     {
         var containerClient = new BlobContainerClient(_blobService.ConnectionString, _blobService.Container);

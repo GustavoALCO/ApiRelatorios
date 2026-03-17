@@ -21,7 +21,7 @@ public class UpdateDescricaoImageHandler
     public async Task Handler(UpdateDescricaoImageCommands updateDescricao)
     {
 
-        var image = await _query.GetImageId(updateDescricao.evidenciaId) ?? throw new Exception("Erro ao Encontrar Evidencia");
+        var image = await _query.GetEvidenciaId(updateDescricao.evidenciaId) ?? throw new Exception("Erro ao Encontrar Evidencia");
 
         image.Atualizar(
             updateDescricao.descricao,
