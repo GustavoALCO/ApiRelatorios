@@ -1,36 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\rowcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\rowcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\corpo\\bodyrelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\corpo\\bodyrelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\titlerowcomponents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\titlerowcomponents.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\services\\savedimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\services\\savedimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\contracts\\dtos\\evidenciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\contracts\\dtos\\evidenciadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\docker-compose.yml||{06C066C6-04A2-4E5D-8202-439FD4234EF1}",
-      "RelativeMoniker": "D:0:0:{81DDED9D-158B-E303-5F62-77A2896D2A5A}|docker-compose.dcproj|solutionrelative:docker-compose.yml||{06C066C6-04A2-4E5D-8202-439FD4234EF1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\validations\\evidencias\\createimagevalidations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\validations\\evidencias\\createimagevalidations.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -38,101 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RowComponentes.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "ViewState": "AgIAACUAAAAAAAAAAAAgwDEAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T23:29:58.993Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BodyRelatorio.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorio.cs",
-              "ViewState": "AgIAAAQAAAAAAAAAAAAAABgAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T23:29:33.221Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TitleRowComponents.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\TitleRowComponents.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\TitleRowComponents.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\TitleRowComponents.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\TitleRowComponents.cs",
-              "ViewState": "AgIAAAEAAAAAAAAAAAAQwB0AAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T23:29:25.176Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "EvidenciaDTO.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Contracts\\DTOs\\EvidenciaDTO.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Contracts\\DTOs\\EvidenciaDTO.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Contracts\\DTOs\\EvidenciaDTO.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Contracts\\DTOs\\EvidenciaDTO.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAUwBcAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T22:01:13.842Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "docker-compose.yml",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\docker-compose.yml",
-              "RelativeDocumentMoniker": "docker-compose.yml",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\docker-compose.yml",
-              "RelativeToolTip": "docker-compose.yml",
-              "ViewState": "AgIAAAIAAAAAAAAAAAAcwBkAAAAeAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003775|",
-              "WhenOpened": "2026-03-16T20:36:40.968Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SavedImage.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Services\\SavedImage.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Services\\SavedImage.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Services\\SavedImage.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Services\\SavedImage.cs",
-              "ViewState": "AgIAADkAAAAAAAAAAAAAAEoAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T20:32:58.769Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "CreateImageValidations.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Validations\\Evidencias\\CreateImageValidations.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-16T20:32:48.196Z"
             }
           ]
         }

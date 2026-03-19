@@ -1,8 +1,10 @@
 ﻿using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
 using ChatApplication.Application.Interfaces;
+using System.Text.RegularExpressions;
 
 namespace APIRelatorios.Application.Features.Commands.Images.Handler;
 
@@ -16,18 +18,17 @@ public class CreateImageHandler
     private readonly IRotaQuery _rotaQuery;
 
     private readonly IUserQuery _query;
-    private readonly IValidateBase64 _validateBase64;
 
-    public CreateImageHandler(IEvidenciaRotaCommands commands, ISavedImages uploadImage, IValidateBase64 validateBase64, IUserQuery query, IRotaQuery rotaQuery)
+
+    public CreateImageHandler(IEvidenciaRotaCommands commands, ISavedImages uploadImage, IUserQuery query, IRotaQuery rotaQuery)
     {
         _commands = commands;
         _uploadImage = uploadImage;
-        _validateBase64 = validateBase64;
         _query = query;
         _rotaQuery = rotaQuery;
     }
 
-    public async Task Handler(CreateImageCommand createImage)
+    public async Task Handler(CreateEvidenciaCommand createImage)
     {
 
         var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) ?? throw new Exception("Erro ao Encontrar Rota");
@@ -36,28 +37,30 @@ public class CreateImageHandler
         
         if(string.IsNullOrEmpty(createImage.Alimentador))
             createImage.Alimentador = rota.Alimentador;
+        
 
+        var urlImages = await _uploadImage.UploadListBase64ImagesAsync(alimentador: createImage.Alimentador,
+                                                                       fiscal: $"{fiscais.Name}_{fiscais.LastName}",
+                                                                       horario: createImage.Horario.ToString("yyyy_MM_dd__HH_mm"),
+                                                                       base64Image: createImage.Base64,
+                                                                       container: "imagens",
+                                                                       evidenciaId: createImage.evidenciaId);
 
-        var urlImage = await _uploadImage.UploadListBase64ImagesAsync(createImage.Alimentador,
-                                                                  fiscal: $"{fiscais.Name}_{fiscais.LastName}",
-                                                                  createImage.Horario.ToString("yyyy_MM_dd__HH_mm_ff"),
-                                                                  createImage.Base64,
-                                                                  "imagens");
-
-        if (urlImage.Count() == 0)
+        if (urlImages.Count() == 0)
         {
             Console.WriteLine("Erro ao fazer upload da imagem");
             throw new Exception("Erro ao fazer upload da imagem");
         }
 
         Dommain.Entities.EvidenciaRota image = new(
+            evidenciaRotaId: createImage.evidenciaId,
             rotaID: createImage.rotaID,
             fiscalId: createImage.fiscalId
             ,tema: createImage.TemaFiscalizacao
             ,alimentador: createImage.Alimentador 
             ,identificacao: createImage.Identificacao
             ,descricao: createImage.Descricao
-            ,imagem: urlImage,
+            ,imagem: urlImages,
             endereco: createImage.Endereco,
             lat: createImage.Latitude,
             lon: createImage.Longitude,

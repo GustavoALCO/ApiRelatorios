@@ -11,10 +11,13 @@ public class BuscarTodasAsEvidenciasRotaHandler
 
     private readonly IUserQuery _userQuery;
 
-    public BuscarTodasAsEvidenciasRotaHandler(IEvidenciaRotaQuery evidenciaRota, IUserQuery userQuery)
+    private readonly IImagesQuery _imagesQuery;
+
+    public BuscarTodasAsEvidenciasRotaHandler(IEvidenciaRotaQuery evidenciaRota, IUserQuery userQuery, IImagesQuery imagesQuery)
     {
         _evidenciaRota = evidenciaRota;
         _userQuery = userQuery;
+        _imagesQuery = imagesQuery;
     }
 
     public async Task<ICollection<EvidenciaDTO>> Handler(BuscarTodasEvidenciasRotaCommands commands)
@@ -41,6 +44,20 @@ public class BuscarTodasAsEvidenciasRotaHandler
         {
             var fiscal = users.First(x => x.UserId == evidencias.FiscalId);
 
+            var images = await _imagesQuery.GetImageEvidencia(evidencias.EvidenciaRotaId) ?? throw new Exception("Não há imagens declaradas nesta evidencia");
+
+            List<string> imageOriginal = new();
+            List<string> imageMedium = new();
+            List<string> imageLow = new();
+
+            foreach (var image in images)
+            {
+                imageOriginal.Add(image.OriginalUrl);
+                imageMedium.Add(image.MediumUrl);
+                imageLow.Add(image.LowUrl);
+            }
+
+
             EvidenciaDTO evidenciaDTO = new EvidenciaDTO
             {
                 EvidenciaRotaId = evidencias.EvidenciaRotaId,
@@ -49,7 +66,9 @@ public class BuscarTodasAsEvidenciasRotaHandler
                 Descricao = evidencias.Descricao,
                 Endereco = evidencias.Endereco,
                 Horario = evidencias.Horario,
-                ImageURL = evidencias.ImageURL,
+                ImageURL = imageOriginal,
+                MediumImageUrl = imageMedium,
+                LowImageUrl = imageLow,
                 Identificacao = evidencias.Identificacão,
                 NomeFiscal = $"{fiscal.Name} {fiscal.LastName}",
                 TemaFiscalizacao = ((int)evidencias.TemaFiscalizacao),

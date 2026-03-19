@@ -13,16 +13,19 @@ public class CreateRelatorioHandler
 
     private readonly IEvidenciaRotaQuery _RotaQuery;
 
+    private readonly IImagesQuery _imageQuery;
+
     private readonly IBuscarByteImagem _ByteImage;
 
     private readonly IValidateIds _validateIds;
 
-    public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagem byteImage, IValidateIds validateIds, IRotaQuery rotaquery)
+    public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagem byteImage, IValidateIds validateIds, IRotaQuery rotaquery, IImagesQuery imageQuery)
     {
         _RotaQuery = rotaQuery;
         _relatorio = relatorio;
         _ByteImage = byteImage;
         _validateIds = validateIds;
+        _imageQuery = imageQuery;
     }
 
     public async Task<byte[]> Handler(CreateRelatorioWordCommand command)
@@ -42,18 +45,19 @@ public class CreateRelatorioHandler
             int contagem = 1;
             foreach (var evidenciasloop in evidenciasBruto)
             {
+                var images = await _imageQuery.GetImageEvidencia(evidenciasloop.EvidenciaRotaId);
 
-                foreach(var images in evidenciasloop.ImageURL)
+                foreach(var image in images)
                 {
                     DadosRelatorioDTO evidendcias = new()
                     {
                         // Buscar os bytes da imagem 
-                        Foto = await _ByteImage.BaixarImagemAsync(images),
+                        Foto = await _ByteImage.BaixarImagemAsync(image.LowUrl),
                         Dsc =
-                    $"{evidenciasloop.Descricao ?? "DSC VAZIO"} ",
+                        $"{evidenciasloop.Descricao ?? "DSC VAZIO"} ",
                         Alimentador = $"{evidenciasloop.Alimentador ?? "Aliemntador Não Declarado"}",
                         Identificação = $"{evidenciasloop.Identificacão}",
-                        Localização = $"{evidenciasloop.Endereco ?? "ENDEREÇO VAZIO"} - Lat : {evidenciasloop.Latitude} - Long : {evidenciasloop.Longitude}",
+                        Localização = $"{evidenciasloop.Endereco ?? "ENDEREÇO VAZIO"}",
                         NumeroImagem = $"{(EnumLetras)i} - {contagem}",
                         Tema = evidenciasloop.TemaFiscalizacao,
                     };

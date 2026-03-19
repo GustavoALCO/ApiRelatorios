@@ -2,12 +2,17 @@
 
 namespace APIRelatorios.Application.Features.Commands.Images;
 
-public readonly record struct UpdateDescricaoImageCommands
+public readonly record struct UpdateEvidenciasCommands
 (
-    int evidenciaId,
+    Guid evidenciaId,
+
     string? descricao,
+
     TemaFiscalizacao? tema,
+
     string? alimentador,
+
     string? endereco,
+
     string? identificacao
 );

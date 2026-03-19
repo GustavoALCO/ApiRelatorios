@@ -31,7 +31,7 @@ public class EvidenciaRotaController : ControllerBase
 
     
     [HttpGet("Id")]
-    public async Task<IActionResult> BuscarPorId(int commands)
+    public async Task<IActionResult> BuscarPorId(Guid commands)
     {
         try
         {
@@ -63,7 +63,7 @@ public class EvidenciaRotaController : ControllerBase
 
     //[authorize]
     [HttpPost]
-    public async Task<IActionResult> CriarEvicencias(CreateImageCommand command)
+    public async Task<IActionResult> CriarEvicencias(CreateEvidenciaCommand command)
     {
         try
         {
@@ -80,7 +80,7 @@ public class EvidenciaRotaController : ControllerBase
 
     //[authorize]
     [HttpPatch]
-    public async Task<IActionResult> AlterarEvidencias(UpdateDescricaoImageCommands command)
+    public async Task<IActionResult> AlterarEvidencias(UpdateEvidenciasCommands command)
     {
         try
         {
@@ -97,7 +97,7 @@ public class EvidenciaRotaController : ControllerBase
 
     //[authorize]
     [HttpDelete]
-    public async Task<IActionResult> DeletarEvidencias(int command)
+    public async Task<IActionResult> DeletarEvidencias(Guid command)
     {
         try
         {

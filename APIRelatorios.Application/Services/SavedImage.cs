@@ -1,7 +1,9 @@
-﻿using Azure.Storage.Blobs;
+﻿using APIRelatorios.Dommain.Entities;
+using Azure.Storage.Blobs;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Settings;
 using Microsoft.Extensions.Options;
+using SkiaSharp;
 using System.Text.RegularExpressions;
 
 namespace ChatApplication.Application.Service;
@@ -15,95 +17,116 @@ public class SavedImage : ISavedImages
         _blobService = configuration.Value;
     }
 
-    public async Task<string> UploadBase64ImagesAsync(
-    string alimentador,
-    string fiscal,
-    string horario,
-    string base64Image,
-    string container,
-    int index)
+    /// Limpa o Base64 removendo prefixos e caracteres inválidos
+    private static string CleanBase64(string base64)
     {
-        // 1️⃣ Extrai o tipo da imagem do base64
-        var match = Regex.Match(base64Image, @"(?<type>[a-zA-Z0-9]+);base64,");
-            
-        if (!match.Success)
-            throw new InvalidOperationException("Formato de imagem inválido service");
+        var cleaned = Regex.Replace(base64, @"^data:image\/[a-zA-Z0-9]+;base64,", "");
+        cleaned = cleaned.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+        return cleaned;
+    }
 
-        var imageType = match.Groups["type"].Value.ToLower();
+    public async Task<string> UploadBase64ImagesAsync(
+        string alimentador,
+        string fiscal,
+        string horario,
+        string base64Image,
+        string container,
+        string qualidade,
+        int index)
+    {
+        // Sempre JPEG
+        string extension = ".jpg";
+        string contentType = "image/jpeg";
+        var fileName = $"{alimentador.Trim()}_{fiscal}_{horario}_{index}_{qualidade}_{Guid.NewGuid()}{extension}";
 
-        // 2️⃣ Define extensão e content type
-        string extension = imageType switch
+        // Limpa e converte Base64
+        var cleanedBase64 = CleanBase64(base64Image);
+        byte[] imageBytes;
+        try
         {
-            "png" => ".png",
-            "jpeg" => ".jpg",
-            "jpg" => ".jpg",
-            "gif" => ".gif",
-            _ => throw new InvalidOperationException("Formato não suportado")
-        };
-
-        string contentType = $"image/{imageType}";
-
-        var fileName = $"{alimentador}_{fiscal}_{horario}_{index}{extension}";
-
-        // 3️⃣ Remove prefixo do base64
-        var data = Regex.Replace(base64Image, @"^data:image\/[a-zA-Z0-9]+;base64,", "");
-
-        byte[] imageBytes = Convert.FromBase64String(data);
-
-        var blobClient = new BlobClient(_blobService.ConnectionString, container, fileName) ?? throw new Exception("Não foi possivel enviar imagem para o blob");
-
-        using (var stream = new MemoryStream(imageBytes))
-        {
-            await blobClient.UploadAsync(stream, new Azure.Storage.Blobs.Models.BlobHttpHeaders
-            {
-                ContentType = contentType
-            });
+            imageBytes = Convert.FromBase64String(cleanedBase64);
         }
+        catch (FormatException)
+        {
+            throw new InvalidOperationException("O Base64 da imagem está em formato inválido.");
+        }
+
+        var blobClient = new BlobClient(_blobService.ConnectionString, container, fileName)
+                         ?? throw new Exception("Não foi possível enviar imagem para o blob");
+
+        using var stream = new MemoryStream(imageBytes);
+        await blobClient.UploadAsync(stream, new Azure.Storage.Blobs.Models.BlobHttpHeaders
+        {
+            ContentType = contentType
+        });
 
         return blobClient.Uri.AbsoluteUri;
     }
 
-    public async Task<List<string>> UploadListBase64ImagesAsync
-                                    (string alimentador,
-                                    string fiscal,
-                                    string horario,
-                                    List<string> base64Image,
-                                    string container
-                                    )
+    public async Task<List<ImageData>> UploadListBase64ImagesAsync(
+        string alimentador,
+        string fiscal,
+        string horario,
+        List<string> base64Images,
+        string container,
+        Guid evidenciaId)
     {
-        List<string> images = new();
+        List<ImageData> images = new();
         int index = 0;
-        foreach (var item in base64Image)
+
+        foreach (var base64 in base64Images)
         {
             index++;
-            var url = await UploadBase64ImagesAsync(alimentador,fiscal,horario,item,container,index);
+            var cleanedBase64 = CleanBase64(base64);
+            byte[] originalBytes = Convert.FromBase64String(cleanedBase64);
 
-            images.Add(url);
+            byte[] imageLow = RedimensionarImagem(originalBytes, 300, 60);
+            byte[] imageMedium = RedimensionarImagem(originalBytes, 800, 75);
+
+            // Faz upload das três versões
+            var urlLow = await UploadBase64ImagesAsync(alimentador, fiscal, horario, Convert.ToBase64String(imageLow), container, "low", index);
+            var urlMedium = await UploadBase64ImagesAsync(alimentador, fiscal, horario, Convert.ToBase64String(imageMedium), container, "medium", index);
+            var urlOriginal = await UploadBase64ImagesAsync(alimentador, fiscal, horario, Convert.ToBase64String(originalBytes), container, "original", index);
+
+            images.Add(new ImageData(urlOriginal, urlMedium, urlLow, evidenciaId));
         }
 
         return images;
     }
-    public async Task DeleteImagesAsync(string imageNames, int indiceContainer)
+
+    public async Task DeleteImagesAsync(string imageUrl, int indiceContainer)
     {
         var containerClient = new BlobContainerClient(_blobService.ConnectionString, _blobService.Container);
-        //Conecta no blob passando o nome do container
-
-        var imageName = GetBlobNameFromUrl(imageNames);
-        //Separa apenas o id da imagem para ser apagada 
-
+        var imageName = GetBlobNameFromUrl(imageUrl);
         var blobClient = containerClient.GetBlobClient(imageName);
-        //Passa o Id da imagem a ser excluida
 
         if (await blobClient.ExistsAsync())
         {
             await blobClient.DeleteAsync();
             Console.WriteLine($"Imagem {imageName} deletada com sucesso.");
-        }//Se acha ele direciona para o deleteAsync onnde vai ser apagado
+        }
         else
         {
             Console.WriteLine($"Imagem {imageName} não encontrada.");
-        }//Se não achar ele envia uma mensagem no console informando que não foi achado
+        }
+    }
 
+    public byte[] RedimensionarImagem(byte[] imageBytes, int largura, int qualidade)
+    {
+        using var inputStream = new MemoryStream(imageBytes);
+        using var original = SKBitmap.Decode(inputStream);
+
+        if (original == null)
+            throw new Exception("Erro ao decodificar imagem");
+
+        float proporcao = (float)largura / original.Width;
+        int altura = (int)(original.Height * proporcao);
+
+        using var resized = original.Resize(new SKImageInfo(largura, altura), SKFilterQuality.High);
+        using var image = SKImage.FromBitmap(resized);
+        using var data = image.Encode(SKEncodedImageFormat.Jpeg, qualidade);
+
+        return data.ToArray();
     }
 
     private static string GetBlobNameFromUrl(string url)

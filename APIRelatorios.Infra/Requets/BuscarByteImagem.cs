@@ -1,5 +1,4 @@
 ﻿using APIRelatorios.Application.Interfaces;
-using DocumentFormat.OpenXml.Bibliography;
 using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Infra.Requets;
@@ -16,6 +15,8 @@ public class BuscarByteImagem : IBuscarByteImagem
     public async Task<byte[]> BaixarImagemAsync(string imageUrl)
     {
         using var httpClient = new HttpClient();
+
+        _logger.LogInformation(imageUrl);
 
         var response = await httpClient.GetAsync(imageUrl);
 

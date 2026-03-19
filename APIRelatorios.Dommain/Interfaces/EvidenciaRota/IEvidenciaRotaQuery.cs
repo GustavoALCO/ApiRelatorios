@@ -6,7 +6,7 @@ public interface IEvidenciaRotaQuery
 {
     Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(int RodaID);
 
-    Task<EvidenciaRota> GetEvidenciaId(int imageId);
+    Task<EvidenciaRota> GetEvidenciaId(Guid imageId);
 
     Task<ICollection<EvidenciaRota>> GetEvidenciasPagination(int RotaID, int page, int pagesize);
 }

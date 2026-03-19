@@ -42,7 +42,7 @@ public class ValidateIds : IValidateIds
     }
 
 
-    public async Task<bool> EvidenciaExisteAsync(int id)
+    public async Task<bool> EvidenciaExisteAsync(Guid id)
     { 
         var evicencia = await _evidenciaQuery.GetEvidenciaId(id);
 

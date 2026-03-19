@@ -122,6 +122,8 @@ public static class DependencyInjection
         services.AddScoped<IRotaCommands, RotaCommands>();
         services.AddScoped<IRotaQuery, RotaQuery>();
 
+        services.AddScoped<IImagesQuery, ImagesQuery>();
+
         return services;
     }
 

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -52,15 +51,13 @@ namespace APIRelatorios.Infra.Migrations
                 name: "EvidenciaRota",
                 columns: table => new
                 {
-                    EvidenciaRotaId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     FiscalId = table.Column<int>(type: "integer", nullable: false),
                     RotaId = table.Column<int>(type: "integer", nullable: false),
                     TemaFiscalizacao = table.Column<int>(type: "integer", nullable: false),
                     Alimentador = table.Column<string>(type: "text", nullable: true),
                     Identificacão = table.Column<string>(type: "text", nullable: true),
                     Descricao = table.Column<string>(type: "text", nullable: true),
-                    ImageURL = table.Column<List<string>>(type: "text[]", nullable: false),
                     Endereco = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
@@ -101,10 +98,37 @@ namespace APIRelatorios.Infra.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Images",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    OriginalUrl = table.Column<string>(type: "text", nullable: false),
+                    MediumUrl = table.Column<string>(type: "text", nullable: false),
+                    LowUrl = table.Column<string>(type: "text", nullable: false),
+                    EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Images", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Images_EvidenciaRota_EvidenciaRotaId",
+                        column: x => x.EvidenciaRotaId,
+                        principalTable: "EvidenciaRota",
+                        principalColumn: "EvidenciaRotaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_EvidenciaRota_RotaId",
                 table: "EvidenciaRota",
                 column: "RotaId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Images_EvidenciaRotaId",
+                table: "Images",
+                column: "EvidenciaRotaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_UsuarioRotas_RotaId",
@@ -116,10 +140,13 @@ namespace APIRelatorios.Infra.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "EvidenciaRota");
+                name: "Images");
 
             migrationBuilder.DropTable(
                 name: "UsuarioRotas");
+
+            migrationBuilder.DropTable(
+                name: "EvidenciaRota");
 
             migrationBuilder.DropTable(
                 name: "Fiscais");

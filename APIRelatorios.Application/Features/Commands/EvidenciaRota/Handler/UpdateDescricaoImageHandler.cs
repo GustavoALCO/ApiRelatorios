@@ -18,7 +18,7 @@ public class UpdateDescricaoImageHandler
         _validateids = validateids;
     }
 
-    public async Task Handler(UpdateDescricaoImageCommands updateDescricao)
+    public async Task Handler(UpdateEvidenciasCommands updateDescricao)
     {
 
         var image = await _query.GetEvidenciaId(updateDescricao.evidenciaId) ?? throw new Exception("Erro ao Encontrar Evidencia");

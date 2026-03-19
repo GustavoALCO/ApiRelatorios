@@ -11,19 +11,36 @@ public class BuscarEvidenciaPorIdHandler
 
     private readonly IUserQuery _userquery;
 
-    public BuscarEvidenciaPorIdHandler(IEvidenciaRotaQuery evidenciaRota, IUserQuery userquery)
+    private readonly IImagesQuery _imagesquery;
+
+    public BuscarEvidenciaPorIdHandler(IEvidenciaRotaQuery evidenciaRota, IUserQuery userquery, IImagesQuery imagesquery)
     {
         _evidenciaRota = evidenciaRota;
         _userquery = userquery;
+        _imagesquery = imagesquery;
     }
 
-    public async Task<EvidenciaDTO> Handler(int commands)
+    public async Task<EvidenciaDTO> Handler(Guid commands)
     {
         var evidencias = await _evidenciaRota.GetEvidenciaId(commands) ?? throw new Exception("Não existe Evidencia com esse ID");
  
         
 
         var fiscal = await _userquery.BuscarFiscalId(evidencias.FiscalId) ?? throw new Exception("Erro ao Encontrar Fiscal com o Id armazenado");
+
+
+        var images = await _imagesquery.GetImageEvidencia(evidencias.EvidenciaRotaId) ?? throw new Exception("Não há imagens declaradas nesta evidencia");
+
+        List<string> imageOriginal = new();
+        List<string> imageMedium = new();
+        List<string> imageLow = new();
+
+        foreach (var image in images)
+        {
+            imageOriginal.Add(image.OriginalUrl);
+            imageMedium.Add(image.MediumUrl);
+            imageLow.Add(image.LowUrl);
+        }
 
         EvidenciaDTO evidenciaDTO = new EvidenciaDTO
         {
@@ -33,7 +50,9 @@ public class BuscarEvidenciaPorIdHandler
             Descricao = evidencias.Descricao,
             Endereco = evidencias.Endereco,
             Horario = evidencias.Horario,
-            ImageURL = evidencias.ImageURL,
+            ImageURL = imageOriginal,
+            MediumImageUrl = imageMedium,
+            LowImageUrl = imageLow,
             Identificacao = evidencias.Identificacão,
             NomeFiscal = $"{fiscal.Name} {fiscal.LastName}",
             TemaFiscalizacao = ((int)evidencias.TemaFiscalizacao),

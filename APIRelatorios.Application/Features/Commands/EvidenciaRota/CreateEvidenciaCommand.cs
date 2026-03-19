@@ -2,8 +2,10 @@
 
 namespace APIRelatorios.Application.Features.Commands.Images;
 
-public record struct CreateImageCommand
+public record struct CreateEvidenciaCommand
 (
+Guid evidenciaId,
+
 int rotaID,
 
 int fiscalId,
@@ -14,7 +16,7 @@ string? Identificacao,
 
 string? Alimentador,
 
-string Descricao,
+string? Descricao,
 
 List<string> Base64,
 

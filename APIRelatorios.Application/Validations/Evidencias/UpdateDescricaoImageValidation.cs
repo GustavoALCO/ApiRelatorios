@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace APIRelatorios.Application.Validations.Evidencias;
 
-public class UpdateDescricaoImageValidation : AbstractValidator<UpdateDescricaoImageCommands>
+public class UpdateDescricaoImageValidation : AbstractValidator<UpdateEvidenciasCommands>
 {
     public UpdateDescricaoImageValidation(IValidateIds validateIds)
     {

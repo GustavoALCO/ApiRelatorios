@@ -6,7 +6,7 @@ namespace APIRelatorios.Dommain.Entities;
 
 public class EvidenciaRota
 {
-    public int EvidenciaRotaId { get; private set; }
+    public Guid EvidenciaRotaId { get; private set; }
 
     public int FiscalId { get; private set; }
 
@@ -22,7 +22,7 @@ public class EvidenciaRota
 
     public string? Descricao { get; private set; }
 
-    public List<string> ImageURL { get; private set; }
+    public List<ImageData> Images { get; private set; } = new();
 
     public string Endereco { get; private set; }
 
@@ -39,26 +39,29 @@ public class EvidenciaRota
         
     }
 
-    public EvidenciaRota(int rotaID,
+    public EvidenciaRota(
+        Guid evidenciaRotaId,
+        int rotaID,
         int fiscalId,
         TemaFiscalizacao tema,
         string? alimentador,
         string? identificacao,
         string? descricao,
-        List<string> imagem,
+        List<ImageData> imagem,
         string endereco,
         double lat,
         double lon,
         DateTime horario
         )
     {
+        EvidenciaRotaId = evidenciaRotaId;
         RotaId = rotaID;
         FiscalId = fiscalId;
         TemaFiscalizacao = tema;    
         Alimentador = alimentador;
         Identificacão = identificacao;
         Descricao = descricao;
-        ImageURL = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
+        Images = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
         Endereco = endereco;
         Latitude = lat;
         Longitude = lon;

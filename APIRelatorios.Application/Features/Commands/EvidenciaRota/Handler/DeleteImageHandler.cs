@@ -18,7 +18,7 @@ public class DeleteImageHandler
         _validateids = validateids;
     }
 
-    public async Task Handler(int updateDescricao)
+    public async Task Handler(Guid updateDescricao)
     {
         if (await _validateids.EvidenciaExisteAsync(updateDescricao) is false)
             throw new Exception("Id invalido");

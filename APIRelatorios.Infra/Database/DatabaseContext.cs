@@ -17,6 +17,8 @@ public class DatabaseContext : DbContext
 
     public DbSet<UsuarioRota> UsuarioRotas { get; set; }
 
+    public DbSet<ImageData> Images { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<EvidenciaRota>()
@@ -27,6 +29,12 @@ public class DatabaseContext : DbContext
             .WithMany(r => r.Images)
             .HasForeignKey(r => r.RotaId)
             .OnDelete(DeleteBehavior.Cascade);
+
+        modelBuilder.Entity<EvidenciaRota>()
+                    .HasMany(e => e.Images)
+                    .WithOne(i => i.EvidenciaRota)
+                    .HasForeignKey(i => i.EvidenciaRotaId)
+                    .OnDelete(DeleteBehavior.Cascade);
 
         modelBuilder.Entity<User>()
             .HasKey(x => x.UserId);

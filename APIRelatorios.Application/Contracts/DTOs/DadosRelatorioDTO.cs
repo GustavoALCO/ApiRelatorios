@@ -10,7 +10,7 @@ public readonly record struct DadosRelatorioDTO
     // Alimentador Obtido pela rota ou substituindo na Evidencia
     string Alimentador,
 
-    // Descrição da evidencia
+    // Observação da evidencia
     string Dsc,
 
     // Identificação do poste
@@ -23,5 +23,9 @@ public readonly record struct DadosRelatorioDTO
     string NumeroImagem,
 
     // Enum para o Tema para atribuir as listas 
-    TemaFiscalizacao Tema
+    TemaFiscalizacao Tema,
+
+    double Lat,
+
+    double Long
 );

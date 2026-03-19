@@ -5,7 +5,7 @@ namespace APIRelatorios.Application.Contracts.DTOs;
 
 public class EvidenciaDTO
 {
-    public int EvidenciaRotaId { get;  set; }
+    public Guid EvidenciaRotaId { get;  set; }
 
     public int RotaId { get; set; }
 
@@ -20,6 +20,10 @@ public class EvidenciaDTO
     public string? Descricao { get;  set; }
 
     public List<string> ImageURL { get;  set; }
+
+    public List<string> MediumImageUrl { get; set; }
+
+    public List<string> LowImageUrl { get; set; }
 
     public string Endereco { get;  set; }
 
