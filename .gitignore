@@ -47,7 +47,6 @@ secrets.json
 Thumbs.db
 
 # ===============================
-# Rider / Outros IDEs
+# Certificados HTTPS (dev)
 # ===============================
-.idea/
-*.iml
+certs/

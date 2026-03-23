@@ -1,7 +1,9 @@
 using APIRelatorios.Application.Settings;
+using APIRelatorios.Infra.Database;
 using APIRelatorios.IOC;
 using ChatApplication.Application.Settings;
 using FluentValidation.AspNetCore;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -64,5 +66,15 @@ app.UseAuthorization();
 
 // Map Controllers
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var db = services.GetRequiredService<DatabaseContext>();
+
+    db.Database.Migrate();
+
+    await DependencyInjection.SeedAsync(services); 
+}
 
 app.Run();

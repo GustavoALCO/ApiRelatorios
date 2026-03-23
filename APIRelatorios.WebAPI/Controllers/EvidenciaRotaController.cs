@@ -2,6 +2,7 @@
 using APIRelatorios.Application.Features.Commands.Images.Handler;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace APIRelatorios.WebAPI.Controllers;
@@ -61,7 +62,7 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> CriarEvicencias(CreateEvidenciaCommand command)
     {
@@ -78,7 +79,7 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpPatch]
     public async Task<IActionResult> AlterarEvidencias(UpdateEvidenciasCommands command)
     {
@@ -95,7 +96,7 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpDelete]
     public async Task<IActionResult> DeletarEvidencias(Guid command)
     {

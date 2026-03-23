@@ -1,4 +1,8 @@
 <Solution>
+  <Folder Name="/certs/" />
+  <Folder Name="/Itens de Solução/">
+    <File Path="nginx.conf" />
+  </Folder>
   <Project Path="APIRelatorios.Application/APIRelatorios.Application.csproj" />
   <Project Path="APIRelatorios.Dommain/APIRelatorios.Dommain.csproj" />
   <Project Path="APIRelatorios.Infra/APIRelatorios.Infra.csproj" />

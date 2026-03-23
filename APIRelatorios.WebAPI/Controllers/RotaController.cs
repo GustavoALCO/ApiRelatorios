@@ -40,7 +40,7 @@ public class RotaController : ControllerBase
         _buscarRotaIdHandler = buscarRotaIdHandler;
     }
 
-    //[authorize]
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> BuscarPorFiltro(
          [FromQuery]BuscarRotaFiltersCommands command)
@@ -56,7 +56,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> BuscarPorFiltro(
         int id)
@@ -72,7 +72,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpPatch("nome")]
     public async Task<IActionResult> UpdNome(
         [FromBody] UpdateNomeRotaCommand command)
@@ -88,7 +88,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpPatch("AddFiscais")]
     public async Task<IActionResult> AddFiscais(
         [FromBody] AddFiscalRotaCommand command)
@@ -104,7 +104,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpPatch("RemoveFiscais")]
     public async Task<IActionResult> RemoverFiscais(
         [FromBody] RemoveFiscalRotaCommand command)
@@ -120,7 +120,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpPost]
     public async Task<IActionResult> Post(
         [FromBody] CreateRotaCommand command)
@@ -136,7 +136,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    //[authorize]
+    [Authorize]
     [HttpDelete("{rotaId}")]
     public async Task<IActionResult> Delete( int rotaId)
     {

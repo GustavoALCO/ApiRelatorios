@@ -7,6 +7,7 @@ using APIRelatorios.Application.Features.Querys.User.Handler;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Services;
 using APIRelatorios.Application.Settings;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.Services;
@@ -211,5 +212,32 @@ public static class DependencyInjection
         });
 
         return services;
+    }
+
+    public static async Task SeedAsync(IServiceProvider services)
+    {
+        var context = services.GetRequiredService<DatabaseContext>();
+        var passwordHasher = services.GetRequiredService<IPasswordHasher>();
+        var dbFiscal = services.GetRequiredService<IUserCommands>();
+
+        if (!context.Fiscais.Any())
+        {
+
+            var password = "123456";
+            var salt = passwordHasher.GenerateHash();
+            var hash = passwordHasher.HashPassword(password, salt);
+
+            var user = new User();
+            user.CreateUser(
+                login: "admin",
+                name: "Admin",
+                lastname: "Master",
+                hashPassword: hash,
+                salt: salt,
+                isAdmin: true
+            );
+
+            await dbFiscal.CreateUser( user );
+        }
     }
 }

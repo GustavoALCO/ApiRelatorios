@@ -17,8 +17,10 @@ services:
       ConnectionStrings__Database: RelatorioDB
       ConnectionStrings__User: AdminTeste
       ConnectionStrings__Password: Teste123
-    ports:
-      - "8080:8080"
+    expose:
+      - "8080"
+    networks:
+      - app-network
 
   postgres-db:
     image: postgres:16
@@ -30,6 +32,25 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx_proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf
+      - ./certs:/etc/nginx/certs
+    depends_on:
+      - apirelatorios.webapi
+    networks:
+      - app-network
 
 volumes:
   pgdata:
+
+networks:
+  app-network:
