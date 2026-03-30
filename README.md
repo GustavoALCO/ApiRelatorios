@@ -74,6 +74,7 @@ Bibliotecas Utilizadas
 
 Flutter (Dart)
 -
+```
  ├─ UI
  │   ├─ material / cupertino
  │
@@ -104,10 +105,12 @@ Flutter (Dart)
  │
  └─ Utilitários
      └─ uuid
+```
+***
 
 API Relatórios (.NET 10)
 -
-
+```
 ├─ Presentation
 │   ├─ Swagger (Swashbuckle) 
 │   ├─ OpenAPI
@@ -129,7 +132,7 @@ API Relatórios (.NET 10)
 │   ├─ JWT Bearer
 │   ├─ Options Pattern
 │   └─ Dependency Injection
+```
 
- Creditar futuralmente a biblioteca Open XML SDK
  Creditar futuralmente a biblioteca FluentValidate
 
