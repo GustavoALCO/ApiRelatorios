@@ -4,9 +4,9 @@ namespace APIRelatorios.Dommain.Interfaces.Images;
 
 public interface IEvidenciaRotaQuery
 {
-    Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(int RodaID);
+    Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(Guid RodaID);
 
     Task<EvidenciaRota> GetEvidenciaId(Guid imageId);
 
-    Task<ICollection<EvidenciaRota>> GetEvidenciasPagination(int RotaID, int page, int pagesize);
+    Task<ICollection<EvidenciaRota>> GetEvidenciasPagination(Guid RotaID, int page, int pagesize);
 }

@@ -59,7 +59,7 @@ public class RotaController : ControllerBase
     [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> BuscarPorFiltro(
-        int id)
+        Guid id)
     {
         try
         {
@@ -138,10 +138,8 @@ public class RotaController : ControllerBase
 
     [Authorize]
     [HttpDelete("{rotaId}")]
-    public async Task<IActionResult> Delete( int rotaId)
+    public async Task<IActionResult> Delete( Guid rotaId)
     {
-        if (rotaId <= 0)
-            return BadRequest("Id invalido");
         try
         {
             await _deleteRota.Handler(rotaId);

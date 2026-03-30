@@ -4,7 +4,7 @@ namespace APIRelatorios.Application.Contracts.DTOs;
 
 public readonly record struct RotaDTO
 (
-    int RotaId,
+    Guid RotaId,
     string NomeRota,
     string Alimentador,
     string DataInicio,

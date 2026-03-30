@@ -2,7 +2,7 @@
 
 public class BuscarTodasEvidenciasRotaCommands
 {
-    public int IdRota { get; set; }
+    public Guid IdRota { get; set; }
 
     public int PageSize { get; set; }
 

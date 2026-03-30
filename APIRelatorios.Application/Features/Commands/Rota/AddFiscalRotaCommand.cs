@@ -2,6 +2,6 @@
 
 public readonly record struct AddFiscalRotaCommand
 (
-    int rotaId,
+    Guid rotaId,
     ICollection<int> FiscaisId
 );

@@ -6,7 +6,7 @@ public record struct CreateEvidenciaCommand
 (
 Guid evidenciaId,
 
-int rotaID,
+Guid rotaID,
 
 int fiscalId,
 

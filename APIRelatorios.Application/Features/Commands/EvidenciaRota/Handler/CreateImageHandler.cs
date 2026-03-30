@@ -42,9 +42,11 @@ public class CreateImageHandler
         var urlImages = await _uploadImage.UploadListBase64ImagesAsync(alimentador: createImage.Alimentador,
                                                                        fiscal: $"{fiscais.Name}_{fiscais.LastName}",
                                                                        horario: createImage.Horario.ToString("yyyy_MM_dd__HH_mm"),
-                                                                       base64Image: createImage.Base64,
+                                                                       base64Images: createImage.Base64,
                                                                        container: "imagens",
-                                                                       evidenciaId: createImage.evidenciaId);
+                                                                       evidenciaId: createImage.evidenciaId,
+                                                                       lat: createImage.Latitude,
+                                                                       log: createImage.Longitude);
 
         if (urlImages.Count() == 0)
         {

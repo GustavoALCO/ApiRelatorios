@@ -61,7 +61,7 @@ public class RotaCommands : IRotaCommands
         }
     }
 
-    public async Task RemoverFiscalRota(int userId, int idrota)
+    public async Task RemoverFiscalRota(int userId, Guid idrota)
     {
         try
         {

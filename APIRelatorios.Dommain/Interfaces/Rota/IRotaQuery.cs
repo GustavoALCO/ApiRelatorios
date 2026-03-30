@@ -2,7 +2,7 @@
 
 public interface IRotaQuery
 {
-    Task<Entities.Rota> BuscarRotaID(int id);
+    Task<Entities.Rota> BuscarRotaID(Guid id);
 
     Task<ICollection<Entities.Rota>> BuscarTodasRotas();
 
@@ -10,7 +10,7 @@ public interface IRotaQuery
 
     Task<ICollection<Entities.Rota>> BuscarRotasPorFiscal(int Fiscais, int page, int pageSize);
 
-    Task<string> BuscarAlimentador(int id);
+    Task<string> BuscarAlimentador(Guid id);
 
     IQueryable<Dommain.Entities.Rota> BuscarQuery();
 

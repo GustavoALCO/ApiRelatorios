@@ -57,7 +57,7 @@ public class CreateRelatorioHandler
                         $"{evidenciasloop.Descricao ?? "DSC VAZIO"} ",
                         Alimentador = $"{evidenciasloop.Alimentador ?? "Aliemntador Não Declarado"}",
                         Identificação = $"{evidenciasloop.Identificacão}",
-                        Localização = $"{evidenciasloop.Endereco ?? "ENDEREÇO VAZIO"}",
+                        Localização = $"{evidenciasloop.Endereco}",
                         NumeroImagem = $"{(EnumLetras)i} - {contagem}",
                         Tema = evidenciasloop.TemaFiscalizacao,
                     };

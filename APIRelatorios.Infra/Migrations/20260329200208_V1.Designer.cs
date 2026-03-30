@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260318231802_V1")]
+    [Migration("20260329200208_V1")]
     partial class V1
     {
         /// <inheritdoc />
@@ -56,8 +56,8 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<double>("Longitude")
                         .HasColumnType("double precision");
 
-                    b.Property<int>("RotaId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("RotaId")
+                        .HasColumnType("uuid");
 
                     b.Property<int>("TemaFiscalizacao")
                         .HasColumnType("integer");
@@ -101,11 +101,9 @@ namespace APIRelatorios.Infra.Migrations
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.Rota", b =>
                 {
-                    b.Property<int>("RotaId")
+                    b.Property<Guid>("RotaId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("RotaId"));
+                        .HasColumnType("uuid");
 
                     b.Property<string>("Alimentador")
                         .IsRequired()
@@ -169,8 +167,8 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<int>("UserId")
                         .HasColumnType("integer");
 
-                    b.Property<int>("RotaId")
-                        .HasColumnType("integer");
+                    b.Property<Guid>("RotaId")
+                        .HasColumnType("uuid");
 
                     b.HasKey("UserId", "RotaId");
 

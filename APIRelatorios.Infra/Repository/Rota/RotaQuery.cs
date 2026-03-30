@@ -16,7 +16,7 @@ public class RotaQuery : IRotaQuery
         _context = context;
     }
 
-    public async Task<Dommain.Entities.Rota> BuscarRotaID(int id)
+    public async Task<Dommain.Entities.Rota> BuscarRotaID(Guid id)
     {
         
             var image = await _context.Rota.FirstOrDefaultAsync(x => x.RotaId == id);
@@ -49,7 +49,7 @@ public class RotaQuery : IRotaQuery
         return await _context.Rota.ToListAsync();
     }
 
-    public async Task<string> BuscarAlimentador(int id)
+    public async Task<string> BuscarAlimentador(Guid id)
     {
         var rota =  await _context.Rota.FirstOrDefaultAsync(x => x.RotaId == id);
 

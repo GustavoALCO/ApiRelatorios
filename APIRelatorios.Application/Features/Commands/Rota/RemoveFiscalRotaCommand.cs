@@ -2,6 +2,6 @@
 
 public readonly record struct RemoveFiscalRotaCommand
 (
-    int rotaId,
+    Guid rotaId,
     ICollection<int> fiscaisId
 );

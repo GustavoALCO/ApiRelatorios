@@ -25,7 +25,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         
     }
 
-    public async Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(int RotaID)
+    public async Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(Guid RotaID)
     {
         try
         {
@@ -42,7 +42,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         }
     }
 
-    public async Task<ICollection<EvidenciaRota>> GetEvidenciasPagination(int RotaID, int page, int pagesize)
+    public async Task<ICollection<EvidenciaRota>> GetEvidenciasPagination(Guid RotaID, int page, int pagesize)
     {
         try
         {

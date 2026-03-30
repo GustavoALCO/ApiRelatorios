@@ -2,7 +2,7 @@
 
 public class UsuarioRota
 {
-    public int RotaId { get; set; }
+    public Guid RotaId { get; set; }
     public Rota Rota { get; set; } = null!;
 
     public int UserId { get; set; }

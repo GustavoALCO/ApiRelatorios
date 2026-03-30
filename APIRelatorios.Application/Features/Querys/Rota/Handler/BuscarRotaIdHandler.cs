@@ -12,7 +12,7 @@ public class BuscarRotaIdHandler
         _query = query;
     }
 
-    public async Task<RotaDTO> Handler(int id)
+    public async Task<RotaDTO> Handler(Guid id)
     {
         var rota = await _query.BuscarRotaID(id) ?? throw new Exception("Erro ao buscar rota");
 

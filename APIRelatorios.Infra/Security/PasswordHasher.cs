@@ -19,10 +19,10 @@ public class PasswordHasher : IPasswordHasher
 
     public string HashPassword(string password, byte[] salt)
     {
-        // Usa PBKDF2 com HMACSHA256 e 100,000 iterações (recomendado)
+        // Gera um Hash para criptografar a senha 
         using (var pbkdf2 = new Rfc2898DeriveBytes(password, salt, 100000, HashAlgorithmName.SHA256))
         {
-            byte[] hash = pbkdf2.GetBytes(32); // Gera hash de 32 bytes
+            byte[] hash = pbkdf2.GetBytes(32); 
             return Convert.ToBase64String(hash);
         }
     }

@@ -26,7 +26,9 @@ public class CreateRotaHandler
                 throw new Exception("Lista de usuarios invalidas");
         }
 
-        Dommain.Entities.Rota rota = new(_commands.NomeRota,
+        Dommain.Entities.Rota rota = new(
+                                        _commands.rotaId ?? Guid.NewGuid(),
+                                        _commands.NomeRota,
                                         _commands.Alimentador,
                                          DateTime.UtcNow);
 

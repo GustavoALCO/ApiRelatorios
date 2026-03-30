@@ -10,7 +10,7 @@ public interface IRotaCommands
 
     Task UpdateRotaAsync(Entities.Rota rota);
 
-    Task RemoverFiscalRota(int userId, int idrota);
+    Task RemoverFiscalRota(int userId, Guid idrota);
 
     Task AdicionarFiscalRota(UsuarioRota usuarioRota);
 }

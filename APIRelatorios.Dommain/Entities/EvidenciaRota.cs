@@ -10,7 +10,7 @@ public class EvidenciaRota
 
     public int FiscalId { get; private set; }
 
-    public int RotaId { get; private set; }
+    public Guid RotaId { get; private set; }
 
     public Rota Rota { get; set; }
 
@@ -41,7 +41,7 @@ public class EvidenciaRota
 
     public EvidenciaRota(
         Guid evidenciaRotaId,
-        int rotaID,
+        Guid rotaID,
         int fiscalId,
         TemaFiscalizacao tema,
         string? alimentador,

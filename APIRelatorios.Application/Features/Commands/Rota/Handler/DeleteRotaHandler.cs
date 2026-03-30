@@ -18,7 +18,7 @@ public class DeleteRotaHandler
         _validateIds = validateIds;
     }
 
-    public async Task Handler(int dltrota)
+    public async Task Handler(Guid dltrota)
     {
         if (await _validateIds.RotaExisteAsync(dltrota) is false)
             throw new Exception("Id invalido");

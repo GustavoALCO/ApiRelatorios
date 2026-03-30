@@ -35,8 +35,7 @@ namespace APIRelatorios.Infra.Migrations
                 name: "Rota",
                 columns: table => new
                 {
-                    RotaId = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     NomeRota = table.Column<string>(type: "text", nullable: true),
                     Alimentador = table.Column<string>(type: "text", nullable: false),
                     DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
@@ -53,7 +52,7 @@ namespace APIRelatorios.Infra.Migrations
                 {
                     EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     FiscalId = table.Column<int>(type: "integer", nullable: false),
-                    RotaId = table.Column<int>(type: "integer", nullable: false),
+                    RotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     TemaFiscalizacao = table.Column<int>(type: "integer", nullable: false),
                     Alimentador = table.Column<string>(type: "text", nullable: true),
                     Identificacão = table.Column<string>(type: "text", nullable: true),
@@ -78,7 +77,7 @@ namespace APIRelatorios.Infra.Migrations
                 name: "UsuarioRotas",
                 columns: table => new
                 {
-                    RotaId = table.Column<int>(type: "integer", nullable: false),
+                    RotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     UserId = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>

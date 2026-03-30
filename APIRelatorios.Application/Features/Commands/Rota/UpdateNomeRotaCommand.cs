@@ -2,6 +2,6 @@
 
 public readonly record struct  UpdateNomeRotaCommand
 (
-    int rotaId,
+    Guid rotaId,
     string nomeRota
 );

@@ -30,7 +30,7 @@ public class ValidateIds : IValidateIds
         return false;
     }
 
-    public async Task<bool> RotaExisteAsync(int id)
+    public async Task<bool> RotaExisteAsync(Guid id)
     {
         var rota = await _rotaQuery.BuscarRotaID(id);
 

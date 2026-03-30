@@ -7,7 +7,7 @@ public class EvidenciaDTO
 {
     public Guid EvidenciaRotaId { get;  set; }
 
-    public int RotaId { get; set; }
+    public Guid RotaId { get; set; }
 
     public string NomeFiscal { get;  set; }
 

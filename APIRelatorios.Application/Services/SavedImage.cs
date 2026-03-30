@@ -2,6 +2,7 @@
 using Azure.Storage.Blobs;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Settings;
+using Google.OpenLocationCode;
 using Microsoft.Extensions.Options;
 using SkiaSharp;
 using System.Text.RegularExpressions;
@@ -17,47 +18,43 @@ public class SavedImage : ISavedImages
         _blobService = configuration.Value;
     }
 
-    /// Limpa o Base64 removendo prefixos e caracteres inválidos
     private static string CleanBase64(string base64)
     {
         var cleaned = Regex.Replace(base64, @"^data:image\/[a-zA-Z0-9]+;base64,", "");
-        cleaned = cleaned.Replace("\r", "").Replace("\n", "").Replace(" ", "");
-        return cleaned;
+        return cleaned.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+    }
+
+    private static string Sanitize(string input)
+    {
+        return Regex.Replace(input, @"[^a-zA-Z0-9_\-]", "_");
     }
 
     public async Task<string> UploadBase64ImagesAsync(
         string alimentador,
         string fiscal,
         string horario,
+        string pluscode,
         string base64Image,
         string container,
         string qualidade,
         int index)
     {
-        // Sempre JPEG
-        string extension = ".jpg";
-        string contentType = "image/jpeg";
-        var fileName = $"{alimentador.Trim()}_{fiscal}_{horario}_{index}_{qualidade}_{Guid.NewGuid()}{extension}";
+        var safeHorario = Sanitize(horario);
+        var safeAlimentador = Sanitize(alimentador);
+        var safeFiscal = Sanitize(fiscal);
 
-        // Limpa e converte Base64
+        var fileName = $"{safeAlimentador}_{safeFiscal}_{safeHorario}_{pluscode}_{qualidade}_{index}.jpg";
+
         var cleanedBase64 = CleanBase64(base64Image);
-        byte[] imageBytes;
-        try
-        {
-            imageBytes = Convert.FromBase64String(cleanedBase64);
-        }
-        catch (FormatException)
-        {
-            throw new InvalidOperationException("O Base64 da imagem está em formato inválido.");
-        }
+        var imageBytes = Convert.FromBase64String(cleanedBase64);
 
-        var blobClient = new BlobClient(_blobService.ConnectionString, container, fileName)
-                         ?? throw new Exception("Não foi possível enviar imagem para o blob");
+        var blobClient = new BlobClient(_blobService.ConnectionString, container, fileName);
 
         using var stream = new MemoryStream(imageBytes);
+
         await blobClient.UploadAsync(stream, new Azure.Storage.Blobs.Models.BlobHttpHeaders
         {
-            ContentType = contentType
+            ContentType = "image/jpeg"
         });
 
         return blobClient.Uri.AbsoluteUri;
@@ -69,24 +66,43 @@ public class SavedImage : ISavedImages
         string horario,
         List<string> base64Images,
         string container,
-        Guid evidenciaId)
+        Guid evidenciaId,
+        double lat,
+        double log)
     {
         List<ImageData> images = new();
         int index = 0;
 
+        string plusCode = OpenLocationCode.Encode(lat, log, 11);
+
         foreach (var base64 in base64Images)
         {
             index++;
+
             var cleanedBase64 = CleanBase64(base64);
             byte[] originalBytes = Convert.FromBase64String(cleanedBase64);
 
-            byte[] imageLow = RedimensionarImagem(originalBytes, 300, 60);
-            byte[] imageMedium = RedimensionarImagem(originalBytes, 800, 75);
+            byte[] imageWithText = AdicionaTexto(
+                originalBytes,
+                alimentador,
+                $"Lat: {lat}, Long: {log}",
+                horario
+            );
 
-            // Faz upload das três versões
-            var urlLow = await UploadBase64ImagesAsync(alimentador, fiscal, horario, Convert.ToBase64String(imageLow), container, "low", index);
-            var urlMedium = await UploadBase64ImagesAsync(alimentador, fiscal, horario, Convert.ToBase64String(imageMedium), container, "medium", index);
-            var urlOriginal = await UploadBase64ImagesAsync(alimentador, fiscal, horario, Convert.ToBase64String(originalBytes), container, "original", index);
+            byte[] imageLow = RedimensionarImagem(imageWithText, 300, 60);
+            byte[] imageMedium = RedimensionarImagem(imageWithText, 800, 75);
+
+            var urlLow = await UploadBase64ImagesAsync(
+                alimentador, fiscal, horario, plusCode,
+                Convert.ToBase64String(imageLow), container, "low", index);
+
+            var urlMedium = await UploadBase64ImagesAsync(
+                alimentador, fiscal, horario, plusCode,
+                Convert.ToBase64String(imageMedium), container, "medium", index);
+
+            var urlOriginal = await UploadBase64ImagesAsync(
+                alimentador, fiscal, horario, plusCode,
+                Convert.ToBase64String(imageWithText), container, "original", index);
 
             images.Add(new ImageData(urlOriginal, urlMedium, urlLow, evidenciaId));
         }
@@ -94,44 +110,106 @@ public class SavedImage : ISavedImages
         return images;
     }
 
-    public async Task DeleteImagesAsync(string imageUrl, int indiceContainer)
-    {
-        var containerClient = new BlobContainerClient(_blobService.ConnectionString, _blobService.Container);
-        var imageName = GetBlobNameFromUrl(imageUrl);
-        var blobClient = containerClient.GetBlobClient(imageName);
-
-        if (await blobClient.ExistsAsync())
-        {
-            await blobClient.DeleteAsync();
-            Console.WriteLine($"Imagem {imageName} deletada com sucesso.");
-        }
-        else
-        {
-            Console.WriteLine($"Imagem {imageName} não encontrada.");
-        }
-    }
-
     public byte[] RedimensionarImagem(byte[] imageBytes, int largura, int qualidade)
     {
         using var inputStream = new MemoryStream(imageBytes);
-        using var original = SKBitmap.Decode(inputStream);
+        using var codec = SKCodec.Create(inputStream);
 
-        if (original == null)
+        if (codec == null)
             throw new Exception("Erro ao decodificar imagem");
 
-        float proporcao = (float)largura / original.Width;
-        int altura = (int)(original.Height * proporcao);
+        var origin = codec.EncodedOrigin;
+        using var bitmap = SKBitmap.Decode(codec);
+        using var rotated = AplicarRotacao(bitmap, origin);
 
-        using var resized = original.Resize(new SKImageInfo(largura, altura), SKFilterQuality.High);
+        float proporcao = (float)largura / rotated.Width;
+        int altura = (int)(rotated.Height * proporcao);
+
+        using var resized = rotated.Resize(
+            new SKImageInfo(largura, altura),
+            new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)
+        );
+
         using var image = SKImage.FromBitmap(resized);
         using var data = image.Encode(SKEncodedImageFormat.Jpeg, qualidade);
 
         return data.ToArray();
     }
 
-    private static string GetBlobNameFromUrl(string url)
+    private SKBitmap AplicarRotacao(SKBitmap bitmap, SKEncodedOrigin origin)
     {
-        Uri uri = new(url);
-        return Path.GetFileName(uri.LocalPath);
+        return origin switch
+        {
+            SKEncodedOrigin.RightTop => Rotate(bitmap, 90),
+            SKEncodedOrigin.LeftBottom => Rotate(bitmap, 270),
+            SKEncodedOrigin.BottomRight => Rotate(bitmap, 180),
+            _ => bitmap
+        };
+    }
+
+    private SKBitmap Rotate(SKBitmap bitmap, float angle)
+    {
+        var rotated = new SKBitmap(bitmap.Height, bitmap.Width);
+
+        using var canvas = new SKCanvas(rotated);
+        canvas.Clear();
+
+        canvas.Translate(rotated.Width / 2f, rotated.Height / 2f);
+        canvas.RotateDegrees(angle);
+        canvas.Translate(-bitmap.Width / 2f, -bitmap.Height / 2f);
+
+        canvas.DrawBitmap(bitmap, 0, 0);
+
+        return rotated;
+    }
+
+    private byte[] AdicionaTexto(byte[] imageBytes, string linha1, string linha2, string linha3)
+    {
+        using var inputStream = new MemoryStream(imageBytes);
+        using var original = SKBitmap.Decode(inputStream);
+
+        if (original == null)
+            throw new Exception("Erro ao carregar imagem");
+
+        using var surface = SKSurface.Create(new SKImageInfo(original.Width, original.Height));
+        var canvas = surface.Canvas;
+
+        canvas.DrawBitmap(original, 0, 0);
+
+        float textSize = original.Width * 0.04f;
+
+        using var paint = new SKPaint
+        {
+            Color = SKColors.White,
+            IsAntialias = true
+        };
+
+        using var shadow = new SKPaint
+        {
+            Color = SKColors.Black,
+            IsAntialias = true
+        };
+
+        using var font = new SKFont { Size = textSize };
+
+        float x = 20;
+        float lineHeight = textSize + 10;
+
+        string[] linhas = { linha1, linha2, linha3 };
+
+        float yBase = original.Height - (lineHeight * linhas.Length);
+
+        for (int i = 0; i < linhas.Length; i++)
+        {
+            float y = yBase + (i * lineHeight);
+
+            canvas.DrawText(linhas[i], x + 2, y + 2, SKTextAlign.Left, font, shadow);
+            canvas.DrawText(linhas[i], x, y, SKTextAlign.Left, font, paint);
+        }
+
+        using var image = surface.Snapshot();
+        using var data = image.Encode(SKEncodedImageFormat.Jpeg, 90);
+
+        return data.ToArray();
     }
 }

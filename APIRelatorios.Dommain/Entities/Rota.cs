@@ -4,7 +4,7 @@ namespace APIRelatorios.Dommain.Entities;
 
 public class Rota
 {
-    public int RotaId { get; private set; }
+    public Guid RotaId { get; private set; }
 
     public string? NomeRota { get; private set; }
 
@@ -22,8 +22,9 @@ public class Rota
     {
         
     }
-    public Rota(string nomeRota,string alimentador ,DateTime dataInicio)
+    public Rota(Guid rotaId, string nomeRota,string alimentador ,DateTime dataInicio)
     {
+        RotaId = rotaId;
         NomeRota = nomeRota;
         Alimentador = alimentador;
         DataInicio = dataInicio;
