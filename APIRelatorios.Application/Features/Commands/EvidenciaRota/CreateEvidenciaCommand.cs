@@ -22,9 +22,13 @@ List<string> Base64,
 
 string Endereco,
 
+string? Cidade,
+
 double Latitude,
 
 double Longitude,
 
-DateTime Horario
+DateTime Horario,
+
+bool Emergencial
 );

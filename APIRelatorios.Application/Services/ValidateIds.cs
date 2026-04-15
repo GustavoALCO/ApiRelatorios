@@ -11,7 +11,6 @@ public class ValidateIds : IValidateIds
     private readonly IUserQuery _userQuery;
     private readonly IRotaQuery _rotaQuery;
     private readonly IEvidenciaRotaQuery _evidenciaQuery;
-    private readonly ILogger<ValidateIds> _logger;
 
     public ValidateIds(IEvidenciaRotaQuery evidenciaQuery, IRotaQuery rotaQuery, IUserQuery userQuery)
     {

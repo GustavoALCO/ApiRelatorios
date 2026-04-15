@@ -66,7 +66,8 @@ public class RotaCommands : IRotaCommands
         try
         {
 
-            var user = await _context.UsuarioRotas.FirstOrDefaultAsync(x => x.UserId == userId && x.RotaId == idrota);
+            var user = await _context.UsuarioRotas.FirstOrDefaultAsync(x => x.UserId == userId && x.RotaId == idrota) 
+                ?? throw new Exception("Usuario não pertence a esta rota");       
 
             _context.Remove(user);
 

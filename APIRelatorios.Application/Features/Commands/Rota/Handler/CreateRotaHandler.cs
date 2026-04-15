@@ -29,6 +29,7 @@ public class CreateRotaHandler
         Dommain.Entities.Rota rota = new(
                                         _commands.rotaId ?? Guid.NewGuid(),
                                         _commands.NomeRota,
+                                        _commands.Concessionarias,
                                         _commands.Alimentador,
                                          DateTime.UtcNow);
 

@@ -1,27 +1,24 @@
 # Configuração da Api.
 
-Certificados
--
+## Certificados
 
-Os certificados não são versionados. 
+Os certificados não são versionados.
 
-para a criação deles é necessario criar uma pasta 
+para a criação deles é necessario criar uma pasta
 
-``
-mkdir certs
-``
+`mkdir certs`
 
-e apos executar o comando 
-``
-docker run --rm -v ${PWD}/certs:/certs alpine sh -c "apk add --no-cache openssl && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /certs/key.pem -out /certs/cert.pem -subj '/C=BR/ST=SP/L=SaoPaulo/O=Dev/CN=localhost'"
-``
-****
-AppSettings
--
+e apos executar o comando
+`docker run --rm -v ${PWD}/certs:/certs alpine sh -c "apk add --no-cache openssl && openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout /certs/key.pem -out /certs/cert.pem -subj '/C=BR/ST=SP/L=SaoPaulo/O=Dev/CN=localhost'"`
 
-O appsettings não é versionado. 
+---
 
-para a criação deve seguir este modelo 
+## AppSettings
+
+O appsettings não é versionado.
+
+para a criação deve seguir este modelo
+
 ```
 {
   "Logging": {
@@ -54,26 +51,25 @@ para a criação deve seguir este modelo
 
 ```
 
-****
+---
 
-Subir a API
--
-para subir a api na raiz do projeto deve escrever o comando 
-``docker compose up --build``
+## Subir a API
 
-****
-Observações
--
+para subir a api na raiz do projeto deve escrever o comando
+`docker compose up --build`
+
+---
+
+## Observações
+
 - Os certificados são locais → o navegador exibirá aviso de segurança.
 
 - A API irá criar automaticamente um usuário **Admin** com login **Admin** e senha **123456**.
 
+## Bibliotecas Utilizadas
 
-Bibliotecas Utilizadas
--
+## Flutter (Dart)
 
-Flutter (Dart)
--
 ```
  ├─ UI
  │   ├─ material / cupertino
@@ -106,13 +102,14 @@ Flutter (Dart)
  └─ Utilitários
      └─ uuid
 ```
-***
 
-API Relatórios (.NET 10)
--
+---
+
+## API Relatórios (.NET 10)
+
 ```
 ├─ Presentation
-│   ├─ Swagger (Swashbuckle) 
+│   ├─ Swagger (Swashbuckle)
 │   ├─ OpenAPI
 │   └─ FluentValidation.AspNetCore
 │
@@ -134,5 +131,4 @@ API Relatórios (.NET 10)
 │   └─ Dependency Injection
 ```
 
- Creditar futuralmente a biblioteca FluentValidate
-
+Creditar futuralmente a biblioteca FluentValidate

@@ -38,8 +38,11 @@ namespace APIRelatorios.Infra.Migrations
                     RotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     NomeRota = table.Column<string>(type: "text", nullable: true),
                     Alimentador = table.Column<string>(type: "text", nullable: false),
+                    Concessionarias = table.Column<int>(type: "integer", nullable: false),
+                    Km = table.Column<double>(type: "double precision", nullable: true),
                     DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    DataFinal = table.Column<DateTime>(type: "timestamp with time zone", nullable: true)
+                    DataFinal = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    TipoRota = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,9 +61,11 @@ namespace APIRelatorios.Infra.Migrations
                     Identificacão = table.Column<string>(type: "text", nullable: true),
                     Descricao = table.Column<string>(type: "text", nullable: true),
                     Endereco = table.Column<string>(type: "text", nullable: false),
+                    Cidade = table.Column<string>(type: "text", nullable: true),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
-                    Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false)
+                    Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
+                    Emergencial = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {

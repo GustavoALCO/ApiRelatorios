@@ -3,12 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\services\\savedimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\services\\savedimage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\interfaces\\isavedimages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\interfaces\\isavedimages.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{6055DD67-46AB-8F64-42ED-9AE85C3AE1D0}|APIRelatorios.Dommain\\APIRelatorios.Dommain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\helpers\\concessionariasmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{6055DD67-46AB-8F64-42ED-9AE85C3AE1D0}|APIRelatorios.Dommain\\APIRelatorios.Dommain.csproj|solutionrelative:apirelatorios.dommain\\helpers\\concessionariasmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -18,7 +14,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -26,28 +22,15 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ISavedImages.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Interfaces\\ISavedImages.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Interfaces\\ISavedImages.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Interfaces\\ISavedImages.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Interfaces\\ISavedImages.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAA1wBgAAAACAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T22:08:58.825Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "SavedImage.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Services\\SavedImage.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Services\\SavedImage.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Services\\SavedImage.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Services\\SavedImage.cs",
-              "ViewState": "AgIAAFgAAAAAAAAAAAAtwGgAAAA0AAAAAAAAAA==",
+              "Title": "ConcessionariasMapper.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\ConcessionariasMapper.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\ConcessionariasMapper.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\ConcessionariasMapper.cs",
+              "RelativeToolTip": "APIRelatorios.Dommain\\Helpers\\ConcessionariasMapper.cs",
+              "ViewState": "AgIAAAcAAAAAAAAAAAAAAAkAAAAuAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-03-29T21:58:25.833Z",
+              "WhenOpened": "2026-04-14T18:45:11.401Z",
               "EditorCaption": ""
             }
           ]

@@ -8,6 +8,7 @@ services:
       dockerfile: APIRelatorios.WebAPI/Dockerfile
     depends_on:
       - postgres-db
+      - api-docx   
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       ASPNETCORE_URLS: http://+:8080
@@ -19,6 +20,15 @@ services:
       ConnectionStrings__Password: Teste123
     expose:
       - "8080"
+    networks:
+      - app-network
+
+  api-docx:
+    build:
+      context: ./PythonDocx
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
     networks:
       - app-network
 

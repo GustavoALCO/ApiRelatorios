@@ -113,19 +113,15 @@ public class SavedImage : ISavedImages
     public byte[] RedimensionarImagem(byte[] imageBytes, int largura, int qualidade)
     {
         using var inputStream = new MemoryStream(imageBytes);
-        using var codec = SKCodec.Create(inputStream);
+        using var bitmap = SKBitmap.Decode(inputStream);
 
-        if (codec == null)
+        if (bitmap == null)
             throw new Exception("Erro ao decodificar imagem");
 
-        var origin = codec.EncodedOrigin;
-        using var bitmap = SKBitmap.Decode(codec);
-        using var rotated = AplicarRotacao(bitmap, origin);
+        float proporcao = (float)largura / bitmap.Width;
+        int altura = (int)(bitmap.Height * proporcao);
 
-        float proporcao = (float)largura / rotated.Width;
-        int altura = (int)(rotated.Height * proporcao);
-
-        using var resized = rotated.Resize(
+        using var resized = bitmap.Resize(
             new SKImageInfo(largura, altura),
             new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)
         );
@@ -135,34 +131,6 @@ public class SavedImage : ISavedImages
 
         return data.ToArray();
     }
-
-    private SKBitmap AplicarRotacao(SKBitmap bitmap, SKEncodedOrigin origin)
-    {
-        return origin switch
-        {
-            SKEncodedOrigin.RightTop => Rotate(bitmap, 90),
-            SKEncodedOrigin.LeftBottom => Rotate(bitmap, 270),
-            SKEncodedOrigin.BottomRight => Rotate(bitmap, 180),
-            _ => bitmap
-        };
-    }
-
-    private SKBitmap Rotate(SKBitmap bitmap, float angle)
-    {
-        var rotated = new SKBitmap(bitmap.Height, bitmap.Width);
-
-        using var canvas = new SKCanvas(rotated);
-        canvas.Clear();
-
-        canvas.Translate(rotated.Width / 2f, rotated.Height / 2f);
-        canvas.RotateDegrees(angle);
-        canvas.Translate(-bitmap.Width / 2f, -bitmap.Height / 2f);
-
-        canvas.DrawBitmap(bitmap, 0, 0);
-
-        return rotated;
-    }
-
     private byte[] AdicionaTexto(byte[] imageBytes, string linha1, string linha2, string linha3)
     {
         using var inputStream = new MemoryStream(imageBytes);

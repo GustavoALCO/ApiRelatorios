@@ -143,6 +143,8 @@ public static class DependencyInjection
         services.AddScoped<IValidateIds, ValidateIds>();
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
+        
+        services.AddHttpClient<IApiDocx, ApiDocx>();
 
         return services;
     }
@@ -164,6 +166,7 @@ public static class DependencyInjection
         services.AddScoped<UpdateNomeRotaHandler>();
         services.AddScoped<UpdatePasswordHandler>();
         services.AddScoped<CreateRelatorioHandler>();
+        services.AddScoped<CreateEmergencialHandler>();
 
         services.AddScoped<LoginHandler>();
         services.AddScoped<DeleteUsuarioHandler>();

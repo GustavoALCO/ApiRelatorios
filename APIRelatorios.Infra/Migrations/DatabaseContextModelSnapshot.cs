@@ -31,8 +31,14 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<string>("Alimentador")
                         .HasColumnType("text");
 
+                    b.Property<string>("Cidade")
+                        .HasColumnType("text");
+
                     b.Property<string>("Descricao")
                         .HasColumnType("text");
+
+                    b.Property<bool>("Emergencial")
+                        .HasColumnType("boolean");
 
                     b.Property<string>("Endereco")
                         .IsRequired()
@@ -106,18 +112,33 @@ namespace APIRelatorios.Infra.Migrations
                         .IsRequired()
                         .HasColumnType("text");
 
+                    b.Property<int>("Concessionarias")
+                        .HasColumnType("integer");
+
                     b.Property<DateTime?>("DataFinal")
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<DateTime>("DataInicio")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<double?>("Km")
+                        .HasColumnType("double precision");
+
                     b.Property<string>("NomeRota")
                         .HasColumnType("text");
+
+                    b.Property<string>("TipoRota")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("character varying(13)");
 
                     b.HasKey("RotaId");
 
                     b.ToTable("Rota");
+
+                    b.HasDiscriminator<string>("TipoRota").HasValue("Rota");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.User", b =>
@@ -172,6 +193,13 @@ namespace APIRelatorios.Infra.Migrations
                     b.HasIndex("RotaId");
 
                     b.ToTable("UsuarioRotas");
+                });
+
+            modelBuilder.Entity("APIRelatorios.Dommain.Entities.RotaRetorno", b =>
+                {
+                    b.HasBaseType("APIRelatorios.Dommain.Entities.Rota");
+
+                    b.HasDiscriminator().HasValue("RotaRetorno");
                 });
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>

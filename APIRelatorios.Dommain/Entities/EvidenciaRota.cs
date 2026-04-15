@@ -26,13 +26,15 @@ public class EvidenciaRota
 
     public string Endereco { get; private set; }
 
+    public string? Cidade { get; private set; }
+
     public double Latitude { get; private set; }
 
     public double Longitude { get; private set; }
 
     public DateTime Horario { get; private set; }
 
-
+    public bool Emergencial { get; private set; }
 
     public EvidenciaRota()
     {
@@ -49,9 +51,11 @@ public class EvidenciaRota
         string? descricao,
         List<ImageData> imagem,
         string endereco,
+        string cidade,
         double lat,
         double lon,
-        DateTime horario
+        DateTime horario,
+        bool emergencial
         )
     {
         EvidenciaRotaId = evidenciaRotaId;
@@ -63,9 +67,11 @@ public class EvidenciaRota
         Descricao = descricao;
         Images = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
         Endereco = endereco;
+        Cidade = cidade;
         Latitude = lat;
         Longitude = lon;
         Horario = horario;
+        Emergencial = emergencial;
     }
 
     public void Atualizar(

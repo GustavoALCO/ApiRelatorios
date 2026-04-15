@@ -2,6 +2,7 @@
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Exeptions;
+using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
 using System.Data.Common;
 
@@ -50,6 +51,24 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
                 .OrderBy(x => x.Horario)
                 .Skip((page - 1) * pagesize)
                 .Take(pagesize)
+                .ToListAsync();
+
+            return image;
+        }
+        catch (InvalidOperationException ex)
+        {
+            throw new RepositoryException("Erro ao buscar informações da imagem no banco de dados.",
+                ex);
+        }
+    }
+
+    public async Task<ICollection<EvidenciaRota>> GetEvidenciasUrgencia(Guid RotaID)
+    {
+        try
+        {
+            var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID && i.Emergencial == true)
+                .Include(e => e.Images)
+                .OrderBy(x => x.Horario)
                 .ToListAsync();
 
             return image;

@@ -43,7 +43,7 @@ public class CreateImageHandler
                                                                        fiscal: $"{fiscais.Name}_{fiscais.LastName}",
                                                                        horario: createImage.Horario.ToString("yyyy_MM_dd__HH_mm"),
                                                                        base64Images: createImage.Base64,
-                                                                       container: "imagens",
+                                                                       container: "testes",
                                                                        evidenciaId: createImage.evidenciaId,
                                                                        lat: createImage.Latitude,
                                                                        log: createImage.Longitude);
@@ -64,9 +64,11 @@ public class CreateImageHandler
             ,descricao: createImage.Descricao
             ,imagem: urlImages,
             endereco: createImage.Endereco,
+            cidade: createImage.Cidade,
             lat: createImage.Latitude,
             lon: createImage.Longitude,
-            horario: createImage.Horario.AddHours(-3)
+            horario: createImage.Horario.AddHours(-3),
+            emergencial: createImage.Emergencial
             );
         
         await _commands.SaveImage(image);

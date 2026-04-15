@@ -2,5 +2,5 @@
 
 public readonly record struct CreateRelatorioWordCommand
 (
-    Guid[] Ids
+    List<Guid> Ids
 );

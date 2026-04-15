@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Dommain.Entities;
+using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIRelatorios.Infra.Database;
@@ -41,6 +42,11 @@ public class DatabaseContext : DbContext
 
         modelBuilder.Entity<Rota>()
             .HasKey(x => x.RotaId);
+
+        modelBuilder.Entity<Rota>()
+                    .HasDiscriminator<string>("TipoRota")
+                    .HasValue<Rota>("Rota")
+                    .HasValue<RotaRetorno>("RotaRetorno");
 
         modelBuilder.Entity<UsuarioRota>()
             .HasKey(ur => new { ur.UserId, ur.RotaId });

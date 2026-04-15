@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace APIRelatorios.WebAPI.Controllers;
 
 [ApiController]
-[Route("a")]
+[Route("")]
 public class ControllerTeste : ControllerBase
 {
 

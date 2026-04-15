@@ -19,6 +19,7 @@ public class RotaController : ControllerBase
     private readonly CreateRelatorioHandler _createRelatorio;
     private readonly BuscarRotaFiltersHandler _buscarRotaFilters;
     private readonly BuscarRotaIdHandler _buscarRotaIdHandler;
+    private readonly CreateEmergencialHandler _createEmergencial;
 
     public RotaController(
         AddFiscalRotaHandler addFiscal,
@@ -28,7 +29,8 @@ public class RotaController : ControllerBase
         UpdateNomeRotaHandler updateNomeRota,
         CreateRelatorioHandler createRelatorio,
         BuscarRotaFiltersHandler buscarRotaFilters,
-        BuscarRotaIdHandler buscarRotaIdHandler)
+        BuscarRotaIdHandler buscarRotaIdHandler,
+        CreateEmergencialHandler createEmergencial)
     {
         _addFiscal = addFiscal;
         _createRota = createRota;
@@ -38,6 +40,7 @@ public class RotaController : ControllerBase
         _createRelatorio = createRelatorio;
         _buscarRotaFilters = buscarRotaFilters;
         _buscarRotaIdHandler = buscarRotaIdHandler;
+        _createEmergencial = createEmergencial;
     }
 
     [Authorize]
@@ -151,7 +154,7 @@ public class RotaController : ControllerBase
         }
     }
 
-    
+    [Authorize]
     [HttpPost("CriarRelatorio")]
     public async Task<IActionResult> CriarRelatorio(
         [FromBody] CreateRelatorioWordCommand command)
@@ -167,6 +170,27 @@ public class RotaController : ControllerBase
             );
         }
         catch (Exception ex )
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [Authorize]
+    [HttpPost("CriarEmergencial")]
+    public async Task<IActionResult> CriarEmergencial(
+        [FromBody] CreateEmergencialCommand command)
+    {
+        try
+        {
+            var bytes = await _createEmergencial.Handler(command);
+
+            return File(
+                        bytes,
+                        "application/zip",
+                        "Emergencial.zip"
+                    );
+        }
+        catch (Exception ex)
         {
             return StatusCode(500, ex.Message);
         }
