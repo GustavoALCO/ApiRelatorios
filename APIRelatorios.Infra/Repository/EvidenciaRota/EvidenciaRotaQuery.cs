@@ -26,7 +26,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         
     }
 
-    public async Task<ICollection<EvidenciaRota>> GetEvidenciaAsync(Guid RotaID)
+    public async Task<List<EvidenciaRota>> GetEvidenciaAsync(Guid RotaID)
     {
         try
         {
@@ -66,8 +66,8 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
     {
         try
         {
-            var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID && i.Emergencial == true)
-                .Include(e => e.Images)
+            var image = await _Context.EvidenciaRota
+                .Where(i => i.RotaId == RotaID && i.Emergencial == true)
                 .OrderBy(x => x.Horario)
                 .ToListAsync();
 

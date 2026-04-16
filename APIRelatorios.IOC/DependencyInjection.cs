@@ -146,6 +146,8 @@ public static class DependencyInjection
         
         services.AddHttpClient<IApiDocx, ApiDocx>();
 
+        services.AddHttpClient<IBuscarDistanciaCordenadas, BuscarDistanciaCordenadas>();
+
         return services;
     }
 
@@ -167,6 +169,7 @@ public static class DependencyInjection
         services.AddScoped<UpdatePasswordHandler>();
         services.AddScoped<CreateRelatorioHandler>();
         services.AddScoped<CreateEmergencialHandler>();
+        services.AddScoped<FinalizarRotaHandler>();
 
         services.AddScoped<LoginHandler>();
         services.AddScoped<DeleteUsuarioHandler>();

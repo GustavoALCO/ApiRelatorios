@@ -20,6 +20,7 @@ public class RotaController : ControllerBase
     private readonly BuscarRotaFiltersHandler _buscarRotaFilters;
     private readonly BuscarRotaIdHandler _buscarRotaIdHandler;
     private readonly CreateEmergencialHandler _createEmergencial;
+    private readonly FinalizarRotaHandler _finalizarRota;
 
     public RotaController(
         AddFiscalRotaHandler addFiscal,
@@ -30,7 +31,8 @@ public class RotaController : ControllerBase
         CreateRelatorioHandler createRelatorio,
         BuscarRotaFiltersHandler buscarRotaFilters,
         BuscarRotaIdHandler buscarRotaIdHandler,
-        CreateEmergencialHandler createEmergencial)
+        CreateEmergencialHandler createEmergencial,
+        FinalizarRotaHandler finalizarRota)
     {
         _addFiscal = addFiscal;
         _createRota = createRota;
@@ -41,6 +43,7 @@ public class RotaController : ControllerBase
         _buscarRotaFilters = buscarRotaFilters;
         _buscarRotaIdHandler = buscarRotaIdHandler;
         _createEmergencial = createEmergencial;
+        _finalizarRota = finalizarRota;
     }
 
     [Authorize]
@@ -189,6 +192,23 @@ public class RotaController : ControllerBase
                         "application/zip",
                         "Emergencial.zip"
                     );
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, ex.Message);
+        }
+    }
+
+    [Authorize]
+    [HttpPost("FinalizarRota")]
+    public async Task<IActionResult> FinalizarRota(
+        [FromBody] FinalizarRotaCommand command)
+    {
+        try
+        {
+            await _finalizarRota.Handler(command);
+
+            return Ok();
         }
         catch (Exception ex)
         {

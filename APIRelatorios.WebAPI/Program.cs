@@ -29,6 +29,10 @@ builder.Services.AddOptions<JWTSettings>()
     .Bind(builder.Configuration.GetRequiredSection("Jwt"))
     .ValidateDataAnnotations();
 
+builder.Services.AddOptions<AzureMapsSettings>()
+    .Bind(builder.Configuration.GetRequiredSection("Azurekey"))
+    .ValidateDataAnnotations();
+
 // JWT Authentication
 builder.Services.Authentication(builder.Configuration);
 
