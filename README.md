@@ -38,6 +38,9 @@ para a criação deve seguir este modelo
     "ConnectionString": "**",
     "Container": "**"
   },
+  "Azurekey": {
+    "AzureMapsApiKey": "**"
+  },
   "Jwt": {
     "Key": "**",
     "Issuer": "**",
