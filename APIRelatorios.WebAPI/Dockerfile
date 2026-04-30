@@ -20,7 +20,7 @@ WORKDIR /src
 COPY ["APIRelatorios.WebAPI/APIRelatorios.WebAPI.csproj", "APIRelatorios.WebAPI/"]
 COPY ["APIRelatorios.IOC/APIRelatorios.IOC.csproj", "APIRelatorios.IOC/"]
 COPY ["APIRelatorios.Application/APIRelatorios.Application.csproj", "APIRelatorios.Application/"]
-COPY ["APIRelatorios.Dommain/APIRelatorios.Dommain.csproj", "APIRelatorios.Dommain/"]
+COPY ["APIRelatorios.Dommain/APIRelatorios.Domain.csproj", "APIRelatorios.Domain/"]
 COPY ["APIRelatorios.Infra/APIRelatorios.Infra.csproj", "APIRelatorios.Infra/"]
 RUN dotnet restore "./APIRelatorios.WebAPI/APIRelatorios.WebAPI.csproj"
 COPY . .

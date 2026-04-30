@@ -27,10 +27,14 @@ public class EvidenciaDTO
 
     public string Endereco { get;  set; }
 
+    public string Cidade { get; set; }
+
     public double Latitude { get; set; }
 
 
     public double Longitude { get; set; }
 
     public DateTime Horario { get;  set; }
+
+    public bool Emergencial { get;  set; }
 }

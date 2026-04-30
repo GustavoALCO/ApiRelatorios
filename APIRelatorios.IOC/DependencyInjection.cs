@@ -7,6 +7,7 @@ using APIRelatorios.Application.Features.Querys.User.Handler;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Services;
 using APIRelatorios.Application.Settings;
+using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -136,24 +137,28 @@ public static class DependencyInjection
 
         services.AddScoped<IRelatorioDeIrregularidades, RelatorioDeIrregulariedades>();
 
-        services.AddScoped<IBuscarByteImagem, BuscarByteImagem>();
+        services.AddScoped<IBuscarByteImagemService, BuscarByteImagemService>();
 
         services.AddScoped<IValidateBase64, ValidateBase64>();
 
         services.AddScoped<IValidateIds, ValidateIds>();
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
-        
-        services.AddHttpClient<IApiDocx, ApiDocx>();
 
-        services.AddHttpClient<IBuscarDistanciaCordenadas, BuscarDistanciaCordenadas>();
+        services.AddScoped<IZipService, ZipService>();
+        
+        services.AddHttpClient<IApiDocxService, ApiDocxService>();
+
+        services.AddHttpClient<IAzureMapsKmService, AzureMapsKmService>();
+
+        services.AddHttpClient<IAzureMapsEnderecoService, AzureMapsEnderecoService>();
 
         return services;
     }
 
     public static IServiceCollection DeclareHandlerAplication(this IServiceCollection services)
     {
-        services.AddScoped<CreateImageHandler>();
+        services.AddScoped<CreateEvidenciaHandler>();
         services.AddScoped<DeleteImageHandler>();
         services.AddScoped<UpdateDescricaoImageHandler>();
         services.AddScoped<BuscarEvidenciaPorIdHandler>();

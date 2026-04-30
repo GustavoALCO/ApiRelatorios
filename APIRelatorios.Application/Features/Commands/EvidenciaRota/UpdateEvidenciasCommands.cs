@@ -14,5 +14,7 @@ public readonly record struct UpdateEvidenciasCommands
 
     string? endereco,
 
-    string? identificacao
+    string? identificacao,
+
+    bool? emergencial
 );

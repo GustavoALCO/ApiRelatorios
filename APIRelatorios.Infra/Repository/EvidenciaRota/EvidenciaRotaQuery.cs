@@ -67,6 +67,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         try
         {
             var image = await _Context.EvidenciaRota
+                .Include(x => x.Images)
                 .Where(i => i.RotaId == RotaID && i.Emergencial == true)
                 .OrderBy(x => x.Horario)
                 .ToListAsync();

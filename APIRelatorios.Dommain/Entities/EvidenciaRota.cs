@@ -79,7 +79,8 @@ public class EvidenciaRota
      TemaFiscalizacao? tema,
      string? alimentador,
      string? endereco,
-     string? identificacao)
+     string? identificacao,
+     bool? emergencial)
     {
         if (descricao is not null)
             Descricao = descricao;
@@ -95,5 +96,8 @@ public class EvidenciaRota
 
         if (identificacao is not null)
             Identificacão = identificacao;
+
+        if (emergencial is not null)
+            Emergencial = (bool)emergencial;
     }
 }

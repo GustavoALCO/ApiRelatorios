@@ -11,7 +11,7 @@ namespace APIRelatorios.WebAPI.Controllers;
 [Route("EvidenciaRotas")]
 public class EvidenciaRotaController : ControllerBase
 {
-    private readonly CreateImageHandler _createImageHandler;
+    private readonly CreateEvidenciaHandler _createImageHandler;
 
     private readonly DeleteImageHandler _deleteImageHandler;
 
@@ -21,7 +21,7 @@ public class EvidenciaRotaController : ControllerBase
 
     private readonly BuscarEvidenciaPorIdHandler _buscarId;
 
-    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateImageHandler createImageHandler, BuscarTodasAsEvidenciasRotaHandler buscarEvidencias, BuscarEvidenciaPorIdHandler buscarId)
+    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateEvidenciaHandler createImageHandler, BuscarTodasAsEvidenciasRotaHandler buscarEvidencias, BuscarEvidenciaPorIdHandler buscarId)
     {
         _updateDescricaoImageHandler = updateDescricaoImageHandler;
         _deleteImageHandler = deleteImageHandler;
@@ -30,7 +30,7 @@ public class EvidenciaRotaController : ControllerBase
         _buscarId = buscarId;
     }
 
-    
+    [Authorize]
     [HttpGet("Id")]
     public async Task<IActionResult> BuscarPorId(Guid commands)
     {
@@ -46,7 +46,7 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
-    
+    [Authorize]
     [HttpGet("TodasEvidencias")]
     public async Task<IActionResult> BuscarTodas([FromQuery] BuscarTodasEvidenciasRotaCommands commands)
     {

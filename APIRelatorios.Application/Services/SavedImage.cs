@@ -89,7 +89,7 @@ public class SavedImage : ISavedImages
                 horario
             );
 
-            byte[] imageLow = RedimensionarImagem(imageWithText, 300, 60);
+            byte[] imageLow = RedimensionarImagem(imageWithText, 190, 100);
             byte[] imageMedium = RedimensionarImagem(imageWithText, 800, 75);
 
             var urlLow = await UploadBase64ImagesAsync(
@@ -148,13 +148,14 @@ public class SavedImage : ISavedImages
 
         using var paint = new SKPaint
         {
-            Color = SKColors.White,
+            Color = SKColors.Yellow,
             IsAntialias = true
         };
 
         using var shadow = new SKPaint
         {
             Color = SKColors.Black,
+            StrokeWidth = 0.02f,
             IsAntialias = true
         };
 

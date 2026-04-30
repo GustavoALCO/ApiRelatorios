@@ -1,14 +1,16 @@
 ﻿using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
 using ChatApplication.Application.Interfaces;
+using Microsoft.Extensions.Logging;
 using System.Text.RegularExpressions;
 
 namespace APIRelatorios.Application.Features.Commands.Images.Handler;
 
-public class CreateImageHandler
+public class CreateEvidenciaHandler
 {
 
     private readonly IEvidenciaRotaCommands _commands;
@@ -19,13 +21,18 @@ public class CreateImageHandler
 
     private readonly IUserQuery _query;
 
+    private readonly IAzureMapsEnderecoService _mapsEnderecoService;
 
-    public CreateImageHandler(IEvidenciaRotaCommands commands, ISavedImages uploadImage, IUserQuery query, IRotaQuery rotaQuery)
+    private readonly ILogger<CreateEvidenciaHandler> _logger;
+
+    public CreateEvidenciaHandler(IEvidenciaRotaCommands commands, ISavedImages uploadImage, IUserQuery query, IRotaQuery rotaQuery, IAzureMapsEnderecoService mapsEnderecoService, ILogger<CreateEvidenciaHandler> logger)
     {
         _commands = commands;
         _uploadImage = uploadImage;
         _query = query;
         _rotaQuery = rotaQuery;
+        _mapsEnderecoService = mapsEnderecoService;
+        _logger = logger;
     }
 
     public async Task Handler(CreateEvidenciaCommand createImage)
@@ -34,23 +41,46 @@ public class CreateImageHandler
         var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) ?? throw new Exception("Erro ao Encontrar Rota");
 
         var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) ?? throw new Exception("Erro ao encontrar filcal");
-        
+
+        if (rota.DataFinal != null)
+            throw new Exception("Rota Já finalizada.");
+
         if(string.IsNullOrEmpty(createImage.Alimentador))
             createImage.Alimentador = rota.Alimentador;
+
+        if (string.IsNullOrEmpty(createImage.Cidade) || string.IsNullOrEmpty(createImage.Endereco))
+        {
+            var azurereturn = await _mapsEnderecoService.BuscarNomeRua(createImage.Latitude, createImage.Longitude) 
+                                                        ?? throw new Exception("Erro ao buscar nome da rua e cidade");
+
+            if (string.IsNullOrEmpty(createImage.Cidade))
+            {
+                _logger.LogInformation("Atribuindo valor de cidade");
+                createImage.Cidade = azurereturn.Item2;
+            }
+                
+
+            if (string.IsNullOrEmpty(createImage.Endereco))
+            {
+                _logger.LogInformation("Atribuindo valor do endereço");
+                createImage.Endereco = azurereturn.Item1;
+            }
+                
+        }
         
 
         var urlImages = await _uploadImage.UploadListBase64ImagesAsync(alimentador: createImage.Alimentador,
                                                                        fiscal: $"{fiscais.Name}_{fiscais.LastName}",
-                                                                       horario: createImage.Horario.ToString("yyyy_MM_dd__HH_mm"),
+                                                                       horario: createImage.Horario.AddHours(-3).ToString("yyyy/MM/dd HH:mm"),
                                                                        base64Images: createImage.Base64,
-                                                                       container: "testes",
+                                                                       container: "images",
                                                                        evidenciaId: createImage.evidenciaId,
                                                                        lat: createImage.Latitude,
                                                                        log: createImage.Longitude);
 
         if (urlImages.Count() == 0)
         {
-            Console.WriteLine("Erro ao fazer upload da imagem");
+            _logger.LogInformation("Erro ao fazer upload da imagem");
             throw new Exception("Erro ao fazer upload da imagem");
         }
 

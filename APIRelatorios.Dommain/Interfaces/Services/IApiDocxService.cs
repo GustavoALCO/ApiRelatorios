@@ -2,7 +2,7 @@
 
 namespace APIRelatorios.Dommain.Interfaces.Services;
 
-public interface IApiDocx
+public interface IApiDocxService
 {
     Task<byte[]> emergencial(EmergencialDTO dto);
 }

@@ -19,7 +19,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\APIRelatorios.Application\APIRelatorios.Application.csproj" />
-    <ProjectReference Include="..\APIRelatorios.Dommain\APIRelatorios.Dommain.csproj" />
+    <ProjectReference Include="..\APIRelatorios.Dommain\APIRelatorios.Domain.csproj" />
   </ItemGroup>
 
 </Project>

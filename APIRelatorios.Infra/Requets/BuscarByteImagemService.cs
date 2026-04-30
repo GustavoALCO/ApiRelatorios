@@ -3,11 +3,11 @@ using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Infra.Requets;
 
-public class BuscarByteImagem : IBuscarByteImagem
+public class BuscarByteImagemService : IBuscarByteImagemService
 {
-    private readonly ILogger<BuscarByteImagem> _logger;
+    private readonly ILogger<BuscarByteImagemService> _logger;
 
-    public BuscarByteImagem(ILogger<BuscarByteImagem> logger)
+    public BuscarByteImagemService(ILogger<BuscarByteImagemService> logger)
     {
         _logger = logger;
     }

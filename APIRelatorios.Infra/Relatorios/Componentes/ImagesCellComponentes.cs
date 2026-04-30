@@ -73,10 +73,7 @@ internal static class ImageCellComponentes
                                     new A.Offset { X = 0, Y = 0 },
                                     new A.Extents { Cx = larguraEmus, Cy = alturaEmus }
 
-                                )
-                                {
-                                    Rotation = 5400000,
-                                },
+                                ),
                                 new A.PresetGeometry(new A.AdjustValueList())
                                 {
                                     

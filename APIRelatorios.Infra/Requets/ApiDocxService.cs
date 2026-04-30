@@ -7,13 +7,13 @@ using System.Text.Json;
 
 namespace APIRelatorios.Infra.Requets;
 
-public class ApiDocx : IApiDocx
+public class ApiDocxService : IApiDocxService
 {
-    private readonly ILogger<ApiDocx> _logger;
+    private readonly ILogger<ApiDocxService> _logger;
 
     private readonly HttpClient _httpClient;
 
-    public ApiDocx(ILogger<ApiDocx> logger, HttpClient httpClient)
+    public ApiDocxService(ILogger<ApiDocxService> logger, HttpClient httpClient)
     {
         _logger = logger;
         _httpClient = httpClient;

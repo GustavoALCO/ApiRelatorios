@@ -20,11 +20,11 @@ public class BuscarRotaFiltersHandler
     public async Task<ICollection<RotaDTO>> Handler(BuscarRotaFiltersCommands commands)
     {
         //valida se o numero e o tamnho da pagina é maior que 0 
-        var page = commands.page <= 0 ? 1: commands.page;
+        var page = commands.page <= 0 ? 1 : commands.page;
         var pagesize = commands.pagesize <= 0 ? 1 : commands.pagesize;
 
         //valida se o fiscal é existente
-        var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new Exception("Fiscal Invalido"); 
+        var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new Exception("Fiscal Invalido");
 
         //Buscar IQueryable para buscar filtros
         var query = _rotaQuery.BuscarQuery();
@@ -34,7 +34,7 @@ public class BuscarRotaFiltersHandler
 
 
         //Verifica se o valor de nome não é nulo
-        if(!string.IsNullOrEmpty(commands.Nome))
+        if (!string.IsNullOrEmpty(commands.Nome))
         {
             //Passa o parametro do nome para a busca de filtros
             query = query.Where(x => x.NomeRota.ToUpper().Contains(commands.Nome.ToUpper()));
@@ -43,13 +43,15 @@ public class BuscarRotaFiltersHandler
         //Verifica Se a data Inicial é nula
         if (!string.IsNullOrEmpty(commands.DataInicial) && !string.IsNullOrEmpty(commands.DataFinal))
         {
-            var dataFinal = DateTime.ParseExact(commands.DataFinal,
-                "dd/MM/yyyy",
-                CultureInfo.InvariantCulture);
-
-            var dataInicial = DateTime.ParseExact(commands.DataInicial,
-                "dd/MM/yyyy",
-                CultureInfo.InvariantCulture);
+            var dataInicial = DateTime.SpecifyKind(
+                DateTime.ParseExact(commands.DataInicial, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                DateTimeKind.Utc
+            );
+    
+            var dataFinal = DateTime.SpecifyKind(
+                DateTime.ParseExact(commands.DataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                DateTimeKind.Utc
+            );
 
             if (dataFinal < dataInicial)
             {
@@ -63,27 +65,31 @@ public class BuscarRotaFiltersHandler
         else if (!string.IsNullOrEmpty(commands.DataInicial))
         {
 
-            var dataInicial = DateTime.ParseExact(commands.DataInicial,
-                "dd/MM/yyyy",
-                CultureInfo.InvariantCulture);
+            var dataInicial = DateTime.SpecifyKind(
+                DateTime.ParseExact(commands.DataInicial, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                DateTimeKind.Utc
+            );
 
             query = query.Where(x => x.DataInicio == dataInicial);
         }
         //Aplica o filtro apenas se o valor de data Finalw for valido
         else if (!string.IsNullOrEmpty(commands.DataFinal))
         {
-            var dataFinal = DateTime.ParseExact(commands.DataFinal,
-                "dd/MM/yyyy",
-                CultureInfo.InvariantCulture);
+            var dataFinal = DateTime.SpecifyKind(
+                DateTime.ParseExact(commands.DataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                DateTimeKind.Utc
+            );
+            var dataFinalFim = dataFinal.AddDays(1).AddTicks(-1);
 
-            query = query.Where(x => x.DataFinal == dataFinal);
+            query = query.Where(x => x.DataFinal >= dataFinal && x.DataFinal <= dataFinalFim);
+            
         }
 
         var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, page, pagesize);
 
         List<RotaDTO> filtersdto = new();
 
-        foreach(var filters in searchFilters)
+        foreach (var filters in searchFilters)
         {
             RotaDTO dto = new RotaDTO()
             {
@@ -91,6 +97,7 @@ public class BuscarRotaFiltersHandler
                 Alimentador = filters.Alimentador,
                 DataFinal = filters.DataFinal?.ToString("dd/MM/yyyy"),
                 DataInicio = filters.DataInicio.ToString("dd/MM/yyyy"),
+                Concessionarias = filters.Concessionarias,
                 NomeRota = filters.NomeRota
             };
 

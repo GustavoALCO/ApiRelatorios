@@ -1,6 +1,6 @@
 ﻿namespace APIRelatorios.Application.Interfaces;
 
-public interface IBuscarByteImagem
+public interface IBuscarByteImagemService
 {
     Task<byte[]> BaixarImagemAsync(string imageUrl);
 }

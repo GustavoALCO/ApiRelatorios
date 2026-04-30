@@ -20,7 +20,7 @@ string? Descricao,
 
 List<string> Base64,
 
-string Endereco,
+string? Endereco,
 
 string? Cidade,
 

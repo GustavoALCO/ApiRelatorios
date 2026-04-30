@@ -2,7 +2,9 @@
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Exeptions;
+using Azure;
 using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Wordprocessing;
 using Microsoft.EntityFrameworkCore;
 
 namespace APIRelatorios.Infra.Repository.Rota;
@@ -61,6 +63,19 @@ public class RotaQuery : IRotaQuery
         var rota = await rotas.OrderByDescending(x => x.DataInicio).Skip((page - 1) * pagesize).Take(pagesize).ToListAsync();
 
         return rota;
+    }
+
+    public async Task <ICollection<Dommain.Entities.Rota>> GetRotaFinish(Guid iduser,int page,int pagesize)
+    {
+        var rotas = await _context.Rota.Where(x => x.Fiscais.Any
+                                                                (f => iduser.Equals(f.UserId))
+                                                                && x.DataFinal != null)
+                                                                .OrderByDescending(x => x.DataFinal)
+                                                                .Skip((page - 1) * pagesize)
+                                                                .Take(pagesize)
+                                                                .ToListAsync();
+
+        return rotas;
     }
 
     public IQueryable<Dommain.Entities.Rota> BuscarQuery()

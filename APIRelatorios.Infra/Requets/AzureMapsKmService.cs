@@ -5,11 +5,11 @@ using Microsoft.Extensions.Options;
 
 namespace APIRelatorios.Infra.Requets;
 
-public class BuscarDistanciaCordenadas : IBuscarDistanciaCordenadas
+public class AzureMapsKmService : IAzureMapsKmService
 {
     private readonly HttpClient _httpClient;
 
-    private readonly ILogger<BuscarDistanciaCordenadas> _logger;
+    private readonly ILogger<AzureMapsKmService> _logger;
 
     private readonly AzureMapsSettings _azureMapsSettings;
 
@@ -17,7 +17,7 @@ public class BuscarDistanciaCordenadas : IBuscarDistanciaCordenadas
 
     private readonly string _version;
 
-    public BuscarDistanciaCordenadas(ILogger<BuscarDistanciaCordenadas> logger, HttpClient httpClient, IOptions<AzureMapsSettings> configuration)
+    public AzureMapsKmService(ILogger<AzureMapsKmService> logger, HttpClient httpClient, IOptions<AzureMapsSettings> configuration)
     {
         _logger = logger;
         _httpClient = httpClient;

@@ -65,6 +65,7 @@ public class BuscarTodasAsEvidenciasRotaHandler
                 Alimentador = evidencias.Alimentador,
                 Descricao = evidencias.Descricao,
                 Endereco = evidencias.Endereco,
+                Cidade = evidencias.Cidade,
                 Horario = evidencias.Horario,
                 ImageURL = imageOriginal,
                 MediumImageUrl = imageMedium,
@@ -74,6 +75,7 @@ public class BuscarTodasAsEvidenciasRotaHandler
                 TemaFiscalizacao = ((int)evidencias.TemaFiscalizacao),
                 Latitude = evidencias.Latitude,
                 Longitude = evidencias.Longitude,
+                Emergencial = evidencias.Emergencial
             };
 
             evidenciaDTOs.Add(evidenciaDTO);

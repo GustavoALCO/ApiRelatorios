@@ -167,10 +167,10 @@ public class RotaController : ControllerBase
             var bytes = await _createRelatorio.Handler(command);
 
             return File(
-                bytes,
-                "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-                "Relatorio.docx"
-            );
+                        bytes,
+                        "application/zip",
+                        "Relatorio.zip"
+                    );
         }
         catch (Exception ex )
         {
@@ -200,7 +200,7 @@ public class RotaController : ControllerBase
     }
 
     [Authorize]
-    [HttpPost("FinalizarRota")]
+    [HttpPatch("FinalizarRota")]
     public async Task<IActionResult> FinalizarRota(
         [FromBody] FinalizarRotaCommand command)
     {

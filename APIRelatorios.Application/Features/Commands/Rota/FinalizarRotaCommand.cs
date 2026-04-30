@@ -2,7 +2,5 @@
 
 public readonly record struct FinalizarRotaCommand
 (
-    Guid RotaId,
-
-    DateTime DataFinal
+    Guid RotaId
 );

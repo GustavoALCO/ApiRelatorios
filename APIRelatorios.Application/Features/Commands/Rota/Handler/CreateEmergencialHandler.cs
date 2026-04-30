@@ -14,11 +14,11 @@ public class CreateEmergencialHandler
 
     private readonly IEvidenciaRotaQuery _evidenciaRotaQuery;
 
-    private readonly IApiDocx _apiDocx;
+    private readonly IApiDocxService _apiDocx;
 
     private readonly ILogger<CreateEmergencialCommand> _logger;
 
-    public CreateEmergencialHandler(ILogger<CreateEmergencialCommand> logger, IEvidenciaRotaQuery evidenciaRotaQuery, IRotaQuery rotaQuery, IApiDocx apiDocx)
+    public CreateEmergencialHandler(ILogger<CreateEmergencialCommand> logger, IEvidenciaRotaQuery evidenciaRotaQuery, IRotaQuery rotaQuery, IApiDocxService apiDocx)
     {
         _logger = logger;
         _evidenciaRotaQuery = evidenciaRotaQuery;

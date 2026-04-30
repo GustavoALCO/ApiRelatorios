@@ -16,13 +16,15 @@ public class CreateRelatorioHandler
 
     private readonly IImagesQuery _imageQuery;
 
-    private readonly IBuscarByteImagem _ByteImage;
+    private readonly IBuscarByteImagemService _ByteImage;
 
     private readonly IValidateIds _validateIds;
 
+    private readonly IZipService _zipService;
+
     private readonly ILogger<CreateRelatorioHandler> _logger;
 
-    public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagem byteImage, IValidateIds validateIds, IRotaQuery rotaquery, IImagesQuery imageQuery, ILogger<CreateRelatorioHandler> logger)
+    public CreateRelatorioHandler(IEvidenciaRotaQuery rotaQuery, IRelatorioDeIrregularidades relatorio, IBuscarByteImagemService byteImage, IValidateIds validateIds, IRotaQuery rotaquery, IImagesQuery imageQuery, ILogger<CreateRelatorioHandler> logger, IZipService zipService)
     {
         _RotaQuery = rotaQuery;
         _relatorio = relatorio;
@@ -30,6 +32,7 @@ public class CreateRelatorioHandler
         _validateIds = validateIds;
         _imageQuery = imageQuery;
         _logger = logger;
+        _zipService = zipService;
     }
 
     public async Task<byte[]> Handler(CreateRelatorioWordCommand command)
@@ -43,20 +46,22 @@ public class CreateRelatorioHandler
             if (await _validateIds.RotaExisteAsync(rota) is false)
                 throw new Exception("Erro na lista de ids");
         }
+        List<(Func<Task<Stream>> StreamFactory, string Nome)> fotos = new();
 
         for (int i = 0; i < command.Ids.Count; i++)
         {
             _logger.LogInformation($"Buscando rota do index : {i}");
             var evidenciasBruto = await _RotaQuery.GetEvidenciaAsync(command.Ids[i]);
 
+            int contagem = 1;
             foreach (var evidenciasloop in evidenciasBruto)
             {
                 var images = await _imageQuery.GetImageEvidencia(evidenciasloop.EvidenciaRotaId);
 
-                int contagem = 1;
+                
                 foreach(var image in images)
                 {
-                    DadosRelatorioDTO evidendcias = new()
+                    DadosRelatorioDTO evidenciasDTO = new()
                     {
                         // Buscar os bytes da imagem 
                         Foto = await _ByteImage.BaixarImagemAsync(image.LowUrl),
@@ -69,9 +74,18 @@ public class CreateRelatorioHandler
                         Tema = evidenciasloop.TemaFiscalizacao,
                     };
 
-                    evidencias.Add(evidendcias);
+                    evidencias.Add(evidenciasDTO);
 
                     _logger.LogInformation($"Evidencia do index {i}");
+
+                    fotos.Add((
+                    async () =>
+                    {
+                        var bytes = await _ByteImage.BaixarImagemAsync(image.OriginalUrl);
+                        return new MemoryStream(bytes);
+                    },
+                    $"{$"{(EnumLetras)i} - {contagem}"} {evidenciasloop.TemaFiscalizacao}"
+                ));
                 }
 
                 contagem++;
@@ -80,7 +94,9 @@ public class CreateRelatorioHandler
 
         var bytesRelatorio = await _relatorio.BuildAsync(evidencias);
 
-        return bytesRelatorio;
+        var byteszip = await _zipService.CreateZipWithImagesAsync(bytesRelatorio, fotos);
+
+        return byteszip;
         
     }
 }

@@ -2,35 +2,34 @@ version: "3.9"
 
 services:
   apirelatorios.webapi:
-    image: ${DOCKER_REGISTRY-}apirelatorioswebapi
+    image: apirelatorioswebapi
     build:
       context: .
       dockerfile: APIRelatorios.WebAPI/Dockerfile
     depends_on:
       - postgres-db
-      - api-docx   
+      - api-docx
     environment:
-      ASPNETCORE_ENVIRONMENT: Development
-      ASPNETCORE_URLS: http://+:8080
-
-      ConnectionStrings__Host: postgres-db
-      ConnectionStrings__Port: "5432"
-      ConnectionStrings__Database: RelatorioDB
-      ConnectionStrings__User: AdminTeste
+      ASPNETCORE_ENVIRONMENT: Production
+      ASPNETCORE_URLS: http://+:8080/
+      ConnectionStringsHost: postgres-db
+      ConnectionStringsPort: "5432"
+      ConnectionStringsDatabase: RelatorioDB
+      ConnectionStringsUser: AdminTeste
       ConnectionStrings__Password: Teste123
     expose:
       - "8080"
     networks:
-      - app-network
+      - backend
 
   api-docx:
     build:
       context: ./PythonDocx
       dockerfile: Dockerfile
-    ports:
-      - "8000:8000"
+    expose:
+      - "8000"
     networks:
-      - app-network
+      - backend
 
   postgres-db:
     image: postgres:16
@@ -38,15 +37,13 @@ services:
       POSTGRES_DB: RelatorioDB
       POSTGRES_USER: AdminTeste
       POSTGRES_PASSWORD: Teste123
-    ports:
-      - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
     networks:
-      - app-network
+      - backend
 
   nginx:
-    image: nginx:latest
+    image: nginx:1.25
     container_name: nginx_proxy
     ports:
       - "80:80"
@@ -57,10 +54,12 @@ services:
     depends_on:
       - apirelatorios.webapi
     networks:
-      - app-network
+      - frontend
+      - backend
 
 volumes:
   pgdata:
 
 networks:
-  app-network:
+  frontend:
+  backend:
