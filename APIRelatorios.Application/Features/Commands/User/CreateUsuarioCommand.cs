@@ -2,7 +2,6 @@
 
 public readonly record struct CreateUsuarioCommand
 (
-    string login,
     string nome,
     string sobreNome,
     string senha,

@@ -1,68 +1,124 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Infra.Relatorios.Templates;
-using DocumentFormat.OpenXml.Drawing;
 using DocumentFormat.OpenXml.Wordprocessing;
-using Google.OpenLocationCode;
 
 namespace APIRelatorios.Infra.Relatorios.Componentes;
 
 internal class RowComponentes
 {
-    internal static DocumentFormat.OpenXml.Wordprocessing.Table CriarTabela(IEnumerable<DadosRelatorioDTO> relatorioDTOs)
+    internal static Table CriarTabela(
+        IEnumerable<DadosRelatorioDTO> relatorioDTOs)
     {
-        var table = new DocumentFormat.OpenXml.Wordprocessing.Table(
-            new DocumentFormat.OpenXml.Wordprocessing.TableProperties(
-                    new TableWidth
+        var table = new Table(
+            new TableProperties(
+                new TableWidth
+                {
+                    Type = TableWidthUnitValues.Dxa,
+                    Width = "9170"
+                },
+
+                new TableLayout
+                {
+                    Type = TableLayoutValues.Fixed
+                },
+
+                new TableBorders(
+                    new TopBorder
                     {
-                        Type = TableWidthUnitValues.Dxa,
-                        Width = "9170"
+                        Val = BorderValues.Single,
+                        Size = 4
                     },
-                    new TableLayout
+
+                    new BottomBorder
                     {
-                        Type = TableLayoutValues.Fixed
+                        Val = BorderValues.Single,
+                        Size = 4
                     },
-                    new DocumentFormat.OpenXml.Wordprocessing.TableBorders(
-                    new DocumentFormat.OpenXml.Wordprocessing.TopBorder { Val = BorderValues.Single, Size = 4 },
-                    new DocumentFormat.OpenXml.Wordprocessing.BottomBorder { Val = BorderValues.Single, Size = 4 },
-                    new DocumentFormat.OpenXml.Wordprocessing.LeftBorder { Val = BorderValues.Single, Size = 4 },
-                    new DocumentFormat.OpenXml.Wordprocessing.RightBorder { Val = BorderValues.Single, Size = 4 },
-                    new DocumentFormat.OpenXml.Wordprocessing.InsideHorizontalBorder { Val = BorderValues.Single, Size = 4 },
-                    new DocumentFormat.OpenXml.Wordprocessing.InsideVerticalBorder { Val = BorderValues.Single, Size = 4 }
-                )   
+
+                    new LeftBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new RightBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new InsideHorizontalBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new InsideVerticalBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    }
+                )
             )
         );
+
         table.AppendChild(
-        new DocumentFormat.OpenXml.Wordprocessing.TableGrid(
-        new DocumentFormat.OpenXml.Wordprocessing.GridColumn { Width = "1130" }, // Item
-        new DocumentFormat.OpenXml.Wordprocessing.GridColumn { Width = "5670" }, // Descrição
-        new DocumentFormat.OpenXml.Wordprocessing.GridColumn { Width = "1930" }  // Fotos
-    )
-);
+            new TableGrid(
+                new GridColumn { Width = "1130" },
+                new GridColumn { Width = "5670" },
+                new GridColumn { Width = "1930" }
+            )
+        );
 
         table.Append(
-        new DocumentFormat.OpenXml.Wordprocessing.TableRow(
-
-            TitleRowComponents.TextoTitulo("Item"),
-            TitleRowComponents.TextoTitulo("Descrição da Irregularidade"),
-            TitleRowComponents.TextoTitulo("Fotos Ilustrativas")
-        )
-    );
+            new TableRow(
+                TitleRowComponents.TextoTitulo("Item"),
+                TitleRowComponents.TextoTitulo("Descrição da Irregularidade"),
+                TitleRowComponents.TextoTitulo("Fotos Ilustrativas")
+            )
+        );
 
         int indice = 0;
 
-        var tabelaAgrupada = relatorioDTOs.GroupBy(x => x.NumeroImagem)
-                                                    .Select(x => x.First())
-                                                    .ToList();
+        var tabelaAgrupada = relatorioDTOs
+            .GroupBy(x => x.NumeroImagem)
+            .Select(x => x.First())
+            .ToList();
 
         foreach (var item in tabelaAgrupada)
         {
             indice++;
 
+            var descricao = string.Join(
+                ", ",
+                new[]
+                {
+                    item.Dsc,
+                    item.Identificação,
+                    item.Localização
+                }
+                .Where(x => !string.IsNullOrWhiteSpace(x))
+            );
+
             table.Append(
-                new DocumentFormat.OpenXml.Wordprocessing.TableRow(
-                    CellComponentes.Texto(indice.ToString(), "", negritoTexto1: true),
-                    CellComponentes.Texto(item.Alimentador ,$" - {item.Dsc + ","} {item.Identificação + ","}, {item.Localização + ","} ", negritoTexto1: true),
-                    CellComponentes.Texto(item.NumeroImagem,"", negritoTexto1: true)
+                new TableRow(
+                    CellComponentes.Texto(
+                        indice.ToString(),
+                        "",
+                        negritoTexto1: true
+                    ),
+
+                    CellComponentes.Texto(
+                        item.Alimentador ?? "",
+                        descricao,
+                        negritoTexto1: true
+                    ),
+
+                    CellComponentes.Texto(
+                        item.NumeroImagem ?? "",
+                        "",
+                        negritoTexto1: true
+                    )
                 )
             );
         }

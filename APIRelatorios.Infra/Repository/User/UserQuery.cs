@@ -19,6 +19,13 @@ public class UserQuery : IUserQuery
                                                                        .Contains(nome.ToUpper()));
     }
 
+    public async Task<List<Dommain.Entities.User>> BuscarTodosFiscalLogin(string login)
+    {
+        return await _context.Fiscais.Where(x => x.Login.ToUpper()
+                                                                .Contains(login.ToUpper()))
+                                                                .ToListAsync();
+    }
+
     public async Task<Dommain.Entities.User> BuscarFiscalLogin(string login)
     {
         return await _context.Fiscais.FirstOrDefaultAsync(x => x.Login == login);

@@ -43,7 +43,7 @@ public class SavedImage : ISavedImages
         var safeAlimentador = Sanitize(alimentador);
         var safeFiscal = Sanitize(fiscal);
 
-        var fileName = $"{safeAlimentador}_{safeFiscal}_{safeHorario}_{pluscode}_{qualidade}_{index}.jpg";
+        var fileName = $"{safeAlimentador}_{safeFiscal}_{safeHorario}_{pluscode}_{qualidade}_{index}_{Guid.NewGuid()}.jpg";
 
         var cleanedBase64 = CleanBase64(base64Image);
         var imageBytes = Convert.FromBase64String(cleanedBase64);
@@ -66,6 +66,7 @@ public class SavedImage : ISavedImages
         string horario,
         List<string> base64Images,
         string container,
+        string rua,
         Guid evidenciaId,
         double lat,
         double log)
@@ -86,25 +87,21 @@ public class SavedImage : ISavedImages
                 originalBytes,
                 alimentador,
                 $"Lat: {lat}, Long: {log}",
+                rua,
                 horario
             );
 
-            byte[] imageLow = RedimensionarImagem(imageWithText, 190, 100);
-            byte[] imageMedium = RedimensionarImagem(imageWithText, 800, 75);
+            byte[] imageLow = RedimensionarImagem(imageWithText, 300, 100);
 
             var urlLow = await UploadBase64ImagesAsync(
                 alimentador, fiscal, horario, plusCode,
                 Convert.ToBase64String(imageLow), container, "low", index);
 
-            var urlMedium = await UploadBase64ImagesAsync(
-                alimentador, fiscal, horario, plusCode,
-                Convert.ToBase64String(imageMedium), container, "medium", index);
-
             var urlOriginal = await UploadBase64ImagesAsync(
                 alimentador, fiscal, horario, plusCode,
                 Convert.ToBase64String(imageWithText), container, "original", index);
 
-            images.Add(new ImageData(urlOriginal, urlMedium, urlLow, evidenciaId));
+            images.Add(new ImageData(urlOriginal, urlLow, evidenciaId));
         }
 
         return images;
@@ -131,7 +128,7 @@ public class SavedImage : ISavedImages
 
         return data.ToArray();
     }
-    private byte[] AdicionaTexto(byte[] imageBytes, string linha1, string linha2, string linha3)
+    private byte[] AdicionaTexto(byte[] imageBytes, string linha1, string linha2, string linha3,string linha4)
     {
         using var inputStream = new MemoryStream(imageBytes);
         using var original = SKBitmap.Decode(inputStream);
@@ -164,7 +161,7 @@ public class SavedImage : ISavedImages
         float x = 20;
         float lineHeight = textSize + 10;
 
-        string[] linhas = { linha1, linha2, linha3 };
+        string[] linhas = { linha1, linha2, linha3, linha4 };
 
         float yBase = original.Height - (lineHeight * linhas.Length);
 

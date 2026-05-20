@@ -137,7 +137,8 @@ public static class DependencyInjection
 
         services.AddScoped<IRelatorioDeIrregularidades, RelatorioDeIrregulariedades>();
 
-        services.AddScoped<IBuscarByteImagemService, BuscarByteImagemService>();
+        services.AddHttpClient<IBuscarByteImagemService, BuscarByteImagemService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5));
 
         services.AddScoped<IValidateBase64, ValidateBase64>();
 

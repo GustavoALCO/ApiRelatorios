@@ -19,6 +19,7 @@ public interface ISavedImages
         string horario,
         List<string> base64Images,
         string container,
+        string rua,
         Guid evidenciaId,
         double lat,
         double log

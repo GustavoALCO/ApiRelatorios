@@ -1,4 +1,4 @@
-﻿using APIRelatorios.Dommain.Enuns;
+﻿using APIRelatorios.Dommain.Entities;
 
 namespace APIRelatorios.Application.Contracts.DTOs;
 
@@ -23,7 +23,7 @@ public readonly record struct DadosRelatorioDTO
     string NumeroImagem,
 
     // Enum para o Tema para atribuir as listas 
-    TemaFiscalizacao Tema,
+    CheckList Tema,
 
     double Lat,
 

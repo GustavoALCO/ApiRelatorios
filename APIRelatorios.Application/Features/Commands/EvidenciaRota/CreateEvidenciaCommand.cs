@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Enuns;
+﻿using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Features.Commands.Images;
 
@@ -10,7 +11,9 @@ Guid rotaID,
 
 int fiscalId,
 
-TemaFiscalizacao TemaFiscalizacao,
+int temaFiscalizacao,
+
+List<int> subTemaFiscalizacao,
 
 string? Identificacao,
 

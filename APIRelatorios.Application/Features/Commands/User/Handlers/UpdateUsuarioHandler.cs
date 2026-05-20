@@ -29,9 +29,9 @@ public class UpdateUsuarioHandler
         if (!string.IsNullOrEmpty(alterUser.login))
             user.UpdateLogin(alterUser.login);
 
-        if (!string.IsNullOrEmpty(alterUser.nome) || !string.IsNullOrEmpty(alterUser.sobreNome))
+        if (!string.IsNullOrEmpty(alterUser.nome) || !string.IsNullOrEmpty(alterUser.sobrenome))
             user.UpdateName(alterUser.nome,
-                            alterUser.sobreNome);
+                            alterUser.sobrenome);
 
         if(alterUser.isAdmin != null)
             user.AlterAdmin(alterUser.isAdmin);

@@ -21,7 +21,6 @@ public class CreateRotaValidate : AbstractValidator<CreateRotaCommand>
             .NotNull().WithMessage("É necessario passar pelo menos um id de fiscal");
 
         RuleFor(x => x.Concessionarias)
-            .NotEmpty().WithMessage("É necessario passar uma Concessionaria")
             .NotNull().WithMessage("É necessario passar uma Concessionaria");
 
     }

@@ -21,9 +21,7 @@ internal static class ImageCellComponentes
         if (imageBytes == null || imageBytes.Length == 0)
             return new TableCell(new Paragraph());
 
-        var imageType = DetectImageType(imageBytes);
-
-        var imagePart = ctx.MainPart.AddImagePart(imageType);
+        var imagePart = ctx.MainPart.AddImagePart(ImagePartType.Png);
 
         using (var stream = new MemoryStream(imageBytes))
             imagePart.FeedData(stream);
@@ -106,28 +104,5 @@ internal static class ImageCellComponentes
                 new Run(drawing)
             )
         );
-    }
-
-    private static ImagePartType DetectImageType(byte[] bytes)
-    {
-        if (bytes.Length > 4 &&
-            bytes[0] == 0x89 &&
-            bytes[1] == 0x50 &&
-            bytes[2] == 0x4E &&
-            bytes[3] == 0x47)
-            return ImagePartType.Png;
-
-        if (bytes.Length > 2 &&
-            bytes[0] == 0xFF &&
-            bytes[1] == 0xD8)
-            return ImagePartType.Jpeg;
-
-        if (bytes.Length > 3 &&
-            bytes[0] == 0x47 &&
-            bytes[1] == 0x49 &&
-            bytes[2] == 0x46)
-            return ImagePartType.Gif;
-
-        throw new InvalidOperationException("Formato de imagem não suportado. Erro no ImageCell");
     }
 }

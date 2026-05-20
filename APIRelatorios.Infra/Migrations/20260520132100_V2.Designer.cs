@@ -12,18 +12,44 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    [Migration("20260414125049_V1")]
-    partial class V1
+    [Migration("20260520132100_V2")]
+    partial class V2
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "10.0.2")
+                .HasAnnotation("ProductVersion", "10.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
+
+            modelBuilder.Entity("APIRelatorios.Dommain.Entities.CheckList", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<Guid>("EvidenciaRotaId")
+                        .HasColumnType("uuid");
+
+                    b.Property<int[]>("SubTemaAlimentadores")
+                        .IsRequired()
+                        .HasColumnType("integer[]");
+
+                    b.Property<int>("TemaCheck")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("EvidenciaRotaId")
+                        .IsUnique();
+
+                    b.ToTable("CheckList");
+                });
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>
                 {
@@ -35,6 +61,7 @@ namespace APIRelatorios.Infra.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Cidade")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("Descricao")
@@ -56,6 +83,9 @@ namespace APIRelatorios.Infra.Migrations
                     b.Property<string>("Identificacão")
                         .HasColumnType("text");
 
+                    b.Property<bool>("IsValid")
+                        .HasColumnType("boolean");
+
                     b.Property<double>("Latitude")
                         .HasColumnType("double precision");
 
@@ -64,9 +94,6 @@ namespace APIRelatorios.Infra.Migrations
 
                     b.Property<Guid>("RotaId")
                         .HasColumnType("uuid");
-
-                    b.Property<int>("TemaFiscalizacao")
-                        .HasColumnType("integer");
 
                     b.HasKey("EvidenciaRotaId");
 
@@ -87,10 +114,6 @@ namespace APIRelatorios.Infra.Migrations
                         .HasColumnType("uuid");
 
                     b.Property<string>("LowUrl")
-                        .IsRequired()
-                        .HasColumnType("text");
-
-                    b.Property<string>("MediumUrl")
                         .IsRequired()
                         .HasColumnType("text");
 
@@ -205,6 +228,17 @@ namespace APIRelatorios.Infra.Migrations
                     b.HasDiscriminator().HasValue("RotaRetorno");
                 });
 
+            modelBuilder.Entity("APIRelatorios.Dommain.Entities.CheckList", b =>
+                {
+                    b.HasOne("APIRelatorios.Dommain.Entities.EvidenciaRota", "EvidenciaRota")
+                        .WithOne("CheckList")
+                        .HasForeignKey("APIRelatorios.Dommain.Entities.CheckList", "EvidenciaRotaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("EvidenciaRota");
+                });
+
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>
                 {
                     b.HasOne("APIRelatorios.Dommain.Entities.Rota", "Rota")
@@ -248,6 +282,9 @@ namespace APIRelatorios.Infra.Migrations
 
             modelBuilder.Entity("APIRelatorios.Dommain.Entities.EvidenciaRota", b =>
                 {
+                    b.Navigation("CheckList")
+                        .IsRequired();
+
                     b.Navigation("Images");
                 });
 

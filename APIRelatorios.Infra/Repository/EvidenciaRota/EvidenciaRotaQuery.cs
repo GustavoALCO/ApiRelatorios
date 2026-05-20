@@ -2,9 +2,7 @@
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Exeptions;
-using DocumentFormat.OpenXml.Drawing.Spreadsheet;
 using Microsoft.EntityFrameworkCore;
-using System.Data.Common;
 
 namespace APIRelatorios.Infra.Repository.Images;
 
@@ -19,18 +17,24 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
 
     public async Task<EvidenciaRota> GetEvidenciaId(Guid imageId)
     {
-       
-        var image = await _Context.EvidenciaRota.FirstOrDefaultAsync(i => i.EvidenciaRotaId == imageId);
+        try
+        {
+            var image = await _Context.EvidenciaRota.Include(x => x.CheckList).FirstOrDefaultAsync(i => i.EvidenciaRotaId == imageId);
 
         return image;
-        
+        }
+        catch (InvalidOperationException ex)
+        {
+            throw new RepositoryException("Erro ao buscar informações da imagem no banco de dados.",
+                ex);
+        }
     }
 
     public async Task<List<EvidenciaRota>> GetEvidenciaAsync(Guid RotaID)
     {
         try
         {
-            var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID)
+            var image = await _Context.EvidenciaRota.Include(x => x.CheckList).Where(i => i.RotaId == RotaID)
                 .OrderBy(x => x.Horario)
                 .ToListAsync();
 
@@ -47,7 +51,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
     {
         try
         {
-            var image = await _Context.EvidenciaRota.Where(i => i.RotaId == RotaID)
+            var image = await _Context.EvidenciaRota.Include(x => x.CheckList).Include(x => x.Images).Where(i => i.RotaId == RotaID)
                 .OrderBy(x => x.Horario)
                 .Skip((page - 1) * pagesize)
                 .Take(pagesize)
@@ -67,6 +71,7 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
         try
         {
             var image = await _Context.EvidenciaRota
+                .Include(x => x.CheckList)
                 .Include(x => x.Images)
                 .Where(i => i.RotaId == RotaID && i.Emergencial == true)
                 .OrderBy(x => x.Horario)

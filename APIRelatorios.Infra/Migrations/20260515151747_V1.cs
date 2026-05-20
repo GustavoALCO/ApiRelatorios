@@ -56,16 +56,16 @@ namespace APIRelatorios.Infra.Migrations
                     EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     FiscalId = table.Column<int>(type: "integer", nullable: false),
                     RotaId = table.Column<Guid>(type: "uuid", nullable: false),
-                    TemaFiscalizacao = table.Column<int>(type: "integer", nullable: false),
                     Alimentador = table.Column<string>(type: "text", nullable: true),
                     Identificacão = table.Column<string>(type: "text", nullable: true),
                     Descricao = table.Column<string>(type: "text", nullable: true),
                     Endereco = table.Column<string>(type: "text", nullable: false),
-                    Cidade = table.Column<string>(type: "text", nullable: true),
+                    Cidade = table.Column<string>(type: "text", nullable: false),
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
                     Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Emergencial = table.Column<bool>(type: "boolean", nullable: false)
+                    Emergencial = table.Column<bool>(type: "boolean", nullable: false),
+                    IsValid = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,6 +103,27 @@ namespace APIRelatorios.Infra.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "CheckList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    TemaCheck = table.Column<int>(type: "integer", nullable: false),
+                    SubTemaAlimentadores = table.Column<int[]>(type: "integer[]", nullable: false),
+                    EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_CheckList_EvidenciaRota_EvidenciaRotaId",
+                        column: x => x.EvidenciaRotaId,
+                        principalTable: "EvidenciaRota",
+                        principalColumn: "EvidenciaRotaId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Images",
                 columns: table => new
                 {
@@ -125,6 +146,12 @@ namespace APIRelatorios.Infra.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_CheckList_EvidenciaRotaId",
+                table: "CheckList",
+                column: "EvidenciaRotaId",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_EvidenciaRota_RotaId",
                 table: "EvidenciaRota",
                 column: "RotaId");
@@ -143,6 +170,9 @@ namespace APIRelatorios.Infra.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "CheckList");
+
             migrationBuilder.DropTable(
                 name: "Images");
 

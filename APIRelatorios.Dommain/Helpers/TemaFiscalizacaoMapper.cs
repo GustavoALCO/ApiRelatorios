@@ -1,29 +1,46 @@
-﻿using APIRelatorios.Dommain.Enuns;
+using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Dommain.Helpers;
-
-public static class TemaFiscalizacaoMapper
+public class TemaFiscalizacaoMapper
 {
-    private static readonly Dictionary<TemaFiscalizacao, string> _map =
+    private static readonly Dictionary<TemaCheck, (int Min, int Max)> _regras =
         new()
         {
-            { TemaFiscalizacao.Vegetacao, "Vegetação ao Alcance da Rede" },
-            { TemaFiscalizacao.PostesDanificados, "Poste Danificado" },
-            { TemaFiscalizacao.PostesDesalinhados, "Postes Desalinhados ou Fora de Prumo" },
-            { TemaFiscalizacao.RedeComCondutoresDesivelados, "Rede com Condutores Desnivelados, Soltos ou com Espaçamentos Inadequados" },
-            { TemaFiscalizacao.CruzetasDanificadas, "Cruzetas Danificadas ou Fora de Posição" },
-            { TemaFiscalizacao.CruzetasForaDePosicao, "Cruzetas Fora de Posição da Bissetriz" },
-            { TemaFiscalizacao.IsoladoresTipoPinoDesalinhados, "Isoladores Tipo Pino Desalinhados, Soltos ou Fletidos" },
-            { TemaFiscalizacao.TransformadorComOxidacao, "Transformador com Oxidação, Corrosão ou Vazamento de Óleo" },
-            { TemaFiscalizacao.InstalacaoDeEquipamentoSemUso, "Instalação de Equipamento sem Uso/Inativo" },
-            { TemaFiscalizacao.ParaRaiosDanificados, "Para-raios Danificados, Ausentes ou Atuados" },
-            { TemaFiscalizacao.EquipamentoSemIdentificacao, "Equipamento sem Identificação do Número Operativo" },
-            { TemaFiscalizacao.Subestacao, "DIGITAR A SUBESTAÇÃO" },
-            { TemaFiscalizacao.Diversos, "Diversos" }
+            { TemaCheck.Postes, (0, 4) },
+            { TemaCheck.Compartilhamento, (5, 11) },
+            { TemaCheck.EstruturasFerragens, (12, 14) },
+            { TemaCheck.Isoladores, (15, 16) },
+            { TemaCheck.Condutores, (17, 19) },
+            { TemaCheck.Aterramento, (20, 21) },
+            { TemaCheck.Transformadores, (22, 25) },
+            { TemaCheck.ChavesReligadores, (26, 28) },
+            { TemaCheck.ParaRaios, (29, 31) },
+            { TemaCheck.IluminacaoPublica, (32, 35) },
+            { TemaCheck.Vegetacao, (36, 37) },
+            { TemaCheck.Seguranca, (38, 40) },
+            { TemaCheck.Outros, (41, 41) }
         };
 
-    public static string ToDescricao(this TemaFiscalizacao tema)
-        => _map.TryGetValue(tema, out var desc)
-            ? desc
-            : throw new Exception("");
+    public static bool ValidarSubTemas(
+        TemaCheck tema,
+        IEnumerable<SubTemaAlimentadores> subTemas)
+    {
+        if (!_regras.TryGetValue(tema, out var faixa))
+            return false;
+
+        return subTemas.All(subtema =>
+            (int)subtema >= faixa.Min &&
+            (int)subtema <= faixa.Max);
+    }
+
+    public static string ObterMensagem(
+        TemaCheck tema)
+    {
+        if (!_regras.TryGetValue(tema, out var faixa))
+            return "Tema inválido.";
+
+        return
+            $"Os subtemas permitidos para {tema} são de {faixa.Min} até {faixa.Max}.";
+    }
 }
+

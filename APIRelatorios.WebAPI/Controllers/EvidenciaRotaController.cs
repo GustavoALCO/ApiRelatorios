@@ -21,13 +21,16 @@ public class EvidenciaRotaController : ControllerBase
 
     private readonly BuscarEvidenciaPorIdHandler _buscarId;
 
-    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateEvidenciaHandler createImageHandler, BuscarTodasAsEvidenciasRotaHandler buscarEvidencias, BuscarEvidenciaPorIdHandler buscarId)
+    private readonly ILogger<EvidenciaRotaController> _logger;
+
+    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateEvidenciaHandler createImageHandler, BuscarTodasAsEvidenciasRotaHandler buscarEvidencias, BuscarEvidenciaPorIdHandler buscarId, ILogger<EvidenciaRotaController> logger)
     {
         _updateDescricaoImageHandler = updateDescricaoImageHandler;
         _deleteImageHandler = deleteImageHandler;
         _createImageHandler = createImageHandler;
         _buscarEvidencias = buscarEvidencias;
         _buscarId = buscarId;
+        _logger = logger;
     }
 
     [Authorize]
@@ -58,6 +61,7 @@ public class EvidenciaRotaController : ControllerBase
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Erro ao buscar todas as evidencias da rota com ID {RotaID}", commands.IdRota);
             return BadRequest(ex.Message);
         }
     }

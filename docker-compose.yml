@@ -19,6 +19,13 @@ services:
       ConnectionStrings__Password: Teste123
     expose:
       - "8080"
+
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+    restart: unless-stopped
+
     networks:
       - backend
 
@@ -28,6 +35,13 @@ services:
       dockerfile: Dockerfile
     expose:
       - "8000"
+
+    dns:
+      - 8.8.8.8
+      - 1.1.1.1
+
+    restart: unless-stopped
+
     networks:
       - backend
 
@@ -39,6 +53,9 @@ services:
       POSTGRES_PASSWORD: Teste123
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+    restart: unless-stopped
+
     networks:
       - backend
 
@@ -53,6 +70,9 @@ services:
       - ./certs:/etc/nginx/certs
     depends_on:
       - apirelatorios.webapi
+
+    restart: unless-stopped
+
     networks:
       - frontend
       - backend

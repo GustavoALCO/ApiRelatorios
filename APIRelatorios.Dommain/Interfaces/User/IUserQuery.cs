@@ -11,4 +11,6 @@ public interface IUserQuery
     Task<ICollection<Entities.User>> BuscarListaFiscalIds(ICollection<int> idFiscal);
 
     Task<Dommain.Entities.User> BuscarFiscalId(int idFiscal);
+
+    Task<List<Dommain.Entities.User>> BuscarTodosFiscalLogin(string login);
 }

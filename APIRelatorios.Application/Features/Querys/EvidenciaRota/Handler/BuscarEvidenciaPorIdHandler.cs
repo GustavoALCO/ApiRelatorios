@@ -32,13 +32,11 @@ public class BuscarEvidenciaPorIdHandler
         var images = await _imagesquery.GetImageEvidencia(evidencias.EvidenciaRotaId) ?? throw new Exception("Não há imagens declaradas nesta evidencia");
 
         List<string> imageOriginal = new();
-        List<string> imageMedium = new();
         List<string> imageLow = new();
 
         foreach (var image in images)
         {
             imageOriginal.Add(image.OriginalUrl);
-            imageMedium.Add(image.MediumUrl);
             imageLow.Add(image.LowUrl);
         }
 
@@ -51,11 +49,11 @@ public class BuscarEvidenciaPorIdHandler
             Endereco = evidencias.Endereco,
             Horario = evidencias.Horario,
             ImageURL = imageOriginal,
-            MediumImageUrl = imageMedium,
             LowImageUrl = imageLow,
             Identificacao = evidencias.Identificacão,
             NomeFiscal = $"{fiscal.Name} {fiscal.LastName}",
-            TemaFiscalizacao = ((int)evidencias.TemaFiscalizacao),
+            subTemaFiscalizacao = evidencias.CheckList.SubTemaAlimentadores.ToList(),
+            temaFiscalizacao = evidencias.CheckList.TemaCheck,
             Latitude = evidencias.Latitude,
             Longitude = evidencias.Longitude,
         };

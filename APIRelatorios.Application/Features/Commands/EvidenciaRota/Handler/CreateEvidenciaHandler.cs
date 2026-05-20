@@ -1,6 +1,8 @@
 ﻿using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Enuns;
+using APIRelatorios.Dommain.Helpers;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
@@ -38,6 +40,8 @@ public class CreateEvidenciaHandler
     public async Task Handler(CreateEvidenciaCommand createImage)
     {
 
+        _logger.LogInformation("Iniciando processo de criação de evidencia para a rota");
+
         var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) ?? throw new Exception("Erro ao Encontrar Rota");
 
         var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) ?? throw new Exception("Erro ao encontrar filcal");
@@ -45,8 +49,12 @@ public class CreateEvidenciaHandler
         if (rota.DataFinal != null)
             throw new Exception("Rota Já finalizada.");
 
+        _logger.LogInformation("Rota Encontrada, iniciando processo de criação da evidencia");
+
         if(string.IsNullOrEmpty(createImage.Alimentador))
             createImage.Alimentador = rota.Alimentador;
+
+        _logger.LogInformation("Alimentador atribuido, iniciando processo de validação de endereço e cidade");
 
         if (string.IsNullOrEmpty(createImage.Cidade) || string.IsNullOrEmpty(createImage.Endereco))
         {
@@ -68,12 +76,14 @@ public class CreateEvidenciaHandler
                 
         }
         
+        _logger.LogInformation("Endereço e Cidade validados, iniciando processo de upload da imagem");
 
         var urlImages = await _uploadImage.UploadListBase64ImagesAsync(alimentador: createImage.Alimentador,
                                                                        fiscal: $"{fiscais.Name}_{fiscais.LastName}",
                                                                        horario: createImage.Horario.AddHours(-3).ToString("yyyy/MM/dd HH:mm"),
                                                                        base64Images: createImage.Base64,
-                                                                       container: "images",
+                                                                       container: "testes",
+                                                                       rua: createImage.Endereco,
                                                                        evidenciaId: createImage.evidenciaId,
                                                                        lat: createImage.Latitude,
                                                                        log: createImage.Longitude);
@@ -84,11 +94,22 @@ public class CreateEvidenciaHandler
             throw new Exception("Erro ao fazer upload da imagem");
         }
 
+        _logger.LogInformation("Imagem salva com sucesso, iniciando processo de criação da entidade de evidencia");
+
+        // Cria Classe de checklist para salvar o tema e subtema da fiscalização
+        CheckList checkList = new CheckList(
+            createImage.evidenciaId,
+            (TemaCheck)createImage.temaFiscalizacao,
+            createImage.subTemaFiscalizacao
+                .Select(x => (SubTemaAlimentadores)x)
+                .ToList()
+        );
+        
         Dommain.Entities.EvidenciaRota image = new(
             evidenciaRotaId: createImage.evidenciaId,
             rotaID: createImage.rotaID,
             fiscalId: createImage.fiscalId
-            ,tema: createImage.TemaFiscalizacao
+            ,checkList: checkList
             ,alimentador: createImage.Alimentador 
             ,identificacao: createImage.Identificacao
             ,descricao: createImage.Descricao
@@ -102,5 +123,7 @@ public class CreateEvidenciaHandler
             );
         
         await _commands.SaveImage(image);
+
+        _logger.LogInformation("Evidencia criada com sucesso");
     }
 }

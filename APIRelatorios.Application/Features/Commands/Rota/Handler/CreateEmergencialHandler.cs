@@ -44,7 +44,7 @@ public class CreateEmergencialHandler
 
             foreach (var image in evi.Images)
             {
-                imagesMedium.Add(image.MediumUrl);
+                imagesMedium.Add(image.OriginalUrl);
             }
 
             EvidenciaDocs docx = new EvidenciaDocs

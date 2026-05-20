@@ -11,7 +11,9 @@ public class EvidenciaDTO
 
     public string NomeFiscal { get;  set; }
 
-    public int TemaFiscalizacao { get;  set; }
+    public TemaCheck temaFiscalizacao { get;  set; }
+
+    public List<SubTemaAlimentadores> subTemaFiscalizacao { get;  set; }
 
     public string? Alimentador { get;  set; }
 
@@ -20,8 +22,6 @@ public class EvidenciaDTO
     public string? Descricao { get;  set; }
 
     public List<string> ImageURL { get;  set; }
-
-    public List<string> MediumImageUrl { get; set; }
 
     public List<string> LowImageUrl { get; set; }
 

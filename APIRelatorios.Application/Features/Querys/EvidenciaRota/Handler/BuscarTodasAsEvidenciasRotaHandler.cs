@@ -53,7 +53,6 @@ public class BuscarTodasAsEvidenciasRotaHandler
             foreach (var image in images)
             {
                 imageOriginal.Add(image.OriginalUrl);
-                imageMedium.Add(image.MediumUrl);
                 imageLow.Add(image.LowUrl);
             }
 
@@ -68,11 +67,11 @@ public class BuscarTodasAsEvidenciasRotaHandler
                 Cidade = evidencias.Cidade,
                 Horario = evidencias.Horario,
                 ImageURL = imageOriginal,
-                MediumImageUrl = imageMedium,
                 LowImageUrl = imageLow,
                 Identificacao = evidencias.Identificacão,
                 NomeFiscal = $"{fiscal.Name} {fiscal.LastName}",
-                TemaFiscalizacao = ((int)evidencias.TemaFiscalizacao),
+                subTemaFiscalizacao = evidencias.CheckList.SubTemaAlimentadores,
+                temaFiscalizacao = evidencias.CheckList.TemaCheck,
                 Latitude = evidencias.Latitude,
                 Longitude = evidencias.Longitude,
                 Emergencial = evidencias.Emergencial
