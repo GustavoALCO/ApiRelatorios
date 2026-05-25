@@ -1,9 +1,12 @@
-﻿using APIRelatorios.Application.Contracts.DTOs;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Application.Features.Queries.User;
 using APIRelatorios.Dommain.Interfaces.User;
 
 namespace APIRelatorios.Application.Features.Querys.User.Handler;
 
 public class BuscarTodosUsuariosHandler
+    : IQueryHandler<BuscarTodosusuariosQuery, ICollection<UsuarioDTO>>
 {
     private readonly IUserQuery _query;
 
@@ -12,9 +15,9 @@ public class BuscarTodosUsuariosHandler
         _query = query;
     }
 
-    public async Task<ICollection<UsuarioDTO>> Handler()
+    public async Task<ICollection<UsuarioDTO>> Handle(BuscarTodosusuariosQuery query, CancellationToken cancellationToken)
     {
-        var fiscais = await _query.BuscarTodosFiscais() ?? throw new Exception("Não Existe Fiscais");
+        var fiscais = await _query.BuscarTodosFiscais() ?? throw new Exception("Não Existe Fiscais Cadastrados");
 
         ICollection<UsuarioDTO> fiscaisDTO = [];
 

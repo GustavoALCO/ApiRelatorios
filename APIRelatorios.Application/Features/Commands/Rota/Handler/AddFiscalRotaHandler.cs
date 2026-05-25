@@ -1,11 +1,13 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
-public class AddFiscalRotaHandler
+public sealed class AddFiscalRotaHandler
+        : ICommandHandler<AddFiscalRotaCommand>
 {
     private readonly IRotaQuery _query;
 
@@ -22,7 +24,7 @@ public class AddFiscalRotaHandler
         _validateids = validateids;
         _logger = logger;
     }
-    public async Task Handler(AddFiscalRotaCommand add)
+    public async Task Handle(AddFiscalRotaCommand add, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Fazendo verificação a lista de fiscais é valida");
         foreach (var fiscais in add.FiscaisId)

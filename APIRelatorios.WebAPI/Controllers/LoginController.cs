@@ -1,5 +1,5 @@
-﻿using APIRelatorios.Application.Features.Commands.User;
-using APIRelatorios.Application.Features.Commands.User.Handlers;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Features.Commands.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,19 +9,20 @@ namespace APIRelatorios.WebAPI.Controllers;
 [Route("login")]
 public class LoginController : ControllerBase
 {
-    private readonly LoginHandler _loginHandler;
+    private readonly IDispatcher _dispatcher;
 
-    public LoginController(LoginHandler loginHandler)
+    public LoginController(IDispatcher dispatcher)
     {
-        _loginHandler = loginHandler;
+        _dispatcher = dispatcher;
     }
+    
 
     [HttpPost]
     public async Task<IActionResult> login(LoginCommandsCommand login)
     {
         try
         {
-            var jwt = await _loginHandler.Handler(login);
+            var jwt = await _dispatcher.Send<LoginCommandsCommand, string>(login);
 
             return Ok(jwt);
         }

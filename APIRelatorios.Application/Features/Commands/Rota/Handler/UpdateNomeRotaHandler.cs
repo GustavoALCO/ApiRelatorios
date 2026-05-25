@@ -1,10 +1,12 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
 public class UpdateNomeRotaHandler
+    : ICommandHandler<UpdateNomeRotaCommand>
 {
     private readonly IRotaQuery _query;
 
@@ -19,7 +21,7 @@ public class UpdateNomeRotaHandler
         _validateIds = validateIds;
     }
 
-    public async Task Handler(UpdateNomeRotaCommand updNome)
+    public async Task Handle(UpdateNomeRotaCommand updNome, CancellationToken cancellationToken)
     {
         if (await _validateIds.RotaExisteAsync(updNome.rotaId) is false)
             throw new Exception("Id invalido");

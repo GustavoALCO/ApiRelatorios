@@ -1,10 +1,12 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Services;
 using APIRelatorios.Dommain.Interfaces.User;
 
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
 public class DeleteUsuarioHandler
+        : ICommandHandler<DeleteUsuarioCommand>
 {
     private readonly IUserCommands _commands;
 
@@ -19,7 +21,7 @@ public class DeleteUsuarioHandler
         _commands = commands;
     }
 
-    public async Task Handler(DeleteUsuarioCommand dltuser)
+    public async Task Handle(DeleteUsuarioCommand dltuser, CancellationToken cancellationToken)
     {
         if (await _validateIds.UserExisteAsync(dltuser.idUser) is false)
             throw new Exception("Id invalido");

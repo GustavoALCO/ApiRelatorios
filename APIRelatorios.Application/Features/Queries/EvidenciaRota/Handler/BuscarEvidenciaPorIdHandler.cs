@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Contracts.DTOs;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.User;
@@ -6,6 +7,7 @@ using APIRelatorios.Dommain.Interfaces.User;
 namespace APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
 
 public class BuscarEvidenciaPorIdHandler
+    : IQueryHandler<BuscarEvidenciaPorIDQuery, EvidenciaDTO>
 {
     private readonly IEvidenciaRotaQuery _evidenciaRota;
 
@@ -20,9 +22,9 @@ public class BuscarEvidenciaPorIdHandler
         _imagesquery = imagesquery;
     }
 
-    public async Task<EvidenciaDTO> Handler(Guid commands)
+    public async Task<EvidenciaDTO> Handle(BuscarEvidenciaPorIDQuery query, CancellationToken cancellationToken)
     {
-        var evidencias = await _evidenciaRota.GetEvidenciaId(commands) ?? throw new Exception("Não existe Evidencia com esse ID");
+        var evidencias = await _evidenciaRota.GetEvidenciaId(query.IdEvidencia) ?? throw new Exception("Não existe Evidencia com esse ID");
  
         
 

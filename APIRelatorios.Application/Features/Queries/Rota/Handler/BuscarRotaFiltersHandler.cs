@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Contracts.DTOs;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
 using System.Globalization;
@@ -6,6 +7,7 @@ using System.Globalization;
 namespace APIRelatorios.Application.Features.Querys.Rota.Handler;
 
 public class BuscarRotaFiltersHandler
+    : IQueryHandler<BuscarRotaFiltersQuery, ICollection<RotaDTO>>
 {
     private readonly IRotaQuery _rotaQuery;
 
@@ -17,12 +19,8 @@ public class BuscarRotaFiltersHandler
         _userQuery = userQuery;
     }
 
-    public async Task<ICollection<RotaDTO>> Handler(BuscarRotaFiltersCommands commands)
+    public async Task<ICollection<RotaDTO>> Handle(BuscarRotaFiltersQuery commands, CancellationToken cancellationToken)
     {
-        //valida se o numero e o tamnho da pagina é maior que 0 
-        var page = commands.page <= 0 ? 1 : commands.page;
-        var pagesize = commands.pagesize <= 0 ? 1 : commands.pagesize;
-
         //valida se o fiscal é existente
         var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new Exception("Fiscal Invalido");
 
@@ -85,7 +83,7 @@ public class BuscarRotaFiltersHandler
             
         }
 
-        var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, page, pagesize);
+        var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, commands.page, commands.pagesize);
 
         List<RotaDTO> filtersdto = new();
 

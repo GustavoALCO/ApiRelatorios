@@ -1,5 +1,8 @@
-﻿using APIRelatorios.Application.Features.Commands.User;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Application.Features.Commands.User;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
+using APIRelatorios.Application.Features.Queries.User;
 using APIRelatorios.Application.Features.Querys.User;
 using APIRelatorios.Application.Features.Querys.User.Handler;
 using Microsoft.AspNetCore.Authorization;
@@ -11,24 +14,12 @@ namespace APIRelatorios.WebAPI.Controllers;
 [Route("Fiscais")]
 public class FiscalController : ControllerBase
 {
-    private readonly CreateUserHandler _createHandler;
 
-    private readonly UpdateUsuarioHandler _updateUser;
+    private readonly IDispatcher _dispatcher;
 
-    private readonly UpdatePasswordHandler _updatePassword;
-
-    private readonly DeleteUsuarioHandler _deletehandler;
-
-
-    private readonly BuscarTodosUsuariosHandler _buscarTodosUsuariosHandler;
-
-    public FiscalController(CreateUserHandler createHandler, DeleteUsuarioHandler deletehandler, UpdateUsuarioHandler updateUser, BuscarTodosUsuariosHandler buscarTodosUsuariosHandler, UpdatePasswordHandler updatePassword)
+    public FiscalController(IDispatcher dispatcher)
     {
-        _createHandler = createHandler;
-        _deletehandler = deletehandler;
-        _updateUser = updateUser;
-        _buscarTodosUsuariosHandler = buscarTodosUsuariosHandler;
-        _updatePassword = updatePassword;
+        _dispatcher = dispatcher;
     }
 
     [Authorize]
@@ -37,7 +28,7 @@ public class FiscalController : ControllerBase
     {
         try
         {
-            var fiscal = await _buscarTodosUsuariosHandler.Handler();
+            var fiscal = await _dispatcher.Query<BuscarTodosusuariosQuery, ICollection<UsuarioDTO>>(new BuscarTodosusuariosQuery());
 
             return Ok(fiscal);
         }
@@ -53,7 +44,7 @@ public class FiscalController : ControllerBase
     {
         try
         {
-            await _createHandler.Handler(createuser);
+            await _dispatcher.Send<CreateUsuarioCommand>(createuser);
 
             return Ok();
         }
@@ -69,7 +60,7 @@ public class FiscalController : ControllerBase
     {
         try
         {
-            await _updateUser.Handler(upduser);
+            await _dispatcher.Send<AlterarUsuarioCommand>(upduser);
             return Ok();
         }
         catch (Exception ex)
@@ -84,7 +75,7 @@ public class FiscalController : ControllerBase
     {
         try
         {
-            await _updatePassword.Handler(upduser);
+            await _dispatcher.Send<UpdatePasswordCommand>(upduser);
             return Ok();
         }
         catch (Exception ex)
@@ -99,7 +90,7 @@ public class FiscalController : ControllerBase
     {
         try
         {
-            await _deletehandler.Handler(deleteuser);
+            await _dispatcher.Send<DeleteUsuarioCommand>(deleteuser);
 
             return Ok();
         }

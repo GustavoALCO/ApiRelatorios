@@ -40,7 +40,8 @@ builder.Services.AddSwagger();
 builder.Services.AddInfra(builder.Configuration);
 builder.Services.DeclareInterfaces();
 builder.Services.DeclareInterfacesServices();
-builder.Services.DeclareHandlerAplication();
+builder.Services.AddDispatcher();
+builder.Services.RegisterHandlers();
 
 // Controllers
 builder.Services.AddControllers();

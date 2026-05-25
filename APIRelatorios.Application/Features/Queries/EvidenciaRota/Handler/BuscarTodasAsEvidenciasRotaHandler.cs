@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Contracts.DTOs;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
@@ -6,6 +7,7 @@ using APIRelatorios.Dommain.Interfaces.User;
 namespace APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
 
 public class BuscarTodasAsEvidenciasRotaHandler
+    : IQueryHandler<BuscarTodasEvidenciasRotaQuery, ICollection<EvidenciaDTO>>
 {
     private readonly IEvidenciaRotaQuery _evidenciaRota;
 
@@ -20,7 +22,7 @@ public class BuscarTodasAsEvidenciasRotaHandler
         _imagesQuery = imagesQuery;
     }
 
-    public async Task<ICollection<EvidenciaDTO>> Handler(BuscarTodasEvidenciasRotaCommands commands)
+    public async Task<ICollection<EvidenciaDTO>> Handle(BuscarTodasEvidenciasRotaQuery commands, CancellationToken cancellationToken)
     {
         var evidencia = await _evidenciaRota.GetEvidenciasPagination(commands.IdRota, commands.Page, commands.PageSize);
 

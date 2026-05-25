@@ -1,9 +1,11 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Interfaces.User;
 
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
 public class UpdateUsuarioHandler
+        : ICommandHandler<AlterarUsuarioCommand>
 {
     private readonly IUserCommands _commands;
 
@@ -18,7 +20,7 @@ public class UpdateUsuarioHandler
         _validateIds = validateIds;
     }
 
-    public async Task Handler(AlterarUsuarioCommand alterUser)
+    public async Task Handle(AlterarUsuarioCommand alterUser, CancellationToken cancellationToken)
     {
         if (await _validateIds.UserExisteAsync(alterUser.userId) is false)
             throw new Exception("Id invalido");

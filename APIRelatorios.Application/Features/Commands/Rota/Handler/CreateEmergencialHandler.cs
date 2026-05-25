@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Contracts.DTOs;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Application.Contracts.Enum;
 using APIRelatorios.Dommain.Helpers;
 using APIRelatorios.Dommain.Interfaces.Images;
@@ -8,7 +9,8 @@ using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
-public class CreateEmergencialHandler
+public class CreateEmergencialHandler 
+    : ICommandHandler<CreateEmergencialCommand, byte[]>
 {
     private readonly IRotaQuery _rotaQuery;
 
@@ -25,8 +27,7 @@ public class CreateEmergencialHandler
         _rotaQuery = rotaQuery;
         _apiDocx = apiDocx;
     }
-
-    public async Task<byte[]> Handler(CreateEmergencialCommand command)
+    public async Task<byte[]> Handle(CreateEmergencialCommand command, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Iniciando Handler de Emergencial Handler");
 

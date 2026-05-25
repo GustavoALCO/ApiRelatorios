@@ -1,9 +1,11 @@
-﻿using APIRelatorios.Dommain.Interfaces.Services;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Interfaces.Services;
 using APIRelatorios.Dommain.Interfaces.User;
 
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
 public class UpdatePasswordHandler
+        : ICommandHandler<UpdatePasswordCommand>
 {
     private readonly IPasswordHasher _passwordHasher;
 
@@ -18,7 +20,7 @@ public class UpdatePasswordHandler
         _query = query;
     }
 
-    public async Task Handler(UpdatePasswordCommand updPassword)
+    public async Task Handle(UpdatePasswordCommand updPassword, CancellationToken cancellationToken)
     {
         var user = await _query.BuscarFiscalId(updPassword.idUser)
             ?? throw new Exception("Id invalido de Usuario");

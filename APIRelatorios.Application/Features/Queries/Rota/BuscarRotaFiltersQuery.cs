@@ -1,6 +1,10 @@
-﻿namespace APIRelatorios.Application.Features.Querys.Rota;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
 
-public class BuscarRotaFiltersCommands
+namespace APIRelatorios.Application.Features.Querys.Rota;
+
+public class BuscarRotaFiltersQuery
+    : IQuery<ICollection<RotaDTO>>
 {
     public int FiscalId { get; set; }
     public string? Nome { get; set; }

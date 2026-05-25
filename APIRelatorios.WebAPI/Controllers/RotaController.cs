@@ -1,5 +1,8 @@
-﻿using APIRelatorios.Application.Features.Commands.Rota;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Application.Features.Commands.Rota;
 using APIRelatorios.Application.Features.Commands.Rota.Handler;
+using APIRelatorios.Application.Features.Queries.Rota;
 using APIRelatorios.Application.Features.Querys.Rota;
 using APIRelatorios.Application.Features.Querys.Rota.Handler;
 using Microsoft.AspNetCore.Authorization;
@@ -11,49 +14,21 @@ namespace APIRelatorios.WebAPI.Controllers;
 [Route("Rotas")]
 public class RotaController : ControllerBase
 {
-    private readonly AddFiscalRotaHandler _addFiscal;
-    private readonly CreateRotaHandler _createRota;
-    private readonly DeleteRotaHandler _deleteRota;
-    private readonly RemoveFiscalRotaHandler _rmvFiscalRota;
-    private readonly UpdateNomeRotaHandler _updateNomeRota;
-    private readonly CreateRelatorioHandler _createRelatorio;
-    private readonly BuscarRotaFiltersHandler _buscarRotaFilters;
-    private readonly BuscarRotaIdHandler _buscarRotaIdHandler;
-    private readonly CreateEmergencialHandler _createEmergencial;
-    private readonly FinalizarRotaHandler _finalizarRota;
+    private readonly IDispatcher _dispatcher;
 
-    public RotaController(
-        AddFiscalRotaHandler addFiscal,
-        CreateRotaHandler createRota,
-        DeleteRotaHandler deleteRota,
-        RemoveFiscalRotaHandler rmvFiscalRota,
-        UpdateNomeRotaHandler updateNomeRota,
-        CreateRelatorioHandler createRelatorio,
-        BuscarRotaFiltersHandler buscarRotaFilters,
-        BuscarRotaIdHandler buscarRotaIdHandler,
-        CreateEmergencialHandler createEmergencial,
-        FinalizarRotaHandler finalizarRota)
+     public RotaController(IDispatcher dispatcher)
     {
-        _addFiscal = addFiscal;
-        _createRota = createRota;
-        _deleteRota = deleteRota;
-        _rmvFiscalRota = rmvFiscalRota;
-        _updateNomeRota = updateNomeRota;
-        _createRelatorio = createRelatorio;
-        _buscarRotaFilters = buscarRotaFilters;
-        _buscarRotaIdHandler = buscarRotaIdHandler;
-        _createEmergencial = createEmergencial;
-        _finalizarRota = finalizarRota;
+        _dispatcher = dispatcher;
     }
 
     [Authorize]
     [HttpGet]
     public async Task<IActionResult> BuscarPorFiltro(
-         [FromQuery]BuscarRotaFiltersCommands command)
+         [FromQuery]BuscarRotaFiltersQuery command)
     {
         try
         {
-            var rota = await _buscarRotaFilters.Handler(command);
+            var rota = await _dispatcher.Query<BuscarRotaFiltersQuery, ICollection<RotaDTO>>(command);
             return Ok(rota);
         }
         catch (Exception ex)
@@ -65,11 +40,11 @@ public class RotaController : ControllerBase
     [Authorize]
     [HttpGet("{id}")]
     public async Task<IActionResult> BuscarPorFiltro(
-        Guid id)
+        BuscarRotaIdQuery id)
     {
         try
         {
-            var rota = await _buscarRotaIdHandler.Handler(id);
+            var rota = await _dispatcher.Query<BuscarRotaIdQuery, RotaDTO>(id);
             return Ok(rota);
         }
         catch (Exception ex)
@@ -85,7 +60,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            await _updateNomeRota.Handler(command);
+            await _dispatcher.Send<UpdateNomeRotaCommand>(command);
             return Ok();
         }
         catch (Exception)
@@ -101,7 +76,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            await _addFiscal.Handler(command);
+            await _dispatcher.Send<AddFiscalRotaCommand>(command);
             return Ok();
         }
         catch (Exception)
@@ -117,7 +92,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            await _rmvFiscalRota.Handler(command);
+            await _dispatcher.Send<RemoveFiscalRotaCommand>(command);
             return Ok();
         }
         catch (Exception)
@@ -133,7 +108,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            await _createRota.Handler(command);
+            await _dispatcher.Send<CreateRotaCommand>(command);
             return Ok();
         }
         catch (Exception)
@@ -144,11 +119,11 @@ public class RotaController : ControllerBase
 
     [Authorize]
     [HttpDelete("{rotaId}")]
-    public async Task<IActionResult> Delete( Guid rotaId)
+    public async Task<IActionResult> Delete( DeleteRotaCommand rotaId)
     {
         try
         {
-            await _deleteRota.Handler(rotaId);
+            await _dispatcher.Send<DeleteRotaCommand>(rotaId);
             return Ok();
         }
         catch (Exception)
@@ -164,7 +139,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            var bytes = await _createRelatorio.Handler(command);
+            var bytes = await _dispatcher.Send<CreateRelatorioWordCommand, byte[]>(command);
 
             return File(
                         bytes,
@@ -185,7 +160,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            var bytes = await _createEmergencial.Handler(command);
+            var bytes = await _dispatcher.Send<CreateEmergencialCommand, byte[]>(command);
 
             return File(
                         bytes,
@@ -206,7 +181,7 @@ public class RotaController : ControllerBase
     {
         try
         {
-            await _finalizarRota.Handler(command);
+            await _dispatcher.Send<FinalizarRotaCommand>(command);
 
             return Ok();
         }

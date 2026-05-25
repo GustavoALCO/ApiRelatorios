@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
@@ -13,6 +14,7 @@ using System.Text.RegularExpressions;
 namespace APIRelatorios.Application.Features.Commands.Images.Handler;
 
 public class CreateEvidenciaHandler
+    : ICommandHandler<CreateEvidenciaCommand>
 {
 
     private readonly IEvidenciaRotaCommands _commands;
@@ -37,7 +39,7 @@ public class CreateEvidenciaHandler
         _logger = logger;
     }
 
-    public async Task Handler(CreateEvidenciaCommand createImage)
+    public async Task Handle(CreateEvidenciaCommand createImage, CancellationToken cancellationToken)
     {
 
         _logger.LogInformation("Iniciando processo de criação de evidencia para a rota");

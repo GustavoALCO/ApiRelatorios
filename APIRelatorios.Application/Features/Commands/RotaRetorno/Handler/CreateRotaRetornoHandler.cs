@@ -1,10 +1,12 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 using APIRelatorios.Dommain.Interfaces.Rota;
 
 namespace APIRelatorios.Application.Features.Commands.RotaRetorno.Handler;
 
 public class CreateRotaRetornoHandler
+    : ICommandHandler<CreateRotaRetornoCommand>
 {
 
     private readonly IRotaQuery _rotaQuery;
@@ -17,7 +19,7 @@ public class CreateRotaRetornoHandler
         _rotaQuery = rotaQuery;
     }
 
-    public async Task Handler(CreateRotaRetornoCommand command)
+    public async Task Handle(CreateRotaRetornoCommand command, CancellationToken cancellationToken)
     {
         var rotaoriginal = await _rotaQuery.BuscarRotaID(command.rotaIdOriginal) ?? 
             throw new Exception("Erro ao encontrar Rota Existente");

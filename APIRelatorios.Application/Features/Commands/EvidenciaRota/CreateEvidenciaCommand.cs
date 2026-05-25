@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Features.Commands.Images;
@@ -34,4 +35,4 @@ double Longitude,
 DateTime Horario,
 
 bool Emergencial
-);
+) : ICommand;

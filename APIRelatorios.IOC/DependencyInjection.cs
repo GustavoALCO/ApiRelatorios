@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Features.Commands.Images.Handler;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Features.Commands.Images.Handler;
 using APIRelatorios.Application.Features.Commands.Rota.Handler;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
@@ -157,31 +158,27 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection DeclareHandlerAplication(this IServiceCollection services)
+    public static IServiceCollection RegisterHandlers(
+    this IServiceCollection services)
     {
-        services.AddScoped<CreateEvidenciaHandler>();
-        services.AddScoped<DeleteImageHandler>();
-        services.AddScoped<UpdateDescricaoImageHandler>();
-        services.AddScoped<BuscarEvidenciaPorIdHandler>();
-        services.AddScoped<BuscarTodasAsEvidenciasRotaHandler>();
-        services.AddScoped<BuscarRotaFiltersHandler>();
-        services.AddScoped<BuscarRotaIdHandler>();
+        services.Scan(scan => scan
 
-        services.AddScoped<AddFiscalRotaHandler>();
-        services.AddScoped<CreateRotaHandler>();
-        services.AddScoped<DeleteRotaHandler>();
-        services.AddScoped<RemoveFiscalRotaHandler>();
-        services.AddScoped<UpdateNomeRotaHandler>();
-        services.AddScoped<UpdatePasswordHandler>();
-        services.AddScoped<CreateRelatorioHandler>();
-        services.AddScoped<CreateEmergencialHandler>();
-        services.AddScoped<FinalizarRotaHandler>();
+            .FromApplicationDependencies()
 
-        services.AddScoped<LoginHandler>();
-        services.AddScoped<DeleteUsuarioHandler>();
-        services.AddScoped<UpdateUsuarioHandler>();
-        services.AddScoped<CreateUserHandler>();
-        services.AddScoped<BuscarTodosUsuariosHandler>();
+            .AddClasses(classes =>
+                classes.AssignableTo(typeof(ICommandHandler<>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+
+            .AddClasses(classes =>
+                classes.AssignableTo(typeof(ICommandHandler<,>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+
+            .AddClasses(classes =>
+                classes.AssignableTo(typeof(IQueryHandler<,>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
 
         return services;
     }
@@ -189,6 +186,13 @@ public static class DependencyInjection
     public static IServiceCollection DeclareFluentValidate(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.Load("APIRelatorios.Application"));
+
+        return services;
+    }
+
+    public static IServiceCollection AddDispatcher(this IServiceCollection services)
+    {
+        services.AddScoped<IDispatcher, Dispatcher>();
 
         return services;
     }

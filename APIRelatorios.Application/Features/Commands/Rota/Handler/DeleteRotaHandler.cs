@@ -1,9 +1,11 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Interfaces.Rota;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
 public class DeleteRotaHandler
+    : ICommandHandler<DeleteRotaCommand>
 {
     private readonly IRotaQuery _query;
 
@@ -18,12 +20,12 @@ public class DeleteRotaHandler
         _validateIds = validateIds;
     }
 
-    public async Task Handler(Guid dltrota)
+    public async Task Handle(DeleteRotaCommand command, CancellationToken cancellationToken)
     {
-        if (await _validateIds.RotaExisteAsync(dltrota) is false)
+        if (await _validateIds.RotaExisteAsync(command.RotaId) is false)
             throw new Exception("Id invalido");
 
-        var rota = await _query.BuscarRotaID(dltrota)
+        var rota = await _query.BuscarRotaID(command.RotaId)
             ?? throw new Exception("Erro ao buscar rota");
 
         await _commands.DeleteRotaAsync(rota);

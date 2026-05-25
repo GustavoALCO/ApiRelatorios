@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 using APIRelatorios.Dommain.Interfaces.Images;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace APIRelatorios.Application.Features.Commands.Images.Handler;
 
 public class UpdateDescricaoImageHandler
+    : ICommandHandler<UpdateEvidenciasCommands>
 {
     private readonly IEvidenciaRotaQuery _query;
 
@@ -25,8 +27,7 @@ public class UpdateDescricaoImageHandler
         _logger = logger;
     }
 
-    public async Task Handler(
-        UpdateEvidenciasCommands updateDescricao)
+    public async Task Handle(UpdateEvidenciasCommands updateDescricao, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Iniciando validacao de Id da rota");
 

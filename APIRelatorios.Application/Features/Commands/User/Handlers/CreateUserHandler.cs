@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Services;
 using APIRelatorios.Dommain.Interfaces.User;
 using Microsoft.Extensions.Logging;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Logging;
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
 public class CreateUserHandler
+    : ICommandHandler<CreateUsuarioCommand>
 {
     private readonly IUserCommands _commands;
 
@@ -23,7 +25,7 @@ public class CreateUserHandler
         _logger = logger;
     }
 
-    public async Task Handler(CreateUsuarioCommand createuser)
+    public async Task Handle(CreateUsuarioCommand createuser, CancellationToken cancellationToken)
     {
 
         // Coleta o Ultimo nome do usuário para criar o login

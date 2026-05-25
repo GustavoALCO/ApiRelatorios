@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Contracts.DTOs;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Application.Contracts.Enum;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Helpers;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Logging;
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
 public class CreateRelatorioHandler
+    : ICommandHandler<CreateRelatorioWordCommand, byte[]>
 {
     private readonly IRelatorioDeIrregularidades _relatorio;
     private readonly IEvidenciaRotaQuery _rotaQuery;
@@ -38,7 +40,7 @@ public class CreateRelatorioHandler
         _zipService = zipService;
     }
 
-    public async Task<byte[]> Handler(CreateRelatorioWordCommand command)
+    public async Task<byte[]> Handle(CreateRelatorioWordCommand command, CancellationToken cancellationToken)
     {
         try
         {

@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.Services;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
 public class FinalizarRotaHandler
+    : ICommandHandler<FinalizarRotaCommand>
 {
 
     private readonly ILogger<FinalizarRotaHandler> _logger;
@@ -28,7 +30,7 @@ public class FinalizarRotaHandler
         _buscarKm = buscarKm;
     }
 
-    public async Task Handler(FinalizarRotaCommand command)
+    public async Task Handle(FinalizarRotaCommand command, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Fazendo buscas de RotaId");
 

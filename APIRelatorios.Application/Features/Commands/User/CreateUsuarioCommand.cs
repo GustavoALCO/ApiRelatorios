@@ -1,4 +1,6 @@
-﻿namespace APIRelatorios.Application.Features.Commands.User;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+
+namespace APIRelatorios.Application.Features.Commands.User;
 
 public readonly record struct CreateUsuarioCommand
 (
@@ -6,4 +8,4 @@ public readonly record struct CreateUsuarioCommand
     string sobreNome,
     string senha,
     bool isAdmin
-);
+) : ICommand;
