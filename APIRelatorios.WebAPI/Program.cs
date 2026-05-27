@@ -7,13 +7,6 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// CORS
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("AllowFlutter",
-        policy => policy.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod());
-});
-
 // Kestrel
 builder.WebHost.ConfigureKestrel(options =>
 {
@@ -47,16 +40,14 @@ builder.Services.AddSwagger();
 builder.Services.AddInfra(builder.Configuration);
 builder.Services.DeclareInterfaces();
 builder.Services.DeclareInterfacesServices();
-builder.Services.DeclareHandlerAplication();
+builder.Services.AddDispatcher();
+builder.Services.RegisterHandlers();
 
 // Controllers
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
-
-// Pipeline
-app.UseCors("AllowFlutter");
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>

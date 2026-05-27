@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Features.Commands.Rota;
@@ -15,4 +16,4 @@ public readonly record struct CreateRotaCommand
 
     List<int> Fiscais 
 
-);
+) : ICommand;

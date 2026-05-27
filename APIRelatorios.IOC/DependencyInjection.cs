@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Features.Commands.Images.Handler;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Features.Commands.Images.Handler;
 using APIRelatorios.Application.Features.Commands.Rota.Handler;
 using APIRelatorios.Application.Features.Commands.User.Handlers;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
@@ -7,6 +8,7 @@ using APIRelatorios.Application.Features.Querys.User.Handler;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Services;
 using APIRelatorios.Application.Settings;
+using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -136,46 +138,47 @@ public static class DependencyInjection
 
         services.AddScoped<IRelatorioDeIrregularidades, RelatorioDeIrregulariedades>();
 
-        services.AddScoped<IBuscarByteImagem, BuscarByteImagem>();
+        services.AddHttpClient<IBuscarByteImagemService, BuscarByteImagemService>()
+                .SetHandlerLifetime(TimeSpan.FromMinutes(5));
 
         services.AddScoped<IValidateBase64, ValidateBase64>();
 
         services.AddScoped<IValidateIds, ValidateIds>();
 
         services.AddScoped<IPasswordHasher, PasswordHasher>();
-        
-        services.AddHttpClient<IApiDocx, ApiDocx>();
 
-        services.AddHttpClient<IBuscarDistanciaCordenadas, BuscarDistanciaCordenadas>();
+        services.AddScoped<IZipService, ZipService>();
+        
+        services.AddHttpClient<IApiDocxService, ApiDocxService>();
+
+        services.AddHttpClient<IAzureMapsKmService, AzureMapsKmService>();
+
+        services.AddHttpClient<IAzureMapsEnderecoService, AzureMapsEnderecoService>();
 
         return services;
     }
 
-    public static IServiceCollection DeclareHandlerAplication(this IServiceCollection services)
+    public static IServiceCollection RegisterHandlers(
+    this IServiceCollection services)
     {
-        services.AddScoped<CreateImageHandler>();
-        services.AddScoped<DeleteImageHandler>();
-        services.AddScoped<UpdateDescricaoImageHandler>();
-        services.AddScoped<BuscarEvidenciaPorIdHandler>();
-        services.AddScoped<BuscarTodasAsEvidenciasRotaHandler>();
-        services.AddScoped<BuscarRotaFiltersHandler>();
-        services.AddScoped<BuscarRotaIdHandler>();
+        services.Scan(scan => scan
 
-        services.AddScoped<AddFiscalRotaHandler>();
-        services.AddScoped<CreateRotaHandler>();
-        services.AddScoped<DeleteRotaHandler>();
-        services.AddScoped<RemoveFiscalRotaHandler>();
-        services.AddScoped<UpdateNomeRotaHandler>();
-        services.AddScoped<UpdatePasswordHandler>();
-        services.AddScoped<CreateRelatorioHandler>();
-        services.AddScoped<CreateEmergencialHandler>();
-        services.AddScoped<FinalizarRotaHandler>();
+            .FromApplicationDependencies()
 
-        services.AddScoped<LoginHandler>();
-        services.AddScoped<DeleteUsuarioHandler>();
-        services.AddScoped<UpdateUsuarioHandler>();
-        services.AddScoped<CreateUserHandler>();
-        services.AddScoped<BuscarTodosUsuariosHandler>();
+            .AddClasses(classes =>
+                classes.AssignableTo(typeof(ICommandHandler<>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+
+            .AddClasses(classes =>
+                classes.AssignableTo(typeof(ICommandHandler<,>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+
+            .AddClasses(classes =>
+                classes.AssignableTo(typeof(IQueryHandler<,>)))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime());
 
         return services;
     }
@@ -183,6 +186,13 @@ public static class DependencyInjection
     public static IServiceCollection DeclareFluentValidate(this IServiceCollection services)
     {
         services.AddValidatorsFromAssembly(Assembly.Load("APIRelatorios.Application"));
+
+        return services;
+    }
+
+    public static IServiceCollection AddDispatcher(this IServiceCollection services)
+    {
+        services.AddScoped<IDispatcher, Dispatcher>();
 
         return services;
     }

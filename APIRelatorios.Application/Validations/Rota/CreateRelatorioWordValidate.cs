@@ -9,8 +9,8 @@ public class CreateRelatorioWordValidate : AbstractValidator<CreateRelatorioWord
     public CreateRelatorioWordValidate(IValidateIds validateids)
     {
         RuleFor(x => x.Ids)
-    .Cascade(CascadeMode.Stop)
-    .NotNull()
-    .NotEmpty();
+        .Cascade(CascadeMode.Stop)
+        .NotNull()
+        .NotEmpty();
     }
 }

@@ -1,9 +1,11 @@
-﻿using APIRelatorios.Dommain.Interfaces.Services;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Interfaces.Services;
 using APIRelatorios.Dommain.Interfaces.User;
 
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
 public class LoginHandler
+    : ICommandHandler<LoginCommandsCommand, string>
 {
     private readonly IUserQuery _query;
 
@@ -18,7 +20,7 @@ public class LoginHandler
         _passwordHasher = passwordHasher;
     }
 
-    public async Task<string> Handler(LoginCommandsCommand commands)
+    public async Task<string> Handle(LoginCommandsCommand commands, CancellationToken cancellationToken)
     {
         var usuario = await _query.BuscarFiscalLogin(commands.Login) 
             ?? throw new Exception("Verifique se o login ou a senha está certa");

@@ -1,7 +1,7 @@
-﻿using APIRelatorios.Application.Features.Commands.Images;
-using APIRelatorios.Application.Features.Commands.Images.Handler;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Application.Features.Commands.Images;
 using APIRelatorios.Application.Features.Querys.EvidenciaRota;
-using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,32 +11,24 @@ namespace APIRelatorios.WebAPI.Controllers;
 [Route("EvidenciaRotas")]
 public class EvidenciaRotaController : ControllerBase
 {
-    private readonly CreateImageHandler _createImageHandler;
+    private readonly IDispatcher _dispatcher;
 
-    private readonly DeleteImageHandler _deleteImageHandler;
+    private readonly ILogger<EvidenciaRotaController> _logger;
 
-    private readonly UpdateDescricaoImageHandler _updateDescricaoImageHandler;
-
-    private readonly BuscarTodasAsEvidenciasRotaHandler _buscarEvidencias;
-
-    private readonly BuscarEvidenciaPorIdHandler _buscarId;
-
-    public EvidenciaRotaController(UpdateDescricaoImageHandler updateDescricaoImageHandler, DeleteImageHandler deleteImageHandler, CreateImageHandler createImageHandler, BuscarTodasAsEvidenciasRotaHandler buscarEvidencias, BuscarEvidenciaPorIdHandler buscarId)
+    public EvidenciaRotaController(ILogger<EvidenciaRotaController> logger, IDispatcher dispatcher)
     {
-        _updateDescricaoImageHandler = updateDescricaoImageHandler;
-        _deleteImageHandler = deleteImageHandler;
-        _createImageHandler = createImageHandler;
-        _buscarEvidencias = buscarEvidencias;
-        _buscarId = buscarId;
+        _dispatcher = dispatcher;
+        _logger = logger;
     }
 
-    
+    [Authorize]
     [HttpGet("Id")]
-    public async Task<IActionResult> BuscarPorId(Guid commands)
+    public async Task<IActionResult> BuscarPorId( BuscarEvidenciaPorIDQuery commands)
     {
         try
         {
-            var evidencias = await _buscarId.Handler(commands);
+            var evidencias = await _dispatcher.Query<BuscarEvidenciaPorIDQuery, 
+                                                     EvidenciaDTO>(commands);
 
             return Ok(evidencias);
         }
@@ -46,18 +38,20 @@ public class EvidenciaRotaController : ControllerBase
         }
     }
 
-    
+    [Authorize]
     [HttpGet("TodasEvidencias")]
-    public async Task<IActionResult> BuscarTodas([FromQuery] BuscarTodasEvidenciasRotaCommands commands)
+    public async Task<IActionResult> BuscarTodas([FromQuery] BuscarTodasEvidenciasRotaQuery commands)
     {
         try
         {
-            var user = await _buscarEvidencias.Handler(commands);
+            var user = await _dispatcher.Query<BuscarTodasEvidenciasRotaQuery, 
+            ICollection<EvidenciaDTO>>(commands);
 
             return Ok(user);
         }
         catch (Exception ex)
         {
+            _logger.LogError(ex, "Erro ao buscar todas as evidencias da rota com ID {RotaID}", commands.IdRota);
             return BadRequest(ex.Message);
         }
     }
@@ -68,7 +62,7 @@ public class EvidenciaRotaController : ControllerBase
     {
         try
         {
-            await _createImageHandler.Handler(command);
+            await _dispatcher.Send<CreateEvidenciaCommand>(command);
 
             return Ok();
         }
@@ -85,29 +79,13 @@ public class EvidenciaRotaController : ControllerBase
     {
         try
         {
-            await _updateDescricaoImageHandler.Handler(command);
+            await _dispatcher.Send<UpdateEvidenciasCommands>(command);
 
             return Ok();
         }
         catch (Exception ex)
         {
             
-            return BadRequest(ex.Message);
-        }
-    }
-
-    [Authorize]
-    [HttpDelete]
-    public async Task<IActionResult> DeletarEvidencias(Guid command)
-    {
-        try
-        {
-            await _deleteImageHandler.Handler(command);
-
-            return Ok();
-        }
-        catch (Exception ex)
-        {
             return BadRequest(ex.Message);
         }
     }

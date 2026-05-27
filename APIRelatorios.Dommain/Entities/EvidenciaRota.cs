@@ -14,7 +14,7 @@ public class EvidenciaRota
 
     public Rota Rota { get; set; }
 
-    public TemaFiscalizacao TemaFiscalizacao { get; private set; }
+    public CheckList CheckList { get; private set; } = null;
 
     public string? Alimentador { get; private set; }
 
@@ -26,7 +26,7 @@ public class EvidenciaRota
 
     public string Endereco { get; private set; }
 
-    public string? Cidade { get; private set; }
+    public string Cidade { get; private set; }
 
     public double Latitude { get; private set; }
 
@@ -35,6 +35,8 @@ public class EvidenciaRota
     public DateTime Horario { get; private set; }
 
     public bool Emergencial { get; private set; }
+
+    public bool IsValid {get; private set;}
 
     public EvidenciaRota()
     {
@@ -45,7 +47,7 @@ public class EvidenciaRota
         Guid evidenciaRotaId,
         Guid rotaID,
         int fiscalId,
-        TemaFiscalizacao tema,
+        CheckList checkList,
         string? alimentador,
         string? identificacao,
         string? descricao,
@@ -61,7 +63,7 @@ public class EvidenciaRota
         EvidenciaRotaId = evidenciaRotaId;
         RotaId = rotaID;
         FiscalId = fiscalId;
-        TemaFiscalizacao = tema;    
+        CheckList = checkList;    
         Alimentador = alimentador;
         Identificacão = identificacao;
         Descricao = descricao;
@@ -72,20 +74,22 @@ public class EvidenciaRota
         Longitude = lon;
         Horario = horario;
         Emergencial = emergencial;
+        IsValid = true;
     }
 
     public void Atualizar(
      string? descricao,
-     TemaFiscalizacao? tema,
+     CheckList? tema,
      string? alimentador,
      string? endereco,
-     string? identificacao)
+     string? identificacao,
+     bool? emergencial)
     {
+        if (tema is not null)
+            CheckList = tema;
+
         if (descricao is not null)
             Descricao = descricao;
-
-        if (tema.HasValue)
-            TemaFiscalizacao = tema.Value;
 
         if (alimentador is not null)
             Alimentador = alimentador;
@@ -95,5 +99,13 @@ public class EvidenciaRota
 
         if (identificacao is not null)
             Identificacão = identificacao;
+
+        if (emergencial is not null)
+            Emergencial = (bool)emergencial;
+    }
+
+    public void DesativarEvidencia()
+    {
+        IsValid = false;
     }
 }

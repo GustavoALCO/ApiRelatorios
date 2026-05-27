@@ -1,25 +1,69 @@
 ﻿using APIRelatorios.Application.Features.Commands.Images;
 using APIRelatorios.Application.Interfaces;
-using APIRelatorios.Application.Services;
+using APIRelatorios.Dommain.Enuns;
+using APIRelatorios.Dommain.Helpers;
 using FluentValidation;
 
 namespace APIRelatorios.Application.Validations.Evidencias;
 
-public class CreateImageValidations : AbstractValidator<CreateEvidenciaCommand>
+public class CreateEvidenciaValidations
+    : AbstractValidator<CreateEvidenciaCommand>
 {
-    public CreateImageValidations(IValidateBase64 validateBase64)
+    public CreateEvidenciaValidations(
+        IValidateBase64 validateBase64)
     {
-            
-
-        RuleFor(x => x.Endereco)
-            .NotEmpty().WithMessage("Endereço não pode ser nulo")
-            .NotNull().WithMessage("Endereço não pode ser nulo");
-
         RuleFor(x => x.Base64)
-            .NotEmpty().WithMessage("É obrigatorio passar um Base64 como imagem")
-            .NotNull().WithMessage("É obrigatorio passar um Base64 como imagem");
+            .NotEmpty()
+            .WithMessage(
+                "É obrigatorio passar um Base64 como imagem");
 
-        RuleFor(x => x.TemaFiscalizacao)
-            .NotNull().WithMessage("Deve Selecionar um assunto para o tema da fiscalização");
+        RuleFor(x => x.Latitude)
+            .NotNull()
+            .WithMessage(
+                "É obrigatorio passar a latitude");
+
+        RuleFor(x => x.Longitude)
+            .NotNull()
+            .WithMessage(
+                "É obrigatorio passar a Longitude");
+
+        RuleFor(x => x.temaFiscalizacao)
+            .Must(x =>
+                Enum.IsDefined(typeof(TemaCheck), x))
+            .WithMessage(
+                "Tema da fiscalização inválido");
+
+        RuleFor(x => x.subTemaFiscalizacao)
+            .NotNull()
+            .NotEmpty()
+            .WithMessage(
+                "É obrigatorio informar ao menos um subtema");
+
+        RuleForEach(x => x.subTemaFiscalizacao)
+            .Must(x =>
+                Enum.IsDefined(
+                    typeof(SubTemaAlimentadores),
+                    x))
+            .WithMessage(
+                "Subtema da fiscalização inválido");
+
+        RuleFor(x => x)
+            .Must(x =>
+            {
+                var subTemas =
+                    x.subTemaFiscalizacao
+                        .Select(subTema =>
+                            (SubTemaAlimentadores)subTema)
+                        .ToList();
+
+                return TemaFiscalizacaoMapper
+                    .ValidarSubTemas(
+                        (TemaCheck)x.temaFiscalizacao,
+                        subTemas);
+            })
+            .WithMessage(x =>
+                TemaFiscalizacaoMapper
+                    .ObterMensagem(
+                        (TemaCheck)x.temaFiscalizacao));
     }
 }

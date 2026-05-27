@@ -1,10 +1,12 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Rota;
 
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
-public class RemoveFiscalRotaHandler
+public class RemoveFiscalRotaHandler 
+    : ICommandHandler<RemoveFiscalRotaCommand>
 {
     private readonly IRotaQuery _query;
 
@@ -19,21 +21,21 @@ public class RemoveFiscalRotaHandler
         _validateids = validateids;
     }
 
-    public async Task Handler(RemoveFiscalRotaCommand rmfisc)
+    public async Task Handle(RemoveFiscalRotaCommand command, CancellationToken cancellationToken)
     {
-        foreach (var fiscais in rmfisc.fiscaisId)
+        foreach (var fiscais in command.fiscaisId)
         {
             if (await _validateids.UserExisteAsync(fiscais) is false)
                 throw new Exception("Lista de Id invalida");
         }
 
-        var rota = await _query.BuscarRotaID(rmfisc.rotaId) 
+        var rota = await _query.BuscarRotaID(command.rotaId) 
             ?? throw new Exception("Erro Ao buscar Rota no banco de dados");
 
 
-        foreach (var userId in rmfisc.fiscaisId)
+        foreach (var userId in command.fiscaisId)
         {
-            await _commands.RemoverFiscalRota(userId ,rmfisc.rotaId);
+            await _commands.RemoverFiscalRota(userId ,command.rotaId);
         }
 
     }

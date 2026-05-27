@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Application.Interfaces;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
@@ -6,6 +7,7 @@ using APIRelatorios.Dommain.Interfaces.User;
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
 public class CreateRotaHandler
+    : ICommandHandler<CreateRotaCommand>
 {
 
     private readonly IRotaCommands _rotaCommands;
@@ -18,25 +20,25 @@ public class CreateRotaHandler
         _validateIds = validateIds;
     }
 
-    public async Task Handler(CreateRotaCommand _commands)
+    public async Task Handle(CreateRotaCommand command, CancellationToken cancellationToken)
     {
-        foreach(var fiscais in _commands.Fiscais)
+        foreach(var fiscais in command.Fiscais)
         {
             if (await _validateIds.UserExisteAsync(fiscais) is false)
                 throw new Exception("Lista de usuarios invalidas");
         }
 
         Dommain.Entities.Rota rota = new(
-                                        _commands.rotaId ?? Guid.NewGuid(),
-                                        _commands.NomeRota,
-                                        _commands.Concessionarias,
-                                        _commands.Alimentador,
+                                        command.rotaId ?? Guid.NewGuid(),
+                                        command.NomeRota,
+                                        command.Concessionarias,
+                                        command.Alimentador,
                                          DateTime.UtcNow);
 
-        if (_commands.Fiscais == null || _commands.Fiscais.Count == 0)
+        if (command.Fiscais == null || command.Fiscais.Count == 0)
             throw new Exception("Fiscais não podem ser nulos ou vazio");
 
-        foreach (var userId in _commands.Fiscais)
+        foreach (var userId in command.Fiscais)
         {
             UsuarioRota usuarioRota = new()
             {

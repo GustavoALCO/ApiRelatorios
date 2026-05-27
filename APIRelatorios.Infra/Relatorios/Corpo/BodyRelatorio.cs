@@ -10,7 +10,7 @@ internal class BodyRelatorio
 {
     internal static Body Criar(
                 RelatorioContext ctx,
-                IDictionary<string, IEnumerable<DadosRelatorioDTO>> dadosPorTema
+                IDictionary<string, List<DadosRelatorioDTO>> dadosPorTema
         )
     {
         var body = new Body();

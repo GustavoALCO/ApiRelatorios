@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.Services;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.Logging;
 namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 
 public class FinalizarRotaHandler
+    : ICommandHandler<FinalizarRotaCommand>
 {
 
     private readonly ILogger<FinalizarRotaHandler> _logger;
@@ -15,11 +17,11 @@ public class FinalizarRotaHandler
 
     private readonly IRotaQuery _query;
 
-    private readonly IBuscarDistanciaCordenadas _buscarKm;
+    private readonly IAzureMapsKmService _buscarKm;
 
     private readonly IRotaCommands _commands;
 
-    public FinalizarRotaHandler(IRotaCommands commands, IRotaQuery query, ILogger<FinalizarRotaHandler> logger, IEvidenciaRotaQuery eviQuery, IBuscarDistanciaCordenadas buscarKm)
+    public FinalizarRotaHandler(IRotaCommands commands, IRotaQuery query, ILogger<FinalizarRotaHandler> logger, IEvidenciaRotaQuery eviQuery, IAzureMapsKmService buscarKm)
     {
         _commands = commands;
         _query = query;
@@ -28,72 +30,89 @@ public class FinalizarRotaHandler
         _buscarKm = buscarKm;
     }
 
-    public async Task Handler(FinalizarRotaCommand command)
+    public async Task Handle(FinalizarRotaCommand command, CancellationToken cancellationToken)
     {
         _logger.LogInformation("Fazendo buscas de RotaId");
-        var rota = await _query.BuscarRotaID(command.RotaId) ?? 
-                        throw new Exception("Não foi possicel encontrar a Rota");
 
-        _logger.LogInformation("Verificando se Rota tem Evidencias");
-        var evidencias = await _eviQuery.GetEvidenciaAsync(command.RotaId) ?? 
-                        throw new Exception("Não é possivel finalizar rota sem evidendencias");
+        var rota = await _query.BuscarRotaID(command.RotaId)
+            ?? throw new Exception("Não foi possível encontrar a Rota");
+
+        var evidencias = await _eviQuery.GetEvidenciaAsync(command.RotaId)
+            ?? throw new Exception("Não é possível finalizar rota sem evidências");
 
         var numeroEvidencias = evidencias.Count();
 
         if (numeroEvidencias < 10)
-            throw new Exception("É necessario ao menos 10 Evidencias");
+            throw new Exception("É necessário ao menos 10 evidências");
 
-        List<List<EvidenciaRota>> blocoRota = new();
+        _logger.LogInformation("Ordenando evidências");
+
+        var ordenadas = evidencias
+            .OrderBy(x => x.Horario)
+            .ToList();
+
+        List<List<EvidenciaRota>> blocos = new();
         List<EvidenciaRota> blocoAtual = new();
 
-        _logger.LogInformation("Montando Blocos para Consultas");
-        if(blocoAtual.Count == 20)
+        _logger.LogInformation("Montando blocos por intervalo de 40 minutos");
+
+        for (int i = 0; i < ordenadas.Count; i++)
         {
-            blocoRota.Add(blocoAtual);
-            blocoAtual.Clear();
-        }
-        for (int i = 0; i < evidencias.Count - 1; i++)
-        {
-            var atual = evidencias[i];
-            var proximo = evidencias[i + 1];
+            var atual = ordenadas[i];
 
             blocoAtual.Add(atual);
 
-            var diff = proximo.Horario - atual.Horario;
+            bool quebraTempo = false;
 
-            if (diff.TotalMinutes >= 40)
-                break;
-        }
-
-        double Km = 0.0;
-
-        foreach (var b in blocoRota)
-        {
-            List<(double, double)> cordenadas = new();
-
-            _logger.LogInformation("Atribuindo valores a lista para cordenadas");
-            foreach (var cor in evidencias)
+            if (i < ordenadas.Count - 1)
             {
-                cordenadas.Add((cor.Latitude, cor.Longitude));
+                var proximo = ordenadas[i + 1];
+                var diff = proximo.Horario - atual.Horario;
+
+                if (diff.TotalMinutes >= 40)
+                    quebraTempo = true;
             }
 
-            _logger.LogInformation("Iniciando loop para buscar os Km percorridos");
-            for (int i = 0; i < cordenadas.Count; i += 20)
+            if (blocoAtual.Count == 20 || quebraTempo || i == ordenadas.Count - 1)
             {
-                var batch = cordenadas
-                    .Skip(i == 0 ? i : i - 1) // repete o último ponto
+                blocos.Add(new List<EvidenciaRota>(blocoAtual));
+                blocoAtual.Clear();
+            }
+        }
+
+        double kmTotal = 0.0;
+
+        _logger.LogInformation("Calculando KM por blocos");
+
+        foreach (var bloco in blocos)
+        {
+            var coordenadas = bloco
+                .Select(x => (x.Latitude, x.Longitude))
+                .ToList();
+
+            for (int i = 0; i < coordenadas.Count - 1; i += 19)
+            {
+                var batch = coordenadas
+                    .Skip(i)
                     .Take(20)
                     .ToList();
 
-                Km += await _buscarKm.BuscarDistanciaKM(batch) ??
-                                throw new Exception("objeto nulo"); ;
+                if (batch.Count < 2)
+                    continue;
+
+                var km = await _buscarKm.BuscarDistanciaKM(batch);
+
+                if (km.HasValue)
+                    kmTotal += km.Value;
             }
-
-            rota.finalizandoRota(command.DataFinal, Km);
         }
-        
 
-        _logger.LogInformation("Fazendo Update no Banco de dados");
+        rota.finalizandoRota(DateTime.UtcNow.AddHours(-3), kmTotal);
+
+        _logger.LogInformation("KM total calculado: {Km}", kmTotal);
+
+        _logger.LogInformation("Fazendo update no banco");
+
         await _commands.UpdateRotaAsync(rota);
     }
 }

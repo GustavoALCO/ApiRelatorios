@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Enuns;
 using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.EntityFrameworkCore;
 
@@ -20,47 +21,78 @@ public class DatabaseContext : DbContext
 
     public DbSet<ImageData> Images { get; set; }
 
+    public DbSet<CheckList> CheckList {get; set;}
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        modelBuilder.Entity<EvidenciaRota>()
-            .HasKey(x => x.EvidenciaRotaId);
+{
+    // EvidenciaRota
 
-        modelBuilder.Entity<EvidenciaRota>()
-            .HasOne(rota => rota.Rota)
-            .WithMany(r => r.Images)
-            .HasForeignKey(r => r.RotaId)
-            .OnDelete(DeleteBehavior.Cascade);
+    modelBuilder.Entity<EvidenciaRota>()
+        .HasKey(x => x.EvidenciaRotaId);
 
-        modelBuilder.Entity<EvidenciaRota>()
-                    .HasMany(e => e.Images)
-                    .WithOne(i => i.EvidenciaRota)
-                    .HasForeignKey(i => i.EvidenciaRotaId)
-                    .OnDelete(DeleteBehavior.Cascade);
+    modelBuilder.Entity<EvidenciaRota>()
+        .HasOne(e => e.Rota)
+        .WithMany(r => r.Images)
+        .HasForeignKey(e => e.RotaId)
+        .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<User>()
-            .HasKey(x => x.UserId);
+    modelBuilder.Entity<EvidenciaRota>()
+        .HasOne(e => e.CheckList)
+        .WithOne(c => c.EvidenciaRota)
+        .HasForeignKey<CheckList>(c => c.EvidenciaRotaId)
+        .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Rota>()
-            .HasKey(x => x.RotaId);
+    modelBuilder.Entity<EvidenciaRota>()
+        .HasMany(e => e.Images)
+        .WithOne(i => i.EvidenciaRota)
+        .HasForeignKey(i => i.EvidenciaRotaId)
+        .OnDelete(DeleteBehavior.Cascade);
 
-        modelBuilder.Entity<Rota>()
-                    .HasDiscriminator<string>("TipoRota")
-                    .HasValue<Rota>("Rota")
-                    .HasValue<RotaRetorno>("RotaRetorno");
+    // CheckList
 
-        modelBuilder.Entity<UsuarioRota>()
-            .HasKey(ur => new { ur.UserId, ur.RotaId });
+    modelBuilder.Entity<CheckList>()
+        .HasKey(c => c.Id);
 
-        modelBuilder.Entity<UsuarioRota>()
-            .HasOne(ur => ur.User)
-            .WithMany(u => u.usuarioRotas)
-            .HasForeignKey(ur => ur.UserId);
+    modelBuilder.Entity<CheckList>()
+        .Property(c => c.TemaCheck)
+        .HasConversion<int>();
 
-        modelBuilder.Entity<UsuarioRota>()
-            .HasOne(ur => ur.Rota)
-            .WithMany(r => r.Fiscais)
-            .HasForeignKey(ur => ur.RotaId);
+    modelBuilder.Entity<CheckList>()
+        .Property(c => c.SubTemaAlimentadores)
+        .HasConversion(
+            v => v.Select(e => (int)e).ToArray(),
+            v => v.Select(e => (SubTemaAlimentadores)e).ToList());
 
+    // User
 
-    }
+    modelBuilder.Entity<User>()
+        .HasKey(x => x.UserId);
+
+    // Rota
+
+    modelBuilder.Entity<Rota>()
+        .HasKey(x => x.RotaId);
+
+    modelBuilder.Entity<Rota>()
+        .HasDiscriminator<string>("TipoRota")
+        .HasValue<Rota>("Rota")
+        .HasValue<RotaRetorno>("RotaRetorno");
+
+    // UsuarioRota
+
+    modelBuilder.Entity<UsuarioRota>()
+        .HasKey(ur => new { ur.UserId, ur.RotaId });
+
+    modelBuilder.Entity<UsuarioRota>()
+        .HasOne(ur => ur.User)
+        .WithMany(u => u.usuarioRotas)
+        .HasForeignKey(ur => ur.UserId);
+
+    modelBuilder.Entity<UsuarioRota>()
+        .HasOne(ur => ur.Rota)
+        .WithMany(r => r.Fiscais)
+        .HasForeignKey(ur => ur.RotaId);
+
+    base.OnModelCreating(modelBuilder);
+}
 }

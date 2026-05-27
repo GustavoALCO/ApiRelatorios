@@ -1,7 +1,6 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Infra.Relatorios.Context;
 using APIRelatorios.Infra.Relatorios.Templates;
-using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace APIRelatorios.Infra.Relatorios.Componentes;
@@ -19,24 +18,66 @@ internal class RowImagesComponentes
 
         foreach (var grupo in grupos)
         {
-            // Linha de imagens
+            // =========================
+            // LINHA DAS IMAGENS
+            // =========================
             var rowImages = new TableRow();
+
             foreach (var item in grupo)
             {
                 rowImages.Append(
-                    ImageCellComponentes.Criar(ctx, item.Foto, 1800000, 1800000)
+                    ImageCellComponentes.Criar(
+                        ctx,
+                        item.Foto,
+                        1800000,
+                        1800000
+                    )
                 );
             }
+
             PreencherCelulasVazias(rowImages);
+
             table.Append(rowImages);
 
-            // Linha de descrições
+            // =========================
+            // LINHA DAS DESCRIÇÕES
+            // =========================
             var rowDesc = new TableRow();
+
             foreach (var item in grupo)
             {
-                rowDesc.Append(CellComponentes.Texto($"{item.NumeroImagem} - {item.Alimentador} - ", $" {item.Dsc + ","} {item.Identificação +"," ?? ""} {item.Localização}", negritoTexto1: true));
+                var titulo = string.Join(
+                    " - ",
+                    new[]
+                    {
+                        item.NumeroImagem,
+                        item.Alimentador
+                    }
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                );
+
+                var descricao = string.Join(
+                    ", ",
+                    new[]
+                    {
+                        item.Dsc,
+                        item.Identificação,
+                        item.Localização
+                    }
+                    .Where(x => !string.IsNullOrWhiteSpace(x))
+                );
+
+                rowDesc.Append(
+                    CellComponentes.Texto(
+                        titulo,
+                        descricao,
+                        negritoTexto1: true
+                    )
+                );
             }
+
             PreencherCelulasVazias(rowDesc);
+
             table.Append(rowDesc);
         }
 
@@ -47,25 +88,65 @@ internal class RowImagesComponentes
     {
         var table = new Table(
             new TableProperties(
-                new TableWidth { Type = TableWidthUnitValues.Dxa, Width = "9170" },
-                new TableLayout { Type = TableLayoutValues.Fixed },
+                new TableWidth
+                {
+                    Type = TableWidthUnitValues.Dxa,
+                    Width = "9170"
+                },
+
+                new TableLayout
+                {
+                    Type = TableLayoutValues.Fixed
+                },
+
                 new TableBorders(
-                    new TopBorder { Val = BorderValues.Single, Size = 4 },
-                    new BottomBorder { Val = BorderValues.Single, Size = 4 },
-                    new LeftBorder { Val = BorderValues.Single, Size = 4 },
-                    new RightBorder { Val = BorderValues.Single, Size = 4 },
-                    new InsideHorizontalBorder { Val = BorderValues.Single, Size = 4 },
-                    new InsideVerticalBorder { Val = BorderValues.Single, Size = 4 }
+                    new TopBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new BottomBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new LeftBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new RightBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new InsideHorizontalBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    },
+
+                    new InsideVerticalBorder
+                    {
+                        Val = BorderValues.Single,
+                        Size = 4
+                    }
                 )
             )
         );
 
         // Colunas fixas
-        table.AppendChild(new TableGrid(
-            new GridColumn { Width = "3050" },
-            new GridColumn { Width = "3050" },
-            new GridColumn { Width = "3050" }
-        ));
+        table.AppendChild(
+            new TableGrid(
+                new GridColumn { Width = "3050" },
+                new GridColumn { Width = "3050" },
+                new GridColumn { Width = "3050" }
+            )
+        );
 
         return table;
     }
@@ -74,8 +155,9 @@ internal class RowImagesComponentes
     {
         while (row.ChildElements.Count < 3)
         {
-            row.Append(CellComponentes.Texto("",""));
+            row.Append(
+                CellComponentes.Texto("", "")
+            );
         }
     }
-
 }

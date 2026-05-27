@@ -1,4 +1,6 @@
-﻿using APIRelatorios.Dommain.Enuns;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Features.Commands.Images;
 
@@ -8,11 +10,15 @@ public readonly record struct UpdateEvidenciasCommands
 
     string? descricao,
 
-    TemaFiscalizacao? tema,
+    int temaFiscalizacao,
+
+    List<int> subTemaFiscalizacao,
 
     string? alimentador,
 
     string? endereco,
 
-    string? identificacao
-);
+    string? identificacao,
+
+    bool? emergencial
+) : ICommand;

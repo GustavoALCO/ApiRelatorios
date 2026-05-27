@@ -1,10 +1,12 @@
-﻿namespace APIRelatorios.Application.Features.Commands.User;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+
+namespace APIRelatorios.Application.Features.Commands.User;
 
 public readonly record struct AlterarUsuarioCommand
 (
     int userId,
     string? login,
     string? nome,
-    string? sobreNome,
+    string? sobrenome,
     bool? isAdmin
-);
+) : ICommand;

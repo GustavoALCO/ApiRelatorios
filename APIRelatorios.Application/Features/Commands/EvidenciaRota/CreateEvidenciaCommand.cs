@@ -1,4 +1,6 @@
-﻿using APIRelatorios.Dommain.Enuns;
+﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Features.Commands.Images;
 
@@ -10,7 +12,9 @@ Guid rotaID,
 
 int fiscalId,
 
-TemaFiscalizacao TemaFiscalizacao,
+int temaFiscalizacao,
+
+List<int> subTemaFiscalizacao,
 
 string? Identificacao,
 
@@ -20,7 +24,7 @@ string? Descricao,
 
 List<string> Base64,
 
-string Endereco,
+string? Endereco,
 
 string? Cidade,
 
@@ -31,4 +35,4 @@ double Longitude,
 DateTime Horario,
 
 bool Emergencial
-);
+) : ICommand;

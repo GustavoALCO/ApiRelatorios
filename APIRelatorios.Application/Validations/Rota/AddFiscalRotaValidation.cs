@@ -15,5 +15,6 @@ public class AddFiscalRotaValidation : AbstractValidator<AddFiscalRotaCommand>
         RuleFor(x => x.FiscaisId)
             .NotEmpty().WithMessage("É necessario passar um id de fiscal")
             .NotNull().WithMessage("É necessario passar um id de fiscal");
+
     }
 }
