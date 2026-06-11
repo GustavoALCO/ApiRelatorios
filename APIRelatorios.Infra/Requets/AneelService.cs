@@ -11,7 +11,8 @@ public class AneelService
 
     public async Task<string> BuscaDeDadosBDGD()
     {
-        var response = await _httpClient.GetAsync("http://aneel-service:8000/dados");
+        // Aguardando URL Atualizada da api de dados da ANEEL
+        var response = await _httpClient.GetAsync("");
 
         response.EnsureSuccessStatusCode();
 

@@ -40,7 +40,7 @@ public class AzureMapsEnderecoService : IAzureMapsEnderecoService
 
         try
         {
-            var response = await _httpClient.GetAsync(url);
+            var response = await _httpClient.GetAsync(url) ?? throw new Exception("Erro ao Buscar enderecos no Azure Maps");
 
             response.EnsureSuccessStatusCode();
 

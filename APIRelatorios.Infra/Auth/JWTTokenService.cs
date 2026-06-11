@@ -34,7 +34,7 @@ public class JWTTokenService : IJwtTokenService
 
         var token = new JwtSecurityToken(
             issuer: _configuration.Issuer,
-            audience: _configuration.Audience[0], // Pega a primeira audience
+            audience: _configuration.Audience[0], 
             claims: claims,
             expires: DateTime.UtcNow.AddDays(_configuration.ExpireDays),
             signingCredentials: creds

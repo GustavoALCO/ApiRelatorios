@@ -38,9 +38,9 @@ public class RotaController : ControllerBase
     }
 
     [Authorize]
-    [HttpGet("{id}")]
+    [HttpGet("id")]
     public async Task<IActionResult> BuscarPorFiltro(
-        BuscarRotaIdQuery id)
+        [FromQuery] BuscarRotaIdQuery id)
     {
         try
         {

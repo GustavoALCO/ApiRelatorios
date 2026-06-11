@@ -48,7 +48,7 @@ public class CreateEvidenciaHandler
 
         var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) ?? throw new Exception("Erro ao encontrar filcal");
 
-        if (rota.DataFinal != null)
+        if (rota.DataFinal > createImage.Horario)
             throw new Exception("Rota Já finalizada.");
 
         _logger.LogInformation("Rota Encontrada, iniciando processo de criação da evidencia");

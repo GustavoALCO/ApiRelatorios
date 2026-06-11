@@ -29,16 +29,19 @@ public class CreateEmergencialHandler
     }
     public async Task<byte[]> Handle(CreateEmergencialCommand command, CancellationToken cancellationToken)
     {
-        _logger.LogInformation("Iniciando Handler de Emergencial Handler");
+        _logger.LogInformation("Iniciando Handler de Relatorio Emergencial");
 
         //Fazendo Buscas no banco de dados
-        var rota = await _rotaQuery.BuscarRotaID(command.IdRota);
+        var rota = await _rotaQuery.BuscarRotaID(command.IdRota) ?? 
+                    throw new Exception("Erro ao Encontrar RotaID");
 
-        var evidencias = await _evidenciaRotaQuery.GetEvidenciasUrgencia(command.IdRota);
+        var evidencias = await _evidenciaRotaQuery.GetEvidenciasUrgencia(command.IdRota) ?? 
+                    throw new Exception("Não há nenhuma Evidencia a ser Listada");
 
         List<EvidenciaDocs> docs = new();
 
         _logger.LogInformation("Atribuindo valores da evidencia para evidenciaDocs");
+
         foreach (var evi in evidencias)
         {
             List<string> imagesMedium = new();

@@ -23,7 +23,7 @@ public class EvidenciaRotaController : ControllerBase
 
     [Authorize]
     [HttpGet("Id")]
-    public async Task<IActionResult> BuscarPorId( BuscarEvidenciaPorIDQuery commands)
+    public async Task<IActionResult> BuscarPorId([FromQuery] BuscarEvidenciaPorIDQuery commands)
     {
         try
         {
