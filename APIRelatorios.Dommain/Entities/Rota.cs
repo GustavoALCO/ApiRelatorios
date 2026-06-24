@@ -15,9 +15,11 @@ public class Rota
 
     public double? Km {  get; private set; }
 
-    public DateTime DataInicio { get; set; }
+    public DateTime DataInicio { get; private set; }
 
-    public DateTime? DataFinal {  get; set; }
+    public DateTime? DataFinal {  get; private set; }
+
+    public bool isValid { get; private set; }
 
     public ICollection<EvidenciaRota> Images { get; set; } 
 
@@ -35,6 +37,7 @@ public class Rota
         Alimentador = alimentador;
         DataInicio = dataInicio;
         Fiscais = new List<UsuarioRota>();
+        isValid = true;
     }
     public void AdicionarFiscal(int userId)
     {
@@ -52,5 +55,10 @@ public class Rota
     {
         DataFinal = dataFinal;
         Km = km;
+    }
+
+    public void ExcluirRota()
+    {
+        isValid = false;
     }
 }

@@ -49,7 +49,7 @@ public class UserCommands : IUserCommands
     {
         try
         {
-            _context.Fiscais.Remove(user);
+            _context.Fiscais.Update(user);
             await _context.SaveChangesAsync();
         }
         catch (DbUpdateException ex)

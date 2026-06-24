@@ -1,6 +1,8 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Application.Contracts.Enum;
+using APIRelatorios.Application.Exceptions.Azure;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Helpers;
 using APIRelatorios.Dommain.Interfaces.Images;
@@ -58,8 +60,7 @@ public class CreateRelatorioHandler
 
                 if (!existe)
                 {
-                    throw new Exception(
-                        $"A rota {rota} não existe.");
+                    throw new RotaNotFoundException(rota);
                 }
             }
 
@@ -89,8 +90,7 @@ public class CreateRelatorioHandler
 
                     foreach (var image in images)
                     {
-                        try
-                        {
+                        
                             var nomeImagem =
                                 $"{(EnumLetras)i} - {contagem}.{contadorImagem}";
 
@@ -148,7 +148,7 @@ public class CreateRelatorioHandler
                                 {
                                     var bytes =
                                         await _byteImage.BaixarImagemAsync(
-                                            originalUrl);
+                                            originalUrl) ?? throw new DownloadImageAzureException();
 
                                     return new MemoryStream(bytes);
                                 },
@@ -162,20 +162,12 @@ public class CreateRelatorioHandler
 
                             contadorImagem++;
                         }
-                        catch (Exception ex)
-                        {
-                            _logger.LogError(
-                                ex,
-                                "Erro ao processar imagem da evidência {EvidenciaId}",
-                                evidencia.EvidenciaRotaId);
-
-                            throw;
-                        }
+                       
                     }
 
                     contagem++;
                 }
-            }
+            
 
             _logger.LogInformation(
                 "Iniciando geração do relatório Word");

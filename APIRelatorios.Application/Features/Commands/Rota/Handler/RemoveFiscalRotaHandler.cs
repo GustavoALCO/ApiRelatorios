@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -26,11 +27,11 @@ public class RemoveFiscalRotaHandler
         foreach (var fiscais in command.fiscaisId)
         {
             if (await _validateids.UserExisteAsync(fiscais) is false)
-                throw new Exception("Lista de Id invalida");
+                throw new UserNotFoundException(fiscais);
         }
 
         var rota = await _query.BuscarRotaID(command.rotaId) 
-            ?? throw new Exception("Erro Ao buscar Rota no banco de dados");
+            ?? throw new RotaNotFoundException(command.rotaId);
 
 
         foreach (var userId in command.fiscaisId)

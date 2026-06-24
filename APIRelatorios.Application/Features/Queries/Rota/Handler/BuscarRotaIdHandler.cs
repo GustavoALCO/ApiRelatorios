@@ -1,5 +1,6 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Features.Queries.Rota;
 using APIRelatorios.Dommain.Interfaces.Rota;
 
@@ -17,12 +18,13 @@ public class BuscarRotaIdHandler
 
     public async Task<RotaDTO> Handle(BuscarRotaIdQuery query, CancellationToken cancellationToken)
     {
-        var rota = await _query.BuscarRotaID(query.RotaId) ?? throw new Exception("Erro ao buscar rota");
+        var rota = await _query.BuscarRotaID(query.RotaId) 
+                    ?? throw new RotaNotFoundException(query.RotaId);
 
         RotaDTO rotaDTO = new()
             {
             RotaId = rota.RotaId,
-            NomeRota = rota.NomeRota,
+            NomeRota = rota.NomeRota ?? "Nome não Informado",
             Alimentador = rota.Alimentador,
             DataInicio = rota.DataInicio.ToString("dd/MM/yyyy"),
             DataFinal = rota.DataFinal?.ToString("dd/MM/yyyy"),

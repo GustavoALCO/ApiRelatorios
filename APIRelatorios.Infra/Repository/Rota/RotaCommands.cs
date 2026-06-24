@@ -46,11 +46,13 @@ public class RotaCommands : IRotaCommands
         }
     }
 
+
+    // Altera para que a Rota Não seja deletada do banco de dados, apenas alterando o status para inativo.
     public async Task DeleteRotaAsync(Dommain.Entities.Rota rota)
     {
         try
         {
-             _context.Rota.Remove(rota);
+             _context.Rota.Update(rota);
 
             await _context.SaveChangesAsync();
         }

@@ -1,5 +1,6 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
 using System.Globalization;
@@ -22,7 +23,7 @@ public class BuscarRotaFiltersHandler
     public async Task<ICollection<RotaDTO>> Handle(BuscarRotaFiltersQuery commands, CancellationToken cancellationToken)
     {
         //valida se o fiscal é existente
-        var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new Exception("Fiscal Invalido");
+        var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new UserNotFoundException(commands.FiscalId);
 
         //Buscar IQueryable para buscar filtros
         var query = _rotaQuery.BuscarQuery();
@@ -96,7 +97,7 @@ public class BuscarRotaFiltersHandler
                 DataFinal = filters.DataFinal?.ToString("dd/MM/yyyy"),
                 DataInicio = filters.DataInicio.ToString("dd/MM/yyyy"),
                 Concessionarias = filters.Concessionarias,
-                NomeRota = filters.NomeRota
+                NomeRota = filters.NomeRota ?? "Nome não informado"
             };
 
             filtersdto.Add(dto);

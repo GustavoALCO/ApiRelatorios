@@ -27,13 +27,19 @@ public class CreateUserHandler
 
     public async Task Handle(CreateUsuarioCommand createuser, CancellationToken cancellationToken)
     {
-
+        _logger.LogInformation("Iniciando processo de criação de usuário para {Nome} {Sobrenome}", createuser.nome, createuser.sobreNome);
         // Coleta o Ultimo nome do usuário para criar o login
         string ultimoNome = createuser.sobreNome.Split(' ').Last();
+
+        _logger.LogInformation("Último nome extraído: {UltimoNome}", ultimoNome);
 
         // Cria o login do usuário utilizando o nome e o ultimo nome
         var login = $"{createuser.nome.ToLower()}.{ultimoNome.ToLower()}";
 
+        _logger.LogInformation("Login inicial gerado: {Login}", login);
+
+
+        _logger.LogInformation("Verificando se o login {Login} já existe no banco de dados.", login);
         var userExist = await _query.BuscarTodosFiscalLogin(login);
 
         if (userExist.Any())
@@ -49,14 +55,16 @@ public class CreateUserHandler
 
         Dommain.Entities.User user = new();
 
-        //Gera um salt para ser armazenado no banco de dados
+        _logger.LogInformation("Gerando hash da senha para o usuário {Login}.", login);
         var salt = _passwordHasher.GenerateHash();
 
         var hashPassword = _passwordHasher.HashPassword(createuser.senha, salt);
 
+        _logger.LogInformation("Criando usuário com login {Login}.", login);
         user.CreateUser(login, createuser.nome, createuser.sobreNome, hashPassword, salt, createuser.isAdmin);
-        
-
+       
         await _commands.CreateUser(user);
+
+        _logger.LogInformation("Usuário {Login} criado com sucesso.", login);
     }
 }

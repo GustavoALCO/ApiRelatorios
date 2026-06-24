@@ -4,22 +4,42 @@ namespace APIRelatorios.Dommain.Helpers;
 public class TemaFiscalizacaoMapper
 {
     private static readonly Dictionary<TemaCheck, (int Min, int Max)> _regras =
-        new()
-        {
-            { TemaCheck.Postes, (0, 4) },
-            { TemaCheck.Compartilhamento, (5, 11) },
-            { TemaCheck.EstruturasFerragens, (12, 14) },
-            { TemaCheck.Isoladores, (15, 16) },
-            { TemaCheck.Condutores, (17, 19) },
-            { TemaCheck.Aterramento, (20, 21) },
-            { TemaCheck.Transformadores, (22, 25) },
-            { TemaCheck.ChavesReligadores, (26, 28) },
-            { TemaCheck.ParaRaios, (29, 31) },
-            { TemaCheck.IluminacaoPublica, (32, 35) },
-            { TemaCheck.Vegetacao, (36, 37) },
-            { TemaCheck.Seguranca, (38, 40) },
-            { TemaCheck.Outros, (41, 41) }
-        };
+    new()
+    {
+        { TemaCheck.SaidaDoAlimentador, (0, 8) },
+
+        { TemaCheck.Vegetacao, (9, 11) },
+
+        { TemaCheck.Postes, (12, 18) },
+
+        { TemaCheck.Cruzetas, (19, 21) },
+
+        { TemaCheck.Isoladores, (22, 24) },
+
+        { TemaCheck.Condutores, (25, 29) },
+
+        { TemaCheck.Seguranca, (30, 32) },
+
+        { TemaCheck.Aterramento, (33, 34) },
+
+        { TemaCheck.Transformadores, (35, 41) },
+
+        { TemaCheck.ChavesReligadores, (42, 44) },
+
+        { TemaCheck.ParaRaios, (45, 50) },
+
+        { TemaCheck.EquipamentoInativo, (51, 51) },
+
+        { TemaCheck.EquipamentoSemIdentificacao, (52, 53) },
+
+        { TemaCheck.IluminacaoPublica, (54, 57) },
+
+        { TemaCheck.SegurancaSinalizacao, (58, 60) },
+
+        { TemaCheck.Compartilhamento, (61, 68) },
+
+        { TemaCheck.OutrasConstatacoes, (69, 69) }
+    };
 
     public static bool ValidarSubTemas(
         TemaCheck tema,

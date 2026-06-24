@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Interfaces.Rota;
 
@@ -21,12 +22,13 @@ public class DeleteRotaHandler
     }
 
     public async Task Handle(DeleteRotaCommand command, CancellationToken cancellationToken)
-    {
-        if (await _validateIds.RotaExisteAsync(command.RotaId) is false)
-            throw new Exception("Id invalido");
+    {    
 
         var rota = await _query.BuscarRotaID(command.RotaId)
-            ?? throw new Exception("Erro ao buscar rota");
+            ?? throw new RotaNotFoundException(command.RotaId);
+
+        // Altera o estado da rota para excluída
+        rota.ExcluirRota();
 
         await _commands.DeleteRotaAsync(rota);
     }

@@ -1,6 +1,8 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Application.Contracts.Enum;
+using APIRelatorios.Application.Exceptions.Integrations;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Dommain.Helpers;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -33,10 +35,10 @@ public class CreateEmergencialHandler
 
         //Fazendo Buscas no banco de dados
         var rota = await _rotaQuery.BuscarRotaID(command.IdRota) ?? 
-                    throw new Exception("Erro ao Encontrar RotaID");
+                    throw new RotaNotFoundException(command.IdRota);
 
         var evidencias = await _evidenciaRotaQuery.GetEvidenciasUrgencia(command.IdRota) ?? 
-                    throw new Exception("Não há nenhuma Evidencia a ser Listada");
+                    throw new RotaNotFoundException(command.IdRota);
 
         List<EvidenciaDocs> docs = new();
 
@@ -91,7 +93,7 @@ public class CreateEmergencialHandler
 
         if (resultBytes == null || resultBytes.Length == 0)
         {
-            throw new Exception("Arquivo não foi gerado");
+            throw new DocxApiException();
         }
 
         return resultBytes;

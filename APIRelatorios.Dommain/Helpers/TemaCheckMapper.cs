@@ -6,17 +6,23 @@ public static class TemaCheckMapper
     private static readonly Dictionary<TemaCheck, string> _map =
         new()
         {
-            { TemaCheck.Aterramento, "Aterramento" },
-            { TemaCheck.ChavesReligadores, "Chaves/Religadores" },
-            { TemaCheck.Compartilhamento, "Compartilhamento" },
-            { TemaCheck.Condutores, "Condutores" },
-            { TemaCheck.EstruturasFerragens, "Estruturas/Ferragens" },
-            { TemaCheck.IluminacaoPublica, "Iluminação Pública" },
-            { TemaCheck.Isoladores, "Isoladores" },
-            { TemaCheck.ParaRaios, "Para-Raios" },
+            { TemaCheck.SaidaDoAlimentador, "Saída do Alimentador" },
+            { TemaCheck.Vegetacao, "Vegetação" },
             { TemaCheck.Postes, "Postes" },
-            { TemaCheck.Seguranca, "Segurança/Sinalização" },
+            { TemaCheck.Cruzetas, "Cruzetas" },
+            { TemaCheck.Isoladores, "Isoladores" },
+            { TemaCheck.Condutores, "Condutores" },
+            { TemaCheck.Seguranca, "Segurança" },
+            { TemaCheck.Aterramento, "Aterramento" },
             { TemaCheck.Transformadores, "Transformadores" },
+            { TemaCheck.ChavesReligadores, "Chaves/Religadores" },
+            { TemaCheck.ParaRaios, "Para-raios" },
+            { TemaCheck.EquipamentoInativo, "Equipamento Inativo" },
+            { TemaCheck.EquipamentoSemIdentificacao, "Equipamento sem Identificação" },
+            { TemaCheck.IluminacaoPublica, "Iluminação Pública" },
+            { TemaCheck.SegurancaSinalizacao, "Segurança/Sinalização" },
+            { TemaCheck.Compartilhamento, "Compartilhamento" },
+            { TemaCheck.OutrasConstatacoes, "Outras Constatações" }
         };
 
     public static string ToDescricao(this TemaCheck tema)

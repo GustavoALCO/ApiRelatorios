@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Application.Exceptions.Business;
+using APIRelatorios.Dommain.Entities;
 using Azure.Storage.Blobs;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Settings;
@@ -113,7 +114,7 @@ public class SavedImage : ISavedImages
         using var bitmap = SKBitmap.Decode(inputStream);
 
         if (bitmap == null)
-            throw new Exception("Erro ao decodificar imagem");
+            throw new Base64Exception();
 
         float proporcao = (float)largura / bitmap.Width;
         int altura = (int)(bitmap.Height * proporcao);
@@ -134,7 +135,7 @@ public class SavedImage : ISavedImages
         using var original = SKBitmap.Decode(inputStream);
 
         if (original == null)
-            throw new Exception("Erro ao carregar imagem");
+            throw new Base64Exception();
 
         using var surface = SKSurface.Create(new SKImageInfo(original.Width, original.Height));
         var canvas = surface.Canvas;

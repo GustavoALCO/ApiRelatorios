@@ -2,20 +2,9 @@ namespace APIRelatorios.Dommain.Enuns;
 
 public enum TipoFiscalizacao
 {
-    Alimentadores = 0,
+    Alimentadores,
 
-    Substatacao = 1,
+    SubEstacao,
 
-    Usinas = 2,
-
-    LinhaDistribuicao = 3,
-
-    LinhaTransmicao = 4,
-
-    LigacaoObras = 5,
-
-    LigacaoSemObras = 6,
-
-    ConexaoGeracaoDistribuida = 7,
-
+    Amostra
 }

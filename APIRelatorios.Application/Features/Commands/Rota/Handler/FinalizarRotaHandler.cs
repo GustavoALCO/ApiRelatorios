@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -35,45 +36,36 @@ public class FinalizarRotaHandler
         _logger.LogInformation("Fazendo buscas de RotaId");
 
         var rota = await _query.BuscarRotaID(command.RotaId)
-            ?? throw new Exception("Não foi possível encontrar a Rota");
+            ?? throw new RotaNotFoundException(command.RotaId);
 
         var evidencias = await _eviQuery.GetEvidenciaAsync(command.RotaId)
-            ?? throw new Exception("Não é possível finalizar rota sem evidências");
+            ?? throw new ListEvidenciaNotFoundException();
 
         var numeroEvidencias = evidencias.Count();
-
-        if (numeroEvidencias < 10)
-            throw new Exception("É necessário ao menos 10 evidências");
-
-        _logger.LogInformation("Ordenando evidências");
-
-        var ordenadas = evidencias
-            .OrderBy(x => x.Horario)
-            .ToList();
 
         List<List<EvidenciaRota>> blocos = new();
         List<EvidenciaRota> blocoAtual = new();
 
         _logger.LogInformation("Montando blocos por intervalo de 40 minutos");
 
-        for (int i = 0; i < ordenadas.Count; i++)
+        for (int i = 0; i < evidencias.Count; i++)
         {
-            var atual = ordenadas[i];
+            var atual = evidencias[i];
 
             blocoAtual.Add(atual);
 
             bool quebraTempo = false;
 
-            if (i < ordenadas.Count - 1)
+            if (i < evidencias.Count - 1)
             {
-                var proximo = ordenadas[i + 1];
+                var proximo = evidencias[i + 1];
                 var diff = proximo.Horario - atual.Horario;
 
                 if (diff.TotalMinutes >= 40)
                     quebraTempo = true;
             }
 
-            if (blocoAtual.Count == 20 || quebraTempo || i == ordenadas.Count - 1)
+            if (blocoAtual.Count == 20 || quebraTempo || i == evidencias.Count - 1)
             {
                 blocos.Add(new List<EvidenciaRota>(blocoAtual));
                 blocoAtual.Clear();

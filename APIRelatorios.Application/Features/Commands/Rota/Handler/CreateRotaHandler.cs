@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -25,7 +26,7 @@ public class CreateRotaHandler
         foreach(var fiscais in command.Fiscais)
         {
             if (await _validateIds.UserExisteAsync(fiscais) is false)
-                throw new Exception("Lista de usuarios invalidas");
+                throw new ListUsersNotFoundException();
         }
 
         Dommain.Entities.Rota rota = new(
@@ -34,9 +35,6 @@ public class CreateRotaHandler
                                         command.Concessionarias,
                                         command.Alimentador,
                                          DateTime.UtcNow);
-
-        if (command.Fiscais == null || command.Fiscais.Count == 0)
-            throw new Exception("Fiscais não podem ser nulos ou vazio");
 
         foreach (var userId in command.Fiscais)
         {

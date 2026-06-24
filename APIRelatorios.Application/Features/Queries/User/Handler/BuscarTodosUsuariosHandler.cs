@@ -17,7 +17,7 @@ public class BuscarTodosUsuariosHandler
 
     public async Task<ICollection<UsuarioDTO>> Handle(BuscarTodosusuariosQuery query, CancellationToken cancellationToken)
     {
-        var fiscais = await _query.BuscarTodosFiscais() ?? throw new Exception("Não Existe Fiscais Cadastrados");
+        var fiscais = await _query.BuscarTodosFiscais();
 
         ICollection<UsuarioDTO> fiscaisDTO = [];
 

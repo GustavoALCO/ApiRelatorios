@@ -20,16 +20,11 @@ public class LoginController : ControllerBase
     [HttpPost]
     public async Task<IActionResult> login(LoginCommandsCommand login)
     {
-        try
-        {
-            var jwt = await _dispatcher.Send<LoginCommandsCommand, string>(login);
 
-            return Ok(jwt);
-        }
-        catch (Exception ex)
-        {
-            return BadRequest(ex.Message);
-        }
+        var jwt = await _dispatcher.Send<LoginCommandsCommand, string>(login);
+
+        return Ok(jwt);
+
     }
 
     [HttpGet]

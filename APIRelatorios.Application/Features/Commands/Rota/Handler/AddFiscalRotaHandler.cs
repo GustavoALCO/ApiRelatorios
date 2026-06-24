@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -30,12 +31,12 @@ public sealed class AddFiscalRotaHandler
         foreach (var fiscais in add.FiscaisId)
         {
             if (await _validateids.UserExisteAsync(fiscais) is false)
-                throw new Exception("Lista de Id invalida");
+                throw new ListUsersNotFoundException();
         }
         _logger.LogInformation("Lista é Valida");
 
         var rota = await _query.BuscarRotaID(add.rotaId) ?? 
-            throw new Exception("Erro ao Encontrar Rota no Banco de dados");
+            throw new RotaNotFoundException(add.rotaId);
 
         _logger.LogInformation("Iniciando loop de para adicionar fiscal");
         foreach (var fiscalAdd in add.FiscaisId)
@@ -46,5 +47,7 @@ public sealed class AddFiscalRotaHandler
 
             await _commands.AdicionarFiscalRota(user);
         }
+
+        _logger.LogInformation("Finalizado processo de adicionar fiscal");
     }
 }

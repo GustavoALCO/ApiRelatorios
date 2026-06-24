@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using Microsoft.Extensions.Logging;
@@ -23,11 +24,9 @@ public class UpdateNomeRotaHandler
 
     public async Task Handle(UpdateNomeRotaCommand updNome, CancellationToken cancellationToken)
     {
-        if (await _validateIds.RotaExisteAsync(updNome.rotaId) is false)
-            throw new Exception("Id invalido");
 
         var rota = await _query.BuscarRotaID(updNome.rotaId) ??
-            throw new Exception("Erro ao Encontrar Rota no Banco de dados"); ;
+            throw new RotaNotFoundException(updNome.rotaId); ;
 
         rota.AlterarNomeRota(updNome.nomeRota);
 

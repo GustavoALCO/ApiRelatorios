@@ -26,15 +26,10 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> BuscarPorFiltro(
          [FromQuery]BuscarRotaFiltersQuery command)
     {
-        try
-        {
-            var rota = await _dispatcher.Query<BuscarRotaFiltersQuery, ICollection<RotaDTO>>(command);
-            return Ok(rota);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Erro interno ao buscar rotas.\n{ex}");
-        }
+
+        var rota = await _dispatcher.Query<BuscarRotaFiltersQuery, ICollection<RotaDTO>>(command);
+        return Ok(rota);
+
     }
 
     [Authorize]
@@ -42,15 +37,9 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> BuscarPorFiltro(
         [FromQuery] BuscarRotaIdQuery id)
     {
-        try
-        {
-            var rota = await _dispatcher.Query<BuscarRotaIdQuery, RotaDTO>(id);
-            return Ok(rota);
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, $"Erro interno ao buscar rotas.\n{ex}");
-        }
+
+        var rota = await _dispatcher.Query<BuscarRotaIdQuery, RotaDTO>(id);
+        return Ok(rota);
     }
 
     [Authorize]
@@ -58,15 +47,10 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> UpdNome(
         [FromBody] UpdateNomeRotaCommand command)
     {
-        try
-        {
-            await _dispatcher.Send<UpdateNomeRotaCommand>(command);
-            return Ok();
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, "Erro interno ao atualizar rota.");
-        }
+
+        await _dispatcher.Send<UpdateNomeRotaCommand>(command);
+        return Ok();
+
     }
 
     [Authorize]
@@ -74,15 +58,9 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> AddFiscais(
         [FromBody] AddFiscalRotaCommand command)
     {
-        try
-        {
-            await _dispatcher.Send<AddFiscalRotaCommand>(command);
-            return Ok();
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, "Erro interno ao adicionar fiscais.");
-        }
+
+        await _dispatcher.Send<AddFiscalRotaCommand>(command);
+        return Ok();
     }
 
     [Authorize]
@@ -90,15 +68,9 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> RemoverFiscais(
         [FromBody] RemoveFiscalRotaCommand command)
     {
-        try
-        {
-            await _dispatcher.Send<RemoveFiscalRotaCommand>(command);
-            return Ok();
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, "Erro interno ao remover fiscais.");
-        }
+
+        await _dispatcher.Send<RemoveFiscalRotaCommand>(command);
+        return Ok();
     }
 
     [Authorize]
@@ -106,30 +78,20 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> Post(
         [FromBody] CreateRotaCommand command)
     {
-        try
-        {
-            await _dispatcher.Send<CreateRotaCommand>(command);
-            return Ok();
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, "Erro interno ao criar rota.");
-        }
+
+        await _dispatcher.Send<CreateRotaCommand>(command);
+        return Ok();
+
     }
 
     [Authorize]
     [HttpDelete("{rotaId}")]
     public async Task<IActionResult> Delete( DeleteRotaCommand rotaId)
     {
-        try
-        {
-            await _dispatcher.Send<DeleteRotaCommand>(rotaId);
-            return Ok();
-        }
-        catch (Exception)
-        {
-            return StatusCode(500, "Erro interno ao deletar rota.");
-        }
+
+        await _dispatcher.Send<DeleteRotaCommand>(rotaId);
+        return Ok();
+
     }
 
     [Authorize]
@@ -137,20 +99,14 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> CriarRelatorio(
         [FromBody] CreateRelatorioWordCommand command)
     {
-        try
-        {
-            var bytes = await _dispatcher.Send<CreateRelatorioWordCommand, byte[]>(command);
+        var bytes = await _dispatcher.Send<CreateRelatorioWordCommand, byte[]>(command);
 
-            return File(
-                        bytes,
-                        "application/zip",
-                        "Relatorio.zip"
-                    );
-        }
-        catch (Exception ex )
-        {
-            return StatusCode(500, ex.Message);
-        }
+        return File(
+                    bytes,
+                    "application/zip",
+                    "Relatorio.zip"
+                );
+
     }
 
     [Authorize]
@@ -158,20 +114,14 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> CriarEmergencial(
         [FromBody] CreateEmergencialCommand command)
     {
-        try
-        {
-            var bytes = await _dispatcher.Send<CreateEmergencialCommand, byte[]>(command);
 
-            return File(
-                        bytes,
-                        "application/zip",
-                        "Emergencial.zip"
-                    );
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
+        var bytes = await _dispatcher.Send<CreateEmergencialCommand, byte[]>(command);
+
+        return File(
+                    bytes,
+                    "application/zip",
+                    "Emergencial.zip"
+                );
     }
 
     [Authorize]
@@ -179,15 +129,10 @@ public class RotaController : ControllerBase
     public async Task<IActionResult> FinalizarRota(
         [FromBody] FinalizarRotaCommand command)
     {
-        try
-        {
-            await _dispatcher.Send<FinalizarRotaCommand>(command);
 
-            return Ok();
-        }
-        catch (Exception ex)
-        {
-            return StatusCode(500, ex.Message);
-        }
+        await _dispatcher.Send<FinalizarRotaCommand>(command);
+
+        return Ok();
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
@@ -34,8 +35,7 @@ public class UpdateDescricaoImageHandler
         var image =
             await _query.GetEvidenciaId(
                 updateDescricao.evidenciaId)
-            ?? throw new Exception(
-                "Erro ao Encontrar Evidencia");
+            ?? throw new RotaNotFoundException(updateDescricao.evidenciaId);
 
         _logger.LogInformation("Evidencia Encontrada, iniciando processo de atualização");
 

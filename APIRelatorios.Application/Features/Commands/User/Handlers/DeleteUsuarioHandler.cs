@@ -1,7 +1,9 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Services;
 using APIRelatorios.Dommain.Interfaces.User;
+using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Application.Features.Commands.User.Handlers;
 
@@ -14,21 +16,29 @@ public class DeleteUsuarioHandler
 
     private readonly IValidateIds _validateIds;
 
-    public DeleteUsuarioHandler(IUserQuery query, IUserCommands commands, IValidateIds validateIds)
+    private readonly ILogger<DeleteUsuarioHandler> _logger;
+
+    public DeleteUsuarioHandler(IUserQuery query, IUserCommands commands, IValidateIds validateIds, ILogger<DeleteUsuarioHandler> logger)
     {
         _validateIds = validateIds;
         _query = query;
         _commands = commands;
+        _logger = logger;
     }
 
     public async Task Handle(DeleteUsuarioCommand dltuser, CancellationToken cancellationToken)
     {
-        if (await _validateIds.UserExisteAsync(dltuser.idUser) is false)
-            throw new Exception("Id invalido");
+        _logger.LogInformation("Iniciando processo de exclusão do usuário com ID {UserId}", dltuser.idUser);
 
         var user = await _query.BuscarFiscalId(dltuser.idUser)
-            ?? throw new Exception("Erro ao Encontrar Usuario");
+            ?? throw new UserNotFoundException(dltuser.idUser);
+
+        _logger.LogInformation("Usuário encontrado: {UserLogin} ({UserId})", user.Login, user.UserId);
+
+        user.AlterValid(true);
 
         await _commands.DeleteUser(user);
+
+        _logger.LogInformation("Usuário com ID {UserId} excluído com sucesso", dltuser.idUser);
     }
 }

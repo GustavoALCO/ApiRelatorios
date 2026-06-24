@@ -1,6 +1,7 @@
 using APIRelatorios.Application.Settings;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.IOC;
+using APIRelatorios.WebAPI.Exceptions;
 using ChatApplication.Application.Settings;
 using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,23 @@ builder.WebHost.ConfigureKestrel(options =>
 {
     options.ListenAnyIP(8080);
 });
+
+//Exceptions
+builder.Services.AddProblemDetails();
+
+builder.Services.AddExceptionHandler<AppExceptionHandler>();
+
+builder.Services.AddExceptionHandler<AzureErrorExceptionsHandler>();
+
+builder.Services.AddExceptionHandler<AuthenticationExceptionHandler>();
+
+builder.Services.AddExceptionHandler<BusinessExceptionHandler>();
+
+builder.Services.AddExceptionHandler<IntegrationExceptionHandler>();
+
+builder.Services.AddExceptionHandler<InternalErrorExceptionHandler>();
+
+builder.Services.AddExceptionHandler<NotFoundExceptionHandler>();
 
 // Configurações
 builder.Services.AddOptions<BlobSettings>()
@@ -48,6 +66,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 app.UseSwagger();
 app.UseSwaggerUI(c =>

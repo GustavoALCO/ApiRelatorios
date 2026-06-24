@@ -1,4 +1,7 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Application.Exceptions.Azure;
+using APIRelatorios.Application.Exceptions.Business;
+using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
@@ -44,12 +47,14 @@ public class CreateEvidenciaHandler
 
         _logger.LogInformation("Iniciando processo de criação de evidencia para a rota");
 
-        var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) ?? throw new Exception("Erro ao Encontrar Rota");
+        var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) 
+                            ?? throw new RotaNotFoundException(createImage.rotaID);
 
-        var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) ?? throw new Exception("Erro ao encontrar filcal");
+        var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) 
+                            ?? throw new UserNotFoundException(createImage.fiscalId);
 
         if (rota.DataFinal > createImage.Horario)
-            throw new Exception("Rota Já finalizada.");
+                throw new RotaFinalizadaException();
 
         _logger.LogInformation("Rota Encontrada, iniciando processo de criação da evidencia");
 
@@ -61,7 +66,7 @@ public class CreateEvidenciaHandler
         if (string.IsNullOrEmpty(createImage.Cidade) || string.IsNullOrEmpty(createImage.Endereco))
         {
             var azurereturn = await _mapsEnderecoService.BuscarNomeRua(createImage.Latitude, createImage.Longitude) 
-                                                        ?? throw new Exception("Erro ao buscar nome da rua e cidade");
+                                                        ?? throw new AzureErrorMapsException();
 
             if (string.IsNullOrEmpty(createImage.Cidade))
             {
@@ -90,10 +95,10 @@ public class CreateEvidenciaHandler
                                                                        lat: createImage.Latitude,
                                                                        log: createImage.Longitude);
 
-        if (urlImages.Count() == 0)
+        if (!urlImages.Any())
         {
             _logger.LogInformation("Erro ao fazer upload da imagem");
-            throw new Exception("Erro ao fazer upload da imagem");
+            throw new AzureErrorStorageException();
         }
 
         _logger.LogInformation("Imagem salva com sucesso, iniciando processo de criação da entidade de evidencia");

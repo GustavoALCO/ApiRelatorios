@@ -19,7 +19,9 @@ public class EvidenciaRotaQuery : IEvidenciaRotaQuery
     {
         try
         {
-            var image = await _Context.EvidenciaRota.Include(x => x.CheckList).FirstOrDefaultAsync(i => i.EvidenciaRotaId == imageId);
+            var image = await _Context.EvidenciaRota.Include(x => x.CheckList)
+                                                    .Include(x => x.Images)
+                                                    .FirstOrDefaultAsync(i => i.EvidenciaRotaId == imageId);
 
         return image;
         }

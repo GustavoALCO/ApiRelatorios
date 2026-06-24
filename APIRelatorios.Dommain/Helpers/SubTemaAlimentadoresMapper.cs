@@ -7,90 +7,109 @@ public static class SubTemaAlimentadoresMapper
     private static readonly Dictionary<SubTemaAlimentadores, string> _map =
         new()
         {
-            { SubTemaAlimentadores.EstadoFisico, "Não conformidade no estado físico" },
+            // Saída do Alimentador
+            { SubTemaAlimentadores.SalaBateriaRetificadores, "Sala de bateria/retificadores" },
+            { SubTemaAlimentadores.PaineisDosAlimentadores, "Painéis dos alimentadores" },
+            { SubTemaAlimentadores.CubiculosDosDisjuntores, "Cubículos dos disjuntores" },
+            { SubTemaAlimentadores.DiagramaUnifilar, "Diagrama unifilar" },
+            { SubTemaAlimentadores.AVCB, "AVCB" },
+            { SubTemaAlimentadores.ChavesBloqueioManobraPaneAlarmes, "Chaves de bloqueio/manobra, pane/alarmes" },
+            { SubTemaAlimentadores.CabosCondutores, "Cabos condutores" },
+            { SubTemaAlimentadores.ChavesSeccionadorasParaRaios, "Chaves seccionadoras/para-raios" },
+            { SubTemaAlimentadores.EstruturasEIsoladores, "Estruturas e isoladores" },
 
-            { SubTemaAlimentadores.EstabilidadeEAlinhamento, "Não conformidade na estabilidade ou alinhamento" },
+            // Vegetação
+            { SubTemaAlimentadores.VegetacaoEmContatoComRedeEletrica, "Vegetação em contato com a rede elétrica" },
+            { SubTemaAlimentadores.VegetacaoAoAlcanceDaRede, "Vegetação ao alcance da rede" },
+            { SubTemaAlimentadores.RiscoQuedaVegetacaoSobreRede, "Risco de queda de vegetação sobre a rede" },
 
-            { SubTemaAlimentadores.IdentificacaoLegivel, "Não conformidade na identificação" },
+            // Postes
+            { SubTemaAlimentadores.EstadoFisicoPostes, "Estado físico" },
+            { SubTemaAlimentadores.PosteComAberturasConcreto, "Poste com aberturas no concreto" },
+            { SubTemaAlimentadores.PosteConcretoQuebrado, "Poste de concreto quebrado" },
+            { SubTemaAlimentadores.PosteConcretoFletido, "Poste de concreto fletido" },
+            { SubTemaAlimentadores.PostesDesalinhadosOuForaDePrumo, "Postes desalinhados ou fora de prumo" },
+            { SubTemaAlimentadores.PosteSemEstabilidadeNaBase, "Poste sem estabilidade na base" },
+            { SubTemaAlimentadores.PosteMadeiraComPodridaoOuOco, "Poste de madeira com podridão ou oco" },
 
-            { SubTemaAlimentadores.SinaisdeColisao_Impacto, "Sinais de colisão ou impacto" },
+            // Cruzetas
+            { SubTemaAlimentadores.CruzetasDanificadas, "Cruzetas danificadas" },
+            { SubTemaAlimentadores.CruzetasForaPosicaoBissetriz, "Cruzetas fora da posição da bissetriz" },
+            { SubTemaAlimentadores.IntegridadeSuporteCruzetas, "Integridade de suporte das cruzetas" },
 
-            { SubTemaAlimentadores.CondicoesDaBase, "Não conformidade nas condições da base" },
+            // Isoladores
+            { SubTemaAlimentadores.IsoladoresTrincadosOuQuebrados, "Trincas ou quebras" },
+            { SubTemaAlimentadores.IsoladoresComSujeiraOuFuligem, "Sujeira ou fuligem" },
+            { SubTemaAlimentadores.FixacaoIsoladoresNaCruzeta, "Fixação na cruzeta" },
 
-            { SubTemaAlimentadores.PosicionamentoCorretoDosCabos, "Não conformidade no posicionamento dos cabos" },
+            // Condutores
+            { SubTemaAlimentadores.EstadoFisicoCondutores, "Estado físico dos condutores" },
+            { SubTemaAlimentadores.TensaoMecanicaOuEspacamentoInadequado, "Tensão mecânica ou espaçamento inadequado" },
+            { SubTemaAlimentadores.AfastamentoArvoresEstruturas, "Afastamento de árvores e estruturas" },
+            { SubTemaAlimentadores.InstalacaoSuportesSeparadores, "Instalação correta de suportes e separadores" },
+            { SubTemaAlimentadores.AusenciaCaboNeutro, "Ausência de cabo neutro" },
 
-            { SubTemaAlimentadores.AfastamentoMinimo, "Não conformidade no afastamento mínimo" },
+            // Segurança
+            { SubTemaAlimentadores.CaboPartido, "Cabo partido" },
+            { SubTemaAlimentadores.ProximidadeRedeComEdificacoes, "Proximidade da rede elétrica com edificações" },
+            { SubTemaAlimentadores.CondutoresTelecomProximosDaRede, "Condutores de telecom próximos da rede elétrica" },
 
-            { SubTemaAlimentadores.AusenciaDeCabosSoltos, "Cabos soltos, rompidos ou apoiados em ferragens" },
+            // Aterramento
+            { SubTemaAlimentadores.PresencaCondutorAterramento, "Presença e estado do condutor de aterramento" },
+            { SubTemaAlimentadores.ConexoesCorretasEContinuas, "Conexões corretas e contínuas" },
 
-            { SubTemaAlimentadores.FixacaoAdequada, "Não conformidade na fixação" },
+            // Transformadores
+            { SubTemaAlimentadores.VazamentosDeOleo, "Vazamentos de óleo" },
+            { SubTemaAlimentadores.CorrosaoOuOxidacao, "Corrosão ou oxidação" },
+            { SubTemaAlimentadores.EstufamentoTransformador, "Estufamento" },
+            { SubTemaAlimentadores.FixacaoTransformador, "Fixação" },
+            { SubTemaAlimentadores.EstadoDasBuchas, "Estado das buchas" },
+            { SubTemaAlimentadores.NinhoDePassaro, "Ninho de pássaro" },
+            { SubTemaAlimentadores.RuidoAnormal, "Ruído anormal" },
 
-            { SubTemaAlimentadores.IdentificacaoResponsavel, "Ausência de identificação do responsável" },
+            // Chaves / Religadores
+            { SubTemaAlimentadores.IntegridadeFisicaChavesReligadores, "Integridade física" },
+            { SubTemaAlimentadores.ContatosEManobrabilidade, "Contatos e manobrabilidade" },
+            { SubTemaAlimentadores.SinalizacaoDePosicao, "Sinalização de posição" },
 
-            { SubTemaAlimentadores.OcupacaoClandestina, "Indícios de ocupação clandestina" },
+            // Para-raios
+            { SubTemaAlimentadores.AusenciaParaRaios, "Ausência de para-raios" },
+            { SubTemaAlimentadores.ParaRaiosDanificados, "Para-raios danificados" },
+            { SubTemaAlimentadores.ParaRaiosAtuados, "Para-raios atuados" },
+            { SubTemaAlimentadores.FixacaoCorretaParaRaios, "Fixação correta" },
+            { SubTemaAlimentadores.SujeiraNoParaRaios, "Sujeira no para-raios" },
+            { SubTemaAlimentadores.ConexaoAoAterramento, "Conexão ao aterramento" },
 
-            { SubTemaAlimentadores.OrganizacaoDoFeixeDeCabosNoPoste, "Não conformidade na organização do feixe de cabos" },
+            // Equipamentos
+            { SubTemaAlimentadores.EquipamentoSemUsoOuInativo, "Equipamento sem uso ou inativo" },
+            { SubTemaAlimentadores.EquipamentoSemNumeroOperativo, "Equipamento sem número operativo" },
+            { SubTemaAlimentadores.NumeroOperativoIlegivel, "Número operativo ilegível" },
 
-            { SubTemaAlimentadores.IntegridadeCruzetasSuportes, "Não conformidade na integridade estrutural" },
+            // Iluminação Pública
+            { SubTemaAlimentadores.EstadoDaLuminaria, "Estado da luminária" },
+            { SubTemaAlimentadores.FuncionamentoDaLampada, "Funcionamento da lâmpada" },
+            { SubTemaAlimentadores.FotocelulaEmOperacao, "Fotocélula em operação" },
+            { SubTemaAlimentadores.FiacaoExpostaOuMalFixada, "Fiação exposta ou mal fixada" },
 
-            { SubTemaAlimentadores.ApertoDePorcasEParafusos, "Não conformidade no aperto de porcas e parafusos" },
+            // Segurança/Sinalização
+            { SubTemaAlimentadores.PlacasAdvertenciaVisiveis, "Placas de advertência visíveis" },
+            { SubTemaAlimentadores.BarreirasProtecaoAdequadas, "Barreiras de proteção adequadas" },
+            { SubTemaAlimentadores.ConformidadeNormasNR10, "Conformidade com normas NR-10" },
 
-            { SubTemaAlimentadores.CorrosaoDesgaste, "Corrosão ou desgaste" },
+            // Compartilhamento
+            { SubTemaAlimentadores.PosicionamentoCorretoCabos, "Posicionamento correto dos cabos" },
+            { SubTemaAlimentadores.AfastamentoMinimo, "Afastamento mínimo" },
+            { SubTemaAlimentadores.AusenciaCabosSoltosOuRompidos, "Ausência de cabos soltos ou rompidos" },
+            { SubTemaAlimentadores.FixacaoAdequadaCaixas, "Fixação adequada de caixas" },
+            { SubTemaAlimentadores.IdentificacaoResponsavelCabo, "Identificação do responsável pelo cabo" },
+            { SubTemaAlimentadores.IndiciosOcupacaoClandestina, "Indícios de ocupação clandestina" },
+            { SubTemaAlimentadores.ExcessoTensionamentoCabos, "Excesso de tensionamento dos cabos" },
+            { SubTemaAlimentadores.OrganizacaoFeixeCabos, "Organização do feixe de cabos" },
 
-            { SubTemaAlimentadores.TrincasQuebras, "Trincas, quebras ou fuligem" },
-
-            { SubTemaAlimentadores.FixacaoCruzeta, "Não conformidade na fixação da cruzeta" },
-
-            { SubTemaAlimentadores.EstadoFisicoDesgaste, "Desgaste ou emendas irregulares" },
-
-            { SubTemaAlimentadores.AfastamentoEstruturas, "Não conformidade no afastamento de estruturas" },
-
-            { SubTemaAlimentadores.PresencaEstado, "Não conformidade no aterramento" },
-
-            { SubTemaAlimentadores.ConexoesCorretas, "Não conformidade nas conexões" },
-
-            { SubTemaAlimentadores.VazamentoCorrosao, "Vazamentos, corrosão ou falhas na pintura" },
-
-            { SubTemaAlimentadores.NivelOleo, "Não conformidade no nível de óleo" },
-
-            { SubTemaAlimentadores.EstadoBuchas, "Não conformidade nas buchas" },
-
-            { SubTemaAlimentadores.ParaRaios, "Não conformidade nos para-raios" },
-
-            { SubTemaAlimentadores.IntegridadeFisica, "Não conformidade na integridade física" },
-
-            { SubTemaAlimentadores.ContatosManobrabilidade, "Não conformidade nos contatos ou manobrabilidade" },
-
-            { SubTemaAlimentadores.SinalizacaoPosicao, "Não conformidade na sinalização" },
-
-            { SubTemaAlimentadores.FixacaoCorreta, "Não conformidade na fixação" },
-
-            { SubTemaAlimentadores.TrincasQueimaduras, "Trincas, queimaduras ou fuligem" },
-
-            { SubTemaAlimentadores.ConexaoAterramento, "Não conformidade na conexão de aterramento" },
-
-            { SubTemaAlimentadores.EstadoLuminaria, "Não conformidade na luminária" },
-
-            { SubTemaAlimentadores.FuncionamentoLampada, "Não conformidade no funcionamento da lâmpada" },
-
-            { SubTemaAlimentadores.FotocelulaOperacao, "Não conformidade na fotocélula" },
-
-            { SubTemaAlimentadores.FiacaoExposta, "Fiação exposta ou mal fixada" },
-
-            { SubTemaAlimentadores.GalhosProximos, "Galhos próximos à rede elétrica" },
-
-            { SubTemaAlimentadores.RiscoDeQueda, "Risco de queda" },
-
-            { SubTemaAlimentadores.PlacasAdvertenciaVisiveis, "Não conformidade na sinalização de advertência" },
-
-            { SubTemaAlimentadores.BarreirasAdequadas, "Não conformidade nas barreiras de proteção" },
-
-            { SubTemaAlimentadores.ConformidadeNormas, "Não conformidade com normas técnicas e regulamentadoras" },
-            
-            { SubTemaAlimentadores.TensaoMecanicaAdequada, "Não conformidade na tensão mecânica" },
-
-            { SubTemaAlimentadores.Outros, "Outras não conformidades identificadas" },
+            // Outros
+            { SubTemaAlimentadores.OutraConstatacao, "Outras constatações" }
         };
+
 
     public static string ToDescricao(this SubTemaAlimentadores tema)
     {
