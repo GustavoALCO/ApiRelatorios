@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|Itens de Solu\u00E7\u00E3o{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\nginx.conf||{3B902123-F8A7-4915-9F01-361F908088D0}",
+      "RelativeMoniker": "D:0:0:{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|Itens de Solu\u00E7\u00E3o{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|solutionrelative:nginx.conf||{3B902123-F8A7-4915-9F01-361F908088D0}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\helpers\\temafiscalizacaomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\helpers\\temafiscalizacaomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
@@ -33,8 +37,25 @@
           "SelectedChildIndex": 1,
           "Children": [
             {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+            },
+            {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "nginx.conf",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\nginx.conf",
+              "RelativeDocumentMoniker": "nginx.conf",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\nginx.conf",
+              "RelativeToolTip": "nginx.conf",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
+              "WhenOpened": "2026-06-20T15:37:35.603Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
               "Title": "SubTemaAlimentadoresMapper.cs",
               "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
@@ -42,12 +63,11 @@
               "RelativeToolTip": "APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
               "ViewState": "AgIAAF8AAAAAAAAAAADwv2QAAAAiAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:05:25.205Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T21:05:25.205Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "TemaFiscalizacaoMapper.cs",
               "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\TemaFiscalizacaoMapper.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\TemaFiscalizacaoMapper.cs",
@@ -60,7 +80,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "TemaCheckMapper.cs",
               "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
@@ -68,12 +88,11 @@
               "RelativeToolTip": "APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAKAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:02:14.702Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T21:02:14.702Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "TipoFiscalizacao.cs",
               "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
@@ -81,12 +100,11 @@
               "RelativeToolTip": "APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:00:08.653Z",
-              "EditorCaption": ""
+              "WhenOpened": "2026-06-16T21:00:08.653Z"
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "SubTemaAlimentadores.cs",
               "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
@@ -94,12 +112,7 @@
               "RelativeToolTip": "APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAXAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T20:56:21.448Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
+              "WhenOpened": "2026-06-16T20:56:21.448Z"
             }
           ]
         }
