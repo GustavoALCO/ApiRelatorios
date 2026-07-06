@@ -89,33 +89,48 @@ internal class RowComponentes
         {
             indice++;
 
+            var titulo = string.Join(
+    " - ",
+    new[]
+    {
+        item.Alimentador,
+        item.Irregularidades
+    }
+    .Where(x => !string.IsNullOrWhiteSpace(x))
+);
+
             var descricao = string.Join(
                 ", ",
                 new[]
                 {
-                    item.Dsc,
+                    item.Observacao,
                     item.Identificação,
                     item.Localização
                 }
                 .Where(x => !string.IsNullOrWhiteSpace(x))
             );
 
+            if (!string.IsNullOrWhiteSpace(descricao))
+            {
+                titulo += ",";
+            }
+
             table.Append(
                 new TableRow(
                     CellComponentes.Texto(
                         indice.ToString(),
-                        "",
+                        " ",
                         negritoTexto1: true
                     ),
 
                     CellComponentes.Texto(
-                        item.Alimentador ?? "",
+                        titulo,
                         descricao,
                         negritoTexto1: true
                     ),
 
                     CellComponentes.Texto(
-                        item.NumeroImagem ?? "",
+                        item.NumeroImagem,
                         "",
                         negritoTexto1: true
                     )

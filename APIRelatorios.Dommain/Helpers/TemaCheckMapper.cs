@@ -28,5 +28,5 @@ public static class TemaCheckMapper
     public static string ToDescricao(this TemaCheck tema)
         => _map.TryGetValue(tema, out var desc)
             ? desc
-            : throw new Exception("");
+            : throw new ArgumentNullException("Tema Principal Não Mapeado");
 }

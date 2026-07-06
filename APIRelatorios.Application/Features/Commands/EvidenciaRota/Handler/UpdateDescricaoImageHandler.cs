@@ -71,7 +71,7 @@ public class UpdateDescricaoImageHandler
             updateDescricao.alimentador,
             updateDescricao.endereco,
             updateDescricao.identificacao,
-            updateDescricao.emergencial
+            updateDescricao.nivelRisco
         );
 
         await _commands.UpdateImageAsync(image);

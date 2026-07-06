@@ -4,6 +4,7 @@ using APIRelatorios.Application.Contracts.Enum;
 using APIRelatorios.Application.Exceptions.Azure;
 using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Dommain.Enuns;
 using APIRelatorios.Dommain.Helpers;
 using APIRelatorios.Dommain.Interfaces.Images;
 using APIRelatorios.Dommain.Interfaces.Rota;
@@ -73,10 +74,12 @@ public class CreateRelatorioHandler
                 var evidenciasBruto =
                     await _rotaQuery.GetEvidenciaAsync(command.Ids[i]);
 
-                int contagem = 1;
+                int contagem = 0;
 
                 foreach (var evidencia in evidenciasBruto)
                 {
+                    contagem++;
+                    
                     _logger.LogInformation(
                         "Processando evidência {Contagem} da rota {Index}",
                         contagem,
@@ -90,8 +93,46 @@ public class CreateRelatorioHandler
 
                     foreach (var image in images)
                     {
-                        
-                            var nomeImagem =
+                        var subtema = evidencia.CheckList.SubTemaAlimentadores.First();
+                        var temaString = string.Empty;
+
+                        // Aplicando o texto da Strinng Corretamente
+                        switch (evidencia.CheckList.TemaCheck)
+                        {
+                            case TemaCheck.Postes:
+                                switch (subtema)
+                                {
+                                    case SubTemaAlimentadores.PosteComFerragemExposta:
+                                    case SubTemaAlimentadores.PosteComAberturasNoConcreto:
+                                    case SubTemaAlimentadores.PosteMadeiraPodridaOcaOuComAberturas:
+                                    case SubTemaAlimentadores.PosteConcretoFletido:
+                                        temaString = "Postes - Integridade Física";
+                                        break;
+
+                                    case SubTemaAlimentadores.PostesDesalinhadosOuForaDePrumo:
+                                        temaString = "Postes - Alinhamentos";
+                                        break;
+
+                                    case SubTemaAlimentadores.PosteSemEstabilidadeNaBase:
+                                        temaString = "Postes - Sem Estabilidade";
+                                        break;
+
+                                    case SubTemaAlimentadores.LocacaoInadequadaDePoste:
+                                        temaString = "Postes - Localização Inadequada";
+                                        break;
+
+                                    default:
+                                        temaString = evidencia.CheckList.TemaCheck.ToDescricao();
+                                        break;
+                                }
+                                break;
+
+                            default:
+                                temaString = evidencia.CheckList.TemaCheck.ToDescricao();
+                                break;
+                        }
+
+                        var nomeImagem =
                                 $"{(EnumLetras)i} - {contagem}.{contadorImagem}";
 
                             _logger.LogInformation(
@@ -119,29 +160,31 @@ public class CreateRelatorioHandler
                             {
                                 Foto = lowBytes,
 
-                                Dsc =
-                                    $"{descricaoSubTemas}, " +
-                                    $"{evidencia.Descricao ?? "Observação vazia"}",
+                                Observacao =
+                                    $"{evidencia.Descricao ?? ""}",
+
+                                Irregularidades =
+                                    descricaoSubTemas,
 
                                 Alimentador =
-                                    evidencia.Alimentador ?? "",
+                                    evidencia.Alimentador ?? null,
 
                                 Identificação =
-                                    evidencia.Identificacão ?? "",
+                                    evidencia.Identificacão ?? null,
 
                                 Localização =
-                                    evidencia.Endereco ?? "",
+                                    evidencia.Endereco ?? null,
 
                                 NumeroImagem =
                                     nomeImagem,
 
-                                Tema =
-                                    evidencia.CheckList,
+                                Tema = temaString
+
                             };
 
                             evidencias.Add(dto);
 
-                            var originalUrl = image.OriginalUrl;
+                            var originalUrl = image.LowUrl;
 
                             fotos.Add((
                                 async () =>

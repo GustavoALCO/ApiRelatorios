@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Domain.Enuns;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 
@@ -34,5 +35,5 @@ double Longitude,
 
 DateTime Horario,
 
-bool Emergencial
+NivelRisco nivelRisco
 ) : ICommand;

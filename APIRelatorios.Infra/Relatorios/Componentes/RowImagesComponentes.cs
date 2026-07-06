@@ -7,20 +7,18 @@ namespace APIRelatorios.Infra.Relatorios.Componentes;
 
 internal class RowImagesComponentes
 {
+    private const int MaxColunas = 2;
+
     internal static Table CriarTabelasImagem(
         RelatorioContext ctx,
         IEnumerable<DadosRelatorioDTO> relatorioDTOs)
     {
         var table = CriarTabelaBase();
 
-        // Quebra em grupos de 3
-        var grupos = relatorioDTOs.Chunk(3);
+        var grupos = relatorioDTOs.Chunk(MaxColunas);
 
         foreach (var grupo in grupos)
         {
-            // =========================
-            // LINHA DAS IMAGENS
-            // =========================
             var rowImages = new TableRow();
 
             foreach (var item in grupo)
@@ -28,9 +26,7 @@ internal class RowImagesComponentes
                 rowImages.Append(
                     ImageCellComponentes.Criar(
                         ctx,
-                        item.Foto,
-                        1800000,
-                        1800000
+                        item.Foto
                     )
                 );
             }
@@ -39,9 +35,6 @@ internal class RowImagesComponentes
 
             table.Append(rowImages);
 
-            // =========================
-            // LINHA DAS DESCRIÇÕES
-            // =========================
             var rowDesc = new TableRow();
 
             foreach (var item in grupo)
@@ -51,7 +44,8 @@ internal class RowImagesComponentes
                     new[]
                     {
                         item.NumeroImagem,
-                        item.Alimentador
+                        item.Alimentador,
+                        item.Irregularidades
                     }
                     .Where(x => !string.IsNullOrWhiteSpace(x))
                 );
@@ -60,12 +54,17 @@ internal class RowImagesComponentes
                     ", ",
                     new[]
                     {
-                        item.Dsc,
+                        item.Observacao,
                         item.Identificação,
                         item.Localização
                     }
                     .Where(x => !string.IsNullOrWhiteSpace(x))
                 );
+
+                if (!string.IsNullOrWhiteSpace(descricao))
+                {
+                    titulo += ",";
+                }
 
                 rowDesc.Append(
                     CellComponentes.Texto(
@@ -139,12 +138,10 @@ internal class RowImagesComponentes
             )
         );
 
-        // Colunas fixas
         table.AppendChild(
             new TableGrid(
-                new GridColumn { Width = "3050" },
-                new GridColumn { Width = "3050" },
-                new GridColumn { Width = "3050" }
+                new GridColumn { Width = "4585" },
+                new GridColumn { Width = "4585" }
             )
         );
 
@@ -153,7 +150,7 @@ internal class RowImagesComponentes
 
     private static void PreencherCelulasVazias(TableRow row)
     {
-        while (row.ChildElements.Count < 3)
+        while (row.ChildElements.Count < MaxColunas)
         {
             row.Append(
                 CellComponentes.Texto("", "")

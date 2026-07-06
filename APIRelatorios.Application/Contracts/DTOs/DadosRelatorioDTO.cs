@@ -10,8 +10,10 @@ public readonly record struct DadosRelatorioDTO
     // Alimentador Obtido pela rota ou substituindo na Evidencia
     string Alimentador,
 
+    string Irregularidades,
+
     // Observação da evidencia
-    string Dsc,
+    string Observacao,
 
     // Identificação do poste
     string Identificação,
@@ -23,9 +25,5 @@ public readonly record struct DadosRelatorioDTO
     string NumeroImagem,
 
     // Enum para o Tema para atribuir as listas 
-    CheckList Tema,
-
-    double Lat,
-
-    double Long
+    string Tema
 );

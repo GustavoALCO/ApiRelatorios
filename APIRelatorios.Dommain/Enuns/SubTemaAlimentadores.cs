@@ -8,10 +8,12 @@ public enum SubTemaAlimentadores
     CubiculosDosDisjuntores,
     DiagramaUnifilar,
     AVCB,
-    ChavesBloqueioManobraPaneAlarmes,
+    ChavesBloqueioManobra,
+    PaneAlarmes,
     CabosCondutores,
-    ChavesSeccionadorasParaRaios,
+    ChavesSeccionadoresParaRaios,
     EstruturasEIsoladores,
+    ValoresGrandezasEletricasImportantes,
 
     // Vegetação
     VegetacaoEmContatoComRedeEletrica,
@@ -19,51 +21,53 @@ public enum SubTemaAlimentadores
     RiscoQuedaVegetacaoSobreRede,
 
     // Postes
-    EstadoFisicoPostes,
-    PosteComAberturasConcreto,
+    PosteComFerragemExposta,
+    PosteComAberturasNoConcreto,
     PosteConcretoQuebrado,
     PosteConcretoFletido,
     PostesDesalinhadosOuForaDePrumo,
     PosteSemEstabilidadeNaBase,
-    PosteMadeiraComPodridaoOuOco,
+    LocacaoInadequadaDePoste,
+    PosteMadeiraPodridaOcaOuComAberturas,
 
     // Cruzetas
     CruzetasDanificadas,
-    CruzetasForaPosicaoBissetriz,
+    CruzetasForaPosicaoBissetrizArriadasOuGiradas,
     IntegridadeSuporteCruzetas,
 
     // Isoladores
-    IsoladoresTrincadosOuQuebrados,
+    IsoladoresComTrincasOuQuebras,
     IsoladoresComSujeiraOuFuligem,
+    IsoladoresTortos,
     FixacaoIsoladoresNaCruzeta,
 
     // Condutores
     EstadoFisicoCondutores,
     TensaoMecanicaOuEspacamentoInadequado,
     AfastamentoArvoresEstruturas,
-    InstalacaoSuportesSeparadores,
+    InstalacaoSuportesEspacadores,
     AusenciaCaboNeutro,
 
     // Segurança
     CaboPartido,
     ProximidadeRedeComEdificacoes,
-    CondutoresTelecomProximosDaRede,
+    CondutoresMetalicosProximosOuTocandoRede,
 
     // Aterramento
-    PresencaCondutorAterramento,
+    PresencaEstadoCondutorAterramento,
     ConexoesCorretasEContinuas,
 
     // Transformadores
     VazamentosDeOleo,
-    CorrosaoOuOxidacao,
-    EstufamentoTransformador,
-    FixacaoTransformador,
+    CorrosaoOxidacao,
+    Estufamento,
+    Fixacao,
     EstadoDasBuchas,
     NinhoDePassaro,
     RuidoAnormal,
 
-    // Chaves / Religadores
-    IntegridadeFisicaChavesReligadores,
+    // Chaves/Religadores
+    IntegridadeFisica,
     ContatosEManobrabilidade,
     SinalizacaoDePosicao,
 
@@ -76,7 +80,7 @@ public enum SubTemaAlimentadores
     ConexaoAoAterramento,
 
     // Equipamento Inativo
-    EquipamentoSemUsoOuInativo,
+    InstalacaoOuEquipamentoSemUsoInativo,
 
     // Equipamento sem Identificação
     EquipamentoSemNumeroOperativo,
@@ -88,21 +92,21 @@ public enum SubTemaAlimentadores
     FotocelulaEmOperacao,
     FiacaoExpostaOuMalFixada,
 
-    // Segurança / Sinalização
+    // Segurança/Sinalização
     PlacasAdvertenciaVisiveis,
     BarreirasProtecaoAdequadas,
-    ConformidadeNormasNR10,
+    ConformidadeNormasNR10Concessionaria,
 
     // Compartilhamento
-    PosicionamentoCorretoCabos,
+    PosicionamentoCorretoCabosAbaixoRede,
     AfastamentoMinimo,
-    AusenciaCabosSoltosOuRompidos,
+    AusenciaCabosSoltosRompidosOuApoiados,
     FixacaoAdequadaCaixas,
     IdentificacaoResponsavelCabo,
     IndiciosOcupacaoClandestina,
     ExcessoTensionamentoCabos,
-    OrganizacaoFeixeCabos,
+    OrganizacaoFeixeCabosPoste,
 
-    // Outras Constatações
-    OutraConstatacao
+    // Outras constatações
+    DescreverConstatacaoObservada
 }

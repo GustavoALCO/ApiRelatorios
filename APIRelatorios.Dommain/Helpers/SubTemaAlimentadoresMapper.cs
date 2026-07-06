@@ -8,116 +8,117 @@ public static class SubTemaAlimentadoresMapper
         new()
         {
             // Saída do Alimentador
-            { SubTemaAlimentadores.SalaBateriaRetificadores, "Sala de bateria/retificadores" },
-            { SubTemaAlimentadores.PaineisDosAlimentadores, "Painéis dos alimentadores" },
-            { SubTemaAlimentadores.CubiculosDosDisjuntores, "Cubículos dos disjuntores" },
-            { SubTemaAlimentadores.DiagramaUnifilar, "Diagrama unifilar" },
-            { SubTemaAlimentadores.AVCB, "AVCB" },
-            { SubTemaAlimentadores.ChavesBloqueioManobraPaneAlarmes, "Chaves de bloqueio/manobra, pane/alarmes" },
-            { SubTemaAlimentadores.CabosCondutores, "Cabos condutores" },
-            { SubTemaAlimentadores.ChavesSeccionadorasParaRaios, "Chaves seccionadoras/para-raios" },
-            { SubTemaAlimentadores.EstruturasEIsoladores, "Estruturas e isoladores" },
+            { SubTemaAlimentadores.SalaBateriaRetificadores, "Sala de bateria/retificadores com irregularidades" },
+            { SubTemaAlimentadores.PaineisDosAlimentadores, "Painéis dos alimentadores com irregularidades" },
+            { SubTemaAlimentadores.CubiculosDosDisjuntores, "Cubículos dos disjuntores com irregularidades" },
+            { SubTemaAlimentadores.DiagramaUnifilar, "Diagrama unifilar ausente ou desatualizado" },
+            { SubTemaAlimentadores.AVCB, "AVCB ausente ou vencido" },
+            { SubTemaAlimentadores.ChavesBloqueioManobra, "Falhas nas chaves de bloqueio/manobra" },
+            { SubTemaAlimentadores.PaneAlarmes, "Existência de panes/alarmes injustificadas" },
+            { SubTemaAlimentadores.CabosCondutores, "Cabos condutores danificados" },
+            { SubTemaAlimentadores.ChavesSeccionadoresParaRaios, "Chaves seccionadoras ou para-raios com irregularidades" },
+            { SubTemaAlimentadores.EstruturasEIsoladores, "Estruturas ou isoladores com irregularidades" },
+            { SubTemaAlimentadores.ValoresGrandezasEletricasImportantes, "Valores de grandezas elétricas fora do esperado" },
 
             // Vegetação
             { SubTemaAlimentadores.VegetacaoEmContatoComRedeEletrica, "Vegetação em contato com a rede elétrica" },
-            { SubTemaAlimentadores.VegetacaoAoAlcanceDaRede, "Vegetação ao alcance da rede" },
+            { SubTemaAlimentadores.VegetacaoAoAlcanceDaRede, "Vegetação ao alcance da rede elétrica" },
             { SubTemaAlimentadores.RiscoQuedaVegetacaoSobreRede, "Risco de queda de vegetação sobre a rede" },
 
             // Postes
-            { SubTemaAlimentadores.EstadoFisicoPostes, "Estado físico" },
-            { SubTemaAlimentadores.PosteComAberturasConcreto, "Poste com aberturas no concreto" },
+            { SubTemaAlimentadores.PosteComFerragemExposta, "Poste com ferragem exposta" },
+            { SubTemaAlimentadores.PosteComAberturasNoConcreto, "Poste com aberturas (fissura, trinca ou rachadura) no concreto" },
             { SubTemaAlimentadores.PosteConcretoQuebrado, "Poste de concreto quebrado" },
             { SubTemaAlimentadores.PosteConcretoFletido, "Poste de concreto fletido" },
-            { SubTemaAlimentadores.PostesDesalinhadosOuForaDePrumo, "Postes desalinhados ou fora de prumo" },
-            { SubTemaAlimentadores.PosteSemEstabilidadeNaBase, "Poste sem estabilidade na base" },
-            { SubTemaAlimentadores.PosteMadeiraComPodridaoOuOco, "Poste de madeira com podridão ou oco" },
+            { SubTemaAlimentadores.PostesDesalinhadosOuForaDePrumo, "Poste desalinhado ou fora de prumo" },
+            { SubTemaAlimentadores.PosteSemEstabilidadeNaBase, "Poste com estabilidade na base comprometida" },
+            { SubTemaAlimentadores.LocacaoInadequadaDePoste, "Poste instalado em local inadequado" },
+            { SubTemaAlimentadores.PosteMadeiraPodridaOcaOuComAberturas, "Poste de madeira com podridão, oco ou com aberturas" },
 
             // Cruzetas
-            { SubTemaAlimentadores.CruzetasDanificadas, "Cruzetas danificadas" },
-            { SubTemaAlimentadores.CruzetasForaPosicaoBissetriz, "Cruzetas fora da posição da bissetriz" },
-            { SubTemaAlimentadores.IntegridadeSuporteCruzetas, "Integridade de suporte das cruzetas" },
+            { SubTemaAlimentadores.CruzetasDanificadas, "Cruzeta danificada" },
+            { SubTemaAlimentadores.CruzetasForaPosicaoBissetrizArriadasOuGiradas, "Cruzeta fora da posição da bissetriz, arriada ou girada" },
+            { SubTemaAlimentadores.IntegridadeSuporteCruzetas, "Suporte da cruzeta comprometido" },
 
             // Isoladores
-            { SubTemaAlimentadores.IsoladoresTrincadosOuQuebrados, "Trincas ou quebras" },
-            { SubTemaAlimentadores.IsoladoresComSujeiraOuFuligem, "Sujeira ou fuligem" },
-            { SubTemaAlimentadores.FixacaoIsoladoresNaCruzeta, "Fixação na cruzeta" },
+            { SubTemaAlimentadores.IsoladoresComTrincasOuQuebras, "Isoladores com trincas ou quebrado" },
+            { SubTemaAlimentadores.IsoladoresComSujeiraOuFuligem, "Isoladores com sujeira ou fuligem" },
+            { SubTemaAlimentadores.IsoladoresTortos, "Isoladores desalinhados ou fletidos" },
+            { SubTemaAlimentadores.FixacaoIsoladoresNaCruzeta, "Isolador com fixação na cruzeta comprometida" },
 
             // Condutores
-            { SubTemaAlimentadores.EstadoFisicoCondutores, "Estado físico dos condutores" },
-            { SubTemaAlimentadores.TensaoMecanicaOuEspacamentoInadequado, "Tensão mecânica ou espaçamento inadequado" },
-            { SubTemaAlimentadores.AfastamentoArvoresEstruturas, "Afastamento de árvores e estruturas" },
-            { SubTemaAlimentadores.InstalacaoSuportesSeparadores, "Instalação correta de suportes e separadores" },
+            { SubTemaAlimentadores.EstadoFisicoCondutores, "Condutor com danos físicos" },
+            { SubTemaAlimentadores.TensaoMecanicaOuEspacamentoInadequado, "Tensão mecânica ou espaçamento inadequado entre os condutores" },
+            { SubTemaAlimentadores.AfastamentoArvoresEstruturas, "Afastamento inadequado de árvores ou estruturas" },
+            { SubTemaAlimentadores.InstalacaoSuportesEspacadores, "Suportes ou espaçadores instalados inadequadamente, soltos, quebrados ou ausentes" },
             { SubTemaAlimentadores.AusenciaCaboNeutro, "Ausência de cabo neutro" },
 
             // Segurança
             { SubTemaAlimentadores.CaboPartido, "Cabo partido" },
-            { SubTemaAlimentadores.ProximidadeRedeComEdificacoes, "Proximidade da rede elétrica com edificações" },
-            { SubTemaAlimentadores.CondutoresTelecomProximosDaRede, "Condutores de telecom próximos da rede elétrica" },
+            { SubTemaAlimentadores.ProximidadeRedeComEdificacoes, "Rede elétrica próxima de edificações ou de estruturas" },
+            { SubTemaAlimentadores.CondutoresMetalicosProximosOuTocandoRede, "Condutores metálicos próximos ou tocando a rede elétrica" },
 
             // Aterramento
-            { SubTemaAlimentadores.PresencaCondutorAterramento, "Presença e estado do condutor de aterramento" },
-            { SubTemaAlimentadores.ConexoesCorretasEContinuas, "Conexões corretas e contínuas" },
+            { SubTemaAlimentadores.PresencaEstadoCondutorAterramento, "Condutor de aterramento ausente ou em más condições" },
+            { SubTemaAlimentadores.ConexoesCorretasEContinuas, "Conexões de aterramento inadequadas ou interrompidas" },
 
             // Transformadores
-            { SubTemaAlimentadores.VazamentosDeOleo, "Vazamentos de óleo" },
-            { SubTemaAlimentadores.CorrosaoOuOxidacao, "Corrosão ou oxidação" },
-            { SubTemaAlimentadores.EstufamentoTransformador, "Estufamento" },
-            { SubTemaAlimentadores.FixacaoTransformador, "Fixação" },
-            { SubTemaAlimentadores.EstadoDasBuchas, "Estado das buchas" },
-            { SubTemaAlimentadores.NinhoDePassaro, "Ninho de pássaro" },
-            { SubTemaAlimentadores.RuidoAnormal, "Ruído anormal" },
+            { SubTemaAlimentadores.VazamentosDeOleo, "Transformador com vazamento de óleo" },
+            { SubTemaAlimentadores.CorrosaoOxidacao, "Transformador com corrosão ou oxidação" },
+            { SubTemaAlimentadores.Estufamento, "Transformador com estufamento" },
+            { SubTemaAlimentadores.Fixacao, "Transformador com fixação inadequada" },
+            { SubTemaAlimentadores.EstadoDasBuchas, "Buchas do transformador danificadas" },
+            { SubTemaAlimentadores.NinhoDePassaro, "Transformador com presença de ninho de pássaro em pontos energizados" },
+            { SubTemaAlimentadores.RuidoAnormal, "Transformador com ruído anormal" },
 
             // Chaves / Religadores
-            { SubTemaAlimentadores.IntegridadeFisicaChavesReligadores, "Integridade física" },
-            { SubTemaAlimentadores.ContatosEManobrabilidade, "Contatos e manobrabilidade" },
-            { SubTemaAlimentadores.SinalizacaoDePosicao, "Sinalização de posição" },
+            { SubTemaAlimentadores.IntegridadeFisica, "Chave ou religador com integridade física comprometida" },
+            { SubTemaAlimentadores.ContatosEManobrabilidade, "Chave ou religador com problemas nos contatos ou na manobrabilidade" },
+            { SubTemaAlimentadores.SinalizacaoDePosicao, "Chave ou religador com sinalização de posição inadequada" },
 
             // Para-raios
             { SubTemaAlimentadores.AusenciaParaRaios, "Ausência de para-raios" },
             { SubTemaAlimentadores.ParaRaiosDanificados, "Para-raios danificados" },
             { SubTemaAlimentadores.ParaRaiosAtuados, "Para-raios atuados" },
-            { SubTemaAlimentadores.FixacaoCorretaParaRaios, "Fixação correta" },
-            { SubTemaAlimentadores.SujeiraNoParaRaios, "Sujeira no para-raios" },
-            { SubTemaAlimentadores.ConexaoAoAterramento, "Conexão ao aterramento" },
+            { SubTemaAlimentadores.FixacaoCorretaParaRaios, "Para-raios com fixação inadequada" },
+            { SubTemaAlimentadores.SujeiraNoParaRaios, "Para-raios com excesso de sujeira" },
+            { SubTemaAlimentadores.ConexaoAoAterramento, "Conexão do para-raios ao aterramento inadequada ou inexistente" },
 
-            // Equipamentos
-            { SubTemaAlimentadores.EquipamentoSemUsoOuInativo, "Equipamento sem uso ou inativo" },
-            { SubTemaAlimentadores.EquipamentoSemNumeroOperativo, "Equipamento sem número operativo" },
+            // Equipamento Inativo
+            { SubTemaAlimentadores.InstalacaoOuEquipamentoSemUsoInativo, "Instalação ou equipamento sem uso (inativo)" },
+
+            // Equipamento sem Identificação
+            { SubTemaAlimentadores.EquipamentoSemNumeroOperativo, "Número operativo ilegível ou danificado" },
             { SubTemaAlimentadores.NumeroOperativoIlegivel, "Número operativo ilegível" },
 
             // Iluminação Pública
-            { SubTemaAlimentadores.EstadoDaLuminaria, "Estado da luminária" },
-            { SubTemaAlimentadores.FuncionamentoDaLampada, "Funcionamento da lâmpada" },
-            { SubTemaAlimentadores.FotocelulaEmOperacao, "Fotocélula em operação" },
+            { SubTemaAlimentadores.EstadoDaLuminaria, "Luminária em mau estado de conservação" },
+            { SubTemaAlimentadores.FuncionamentoDaLampada, "Lâmpada queimada ou acesa durante o dia" },
+            { SubTemaAlimentadores.FotocelulaEmOperacao, "Fotocélula com defeito" },
             { SubTemaAlimentadores.FiacaoExpostaOuMalFixada, "Fiação exposta ou mal fixada" },
 
-            // Segurança/Sinalização
-            { SubTemaAlimentadores.PlacasAdvertenciaVisiveis, "Placas de advertência visíveis" },
-            { SubTemaAlimentadores.BarreirasProtecaoAdequadas, "Barreiras de proteção adequadas" },
-            { SubTemaAlimentadores.ConformidadeNormasNR10, "Conformidade com normas NR-10" },
+            // Segurança / Sinalização
+            { SubTemaAlimentadores.PlacasAdvertenciaVisiveis, "Ausência ou má conservação das placas de advertência" },
+            { SubTemaAlimentadores.BarreirasProtecaoAdequadas, "Barreiras de proteção inadequadas" },
+            { SubTemaAlimentadores.ConformidadeNormasNR10Concessionaria, "Não conformidade com a NR-10 ou normas da concessionária" },
 
             // Compartilhamento
-            { SubTemaAlimentadores.PosicionamentoCorretoCabos, "Posicionamento correto dos cabos" },
-            { SubTemaAlimentadores.AfastamentoMinimo, "Afastamento mínimo" },
-            { SubTemaAlimentadores.AusenciaCabosSoltosOuRompidos, "Ausência de cabos soltos ou rompidos" },
-            { SubTemaAlimentadores.FixacaoAdequadaCaixas, "Fixação adequada de caixas" },
-            { SubTemaAlimentadores.IdentificacaoResponsavelCabo, "Identificação do responsável pelo cabo" },
+            { SubTemaAlimentadores.PosicionamentoCorretoCabosAbaixoRede, "Cabos de compartilhamento posicionados inadequadamente" },
+            { SubTemaAlimentadores.AfastamentoMinimo, "Afastamento mínimo em redes não atendido" },
+            { SubTemaAlimentadores.AusenciaCabosSoltosRompidosOuApoiados, "Cabos soltos, rompidos ou apoiados inadequadamente" },
+            { SubTemaAlimentadores.FixacaoAdequadaCaixas, "Caixas com fixação inadequada" },
+            { SubTemaAlimentadores.IdentificacaoResponsavelCabo, "Ausência de identificação do responsável pelo cabo" },
             { SubTemaAlimentadores.IndiciosOcupacaoClandestina, "Indícios de ocupação clandestina" },
-            { SubTemaAlimentadores.ExcessoTensionamentoCabos, "Excesso de tensionamento dos cabos" },
-            { SubTemaAlimentadores.OrganizacaoFeixeCabos, "Organização do feixe de cabos" },
+            { SubTemaAlimentadores.ExcessoTensionamentoCabos, "Cabos com excesso de tensionamento" },
+            { SubTemaAlimentadores.OrganizacaoFeixeCabosPoste, "Feixe de cabos desorganizado" },
 
-            // Outros
-            { SubTemaAlimentadores.OutraConstatacao, "Outras constatações" }
+            // Outras Constatações
+            { SubTemaAlimentadores.DescreverConstatacaoObservada, "Outra não conformidade identificada" }
         };
 
 
     public static string ToDescricao(this SubTemaAlimentadores tema)
-    {
-        if (_map.TryGetValue(tema, out var desc))
-        {
-            return desc;
-        }
-
-        return $"SubTema não mapeado ({(int)tema})";
-    }
+    => _map.TryGetValue(tema, out var desc)
+        ? desc
+        : throw new ArgumentNullException("Erro ao Mapear os SubTemas");
 }

@@ -1,6 +1,7 @@
 ﻿using APIRelatorios.Application.Exceptions.Business;
 using APIRelatorios.Dommain.Entities;
 using Azure.Storage.Blobs;
+using Azure.Storage.Blobs.Models;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Settings;
 using Google.OpenLocationCode;
@@ -21,8 +22,16 @@ public class SavedImage : ISavedImages
 
     private static string CleanBase64(string base64)
     {
-        var cleaned = Regex.Replace(base64, @"^data:image\/[a-zA-Z0-9]+;base64,", "");
-        return cleaned.Replace("\r", "").Replace("\n", "").Replace(" ", "");
+        var cleaned = Regex.Replace(
+            base64,
+            @"^data:image\/[a-zA-Z0-9]+;base64,",
+            ""
+        );
+
+        return cleaned
+            .Replace("\r", "")
+            .Replace("\n", "")
+            .Replace(" ", "");
     }
 
     private static string Sanitize(string input)
@@ -44,19 +53,27 @@ public class SavedImage : ISavedImages
         var safeAlimentador = Sanitize(alimentador);
         var safeFiscal = Sanitize(fiscal);
 
-        var fileName = $"{safeAlimentador}_{safeFiscal}_{safeHorario}_{pluscode}_{qualidade}_{index}_{Guid.NewGuid()}.jpg";
+        var fileName =
+            $"{safeAlimentador}_{safeFiscal}_{safeHorario}_{pluscode}_{qualidade}_{index}_{Guid.NewGuid()}.jpg";
 
         var cleanedBase64 = CleanBase64(base64Image);
         var imageBytes = Convert.FromBase64String(cleanedBase64);
 
-        var blobClient = new BlobClient(_blobService.ConnectionString, container, fileName);
+        var blobClient = new BlobClient(
+            _blobService.ConnectionString,
+            container,
+            fileName
+        );
 
         using var stream = new MemoryStream(imageBytes);
 
-        await blobClient.UploadAsync(stream, new Azure.Storage.Blobs.Models.BlobHttpHeaders
-        {
-            ContentType = "image/jpeg"
-        });
+        await blobClient.UploadAsync(
+            stream,
+            new BlobHttpHeaders
+            {
+                ContentType = "image/jpeg"
+            }
+        );
 
         return blobClient.Uri.AbsoluteUri;
     }
@@ -73,6 +90,7 @@ public class SavedImage : ISavedImages
         double log)
     {
         List<ImageData> images = new();
+
         int index = 0;
 
         string plusCode = OpenLocationCode.Encode(lat, log, 11);
@@ -82,7 +100,9 @@ public class SavedImage : ISavedImages
             index++;
 
             var cleanedBase64 = CleanBase64(base64);
-            byte[] originalBytes = Convert.FromBase64String(cleanedBase64);
+
+            byte[] originalBytes =
+                Convert.FromBase64String(cleanedBase64);
 
             byte[] imageWithText = AdicionaTexto(
                 originalBytes,
@@ -92,23 +112,50 @@ public class SavedImage : ISavedImages
                 horario
             );
 
-            byte[] imageLow = RedimensionarImagem(imageWithText, 300, 100);
+            byte[] imageLow = RedimensionarImagem(
+                imageWithText,
+                300,
+                100
+            );
 
             var urlLow = await UploadBase64ImagesAsync(
-                alimentador, fiscal, horario, plusCode,
-                Convert.ToBase64String(imageLow), container, "low", index);
+                alimentador,
+                fiscal,
+                horario,
+                plusCode,
+                Convert.ToBase64String(imageLow),
+                container,
+                "low",
+                index
+            );
 
             var urlOriginal = await UploadBase64ImagesAsync(
-                alimentador, fiscal, horario, plusCode,
-                Convert.ToBase64String(imageWithText), container, "original", index);
+                alimentador,
+                fiscal,
+                horario,
+                plusCode,
+                Convert.ToBase64String(imageWithText),
+                container,
+                "original",
+                index
+            );
 
-            images.Add(new ImageData(urlOriginal, urlLow, evidenciaId));
+            images.Add(
+                new ImageData(
+                    urlOriginal,
+                    urlLow,
+                    evidenciaId
+                )
+            );
         }
 
         return images;
     }
 
-    public byte[] RedimensionarImagem(byte[] imageBytes, int largura, int qualidade)
+    public byte[] RedimensionarImagem(
+        byte[] imageBytes,
+        int largura,
+        int qualidade)
     {
         using var inputStream = new MemoryStream(imageBytes);
         using var bitmap = SKBitmap.Decode(inputStream);
@@ -117,19 +164,36 @@ public class SavedImage : ISavedImages
             throw new Base64Exception();
 
         float proporcao = (float)largura / bitmap.Width;
+
         int altura = (int)(bitmap.Height * proporcao);
 
         using var resized = bitmap.Resize(
             new SKImageInfo(largura, altura),
-            new SKSamplingOptions(SKFilterMode.Linear, SKMipmapMode.Linear)
+            new SKSamplingOptions(
+                SKFilterMode.Linear,
+                SKMipmapMode.Linear
+            )
         );
 
+        if (resized == null)
+            throw new Base64Exception();
+
         using var image = SKImage.FromBitmap(resized);
-        using var data = image.Encode(SKEncodedImageFormat.Jpeg, qualidade);
+
+        using var data = image.Encode(
+            SKEncodedImageFormat.Jpeg,
+            qualidade
+        );
 
         return data.ToArray();
     }
-    private byte[] AdicionaTexto(byte[] imageBytes, string linha1, string linha2, string linha3,string linha4)
+
+    private byte[] AdicionaTexto(
+        byte[] imageBytes,
+        string linha1,
+        string linha2,
+        string linha3,
+        string linha4)
     {
         using var inputStream = new MemoryStream(imageBytes);
         using var original = SKBitmap.Decode(inputStream);
@@ -137,12 +201,59 @@ public class SavedImage : ISavedImages
         if (original == null)
             throw new Base64Exception();
 
-        using var surface = SKSurface.Create(new SKImageInfo(original.Width, original.Height));
+        using var surface = SKSurface.Create(
+            new SKImageInfo(
+                original.Width,
+                original.Height
+            )
+        );
+
         var canvas = surface.Canvas;
 
         canvas.DrawBitmap(original, 0, 0);
 
-        float textSize = original.Width * 0.04f;
+        var linhas = new[]
+        {
+            linha1,
+            linha2,
+            linha3,
+            linha4
+        }
+        .Where(x => !string.IsNullOrWhiteSpace(x))
+        .ToArray();
+
+        if (linhas.Length == 0)
+        {
+            using var imageSemTexto = surface.Snapshot();
+
+            using var dataSemTexto = imageSemTexto.Encode(
+                SKEncodedImageFormat.Jpeg,
+                90
+            );
+
+            return dataSemTexto.ToArray();
+        }
+
+        float menorLado = Math.Min(
+            original.Width,
+            original.Height
+        );
+
+        float textSize = menorLado * 0.04f;
+        float margem = menorLado * 0.025f;
+        float lineHeight = textSize * 1.35f;
+
+        float x = margem;
+
+        float yBase =
+            original.Height -
+            margem -
+            (lineHeight * (linhas.Length - 1));
+
+        using var font = new SKFont
+        {
+            Size = textSize
+        };
 
         using var paint = new SKPaint
         {
@@ -153,29 +264,38 @@ public class SavedImage : ISavedImages
         using var shadow = new SKPaint
         {
             Color = SKColors.Black,
-            StrokeWidth = 0.02f,
             IsAntialias = true
         };
-
-        using var font = new SKFont { Size = textSize };
-
-        float x = 20;
-        float lineHeight = textSize + 10;
-
-        string[] linhas = { linha1, linha2, linha3, linha4 };
-
-        float yBase = original.Height - (lineHeight * linhas.Length);
 
         for (int i = 0; i < linhas.Length; i++)
         {
             float y = yBase + (i * lineHeight);
 
-            canvas.DrawText(linhas[i], x + 2, y + 2, SKTextAlign.Left, font, shadow);
-            canvas.DrawText(linhas[i], x, y, SKTextAlign.Left, font, paint);
+            canvas.DrawText(
+                linhas[i],
+                x + 2,
+                y + 2,
+                SKTextAlign.Left,
+                font,
+                shadow
+            );
+
+            canvas.DrawText(
+                linhas[i],
+                x,
+                y,
+                SKTextAlign.Left,
+                font,
+                paint
+            );
         }
 
         using var image = surface.Snapshot();
-        using var data = image.Encode(SKEncodedImageFormat.Jpeg, 90);
+
+        using var data = image.Encode(
+            SKEncodedImageFormat.Jpeg,
+            90
+        );
 
         return data.ToArray();
     }

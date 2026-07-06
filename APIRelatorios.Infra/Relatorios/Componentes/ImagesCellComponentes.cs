@@ -2,6 +2,8 @@
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
+using SixLabors.ImageSharp;
+using SixLabors.ImageSharp.Processing;
 using A = DocumentFormat.OpenXml.Drawing;
 using DW = DocumentFormat.OpenXml.Drawing.Wordprocessing;
 using PIC = DocumentFormat.OpenXml.Drawing.Pictures;
@@ -12,18 +14,24 @@ internal static class ImageCellComponentes
 {
     private static uint _docId = 1;
 
+    private const int LarguraMaximaPx = 500;
+    private const int AlturaMaximaPx = 650;
+
+    private const long LarguraMaximaEmus = 1900000;
+    private const long AlturaMaximaEmus = 1900000;
+
     public static TableCell Criar(
         RelatorioContext ctx,
-        byte[] imageBytes,
-        long larguraEmus,
-        long alturaEmus)
+        byte[] imageBytes)
     {
         if (imageBytes == null || imageBytes.Length == 0)
             return new TableCell(new Paragraph());
 
+        var imagemAjustada = RedimensionarImagemCrop(imageBytes);
+
         var imagePart = ctx.MainPart.AddImagePart(ImagePartType.Png);
 
-        using (var stream = new MemoryStream(imageBytes))
+        using (var stream = new MemoryStream(imagemAjustada))
             imagePart.FeedData(stream);
 
         var relId = ctx.MainPart.GetIdOfPart(imagePart);
@@ -31,7 +39,11 @@ internal static class ImageCellComponentes
 
         var drawing = new Drawing(
             new DW.Inline(
-                new DW.Extent { Cx = larguraEmus, Cy = alturaEmus },
+                new DW.Extent
+                {
+                    Cx = LarguraMaximaEmus,
+                    Cy = AlturaMaximaEmus
+                },
                 new DW.EffectExtent
                 {
                     LeftEdge = 0,
@@ -45,7 +57,10 @@ internal static class ImageCellComponentes
                     Name = $"Imagem_{id}"
                 },
                 new DW.NonVisualGraphicFrameDrawingProperties(
-                    new A.GraphicFrameLocks { NoChangeAspect = true }
+                    new A.GraphicFrameLocks
+                    {
+                        NoChangeAspect = true
+                    }
                 ),
                 new A.Graphic(
                     new A.GraphicData(
@@ -62,26 +77,39 @@ internal static class ImageCellComponentes
                                 new A.Blip
                                 {
                                     Embed = relId,
-                                    CompressionState = A.BlipCompressionValues.Print
+                                    CompressionState =
+                                        A.BlipCompressionValues.Print
                                 },
-                                new A.Stretch(new A.FillRectangle())
+                                new A.Stretch(
+                                    new A.FillRectangle()
+                                )
                             ),
                             new PIC.ShapeProperties(
                                 new A.Transform2D(
-                                    new A.Offset { X = 0, Y = 0 },
-                                    new A.Extents { Cx = larguraEmus, Cy = alturaEmus }
-
+                                    new A.Offset
+                                    {
+                                        X = 0,
+                                        Y = 0
+                                    },
+                                    new A.Extents
+                                    {
+                                        Cx = LarguraMaximaEmus,
+                                        Cy = AlturaMaximaEmus
+                                    }
                                 ),
-                                new A.PresetGeometry(new A.AdjustValueList())
+                                new A.PresetGeometry(
+                                    new A.AdjustValueList()
+                                )
                                 {
-                                    
-                                    Preset = A.ShapeTypeValues.Rectangle
+                                    Preset =
+                                        A.ShapeTypeValues.Rectangle
                                 }
                             )
                         )
                     )
                     {
-                        Uri = "http://schemas.openxmlformats.org/drawingml/2006/picture"
+                        Uri =
+                            "http://schemas.openxmlformats.org/drawingml/2006/picture"
                     }
                 )
             )
@@ -104,5 +132,22 @@ internal static class ImageCellComponentes
                 new Run(drawing)
             )
         );
+    }
+
+    private static byte[] RedimensionarImagemCrop(byte[] imageBytes)
+    {
+        using var image = Image.Load(imageBytes);
+
+        image.Mutate(x => x.Resize(new ResizeOptions
+        {
+            Size = new Size(LarguraMaximaPx, AlturaMaximaPx),
+            Mode = ResizeMode.Max,
+            Position = AnchorPositionMode.Center
+        }));
+
+        using var output = new MemoryStream();
+        image.SaveAsPng(output);
+
+        return output.ToArray();
     }
 }

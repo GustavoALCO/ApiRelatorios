@@ -3,28 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|Itens de Solu\u00E7\u00E3o{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\nginx.conf||{3B902123-F8A7-4915-9F01-361F908088D0}",
-      "RelativeMoniker": "D:0:0:{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|Itens de Solu\u00E7\u00E3o{60CA0214-88C6-8651-7B8B-6C0F6C5892CB}|solutionrelative:nginx.conf||{3B902123-F8A7-4915-9F01-361F908088D0}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\helpers\\temafiscalizacaomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\helpers\\temafiscalizacaomapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\helpers\\temacheckmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\helpers\\temacheckmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\helpers\\subtemaalimentadoresmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\helpers\\subtemaalimentadoresmapper.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\enuns\\subtemaalimentadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\enuns\\subtemaalimentadores.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\enuns\\tipofiscalizacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\enuns\\tipofiscalizacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,75 +26,28 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "nginx.conf",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\nginx.conf",
-              "RelativeDocumentMoniker": "nginx.conf",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\nginx.conf",
-              "RelativeToolTip": "nginx.conf",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABEAAAAUAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2026-06-20T15:37:35.603Z",
+              "Title": "Microsoft.Common.CurrentVersion.targets",
+              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
+              "ViewState": "AgIAANQTAAAAAAAAAAAgwOETAAATAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
+              "WhenOpened": "2026-07-06T13:39:36.612Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "SubTemaAlimentadoresMapper.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
-              "RelativeToolTip": "APIRelatorios.Dommain\\Helpers\\SubTemaAlimentadoresMapper.cs",
-              "ViewState": "AgIAAF8AAAAAAAAAAADwv2QAAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:05:25.205Z"
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "TemaFiscalizacaoMapper.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\TemaFiscalizacaoMapper.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\TemaFiscalizacaoMapper.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\TemaFiscalizacaoMapper.cs",
-              "RelativeToolTip": "APIRelatorios.Dommain\\Helpers\\TemaFiscalizacaoMapper.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAAwCoAAAAAAAAAAAAAAA==",
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Program.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Program.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Program.cs",
+              "RelativeToolTip": "APIRelatorios.WebAPI\\Program.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:03:05.682Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "TemaCheckMapper.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
-              "RelativeToolTip": "APIRelatorios.Dommain\\Helpers\\TemaCheckMapper.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABkAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:02:14.702Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "TipoFiscalizacao.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
-              "RelativeToolTip": "APIRelatorios.Dommain\\Enuns\\TipoFiscalizacao.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAPAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T21:00:08.653Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "SubTemaAlimentadores.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
-              "RelativeToolTip": "APIRelatorios.Dommain\\Enuns\\SubTemaAlimentadores.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAAXAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-06-16T20:56:21.448Z"
+              "WhenOpened": "2026-07-06T13:38:18.163Z",
+              "EditorCaption": ""
             }
           ]
         }

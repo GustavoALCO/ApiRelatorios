@@ -6,39 +6,39 @@ public class TemaFiscalizacaoMapper
     private static readonly Dictionary<TemaCheck, (int Min, int Max)> _regras =
     new()
     {
-        { TemaCheck.SaidaDoAlimentador, (0, 8) },
+    { TemaCheck.SaidaDoAlimentador, (0, 10) },
 
-        { TemaCheck.Vegetacao, (9, 11) },
+    { TemaCheck.Vegetacao, (11, 13) },
 
-        { TemaCheck.Postes, (12, 18) },
+    { TemaCheck.Postes, (14, 21) },
 
-        { TemaCheck.Cruzetas, (19, 21) },
+    { TemaCheck.Cruzetas, (22, 24) },
 
-        { TemaCheck.Isoladores, (22, 24) },
+    { TemaCheck.Isoladores, (25, 28) },
 
-        { TemaCheck.Condutores, (25, 29) },
+    { TemaCheck.Condutores, (29, 33) },
 
-        { TemaCheck.Seguranca, (30, 32) },
+    { TemaCheck.Seguranca, (34, 36) },
 
-        { TemaCheck.Aterramento, (33, 34) },
+    { TemaCheck.Aterramento, (37, 38) },
 
-        { TemaCheck.Transformadores, (35, 41) },
+    { TemaCheck.Transformadores, (39, 45) },
 
-        { TemaCheck.ChavesReligadores, (42, 44) },
+    { TemaCheck.ChavesReligadores, (46, 48) },
 
-        { TemaCheck.ParaRaios, (45, 50) },
+    { TemaCheck.ParaRaios, (49, 54) },
 
-        { TemaCheck.EquipamentoInativo, (51, 51) },
+    { TemaCheck.EquipamentoInativo, (55, 55) },
 
-        { TemaCheck.EquipamentoSemIdentificacao, (52, 53) },
+    { TemaCheck.EquipamentoSemIdentificacao, (56, 57) },
 
-        { TemaCheck.IluminacaoPublica, (54, 57) },
+    { TemaCheck.IluminacaoPublica, (58, 61) },
 
-        { TemaCheck.SegurancaSinalizacao, (58, 60) },
+    { TemaCheck.SegurancaSinalizacao, (62, 64) },
 
-        { TemaCheck.Compartilhamento, (61, 68) },
+    { TemaCheck.Compartilhamento, (65, 72) },
 
-        { TemaCheck.OutrasConstatacoes, (69, 69) }
+    { TemaCheck.OutrasConstatacoes, (73, 73) }
     };
 
     public static bool ValidarSubTemas(
@@ -60,7 +60,7 @@ public class TemaFiscalizacaoMapper
             return "Tema inválido.";
 
         return
-            $"Os subtemas permitidos para {tema} são de {faixa.Min} até {faixa.Max}.";
+            $"Os temas permitidos para {tema} são de {faixa.Min} até {faixa.Max}.";
     }
 }
 

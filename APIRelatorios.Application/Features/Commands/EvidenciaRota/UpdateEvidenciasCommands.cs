@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
+using APIRelatorios.Domain.Enuns;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 
@@ -20,5 +21,5 @@ public readonly record struct UpdateEvidenciasCommands
 
     string? identificacao,
 
-    bool? emergencial
+    NivelRisco? nivelRisco
 ) : ICommand;

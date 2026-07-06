@@ -1,6 +1,4 @@
-﻿using APIRelatorios.Dommain.Enuns;
-using APIRelatorios.Infra.Exeptions;
-using System.Runtime.ConstrainedExecution;
+﻿using APIRelatorios.Domain.Enuns;
 
 namespace APIRelatorios.Dommain.Entities;
 
@@ -34,7 +32,7 @@ public class EvidenciaRota
 
     public DateTime Horario { get; private set; }
 
-    public bool Emergencial { get; private set; }
+    public NivelRisco NivelRisco { get; private set; }
 
     public bool IsValid {get; private set;}
 
@@ -57,7 +55,7 @@ public class EvidenciaRota
         double lat,
         double lon,
         DateTime horario,
-        bool emergencial
+        NivelRisco emergencial
         )
     {
         EvidenciaRotaId = evidenciaRotaId;
@@ -67,13 +65,13 @@ public class EvidenciaRota
         Alimentador = alimentador;
         Identificacão = identificacao;
         Descricao = descricao;
-        Images = imagem ?? throw new DommainException("Erro Ao aplicar a url a entidade");
+        Images = imagem ?? throw new ArgumentNullException("Erro Ao aplicar a url a entidade");
         Endereco = endereco;
         Cidade = cidade;
         Latitude = lat;
         Longitude = lon;
         Horario = horario;
-        Emergencial = emergencial;
+        NivelRisco = emergencial;
         IsValid = true;
     }
 
@@ -83,7 +81,7 @@ public class EvidenciaRota
      string? alimentador,
      string? endereco,
      string? identificacao,
-     bool? emergencial)
+     NivelRisco? emergencial)
     {
         if (tema is not null)
             CheckList = tema;
@@ -101,7 +99,7 @@ public class EvidenciaRota
             Identificacão = identificacao;
 
         if (emergencial is not null)
-            Emergencial = (bool)emergencial;
+            NivelRisco = (NivelRisco)emergencial;
     }
 
     public void DesativarEvidencia()

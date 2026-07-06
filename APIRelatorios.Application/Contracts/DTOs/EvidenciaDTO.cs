@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Domain.Enuns;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Contracts.DTOs;
@@ -36,5 +37,5 @@ public class EvidenciaDTO
 
     public DateTime Horario { get;  set; }
 
-    public bool Emergencial { get;  set; }
+    public NivelRisco NivelRisco { get;  set; }
 }

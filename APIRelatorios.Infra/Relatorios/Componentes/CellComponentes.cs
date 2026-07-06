@@ -22,7 +22,7 @@ internal class CellComponentes
             new Run(
                 new RunProperties(
                     negritoTexto1 ? new Bold() : null,
-                    new FontSize { Val = "22" }
+                    new FontSize { Val = "18" }
                 ),
                 new Text(texto)
             )
@@ -37,7 +37,7 @@ internal class CellComponentes
                 new Run(
                     new RunProperties(
                         negritoTexto2 ? new Bold() : null,
-                        new FontSize { Val = "22"}
+                        new FontSize { Val = "18"}
                     ),
                     new Text(texto2)
                 )

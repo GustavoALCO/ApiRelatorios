@@ -3,7 +3,6 @@ using APIRelatorios.Infra.Database;
 using APIRelatorios.IOC;
 using APIRelatorios.WebAPI.Exceptions;
 using ChatApplication.Application.Settings;
-using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -17,7 +16,6 @@ builder.WebHost.ConfigureKestrel(options =>
 //Exceptions
 builder.Services.AddProblemDetails();
 
-builder.Services.AddExceptionHandler<AppExceptionHandler>();
 
 builder.Services.AddExceptionHandler<AzureErrorExceptionsHandler>();
 
@@ -48,7 +46,6 @@ builder.Services.AddOptions<AzureMapsSettings>()
 builder.Services.Authentication(builder.Configuration);
 
 // Fluent Validation
-builder.Services.AddFluentValidationAutoValidation();
 builder.Services.DeclareFluentValidate();
 
 // Swagger com JWT

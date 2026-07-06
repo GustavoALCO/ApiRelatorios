@@ -25,5 +25,5 @@ public static class MounthMapper
     public static string ToMes(this Meses mes)
         => _map.TryGetValue(mes, out var desc)
             ? desc
-            : throw new Exception("");
+            : throw new ArgumentNullException("Erro ao Mapear o nome dos Meses");
 }

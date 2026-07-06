@@ -47,22 +47,35 @@ public class CreateEvidenciaHandler
 
         _logger.LogInformation("Iniciando processo de criação de evidencia para a rota");
 
+        //FAZENDO BUSCAS DE ROTA E FISCAL PARA VALIDAR SE EXISTEM NO BANCO DE DADOS
         var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) 
                             ?? throw new RotaNotFoundException(createImage.rotaID);
 
         var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) 
                             ?? throw new UserNotFoundException(createImage.fiscalId);
 
+        //VALIDANDO SE A ROTA ESTÁ FINALIZADA, CASO ESTEJA, LANÇA EXCEÇÃO
         if (rota.DataFinal > createImage.Horario)
-                throw new RotaFinalizadaException();
+                                 throw new RotaFinalizadaException();
 
         _logger.LogInformation("Rota Encontrada, iniciando processo de criação da evidencia");
 
-        if(string.IsNullOrEmpty(createImage.Alimentador))
+        //VALIDANDO SE O ALIMENTADOR FOI INFORMADO, CASO NÃO TENHA SIDO, ATRIBUI O ALIMENTADOR DA ROTA
+        if (string.IsNullOrEmpty(createImage.Alimentador))
             createImage.Alimentador = rota.Alimentador;
+
+        //VALIDANDO SE O NIVEL DE EMERGENCIAL PARA OS ITENS FOI SELECIONADO, CASO NÃO TENHA SIDO, ATRIBUI O NIVEL DE EMERGENCIAL PARA A EVIDENCIA
+        if (createImage.subTemaFiscalizacao.Contains((int)SubTemaAlimentadores.CaboPartido) 
+            || createImage.subTemaFiscalizacao.Contains((int)SubTemaAlimentadores.ProximidadeRedeComEdificacoes) 
+            || createImage.subTemaFiscalizacao.Contains((int)SubTemaAlimentadores.CondutoresMetalicosProximosOuTocandoRede)
+            && createImage.nivelRisco != Domain.Enuns.NivelRisco.Emergencial)
+        {
+            createImage.nivelRisco = Domain.Enuns.NivelRisco.Emergencial;
+        }
 
         _logger.LogInformation("Alimentador atribuido, iniciando processo de validação de endereço e cidade");
 
+        //VALIDANDO SE O ENDEREÇO E A CIDADE FORAM INFORMADOS, CASO NÃO TENHAM SIDO, BUSCA NO AZURE MAPS
         if (string.IsNullOrEmpty(createImage.Cidade) || string.IsNullOrEmpty(createImage.Endereco))
         {
             var azurereturn = await _mapsEnderecoService.BuscarNomeRua(createImage.Latitude, createImage.Longitude) 
@@ -85,11 +98,12 @@ public class CreateEvidenciaHandler
         
         _logger.LogInformation("Endereço e Cidade validados, iniciando processo de upload da imagem");
 
+        //FAZENDO UPLOAD DAS IMAGENS PARA O AZURE STORAGE E RETORNANDO A URL DAS IMAGENS
         var urlImages = await _uploadImage.UploadListBase64ImagesAsync(alimentador: createImage.Alimentador,
                                                                        fiscal: $"{fiscais.Name}_{fiscais.LastName}",
                                                                        horario: createImage.Horario.AddHours(-3).ToString("yyyy/MM/dd HH:mm"),
                                                                        base64Images: createImage.Base64,
-                                                                       container: "testes",
+                                                                       container: "images",
                                                                        rua: createImage.Endereco,
                                                                        evidenciaId: createImage.evidenciaId,
                                                                        lat: createImage.Latitude,
@@ -126,7 +140,7 @@ public class CreateEvidenciaHandler
             lat: createImage.Latitude,
             lon: createImage.Longitude,
             horario: createImage.Horario.AddHours(-3),
-            emergencial: createImage.Emergencial
+            emergencial: createImage.nivelRisco
             );
         
         await _commands.SaveImage(image);

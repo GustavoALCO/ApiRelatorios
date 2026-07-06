@@ -37,99 +37,58 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
             var ctx = new RelatorioContext(mainPart);
 
             var dadosAgrupados = dto
-                .SelectMany(d =>
+            .Select(d =>
+            {
+                if (string.IsNullOrWhiteSpace(d.Tema))
                 {
-                    // =========================
-                    // LOGS DE VALIDAÇÃO
-                    // =========================
+                    _logger.LogWarning(
+                        """
+                        Evidência sem Tema.
+                        NumeroImagem: {NumeroImagem}
+                        Alimentador: {Alimentador}
+                        Observacao: {Observacao}
+                        Irregularidades: {Irregularidades}
+                        """,
+                        d.NumeroImagem,
+                        d.Alimentador,
+                        d.Observacao,
+                        d.Irregularidades
+                    );
+                }
 
-                    if (d.Tema == null)
-                    {
-                        _logger.LogWarning(
-                            """
-                            Evidência sem Tema.
-                            NumeroImagem: {NumeroImagem}
-                            Alimentador: {Alimentador}
-                            Dsc: {Descricao}
-                            """,
-                            d.NumeroImagem,
-                            d.Alimentador,
-                            d.Dsc
-                        );
+                if (string.IsNullOrWhiteSpace(d.Irregularidades))
+                {
+                    _logger.LogWarning(
+                        """
+                        Evidência com TemaCheck porém sem irregularidades.
+                        TemaCheck: {TemaCheck}
+                        NumeroImagem: {NumeroImagem}
+                        Alimentador: {Alimentador}
+                        Observacao: {Observacao}
+                        Irregularidades: {Irregularidades}
+                        """,
+                        d.Tema,
+                        d.NumeroImagem,
+                        d.Alimentador,
+                        d.Observacao,
+                        d.Irregularidades
+                    );
+                }
 
-                        return new[]
-                        {
-                            new
-                            {
-                                SubTema = "Sem classificação",
-                                Item = d
-                            }
-                        };
-                    }
+                return new
+                {
+                    TemaCheck = string.IsNullOrWhiteSpace(d.Tema)
+                        ? "Sem classificação"
+                        : d.Tema,
 
-                    if (d.Tema.SubTemaAlimentadores == null)
-                    {
-                        _logger.LogWarning(
-                            """
-                            Evidência com Tema porém sem SubTemaAlimentadores.
-                            NumeroImagem: {NumeroImagem}
-                            Alimentador: {Alimentador}
-                            Dsc: {Descricao}
-                            """,
-                            d.NumeroImagem,
-                            d.Alimentador,
-                            d.Dsc
-                        );
-
-                        return new[]
-                        {
-                            new
-                            {
-                                SubTema = "Sem classificação",
-                                Item = d
-                            }
-                        };
-                    }
-
-                    if (!d.Tema.SubTemaAlimentadores.Any())
-                    {
-                        _logger.LogWarning(
-                            """
-                            Evidência com lista SubTemaAlimentadores vazia.
-                            NumeroImagem: {NumeroImagem}
-                            Alimentador: {Alimentador}
-                            Dsc: {Descricao}
-                            """,
-                            d.NumeroImagem,
-                            d.Alimentador,
-                            d.Dsc
-                        );
-
-                        return new[]
-                        {
-                            new
-                            {
-                                SubTema = "Sem classificação",
-                                Item = d
-                            }
-                        };
-                    }
-
-                    // =========================
-                    // NORMAL
-                    // =========================
-
-                    return d.Tema.SubTemaAlimentadores.Select(st => new
-                    {
-                        SubTema = st.ToDescricao(),
-                        Item = d
-                    });
-                })
-                .GroupBy(x => x.SubTema)
-                .ToDictionary(
-                    g => g.Key,
-                    g => g.Select(x => x.Item).ToList()
-                );
+                    Item = d
+                };
+            })
+            .GroupBy(x => x.TemaCheck)
+            .ToDictionary(
+                g => g.Key,
+                g => g.Select(x => x.Item).ToList()
+            );
 
             _logger.LogInformation(
                 "Temas encontrados no relatório: {Temas}",

@@ -103,7 +103,7 @@ public class BuscarTodasAsEvidenciasRotaHandler
                 temaFiscalizacao = evidencias.CheckList.TemaCheck,
                 Latitude = evidencias.Latitude,
                 Longitude = evidencias.Longitude,
-                Emergencial = evidencias.Emergencial
+                NivelRisco = evidencias.NivelRisco
             };
             _logger.LogInformation("DTO criado para a evidência {EvidenciaRotaId}, adicionando à lista de resultados",
                 evidenciaDTO.EvidenciaRotaId);
