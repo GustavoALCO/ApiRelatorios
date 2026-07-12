@@ -40,7 +40,8 @@ public class CreateRotaRetornoHandler
             $"{rotaoriginal.NomeRota} Retorno {data.ToString("dd/MM/yyyy")}",
             rotaoriginal.Concessionarias,
             rotaoriginal.Alimentador,
-            data
+            data,
+            rotaoriginal.TipoFiscalizacao
             );
 
         await _rotaCommands.CreateRotaAsync(rotaRetorno);

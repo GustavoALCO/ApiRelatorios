@@ -48,9 +48,6 @@ builder.Services.Authentication(builder.Configuration);
 // Fluent Validation
 builder.Services.DeclareFluentValidate();
 
-// Swagger com JWT
-builder.Services.AddSwagger();
-
 // Infraestrutura, interfaces e handlers
 builder.Services.AddInfra(builder.Configuration);
 builder.Services.DeclareInterfaces();
@@ -65,12 +62,6 @@ builder.Services.AddEndpointsApiExplorer();
 var app = builder.Build();
 
 app.UseExceptionHandler();
-
-app.UseSwagger();
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "Relatorio v1");
-});
 
 // 🔹 Autenticação + Autorização
 app.UseAuthentication();

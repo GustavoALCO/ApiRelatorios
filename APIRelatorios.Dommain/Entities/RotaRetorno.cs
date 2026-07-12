@@ -10,8 +10,8 @@ public class RotaRetorno : Rota
         
     }
 
-    public RotaRetorno(Guid rotaId, string nomeRota, Concessionarias concessionarias, string alimentador, DateTime dataInicio)
-        :base (rotaId, nomeRota, concessionarias, alimentador, dataInicio)
+    public RotaRetorno(Guid rotaId, string nomeRota, Concessionarias concessionarias, string alimentador, DateTime dataInicio, TipoFiscalizacao tipo)
+        :base (rotaId, nomeRota, concessionarias, alimentador, dataInicio, tipo)
     {
     
     }

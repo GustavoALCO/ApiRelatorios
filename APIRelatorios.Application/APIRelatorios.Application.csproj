@@ -7,12 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.27.0" />
+    <PackageReference Include="Azure.Storage.Blobs" Version="12.29.1" />
     <PackageReference Include="FluentValidation" Version="12.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.9" />
     <PackageReference Include="OpenLocationCode" Version="2.1.1" />
-    <PackageReference Include="SkiaSharp" Version="3.119.2" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.119.2" />
+    <PackageReference Include="SkiaSharp" Version="4.148.0" />
+    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="4.148.0" />
   </ItemGroup>
 
   <ItemGroup>

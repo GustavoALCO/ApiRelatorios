@@ -2,6 +2,7 @@
 
 public enum Concessionarias
 {
+    // Distribuidoras
     CPFL_Paulista = 0,
     CPFL_Piratininga = 1,
     CPFL_Santa_Cruz = 2,
@@ -9,6 +10,8 @@ public enum Concessionarias
     ENEL = 4,
     ENERGISA = 5,
     ELEKTRO = 6,
+
+    // Permissionárias
     CETRIL = 7,
     CERMC = 8,
     CERIM = 9,
@@ -21,4 +24,7 @@ public enum Concessionarias
     CERIPA = 16,
     COOPERLUZ_SP = 17,
     CERES = 18,
+
+    // Distribuidoras de transmissão
+    ISA = 19,
 }

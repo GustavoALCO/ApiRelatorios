@@ -23,4 +23,6 @@ public static class ErrorCodes
     public const string DocxApiException = "DOCX_API_EXCEPTION";
 
     public const string InternalError = "INTERNAL_ERROR";
+
+    public const string AmostraNotFound = "AMOSTRA_NOT_FOUND";
 }

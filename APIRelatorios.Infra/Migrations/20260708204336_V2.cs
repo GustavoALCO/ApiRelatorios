@@ -5,25 +5,18 @@
 namespace APIRelatorios.Infra.Migrations
 {
     /// <inheritdoc />
-    public partial class V3 : Migration
+    public partial class V2 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<bool>(
-                name: "isValid",
-                table: "Rota",
-                type: "boolean",
-                nullable: false,
-                defaultValue: false);
+
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
-                name: "isValid",
-                table: "Rota");
+
         }
     }
 }

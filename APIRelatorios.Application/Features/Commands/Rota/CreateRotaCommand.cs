@@ -6,7 +6,7 @@ namespace APIRelatorios.Application.Features.Commands.Rota;
 
 public readonly record struct CreateRotaCommand
 (
-    Guid? rotaId,
+    Guid rotaId,
 
     string NomeRota, 
 
@@ -14,6 +14,8 @@ public readonly record struct CreateRotaCommand
 
     string Alimentador,
 
-    List<int> Fiscais 
+    List<int> Fiscais ,
+
+    TipoFiscalizacao TipoFiscalizacao
 
 ) : ICommand;

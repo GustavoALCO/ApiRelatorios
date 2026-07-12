@@ -23,7 +23,16 @@ public interface ISavedImages
         Guid evidenciaId,
         double lat,
         double log
-);
+    );
+
+    public Task<List<string>> UploadListImagensAmostra(
+        string seqIsa,
+        string fiscal,
+        List<string> base64Images,
+        string container,
+        double lat,
+        double log
+    );
 
     public byte[] RedimensionarImagem(byte[] imageBytes, int largura, int qualidade);
 

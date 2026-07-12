@@ -1,6 +1,7 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Application.Interfaces;
+using APIRelatorios.Domain.Enuns;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 using APIRelatorios.Dommain.Interfaces.Images;
@@ -64,6 +65,10 @@ public class UpdateDescricaoImageHandler
                 .ToList()
         );
 
+        var nivelRisco = updateDescricao.nivelRisco is not null
+            ? (NivelRisco)updateDescricao.nivelRisco
+            : image.NivelRisco;
+
         // Atualiza entidade
         image.Atualizar(
             updateDescricao.descricao,
@@ -71,7 +76,7 @@ public class UpdateDescricaoImageHandler
             updateDescricao.alimentador,
             updateDescricao.endereco,
             updateDescricao.identificacao,
-            updateDescricao.nivelRisco
+            nivelRisco
         );
 
         await _commands.UpdateImageAsync(image);

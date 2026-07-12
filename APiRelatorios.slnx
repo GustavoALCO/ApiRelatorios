@@ -12,7 +12,4 @@
   <Project Path="docker-compose.dcproj">
     <Build />
   </Project>
-  <Project Path="PythonDocx/PythonDocx.pyproj" Type="888888a0-9f3d-457c-b088-3a5042f75d52" Id="9d0e15d5-dc22-4e7e-8af3-63f7b6c5cf33">
-    <Build Project="false" />
-  </Project>
 </Solution>

@@ -28,7 +28,10 @@ public static class ConcessionariasMapper
             { Concessionarias.CERIS, "Cooperativa de Eletrificação da Região de Itapecerica da Serra" },
             { Concessionarias.CERIPA, "Cooperativa de Eletrificação Rural de Itaí, Paranapanema e Avaré Ltda." },
             { Concessionarias.COOPERLUZ_SP, "Cooperluz Cooperativa de Geração de Energia e Desenvolvimento" },
-            { Concessionarias.CERES, "Ceres Tecnologia Ltda." }
+            { Concessionarias.CERES, "Ceres Tecnologia Ltda." },
+
+            // Distribuidoras de transmissão
+            { Concessionarias.ISA, "ISA CTEEP – Companhia de Transmissão de Energia Elétrica Paulista" }
        };
 
     public static string ToConc(this Concessionarias conc)

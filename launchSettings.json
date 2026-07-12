@@ -4,7 +4,10 @@
       "commandName": "DockerCompose",
       "commandVersion": "1.0",
       "serviceActions": {
-        "apirelatorios.webapi": "StartDebugging"
+        "apirelatorios.webapi": "StartDebugging",
+        "api-docx": "DoNotStart",
+        "nginx": "StartWithoutDebugging",
+        "postgres-db": "StartWithoutDebugging"
       }
     }
   }

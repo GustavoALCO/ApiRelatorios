@@ -1,13 +1,8 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
-using APIRelatorios.Application.Features.Commands.Images.Handler;
-using APIRelatorios.Application.Features.Commands.Rota.Handler;
-using APIRelatorios.Application.Features.Commands.User.Handlers;
-using APIRelatorios.Application.Features.Querys.EvidenciaRota.Handler;
-using APIRelatorios.Application.Features.Querys.Rota.Handler;
-using APIRelatorios.Application.Features.Querys.User.Handler;
 using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Application.Services;
 using APIRelatorios.Application.Settings;
+using APIRelatorios.Domain.Interfaces.Amostra;
 using APIRelatorios.Domain.Interfaces.Services;
 using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.Images;
@@ -17,6 +12,7 @@ using APIRelatorios.Dommain.Interfaces.User;
 using APIRelatorios.Infra.Auth;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Relatorios.Index;
+using APIRelatorios.Infra.Repository.Amostra;
 using APIRelatorios.Infra.Repository.Images;
 using APIRelatorios.Infra.Repository.Rota;
 using APIRelatorios.Infra.Repository.User;
@@ -31,7 +27,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using Microsoft.OpenApi;
 using System.Reflection;
 using System.Text;
 
@@ -80,40 +75,6 @@ public static class DependencyInjection
         return services;
     }
 
-    public static IServiceCollection AddSwagger(this IServiceCollection services)
-    {
-        services.AddSwaggerGen(c =>
-        {
-            c.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "Relatorio",
-                Version = "v1"
-            });
-
-            // Define esquema de segurança Bearer JWT
-            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                Name = "Authorization",
-                In = ParameterLocation.Header,
-                Type = SecuritySchemeType.Http,
-                Scheme = "bearer",
-                BearerFormat = "JWT",
-                Description = "Digite: Bearer {token}"
-            });
-
-            // Adiciona requisito usando delegate
-            c.AddSecurityRequirement(document =>
-            {
-                return new OpenApiSecurityRequirement
-                {
-                    { new OpenApiSecuritySchemeReference("Bearer"), new List<string>() }
-                };
-            });
-        });
-
-        return services;
-    }
-
     public static IServiceCollection DeclareInterfaces(this IServiceCollection services)
     {
         services.AddScoped<IEvidenciaRotaCommands, EvidenciaRotaCommands>();
@@ -126,6 +87,9 @@ public static class DependencyInjection
         services.AddScoped<IRotaQuery, RotaQuery>();
 
         services.AddScoped<IImagesQuery, ImagesQuery>();
+
+        services.AddScoped<IAmostraCommands, AmostraCommands>();
+        services.AddScoped<IAmostraQuery, AmostraQuery>();
 
         return services;
     }

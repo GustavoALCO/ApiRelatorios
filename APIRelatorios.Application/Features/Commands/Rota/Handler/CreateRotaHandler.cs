@@ -30,11 +30,12 @@ public class CreateRotaHandler
         }
 
         Dommain.Entities.Rota rota = new(
-                                        command.rotaId ?? Guid.NewGuid(),
+                                        command.rotaId,
                                         command.NomeRota,
                                         command.Concessionarias,
                                         command.Alimentador,
-                                         DateTime.UtcNow);
+                                         DateTime.UtcNow,
+                                         command.TipoFiscalizacao);
 
         foreach (var userId in command.Fiscais)
         {

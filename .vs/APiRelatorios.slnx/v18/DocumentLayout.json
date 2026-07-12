@@ -3,11 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\rota\\handler\\createrotahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\rota\\handler\\createrotahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\entities\\rota.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\entities\\rota.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\rota\\createrotacommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\rota\\createrotacommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\amostra\\createamostracommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\amostra\\createamostracommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -17,8 +26,34 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 3,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Rota.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Entities\\Rota.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Entities\\Rota.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Entities\\Rota.cs",
+              "RelativeToolTip": "APIRelatorios.Dommain\\Entities\\Rota.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAuwCEAAACMAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T18:30:43.894Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CreateRotaCommand.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\CreateRotaCommand.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\Rota\\CreateRotaCommand.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\CreateRotaCommand.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\Rota\\CreateRotaCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABUAAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T18:24:36.235Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
@@ -26,27 +61,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "Microsoft.Common.CurrentVersion.targets",
-              "DocumentMoniker": "C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeDocumentMoniker": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ToolTip": "C:\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "RelativeToolTip": "..\\..\\..\\..\\..\\Program Files\\Microsoft Visual Studio\\18\\Insiders\\MSBuild\\Current\\Bin\\amd64\\Microsoft.Common.CurrentVersion.targets",
-              "ViewState": "AgIAANQTAAAAAAAAAAAgwOETAAATAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003801|",
-              "WhenOpened": "2026-07-06T13:39:36.612Z",
+              "Title": "CreateRotaHandler.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRotaHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRotaHandler.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRotaHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRotaHandler.cs",
+              "ViewState": "AgIAABUAAAAAAAAAAADwvygAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-10T18:17:20.144Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Program.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Program.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Program.cs",
-              "RelativeToolTip": "APIRelatorios.WebAPI\\Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAArAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "CreateAmostraCommand.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Amostra\\CreateAmostraCommand.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\Amostra\\CreateAmostraCommand.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Amostra\\CreateAmostraCommand.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\Amostra\\CreateAmostraCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-06T13:38:18.163Z",
+              "WhenOpened": "2026-07-10T14:32:23.917Z",
               "EditorCaption": ""
             }
           ]

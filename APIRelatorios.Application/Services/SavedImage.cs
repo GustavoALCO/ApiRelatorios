@@ -299,4 +299,33 @@ public class SavedImage : ISavedImages
 
         return data.ToArray();
     }
+
+    public async Task<List<string>> UploadListImagensAmostra(string seqIsa, string fiscal, List<string> base64Images, string container, double lat, double log)
+    {
+        var imagesUrl = new List<string>();
+
+        int index = 0;
+
+        string plusCode = OpenLocationCode.Encode(lat, log, 11);
+
+        foreach (var image in base64Images)
+        {
+            index++;
+
+            string url = await UploadBase64ImagesAsync(
+                seqIsa,
+                fiscal,
+                DateTime.Now.ToString("yyyyMMdd_HHmmss"),
+                plusCode,
+                image,
+                container,
+                "compact",
+                index
+            );
+
+            imagesUrl.Add(url);
+        }
+
+        return imagesUrl;
+    }
 }

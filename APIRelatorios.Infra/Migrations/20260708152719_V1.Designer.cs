@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using APIRelatorios.Infra.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -12,9 +13,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace APIRelatorios.Infra.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20260708152719_V1")]
+    partial class V1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -32,6 +35,7 @@ namespace APIRelatorios.Infra.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("DataFabricacao")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("DescricaoTUC")
@@ -49,6 +53,7 @@ namespace APIRelatorios.Infra.Migrations
                         .HasColumnType("text");
 
                     b.PrimitiveCollection<List<string>>("Fotos")
+                        .IsRequired()
                         .HasColumnType("text[]");
 
                     b.Property<string>("Instalacao")
@@ -78,6 +83,7 @@ namespace APIRelatorios.Infra.Migrations
                         .HasColumnType("text");
 
                     b.Property<string>("Observacao")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("PosicaoOperativa")

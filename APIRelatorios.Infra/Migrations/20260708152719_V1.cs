@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -42,11 +43,57 @@ namespace APIRelatorios.Infra.Migrations
                     Km = table.Column<double>(type: "double precision", nullable: true),
                     DataInicio = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
                     DataFinal = table.Column<DateTime>(type: "timestamp with time zone", nullable: true),
+                    isValid = table.Column<bool>(type: "boolean", nullable: false),
+                    TipoFiscalizacao = table.Column<int>(type: "integer", nullable: false),
                     TipoRota = table.Column<string>(type: "character varying(13)", maxLength: 13, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rota", x => x.RotaId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Amostras",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    RotaId = table.Column<Guid>(type: "uuid", nullable: false),
+                    SeqISA = table.Column<string>(type: "text", nullable: false),
+                    SeqBaseFisica = table.Column<string>(type: "text", nullable: false),
+                    VlrBase = table.Column<string>(type: "text", nullable: true),
+                    DescricaoTUC = table.Column<string>(type: "text", nullable: false),
+                    DescricaoTec = table.Column<string>(type: "text", nullable: false),
+                    ODIEngenharia = table.Column<string>(type: "text", nullable: false),
+                    Instalacao = table.Column<string>(type: "text", nullable: false),
+                    Endereco = table.Column<string>(type: "text", nullable: true),
+                    Municipio = table.Column<string>(type: "text", nullable: true),
+                    Latitude = table.Column<double>(type: "double precision", nullable: true),
+                    Longitude = table.Column<double>(type: "double precision", nullable: true),
+                    LatitudeUser = table.Column<double>(type: "double precision", nullable: true),
+                    LongitudeUser = table.Column<double>(type: "double precision", nullable: true),
+                    TUC1 = table.Column<string>(type: "text", nullable: false),
+                    TUC2 = table.Column<string>(type: "text", nullable: true),
+                    TUC3 = table.Column<string>(type: "text", nullable: true),
+                    TUC4 = table.Column<string>(type: "text", nullable: true),
+                    TUC5 = table.Column<string>(type: "text", nullable: true),
+                    TUC6 = table.Column<string>(type: "text", nullable: true),
+                    NumSerie = table.Column<string>(type: "text", nullable: true),
+                    PosicaoOperativa = table.Column<string>(type: "text", nullable: true),
+                    Equipamento = table.Column<string>(type: "text", nullable: true),
+                    DataFabricacao = table.Column<string>(type: "text", nullable: false),
+                    Observacao = table.Column<string>(type: "text", nullable: false),
+                    Fotos = table.Column<List<string>>(type: "text[]", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Amostras", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Amostras_Rota_RotaId",
+                        column: x => x.RotaId,
+                        principalTable: "Rota",
+                        principalColumn: "RotaId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -64,7 +111,7 @@ namespace APIRelatorios.Infra.Migrations
                     Latitude = table.Column<double>(type: "double precision", nullable: false),
                     Longitude = table.Column<double>(type: "double precision", nullable: false),
                     Horario = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Emergencial = table.Column<bool>(type: "boolean", nullable: false),
+                    NivelRisco = table.Column<int>(type: "integer", nullable: false),
                     IsValid = table.Column<bool>(type: "boolean", nullable: false)
                 },
                 constraints: table =>
@@ -108,9 +155,9 @@ namespace APIRelatorios.Infra.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false),
                     TemaCheck = table.Column<int>(type: "integer", nullable: false),
-                    SubTemaAlimentadores = table.Column<int[]>(type: "integer[]", nullable: false),
-                    EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false)
+                    SubTemaAlimentadores = table.Column<int[]>(type: "integer[]", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -130,7 +177,6 @@ namespace APIRelatorios.Infra.Migrations
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
                     OriginalUrl = table.Column<string>(type: "text", nullable: false),
-                    MediumUrl = table.Column<string>(type: "text", nullable: false),
                     LowUrl = table.Column<string>(type: "text", nullable: false),
                     EvidenciaRotaId = table.Column<Guid>(type: "uuid", nullable: false)
                 },
@@ -144,6 +190,11 @@ namespace APIRelatorios.Infra.Migrations
                         principalColumn: "EvidenciaRotaId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Amostras_RotaId",
+                table: "Amostras",
+                column: "RotaId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CheckList_EvidenciaRotaId",
@@ -170,6 +221,9 @@ namespace APIRelatorios.Infra.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Amostras");
+
             migrationBuilder.DropTable(
                 name: "CheckList");
 

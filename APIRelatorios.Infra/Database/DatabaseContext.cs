@@ -1,4 +1,5 @@
-﻿using APIRelatorios.Dommain.Entities;
+﻿using APIRelatorios.Domain.Entities;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Enuns;
 using DocumentFormat.OpenXml.Vml.Office;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +23,8 @@ public class DatabaseContext : DbContext
     public DbSet<ImageData> Images { get; set; }
 
     public DbSet<CheckList> CheckList {get; set;}
+
+    public DbSet<Amostra> Amostras { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
 {
@@ -93,6 +96,16 @@ public class DatabaseContext : DbContext
         .WithMany(r => r.Fiscais)
         .HasForeignKey(ur => ur.RotaId);
 
-    base.OnModelCreating(modelBuilder);
+    // Amostra
+
+    modelBuilder.Entity<Amostra>()
+                .HasKey(x => x.Id);
+
+    modelBuilder.Entity<Amostra>()
+                .HasOne(e => e.Rota)
+                .WithMany()
+                .HasForeignKey(e => e.RotaId);
+
+        base.OnModelCreating(modelBuilder);
 }
 }

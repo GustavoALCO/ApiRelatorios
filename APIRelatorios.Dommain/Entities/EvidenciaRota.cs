@@ -12,7 +12,7 @@ public class EvidenciaRota
 
     public Rota Rota { get; set; }
 
-    public CheckList CheckList { get; private set; } = null;
+    public CheckList CheckList { get; private set; }
 
     public string? Alimentador { get; private set; }
 
