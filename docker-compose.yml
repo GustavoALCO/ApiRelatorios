@@ -60,22 +60,22 @@ services:
       - backend
 
   nginx:
-    image: nginx:1.25
-    container_name: nginx_proxy
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-      - ./certs:/etc/nginx/certs
-    depends_on:
-      - apirelatorios.webapi
+  image: nginx:1.25
+  container_name: nginx_proxy
+  ports:
+    - "80:80"
+    - "443:443"
+  volumes:
+    - ./nginx.conf:/etc/nginx/nginx.conf
+    - ./letsencrypt:/etc/letsencrypt:ro
+  depends_on:
+    - apirelatorios.webapi
 
-    restart: unless-stopped
+  restart: unless-stopped
 
-    networks:
-      - frontend
-      - backend
+  networks:
+    - frontend
+    - backend
 
 volumes:
   pgdata:
