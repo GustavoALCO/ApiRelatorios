@@ -3,112 +3,287 @@ using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Dommain.Interfaces.User;
+using Microsoft.Extensions.Logging;
 using System.Globalization;
 
 namespace APIRelatorios.Application.Features.Querys.Rota.Handler;
 
 public class BuscarRotaFiltersHandler
-    : IQueryHandler<BuscarRotaFiltersQuery, ICollection<RotaDTO>>
+    : IQueryHandler<
+        BuscarRotaFiltersQuery,
+        ICollection<RotaDTO>
+    >
 {
     private readonly IRotaQuery _rotaQuery;
-
     private readonly IUserQuery _userQuery;
 
-    public BuscarRotaFiltersHandler(IRotaQuery rotaQuery, IUserQuery userQuery)
+    private readonly ILogger<BuscarRotaFiltersHandler> _logger;
+
+    public BuscarRotaFiltersHandler(
+        IRotaQuery rotaQuery,
+        IUserQuery userQuery,
+        ILogger<BuscarRotaFiltersHandler> logger)
     {
         _rotaQuery = rotaQuery;
         _userQuery = userQuery;
+        _logger = logger;
     }
 
-    public async Task<ICollection<RotaDTO>> Handle(BuscarRotaFiltersQuery commands, CancellationToken cancellationToken)
+    public async Task<ICollection<RotaDTO>> Handle(
+        BuscarRotaFiltersQuery commands,
+        CancellationToken cancellationToken)
     {
-        //valida se o fiscal é existente
-        var fiscal = await _userQuery.BuscarFiscalId(commands.FiscalId) ?? throw new UserNotFoundException(commands.FiscalId);
+        _logger.LogInformation(
+            "Iniciando busca de rotas. " +
+            "FiscalId: {FiscalId}, Nome: {Nome}, " +
+            "DataInicial: {DataInicial}, DataFinal: {DataFinal}, " +
+            "TipoFiscalizacao: {TipoFiscalizacao}, " +
+            "Página: {Pagina}, Tamanho: {Tamanho}",
+            commands.FiscalId,
+            commands.Nome,
+            commands.DataInicial,
+            commands.DataFinal,
+            commands.tipoFiscalizacao,
+            commands.page,
+            commands.pagesize
+        );
 
-        //Buscar IQueryable para buscar filtros
-        var query = _rotaQuery.BuscarQuery();
+        var fiscal = await _userQuery.BuscarFiscalId(
+            commands.FiscalId
+        );
 
-        //Passa o parametro para buscar apenas rotas que o usuario esta incluido.
-        query = query.Where(x => x.Fiscais.Any(f => f.UserId == commands.FiscalId));
-
-
-        //Verifica se o valor de nome não é nulo
-        if (!string.IsNullOrEmpty(commands.Nome))
+        if (fiscal == null)
         {
-            //Passa o parametro do nome para a busca de filtros
-            query = query.Where(x => x.NomeRota.ToUpper().Contains(commands.Nome.ToUpper()));
+            _logger.LogWarning(
+                "Fiscal não encontrado. FiscalId: {FiscalId}",
+                commands.FiscalId
+            );
+
+            throw new UserNotFoundException(
+                commands.FiscalId
+            );
         }
 
-        //Verifica Se a data Inicial é nula
-        if (!string.IsNullOrEmpty(commands.DataInicial) && !string.IsNullOrEmpty(commands.DataFinal))
+        _logger.LogInformation(
+            "Fiscal encontrado. FiscalId: {FiscalId}, Nome: {Nome}",
+            commands.FiscalId,
+            fiscal.Name
+        );
+
+        var query = _rotaQuery.BuscarQuery();
+
+        _logger.LogInformation(
+            "Aplicando filtro de rotas vinculadas ao fiscal {FiscalId}",
+            commands.FiscalId
+        );
+
+        query = query.Where(
+            rota => rota.Fiscais.Any(
+                fiscalRota =>
+                    fiscalRota.UserId == commands.FiscalId
+            )
+        );
+
+        if (!string.IsNullOrWhiteSpace(commands.Nome))
         {
-            var dataInicial = DateTime.SpecifyKind(
-                DateTime.ParseExact(commands.DataInicial, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                DateTimeKind.Utc
+            var nome = commands.Nome.Trim().ToUpper();
+
+            _logger.LogInformation(
+                "Aplicando filtro de nome: {Nome}",
+                commands.Nome
             );
-    
-            var dataFinal = DateTime.SpecifyKind(
-                DateTime.ParseExact(commands.DataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                DateTimeKind.Utc
+
+            query = query.Where(
+                rota =>
+                    rota.NomeRota != null &&
+                    rota.NomeRota.ToUpper().Contains(nome)
+            );
+        }
+
+        if (!string.IsNullOrWhiteSpace(commands.DataInicial) &&
+            !string.IsNullOrWhiteSpace(commands.DataFinal))
+        {
+            var dataInicial = ConverterData(
+                commands.DataInicial,
+                nameof(commands.DataInicial)
+            );
+
+            var dataFinal = ConverterData(
+                commands.DataFinal,
+                nameof(commands.DataFinal)
             );
 
             if (dataFinal < dataInicial)
             {
-                dataFinal = dataInicial;
-                dataInicial = dataFinal;
+                _logger.LogWarning(
+                    "Intervalo de datas invertido. " +
+                    "DataInicial: {DataInicial}, DataFinal: {DataFinal}",
+                    dataInicial,
+                    dataFinal
+                );
+
+                // Troca os valores corretamente.
+                (dataInicial, dataFinal) =
+                    (dataFinal, dataInicial);
             }
 
-            query = query.Where(x => x.DataFinal >= dataInicial && x.DataFinal <= dataFinal);
-        }
-        //Aplica o filtro apenas se o valor de data Inicial for valido
-        else if (!string.IsNullOrEmpty(commands.DataInicial))
-        {
+            var fimDoDiaFinal =
+                dataFinal.AddDays(1).AddTicks(-1);
 
-            var dataInicial = DateTime.SpecifyKind(
-                DateTime.ParseExact(commands.DataInicial, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                DateTimeKind.Utc
+            _logger.LogInformation(
+                "Aplicando período entre {DataInicial} e {DataFinal}",
+                dataInicial,
+                fimDoDiaFinal
             );
 
-            query = query.Where(x => x.DataInicio == dataInicial);
-        }
-        //Aplica o filtro apenas se o valor de data Finalw for valido
-        else if (!string.IsNullOrEmpty(commands.DataFinal))
-        {
-            var dataFinal = DateTime.SpecifyKind(
-                DateTime.ParseExact(commands.DataFinal, "dd/MM/yyyy", CultureInfo.InvariantCulture),
-                DateTimeKind.Utc
+            query = query.Where(
+                rota =>
+                    rota.DataInicio >= dataInicial &&
+                    rota.DataInicio <= fimDoDiaFinal
             );
-            var dataFinalFim = dataFinal.AddDays(1).AddTicks(-1);
-
-            query = query.Where(x => x.DataFinal >= dataFinal && x.DataFinal <= dataFinalFim);
-            
         }
-
-        if (commands.tipoFiscalizacao == null)
+        else if (!string.IsNullOrWhiteSpace(commands.DataInicial))
         {
-            query = query.Where(x => x.TipoFiscalizacao == commands.tipoFiscalizacao);
+            var dataInicial = ConverterData(
+                commands.DataInicial,
+                nameof(commands.DataInicial)
+            );
+
+            var fimDoDia =
+                dataInicial.AddDays(1).AddTicks(-1);
+
+            _logger.LogInformation(
+                "Aplicando DataInicial entre {Inicio} e {Fim}",
+                dataInicial,
+                fimDoDia
+            );
+
+            query = query.Where(
+                rota =>
+                    rota.DataInicio >= dataInicial &&
+                    rota.DataInicio <= fimDoDia
+            );
         }
-
-        var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, commands.page, commands.pagesize);
-
-        List<RotaDTO> filtersdto = new();
-
-        foreach (var filters in searchFilters)
+        else if (!string.IsNullOrWhiteSpace(commands.DataFinal))
         {
-            RotaDTO dto = new RotaDTO()
-            {
-                RotaId = filters.RotaId,
-                Alimentador = filters.Alimentador,
-                DataFinal = filters.DataFinal?.ToString("dd/MM/yyyy"),
-                DataInicio = filters.DataInicio.ToString("dd/MM/yyyy"),
-                Concessionarias = filters.Concessionarias,
-                NomeRota = filters.NomeRota ?? "Nome não informado",
-                TipoFiscalizacao = filters.TipoFiscalizacao
-            };
+            var dataFinal = ConverterData(
+                commands.DataFinal,
+                nameof(commands.DataFinal)
+            );
 
-            filtersdto.Add(dto);
+            var fimDoDia =
+                dataFinal.AddDays(1).AddTicks(-1);
+
+            _logger.LogInformation(
+                "Aplicando DataFinal entre {Inicio} e {Fim}",
+                dataFinal,
+                fimDoDia
+            );
+
+            query = query.Where(
+                rota =>
+                    rota.DataFinal >= dataFinal &&
+                    rota.DataFinal <= fimDoDia
+            );
         }
 
-        return filtersdto;
+        // A condição correta é != null.
+        if (commands.tipoFiscalizacao != null)
+        {
+            _logger.LogInformation(
+                "Aplicando TipoFiscalizacao: {TipoFiscalizacao}",
+                commands.tipoFiscalizacao
+            );
+
+            query = query.Where(
+                rota =>
+                    rota.TipoFiscalizacao ==
+                    commands.tipoFiscalizacao.Value
+            );
+        }
+        else
+        {
+            _logger.LogInformation(
+                "Nenhum filtro de TipoFiscalizacao informado"
+            );
+        }
+
+        var pagina = commands.page <= 0
+            ? 1
+            : commands.page;
+
+        var tamanhoPagina = commands.pagesize <= 0
+            ? 10
+            : commands.pagesize;
+
+        _logger.LogInformation(
+            "Executando consulta. Página: {Pagina}, Tamanho: {Tamanho}",
+            pagina,
+            tamanhoPagina
+        );
+
+        var searchFilters =
+            await _rotaQuery.BuscarRotaFiltros(
+                query,
+                pagina,
+                tamanhoPagina
+            );
+
+        _logger.LogInformation(
+            "Consulta concluída. Rotas encontradas: {Quantidade}",
+            searchFilters.Count
+        );
+
+        var filtersDto = searchFilters
+            .Select(
+                rota => new RotaDTO
+                {
+                    RotaId = rota.RotaId,
+                    Alimentador = rota.Alimentador,
+                    DataFinal = rota.DataFinal?
+                        .ToString("dd/MM/yyyy"),
+                    DataInicio = rota.DataInicio
+                        .ToString("dd/MM/yyyy"),
+                    Concessionarias =
+                        rota.Concessionarias,
+                    NomeRota = rota.NomeRota
+                        ?? "Nome não informado",
+                    TipoFiscalizacao =
+                        rota.TipoFiscalizacao
+                }
+            )
+            .ToList();
+
+        _logger.LogInformation(
+            "Handler retornando {Quantidade} DTOs para o fiscal {FiscalId}",
+            filtersDto.Count,
+            commands.FiscalId
+        );
+
+        return filtersDto;
+    }
+
+    private static DateTime ConverterData(
+        string data,
+        string nomeParametro)
+    {
+        if (!DateTime.TryParseExact(
+                data,
+                "dd/MM/yyyy",
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.None,
+                out var resultado))
+        {
+            throw new ArgumentException(
+                $"A data '{data}' é inválida. " +
+                "Utilize o formato dd/MM/yyyy.",
+                nomeParametro
+            );
+        }
+
+        return DateTime.SpecifyKind(
+            resultado,
+            DateTimeKind.Utc
+        );
     }
 }
