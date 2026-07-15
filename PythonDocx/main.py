@@ -8,6 +8,12 @@ import zipfile
 
 app = FastAPI()
 
+@app.get("/health")
+async def health():
+    return {
+        "status": "healthy"
+    }
+
 @app.post("/gerar-doc")
 def gerar_documento(dados: dict):
     # chama as funções para gerar os documentos em memória
