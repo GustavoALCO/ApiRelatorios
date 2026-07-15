@@ -36,7 +36,7 @@ public class UpdateDescricaoImageHandler
         var image =
             await _query.GetEvidenciaId(
                 updateDescricao.evidenciaId)
-            ?? throw new RotaNotFoundException(updateDescricao.evidenciaId);
+            ?? throw new RotaNotFoundException();
 
         _logger.LogInformation("Evidencia Encontrada, iniciando processo de atualização");
 

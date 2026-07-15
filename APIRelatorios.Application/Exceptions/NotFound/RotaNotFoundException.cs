@@ -2,10 +2,10 @@
 
 public sealed class RotaNotFoundException : NotFoundException
 {
-    public RotaNotFoundException(Guid id) 
+    public RotaNotFoundException() 
         : base(
             ErrorCodes.RotaNotFound, 
-            $"Fiscalização com ID '{id}' não foi encontrado.")
+            $"Fiscalização não foi encontrado.")
     {
     }
 }

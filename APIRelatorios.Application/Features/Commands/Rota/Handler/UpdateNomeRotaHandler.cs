@@ -26,7 +26,7 @@ public class UpdateNomeRotaHandler
     {
 
         var rota = await _query.BuscarRotaID(updNome.rotaId) ??
-            throw new RotaNotFoundException(updNome.rotaId); ;
+            throw new RotaNotFoundException(); ;
 
         rota.AlterarNomeRota(updNome.nomeRota);
 

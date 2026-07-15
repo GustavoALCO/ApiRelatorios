@@ -19,7 +19,7 @@ public class BuscarRotaIdHandler
     public async Task<RotaDTO> Handle(BuscarRotaIdQuery query, CancellationToken cancellationToken)
     {
         var rota = await _query.BuscarRotaID(query.RotaId) 
-                    ?? throw new RotaNotFoundException(query.RotaId);
+                    ?? throw new RotaNotFoundException();
 
         RotaDTO rotaDTO = new()
             {

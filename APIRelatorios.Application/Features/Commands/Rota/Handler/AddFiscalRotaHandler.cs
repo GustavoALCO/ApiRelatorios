@@ -36,7 +36,7 @@ public sealed class AddFiscalRotaHandler
         _logger.LogInformation("Lista é Valida");
 
         var rota = await _query.BuscarRotaID(add.rotaId) ?? 
-            throw new RotaNotFoundException(add.rotaId);
+            throw new RotaNotFoundException();
 
         _logger.LogInformation("Iniciando loop de para adicionar fiscal");
         foreach (var fiscalAdd in add.FiscaisId)

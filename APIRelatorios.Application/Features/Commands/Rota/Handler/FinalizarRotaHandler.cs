@@ -36,7 +36,7 @@ public class FinalizarRotaHandler
         _logger.LogInformation("Fazendo buscas de RotaId");
 
         var rota = await _query.BuscarRotaID(command.RotaId)
-            ?? throw new RotaNotFoundException(command.RotaId);
+            ?? throw new RotaNotFoundException();
 
         var evidencias = await _eviQuery.GetEvidenciaAsync(command.RotaId)
             ?? throw new ListEvidenciaNotFoundException();

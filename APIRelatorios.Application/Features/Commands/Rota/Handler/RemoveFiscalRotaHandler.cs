@@ -31,7 +31,7 @@ public class RemoveFiscalRotaHandler
         }
 
         var rota = await _query.BuscarRotaID(command.rotaId) 
-            ?? throw new RotaNotFoundException(command.rotaId);
+            ?? throw new RotaNotFoundException();
 
 
         foreach (var userId in command.fiscaisId)

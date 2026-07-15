@@ -14,9 +14,9 @@ public class BuscarRotaAmostraCommands : IQueryHandler<BuscarRotaAmostraQuery, I
 
     private readonly IUserQuery _userQuery;
 
-    private readonly ILogger _logger;
+    private readonly ILogger<BuscarRotaAmostraCommands> _logger;
 
-    public BuscarRotaAmostraCommands(IUserQuery userQuery, IRotaQuery rotaQuery, ILogger logger)
+    public BuscarRotaAmostraCommands(IUserQuery userQuery, IRotaQuery rotaQuery, ILogger<BuscarRotaAmostraCommands> logger)
     {
         _userQuery = userQuery;
         _rotaQuery = rotaQuery;
@@ -29,7 +29,9 @@ public class BuscarRotaAmostraCommands : IQueryHandler<BuscarRotaAmostraQuery, I
 
         _logger.LogInformation($"Usuario - {user.Name}-{user.LastName} Buscando Amostras");
 
-        var searchFilters = await _rotaQuery.GetAmostra();
+        var searchFilters = await _rotaQuery.GetAmostra() ?? throw new RotaNotFoundException();
+
+        _logger.LogInformation($"Foram encontradas {searchFilters.Count}");
 
         List<RotaDTO> filtersdto = new();
 

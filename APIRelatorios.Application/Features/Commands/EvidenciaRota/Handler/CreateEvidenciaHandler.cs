@@ -49,7 +49,7 @@ public class CreateEvidenciaHandler
 
         //FAZENDO BUSCAS DE ROTA E FISCAL PARA VALIDAR SE EXISTEM NO BANCO DE DADOS
         var rota = await _rotaQuery.BuscarRotaID(createImage.rotaID) 
-                            ?? throw new RotaNotFoundException(createImage.rotaID);
+                            ?? throw new RotaNotFoundException();
 
         var fiscais = await _query.BuscarFiscalId(createImage.fiscalId) 
                             ?? throw new UserNotFoundException(createImage.fiscalId);

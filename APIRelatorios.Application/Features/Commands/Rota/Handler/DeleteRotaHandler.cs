@@ -25,7 +25,7 @@ public class DeleteRotaHandler
     {    
 
         var rota = await _query.BuscarRotaID(command.RotaId)
-            ?? throw new RotaNotFoundException(command.RotaId);
+            ?? throw new RotaNotFoundException();
 
         // Altera o estado da rota para excluída
         rota.ExcluirRota();

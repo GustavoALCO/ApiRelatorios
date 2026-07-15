@@ -61,7 +61,7 @@ public class CreateRelatorioHandler
 
                 if (!existe)
                 {
-                    throw new RotaNotFoundException(rota);
+                    throw new RotaNotFoundException();
                 }
             }
 

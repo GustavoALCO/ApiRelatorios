@@ -33,6 +33,17 @@ public class RotaController : ControllerBase
     }
 
     [Authorize]
+    [HttpGet("BuscarAmostra")]
+    public async Task<IActionResult> BuscarAmostra(
+         [FromQuery] BuscarRotaAmostraQuery command)
+    {
+
+        var rota = await _dispatcher.Query<BuscarRotaAmostraQuery, ICollection<RotaDTO>>(command);
+        return Ok(rota);
+
+    }
+
+    [Authorize]
     [HttpGet("id")]
     public async Task<IActionResult> BuscarPorFiltro(
         [FromQuery] BuscarRotaIdQuery id)

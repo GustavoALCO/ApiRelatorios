@@ -35,10 +35,10 @@ public class CreateEmergencialHandler
 
         //Fazendo Buscas no banco de dados
         var rota = await _rotaQuery.BuscarRotaID(command.IdRota) ?? 
-                    throw new RotaNotFoundException(command.IdRota);
+                    throw new RotaNotFoundException();
 
         var evidencias = await _evidenciaRotaQuery.GetEvidenciasUrgencia(command.IdRota) ?? 
-                    throw new RotaNotFoundException(command.IdRota);
+                    throw new RotaNotFoundException();
 
         List<EvidenciaDocs> docs = new();
 
