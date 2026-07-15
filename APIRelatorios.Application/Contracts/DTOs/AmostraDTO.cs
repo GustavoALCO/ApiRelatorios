@@ -30,4 +30,6 @@ public class AmostraDTO
     public string DataFabricacao { get;  set; }
     public string Observacao { get;  set; }
     public List<string>? Fotos { get;  set; }
+
+    public bool Sincronizado {get; set;}
 }

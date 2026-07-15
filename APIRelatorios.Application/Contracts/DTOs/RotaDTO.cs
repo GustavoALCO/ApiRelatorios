@@ -10,6 +10,7 @@ public readonly record struct RotaDTO
     string Alimentador,
     string DataInicio,
     Concessionarias Concessionarias,
-    string? DataFinal
+    string? DataFinal,
+    TipoFiscalizacao TipoFiscalizacao
 );
 

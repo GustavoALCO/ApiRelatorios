@@ -28,6 +28,8 @@ public class BuscarRotaIdHandler
             Alimentador = rota.Alimentador,
             DataInicio = rota.DataInicio.ToString("dd/MM/yyyy"),
             DataFinal = rota.DataFinal?.ToString("dd/MM/yyyy"),
+            TipoFiscalizacao = rota.TipoFiscalizacao,
+            Concessionarias = rota.Concessionarias,
         };
         
         return rotaDTO;

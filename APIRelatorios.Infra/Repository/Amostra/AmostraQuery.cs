@@ -18,6 +18,13 @@ public class AmostraQuery : IAmostraQuery
         return await _databaseContext.Amostras.Where(a => a.RotaId == idRota).ToListAsync();
     }
 
+    public async Task<List<Domain.Entities.Amostra>> GetAmostraCheck(Guid idRota)
+    {
+        return await _databaseContext.Amostras
+            .Where(a => a.RotaId == idRota && a.Sincronizado)
+            .ToListAsync();
+    }
+
     public async Task<Domain.Entities.Amostra> GetAmostraId(int id)
     {
         return await _databaseContext.Amostras.FindAsync(id);

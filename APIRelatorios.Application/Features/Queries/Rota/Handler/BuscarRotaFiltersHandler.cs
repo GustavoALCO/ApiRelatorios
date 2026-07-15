@@ -97,7 +97,8 @@ public class BuscarRotaFiltersHandler
                 DataFinal = filters.DataFinal?.ToString("dd/MM/yyyy"),
                 DataInicio = filters.DataInicio.ToString("dd/MM/yyyy"),
                 Concessionarias = filters.Concessionarias,
-                NomeRota = filters.NomeRota ?? "Nome não informado"
+                NomeRota = filters.NomeRota ?? "Nome não informado",
+                TipoFiscalizacao = filters.TipoFiscalizacao,
             };
 
             filtersdto.Add(dto);

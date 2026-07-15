@@ -5,6 +5,7 @@ using Azure.Storage.Blobs.Models;
 using ChatApplication.Application.Interfaces;
 using ChatApplication.Application.Settings;
 using Google.OpenLocationCode;
+using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using SkiaSharp;
 using System.Text.RegularExpressions;
@@ -15,9 +16,12 @@ public class SavedImage : ISavedImages
 {
     private readonly BlobSettings _blobService;
 
-    public SavedImage(IOptions<BlobSettings> configuration)
+    private readonly ILogger<SavedImage> _logger;
+
+    public SavedImage(IOptions<BlobSettings> configuration, ILogger<SavedImage> logger)
     {
         _blobService = configuration.Value;
+        _logger = logger;
     }
 
     private static string CleanBase64(string base64)
@@ -300,32 +304,144 @@ public class SavedImage : ISavedImages
         return data.ToArray();
     }
 
-    public async Task<List<string>> UploadListImagensAmostra(string seqIsa, string fiscal, List<string> base64Images, string container, double lat, double log)
+    public async Task<List<string>> UploadListImagensAmostra(
+    string seqIsa,
+    string fiscal,
+    List<string> base64Images,
+    string container,
+    double latitude,
+    double longitude)
     {
         var imagesUrl = new List<string>();
 
-        int index = 0;
+        _logger.LogInformation(
+            "Iniciando upload das imagens da amostra. " +
+            "SeqIsa: {SeqIsa}, Fiscal: {Fiscal}, Quantidade: {Quantidade}",
+            seqIsa,
+            fiscal,
+            base64Images?.Count ?? 0
+        );
 
-        string plusCode = OpenLocationCode.Encode(lat, log, 11);
-
-        foreach (var image in base64Images)
+        if (base64Images == null || base64Images.Count == 0)
         {
-            index++;
-
-            string url = await UploadBase64ImagesAsync(
-                seqIsa,
-                fiscal,
-                DateTime.Now.ToString("yyyyMMdd_HHmmss"),
-                plusCode,
-                image,
-                container,
-                "compact",
-                index
+            _logger.LogWarning(
+                "Nenhuma imagem recebida para upload. SeqIsa: {SeqIsa}",
+                seqIsa
             );
 
-            imagesUrl.Add(url);
+            return imagesUrl;
         }
 
-        return imagesUrl;
+        try
+        {
+            _logger.LogInformation(
+                "Gerando Plus Code."
+            );
+  
+
+            var horario = DateTime.Now.ToString("dd-MM-yyyy_HH-mm-ss");
+
+            for (var index = 0; index < base64Images.Count; index++)
+            {
+                var numeroImagem = index + 1;
+                var base64Image = base64Images[index];
+
+                if (string.IsNullOrWhiteSpace(base64Image))
+                {
+                    _logger.LogWarning(
+                        "Imagem vazia ignorada. " +
+                        "SeqIsa: {SeqIsa}, Imagem: {NumeroImagem}",
+                        seqIsa,
+                        numeroImagem
+                    );
+
+                    continue;
+                }
+
+                try
+                {
+                    _logger.LogInformation("limpando base64");
+
+                    var cleanbase64 = CleanBase64(base64Image);
+
+                    _logger.LogInformation("base64limpo");
+
+                    _logger.LogInformation(
+                        "Iniciando upload de imagem. " +
+                        "SeqIsa: {SeqIsa}, Imagem: {NumeroImagem}/{Total}",
+                        seqIsa,
+                        numeroImagem,
+                        base64Images.Count
+                    );
+
+                    var url = await UploadBase64ImagesAsync(
+                        seqIsa,
+                        fiscal,
+                        horario,
+                        "",
+                        cleanbase64,
+                        container,
+                        "original",
+                        numeroImagem
+                    );
+
+                    imagesUrl.Add(url);
+
+                    _logger.LogInformation(
+                        "Upload de imagem concluído. " +
+                        "SeqIsa: {SeqIsa}, Imagem: {NumeroImagem}, Url: {Url}",
+                        seqIsa,
+                        numeroImagem,
+                        url
+                    );
+                }
+                catch (FormatException exception)
+                {
+                    _logger.LogError(
+                        exception,
+                        "Base64 inválido. " +
+                        "SeqIsa: {SeqIsa}, Imagem: {NumeroImagem}",
+                        seqIsa,
+                        numeroImagem
+                    );
+
+                    throw new Base64Exception();
+                }
+                catch (Exception exception)
+                {
+                    _logger.LogError(
+                        exception,
+                        "Erro ao enviar imagem. " +
+                        "SeqIsa: {SeqIsa}, Imagem: {NumeroImagem}",
+                        seqIsa,
+                        numeroImagem
+                    );
+
+                    throw;
+                }
+            }
+
+            _logger.LogInformation(
+                "Upload das imagens da amostra concluído. " +
+                "SeqIsa: {SeqIsa}, Enviadas: {Enviadas}, Recebidas: {Recebidas}",
+                seqIsa,
+                imagesUrl.Count,
+                base64Images.Count
+            );
+
+            return imagesUrl;
+        }
+        catch (Exception exception)
+        {
+            _logger.LogError(
+                exception,
+                "Falha no upload das imagens da amostra. " +
+                "SeqIsa: {SeqIsa}, Fiscal: {Fiscal}",
+                seqIsa,
+                fiscal
+            );
+
+            throw;
+        }
     }
 }

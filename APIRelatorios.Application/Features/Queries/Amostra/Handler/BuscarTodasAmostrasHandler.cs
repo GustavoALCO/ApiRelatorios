@@ -49,7 +49,8 @@ public class BuscarTodasAmostrasHandler : IQueryHandler<BuscarTodasAmostrasQuery
             PosicaoOperativa = amostra.PosicaoOperativa,
             Equipamento = amostra.Equipamento,
             DataFabricacao = amostra.DataFabricacao,
-            Observacao = amostra.Observacao
+            Observacao = amostra.Observacao,
+            Fotos = amostra.Fotos
         });
     }
 }

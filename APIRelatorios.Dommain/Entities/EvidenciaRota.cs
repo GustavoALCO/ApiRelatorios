@@ -81,7 +81,8 @@ public class EvidenciaRota
      string? alimentador,
      string? endereco,
      string? identificacao,
-     NivelRisco? emergencial)
+     NivelRisco? emergencial
+     )
     {
         if (tema is not null)
             CheckList = tema;
@@ -100,6 +101,7 @@ public class EvidenciaRota
 
         if (emergencial is not null)
             NivelRisco = (NivelRisco)emergencial;
+
     }
 
     public void DesativarEvidencia()

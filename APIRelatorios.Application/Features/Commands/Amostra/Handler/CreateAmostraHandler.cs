@@ -10,12 +10,9 @@ public class CreateAmostraHandler : ICommandHandler<CreateAmostraCommand>
 
     private readonly IAmostraCommands _commands;
 
-    private readonly IAmostraQuery _query;
-
-    public CreateAmostraHandler(IAmostraCommands commands, IAmostraQuery query, ILogger<CreateAmostraHandler> logger)
+    public CreateAmostraHandler(IAmostraCommands commands, ILogger<CreateAmostraHandler> logger)
     {
         _commands = commands;
-        _query = query;
         _logger = logger;
     }
 

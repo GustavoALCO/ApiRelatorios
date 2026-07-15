@@ -32,7 +32,8 @@ public class ApiDocxService : IApiDocxService
 
         var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-        var zip = await _httpClient.PostAsync("http://api-docx:8000/gerar-doc", content) ?? throw new Exception("Servico de Relatorios Indisponivel");
+        var zip = await _httpClient.PostAsync("http://api-docx:8000/gerar-doc", content) 
+            ?? throw new Exception("Servico de Relatorios Indisponivel");
 
         zip.EnsureSuccessStatusCode();
 

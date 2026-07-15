@@ -10,20 +10,20 @@ public readonly record struct DadosRelatorioDTO
     // Alimentador Obtido pela rota ou substituindo na Evidencia
     string Alimentador,
 
-    string Irregularidades,
+    string? Irregularidades,
 
     // Observação da evidencia
     string Observacao,
 
     // Identificação do poste
-    string Identificação,
+    string? Identificação,
 
     // Dados como Rua e CEP
-    string Localização,
+    string? Localização,
 
     // Numero da imagem composta pela equipe selecionada + indice da imagem
     string NumeroImagem,
 
     // Enum para o Tema para atribuir as listas 
-    string Tema
+    string? Tema
 );

@@ -39,6 +39,8 @@ public class Amostra
     public string? DataFabricacao { get;  private set; }
     public string? Observacao { get;  private set; }
 
+    public bool Sincronizado {get; private set;}
+
     // Evidencia em Imagem
     public List<string>? Fotos { get;  private set; } = new();
 
@@ -96,6 +98,7 @@ public class Amostra
         this.NumSerie = numSerie;
         this.PosicaoOperativa = posicaoOperativa;
         this.Equipamento = equipamento;
+        this.Sincronizado = false;
     }
 
     public void AtualizarEquipamentosAmostra
@@ -149,5 +152,7 @@ public class Amostra
             this.LatitudeUser = latitudeUser;
             this.LongitudeUser = longitudeUser;
         }
+
+        Sincronizado = true;
     }
 }

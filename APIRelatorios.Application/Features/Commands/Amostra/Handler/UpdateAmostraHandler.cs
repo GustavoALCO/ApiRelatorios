@@ -40,13 +40,16 @@ public class UpdateAmostraHandler : ICommandHandler<UpdateAmostraCommand>
 
         _logger.LogInformation("Enviando Imagens para o serviço de armazenamento...");
 
-        var urlImages = await _imageService.UploadListImagensAmostra(
-                                            amostra.SeqISA,
-                                            $"{user.Name}-{user.LastName}",
-                                            command.fotos,
-                                            "images",
-                                            command.latitude,
-                                            command.longitude
+        var urlImages = await _imageService.UploadListBase64ImagesAsync(
+                                           alimentador: amostra.SeqISA,
+                                           fiscal: $"{user.Name}-{user.LastName}",
+                                           DateTime.UtcNow.ToString(),
+                                           command.fotos,
+                                           "images",
+                                           "-",
+                                           amostra.RotaId,
+                                           0,
+                                           0
                                 );
 
         if ( urlImages.Count() == 0 ) 
@@ -66,7 +69,7 @@ public class UpdateAmostraHandler : ICommandHandler<UpdateAmostraCommand>
             command.numSerie,
             command.dataFabricacao,
             command.observacao,
-            urlImages,
+            urlImages.Select(x => x.OriginalUrl).ToList(),
             command.latitude,
             command.longitude
         );
