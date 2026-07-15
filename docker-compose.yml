@@ -1,28 +1,28 @@
-version: "3.9"
-
 services:
   apirelatorios.webapi:
-    image: apirelatorioswebapi
+    image: apirelatorioswebapi:latest
     build:
       context: .
       dockerfile: APIRelatorios.WebAPI/Dockerfile
-    depends_on:
-      - postgres-db
-      - api-docx
+
     environment:
       ASPNETCORE_ENVIRONMENT: Production
-      ASPNETCORE_URLS: http://+:8080/
+      ASPNETCORE_URLS: http://+:8080
+
       ConnectionStringsHost: postgres-db
       ConnectionStringsPort: "5432"
       ConnectionStringsDatabase: RelatorioDB
       ConnectionStringsUser: AdminTeste
       ConnectionStrings__Password: Teste123
+
     expose:
       - "8080"
 
-    dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+      api-docx:
+        condition: service_healthy
 
     restart: unless-stopped
 
@@ -33,12 +33,22 @@ services:
     build:
       context: ./PythonDocx
       dockerfile: Dockerfile
+
     expose:
       - "8000"
 
-    dns:
-      - 8.8.8.8
-      - 1.1.1.1
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "python",
+          "-c",
+          "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
     restart: unless-stopped
 
@@ -47,12 +57,25 @@ services:
 
   postgres-db:
     image: postgres:16
+
     environment:
       POSTGRES_DB: RelatorioDB
       POSTGRES_USER: AdminTeste
-      POSTGRES_PASSWORD: Teste123
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "pg_isready -U AdminTeste -d RelatorioDB"
+        ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
 
     restart: unless-stopped
 
@@ -60,22 +83,25 @@ services:
       - backend
 
   nginx:
-  image: nginx:1.25
-  container_name: nginx_proxy
-  ports:
-    - "80:80"
-    - "443:443"
-  volumes:
-    - ./nginx.conf:/etc/nginx/nginx.conf
-    - ./letsencrypt:/etc/letsencrypt:ro
-  depends_on:
-    - apirelatorios.webapi
+    image: nginx:1.25
+    container_name: nginx_proxy
 
-  restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
 
-  networks:
-    - frontend
-    - backend
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./letsencrypt:/etc/letsencrypt:ro
+
+    depends_on:
+      - apirelatorios.webapi
+
+    restart: unless-stopped
+
+    networks:
+      - frontend
+      - backend
 
 volumes:
   pgdata:
@@ -83,3 +109,4 @@ volumes:
 networks:
   frontend:
   backend:
+    internal: true
