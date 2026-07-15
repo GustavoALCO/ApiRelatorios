@@ -1,5 +1,6 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Contracts.DTOs;
+using APIRelatorios.Dommain.Enuns;
 
 namespace APIRelatorios.Application.Features.Querys.Rota;
 
@@ -10,6 +11,9 @@ public class BuscarRotaFiltersQuery
     public string? Nome { get; set; }
     public string? DataInicial { get; set; }
     public string? DataFinal { get; set; }
+
+    public TipoFiscalizacao? tipoFiscalizacao { get; set; }
+
     public int page { get; set; }
     public int pagesize {  get; set; }
 }

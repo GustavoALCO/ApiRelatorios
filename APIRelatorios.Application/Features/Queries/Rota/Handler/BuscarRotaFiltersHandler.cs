@@ -84,6 +84,11 @@ public class BuscarRotaFiltersHandler
             
         }
 
+        if (commands.tipoFiscalizacao == null)
+        {
+            query = query.Where(x => x.TipoFiscalizacao == commands.tipoFiscalizacao);
+        }
+
         var searchFilters = await _rotaQuery.BuscarRotaFiltros(query, commands.page, commands.pagesize);
 
         List<RotaDTO> filtersdto = new();
@@ -98,7 +103,7 @@ public class BuscarRotaFiltersHandler
                 DataInicio = filters.DataInicio.ToString("dd/MM/yyyy"),
                 Concessionarias = filters.Concessionarias,
                 NomeRota = filters.NomeRota ?? "Nome não informado",
-                TipoFiscalizacao = filters.TipoFiscalizacao,
+                TipoFiscalizacao = filters.TipoFiscalizacao
             };
 
             filtersdto.Add(dto);

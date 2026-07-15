@@ -14,5 +14,7 @@ public interface IRotaQuery
 
     IQueryable<Dommain.Entities.Rota> BuscarQuery();
 
+    Task<ICollection<Dommain.Entities.Rota>> GetAmostra();
+
     Task<ICollection<Dommain.Entities.Rota>> BuscarRotaFiltros(IQueryable<Dommain.Entities.Rota> rotas, int page, int pagesize);
 }

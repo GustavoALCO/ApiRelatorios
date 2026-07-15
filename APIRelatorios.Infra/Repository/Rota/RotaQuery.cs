@@ -1,4 +1,5 @@
 ﻿using APIRelatorios.Dommain.Entities;
+using APIRelatorios.Dommain.Enuns;
 using APIRelatorios.Dommain.Interfaces.Rota;
 using APIRelatorios.Infra.Database;
 using APIRelatorios.Infra.Exeptions;
@@ -74,6 +75,13 @@ public class RotaQuery : IRotaQuery
                                                                 .Skip((page - 1) * pagesize)
                                                                 .Take(pagesize)
                                                                 .ToListAsync();
+
+        return rotas;
+    }
+
+    public async Task<ICollection<Dommain.Entities.Rota>> GetAmostra()
+    {
+        var rotas = await _context.Rota.Where(x => x.TipoFiscalizacao == TipoFiscalizacao.Amostra).ToListAsync();
 
         return rotas;
     }
