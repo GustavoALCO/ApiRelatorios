@@ -1,16 +1,7 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
-  "Documents": [
-    {
-      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\rotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\rotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\amostracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\amostracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    }
-  ],
+  "Documents": [],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -18,37 +9,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": -1,
           "Children": [
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "RotaController.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "ViewState": "AgIAAA4AAAAAAAAAAAAxwCQAAAAzAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-15T19:46:09.242Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "AmostraController.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
-              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
-              "ViewState": "AgIAABMAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-15T19:46:05.033Z",
-              "EditorCaption": ""
             }
           ]
         }

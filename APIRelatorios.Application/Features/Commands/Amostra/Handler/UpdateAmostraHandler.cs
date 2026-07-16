@@ -43,7 +43,7 @@ public class UpdateAmostraHandler : ICommandHandler<UpdateAmostraCommand>
         var urlImages = await _imageService.UploadListBase64ImagesAsync(
                                            alimentador: amostra.SeqISA,
                                            fiscal: $"{user.Name}-{user.LastName}",
-                                           DateTime.UtcNow.ToString(),
+                                           "",
                                            command.fotos,
                                            "images",
                                            "-",

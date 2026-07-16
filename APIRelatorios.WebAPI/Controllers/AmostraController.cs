@@ -33,6 +33,17 @@ public class AmostraController : ControllerBase
         return Ok(resultado);
     }
 
+    [HttpPost("GerarTabelas")]
+    public async Task<IActionResult> GerarTabelasDocx([FromBody] CreateRelatorioAmostraCommand command)
+    {
+        var resultado = await _dispatcher.Send<CreateRelatorioAmostraCommand, byte[]>(command);
+
+        return File(resultado, 
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        "TabelasAmostras.docx"
+        );
+    }
+
     [Authorize]
     [HttpGet("TodasAmostras")]
     public async Task<IActionResult> BuscarTodosPorRotaId([FromQuery] Guid idrota)
@@ -46,7 +57,7 @@ public class AmostraController : ControllerBase
 
     [Authorize]
     [HttpPost]
-    public async Task<IActionResult> CriarDadosAmostra([FromQuery]Guid id, [FromForm] IFormFile arquivo)
+    public async Task<IActionResult> CriarDadosAmostra([FromQuery] Guid id, [FromForm] IFormFile arquivo)
     {
         if (arquivo == null || arquivo.Length == 0)
             return BadRequest("Arquivo não enviado.");
@@ -99,7 +110,7 @@ public class AmostraController : ControllerBase
 
     [Authorize]
     [HttpPatch]
-    public async Task <IActionResult> AlterarVariaveis([FromBody] UpdateAmostraCommand updateAmostra)
+    public async Task<IActionResult> AlterarVariaveis([FromBody] UpdateAmostraCommand updateAmostra)
     {
         await _dispatcher.Send(updateAmostra);
 

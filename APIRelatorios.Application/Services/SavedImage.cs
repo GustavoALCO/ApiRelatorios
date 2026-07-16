@@ -108,10 +108,17 @@ public class SavedImage : ISavedImages
             byte[] originalBytes =
                 Convert.FromBase64String(cleanedBase64);
 
+            string cordenadas = string.Empty;
+
+            if (lat != 0 || log != 0)
+                {
+                   cordenadas = $"Lat: {lat}, Long: {log}";
+                }
+
             byte[] imageWithText = AdicionaTexto(
                 originalBytes,
                 alimentador,
-                $"Lat: {lat}, Long: {log}",
+                cordenadas,
                 rua,
                 horario
             );

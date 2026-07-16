@@ -3,20 +3,8 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\rota\\buscarrotaamostraquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\rota\\buscarrotaamostraquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.dommain\\enuns\\concessionarias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{1D2852EE-DBD7-522E-54E3-CD6F7BF4A851}|APIRelatorios.Dommain\\APIRelatorios.Domain.csproj|solutionrelative:apirelatorios.dommain\\enuns\\concessionarias.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\rotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\rotacontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\rota\\handler\\buscarrotaamostracommands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\rota\\handler\\buscarrotaamostracommands.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{A2CB72A3-6DA5-55B2-9984-DA37E5647469}|APIRelatorios.Testes\\APIRelatorios.Testes.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.testes\\apirelatorios.testes.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2CB72A3-6DA5-55B2-9984-DA37E5647469}|APIRelatorios.Testes\\APIRelatorios.Testes.csproj|solutionrelative:apirelatorios.testes\\apirelatorios.testes.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     }
   ],
   "DocumentGroupContainers": [
@@ -31,58 +19,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BuscarRotaAmostraQuery.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Rota\\BuscarRotaAmostraQuery.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Rota\\BuscarRotaAmostraQuery.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Rota\\BuscarRotaAmostraQuery.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Rota\\BuscarRotaAmostraQuery.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAHAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-15T20:51:48.553Z",
+              "Title": "APIRelatorios.Testes",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Testes\\APIRelatorios.Testes.csproj",
+              "RelativeDocumentMoniker": "APIRelatorios.Testes\\APIRelatorios.Testes.csproj",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Testes\\APIRelatorios.Testes.csproj*",
+              "RelativeToolTip": "APIRelatorios.Testes\\APIRelatorios.Testes.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-16T13:12:13.555Z",
               "EditorCaption": ""
             },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BuscarRotaAmostraCommands.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Rota\\Handler\\BuscarRotaAmostraCommands.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Rota\\Handler\\BuscarRotaAmostraCommands.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Rota\\Handler\\BuscarRotaAmostraCommands.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Rota\\Handler\\BuscarRotaAmostraCommands.cs",
-              "ViewState": "AgIAABIAAAAAAAAAAAAzwCUAAAAuAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-15T20:52:04.748Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "RotaController.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\RotaController.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAjwCUAAAArAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-15T20:26:20.915Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "Concessionarias.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\Concessionarias.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Dommain\\Enuns\\Concessionarias.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Dommain\\Enuns\\Concessionarias.cs",
-              "RelativeToolTip": "APIRelatorios.Dommain\\Enuns\\Concessionarias.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-07-15T20:15:50.402Z",
-              "EditorCaption": ""
             }
           ]
         }
