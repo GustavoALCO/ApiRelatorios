@@ -13,7 +13,7 @@ services:
       ConnectionStringsPort: "5432"
       ConnectionStringsDatabase: RelatorioDB
       ConnectionStringsUser: AdminTeste
-      ConnectionStrings__Password: "V7#qL9@xP2!mR8$kN4^tZ1&cW6*eY3"
+      ConnectionStrings__Password: "V7#qL9@xP2!mR8$$kN4^tZ1&cW6*eY3"
 
     expose:
       - "8080"
@@ -62,7 +62,7 @@ services:
     environment:
       POSTGRES_DB: RelatorioDB
       POSTGRES_USER: AdminTeste
-      POSTGRES_PASSWORD: "V7#qL9@xP2!mR8$kN4^tZ1&cW6*eY3"
+      POSTGRES_PASSWORD: "V7#qL9@xP2!mR8$$kN4^tZ1&cW6*eY3"
 
     volumes:
       - pgdata:/var/lib/postgresql/data

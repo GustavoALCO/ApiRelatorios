@@ -3,8 +3,12 @@
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2CB72A3-6DA5-55B2-9984-DA37E5647469}|APIRelatorios.Testes\\APIRelatorios.Testes.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.testes\\apirelatorios.testes.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{A2CB72A3-6DA5-55B2-9984-DA37E5647469}|APIRelatorios.Testes\\APIRelatorios.Testes.csproj|solutionrelative:apirelatorios.testes\\apirelatorios.testes.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\amostracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\amostracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\amostra\\handler\\updateamostrahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\amostra\\handler\\updateamostrahandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -19,14 +23,27 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "APIRelatorios.Testes",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Testes\\APIRelatorios.Testes.csproj",
-              "RelativeDocumentMoniker": "APIRelatorios.Testes\\APIRelatorios.Testes.csproj",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Testes\\APIRelatorios.Testes.csproj*",
-              "RelativeToolTip": "APIRelatorios.Testes\\APIRelatorios.Testes.csproj*",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAKAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2026-07-16T13:12:13.555Z",
+              "Title": "AmostraController.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "ViewState": "AgIAABgAAAAAAAAAAAAYwCkAAAAaAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-29T16:31:17.845Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "UpdateAmostraHandler.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Amostra\\Handler\\UpdateAmostraHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\Amostra\\Handler\\UpdateAmostraHandler.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Amostra\\Handler\\UpdateAmostraHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\Amostra\\Handler\\UpdateAmostraHandler.cs",
+              "ViewState": "AgIAABwAAAAAAAAAAAAcwC0AAAA6AAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-29T16:19:13.125Z",
               "EditorCaption": ""
             },
             {

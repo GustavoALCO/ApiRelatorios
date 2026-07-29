@@ -130,6 +130,7 @@ public class CreateRelatorioHandler : ICommandHandler<CreateRelatorioAmostraComm
         var bytesZip = await _zipService.CreateZipWithImagesAsync(
     bytesRelatorio,
     listImages);
-        throw new NotImplementedException();
+        
+        return bytesZip;
     }
 }

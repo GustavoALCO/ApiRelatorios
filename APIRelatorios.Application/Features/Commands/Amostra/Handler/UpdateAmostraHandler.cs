@@ -1,6 +1,7 @@
 ﻿using APIRelatorios.Application.Abstractions.Messaging;
 using APIRelatorios.Application.Exceptions.NotFound;
 using APIRelatorios.Domain.Interfaces.Amostra;
+using APIRelatorios.Dommain.Entities;
 using APIRelatorios.Dommain.Interfaces.User;
 using ChatApplication.Application.Interfaces;
 using Microsoft.Extensions.Logging;
@@ -38,22 +39,32 @@ public class UpdateAmostraHandler : ICommandHandler<UpdateAmostraCommand>
 
         var user = await _userQuery.BuscarFiscalId(command.IdFiscal) ?? throw new UserNotFoundException(command.IdFiscal);
 
+        List<ImageData> urlImages = new();
+
         _logger.LogInformation("Enviando Imagens para o serviço de armazenamento...");
 
-        var urlImages = await _imageService.UploadListBase64ImagesAsync(
-                                           alimentador: amostra.SeqISA,
-                                           fiscal: $"{user.Name}-{user.LastName}",
-                                           "",
-                                           command.fotos,
-                                           "images",
-                                           "-",
-                                           amostra.RotaId,
-                                           0,
-                                           0
-                                );
+        if (amostra.Fotos == null || !amostra.Fotos.Any())
+        {
+            urlImages = await _imageService.UploadListBase64ImagesAsync(
+                                          alimentador: amostra.SeqISA,
+                                          fiscal: $"{user.Name}-{user.LastName}",
+                                          "",
+                                          command.fotos,
+                                          "images",
+                                          "-",
+                                          amostra.RotaId,
+                                          0,
+                                          0
+                               );
 
-        if ( urlImages.Count() == 0 ) 
-            throw new AmostraNotFoundException();
+            if (!urlImages.Any())
+                throw new AmostraNotFoundException();
+        }
+        else
+        {
+            _logger.LogInformation("Pulando a etapa de salvar imagens");
+        }
+       
 
         _logger.LogInformation($"Atualizando a Amostra: {amostra.Id}");
 

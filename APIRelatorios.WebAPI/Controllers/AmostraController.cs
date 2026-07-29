@@ -38,10 +38,11 @@ public class AmostraController : ControllerBase
     {
         var resultado = await _dispatcher.Send<CreateRelatorioAmostraCommand, byte[]>(command);
 
-        return File(resultado, 
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "TabelasAmostras.docx"
-        );
+        return File(
+                resultado,
+                "application/zip",
+                "TabelasAmostras.zip"
+                    );
     }
 
     [Authorize]

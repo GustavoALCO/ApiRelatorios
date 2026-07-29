@@ -1,7 +1,12 @@
 {
   "Version": 1,
   "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
-  "Documents": [],
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{A2CB72A3-6DA5-55B2-9984-DA37E5647469}|APIRelatorios.Testes\\APIRelatorios.Testes.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.testes\\apirelatorios.testes.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{A2CB72A3-6DA5-55B2-9984-DA37E5647469}|APIRelatorios.Testes\\APIRelatorios.Testes.csproj|solutionrelative:apirelatorios.testes\\apirelatorios.testes.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+    }
+  ],
   "DocumentGroupContainers": [
     {
       "Orientation": 0,
@@ -9,8 +14,21 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": -1,
+          "SelectedChildIndex": 0,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "APIRelatorios.Testes",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Testes\\APIRelatorios.Testes.csproj",
+              "RelativeDocumentMoniker": "APIRelatorios.Testes\\APIRelatorios.Testes.csproj",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Testes\\APIRelatorios.Testes.csproj*",
+              "RelativeToolTip": "APIRelatorios.Testes\\APIRelatorios.Testes.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACAAAAAKAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-07-16T13:12:13.555Z",
+              "EditorCaption": ""
+            },
             {
               "$type": "Bookmark",
               "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
