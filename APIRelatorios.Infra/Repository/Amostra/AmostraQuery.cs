@@ -21,7 +21,7 @@ public class AmostraQuery : IAmostraQuery
     public async Task<List<Domain.Entities.Amostra>> GetAmostraCheck(Guid idRota)
     {
         return await _databaseContext.Amostras
-            .Where(a => a.RotaId == idRota && a.Sincronizado)
+            .Where(a => a.RotaId == idRota && a.Sincronizado == true)
             .ToListAsync();
     }
 

@@ -20,7 +20,8 @@ public class AmostraController : ControllerBase
     {
         _dispatcher = dispatcher;
     }
-
+    
+    [Authorize]
     [HttpGet]
     public async Task<IActionResult> BuscarPorId([FromQuery] int id)
     {
@@ -32,7 +33,8 @@ public class AmostraController : ControllerBase
 
         return Ok(resultado);
     }
-
+    
+    [Authorize]
     [HttpPost("GerarTabelas")]
     public async Task<IActionResult> GerarTabelasDocx([FromBody] CreateRelatorioAmostraCommand command)
     {
@@ -43,6 +45,15 @@ public class AmostraController : ControllerBase
                 "application/zip",
                 "TabelasAmostras.zip"
                     );
+    }
+
+    [Authorize]
+    [HttpPost("GerarJson")]
+    public async Task<IActionResult> GerarJson([FromBody] BuscarJsonAmostrasColetadasQuery command)
+    {
+        var resultado = await _dispatcher.Query<BuscarJsonAmostrasColetadasQuery, IEnumerable<AmostraDTO>>(command);
+
+        return Ok(resultado);
     }
 
     [Authorize]
