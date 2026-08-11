@@ -57,11 +57,11 @@ public class User
 
     public void AlterAdmin(bool? isadmin)
     {
-        IsAdmin = !isadmin ?? throw new Exception("Erro ao não passar valor a usuario");
+        IsAdmin = (bool)isadmin;
     }
 
-    public void AlterValid(bool? isvalid)
+    public void AlterValid(bool isvalid)
     {
-        IsValid = !isvalid ??throw new Exception("Erro ao não passar valor a usuario");
+        IsValid = isvalid;
     }
 }

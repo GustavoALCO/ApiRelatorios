@@ -1,9 +1,17 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\",
+  "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\user\\alterarusuariocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{43780BC1-1FBA-E7B1-F48E-F14540C9DC95}|APIRelatorios.IOC\\APIRelatorios.IOC.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.ioc\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43780BC1-1FBA-E7B1-F48E-F14540C9DC95}|APIRelatorios.IOC\\APIRelatorios.IOC.csproj|solutionrelative:apirelatorios.ioc\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\rota\\handler\\createrelatoriohandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\rota\\handler\\createrelatoriohandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\user\\alterarusuariocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\user\\alterarusuariocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -19,14 +27,40 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "AlterarUsuarioCommand.cs",
-              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
-              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.IOC\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.IOC\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.IOC\\DependencyInjection.cs",
+              "RelativeToolTip": "APIRelatorios.IOC\\DependencyInjection.cs",
+              "ViewState": "AgIAAFUAAAAAAAAAAAAuwGQAAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-11T12:45:03.865Z",
+              "WhenOpened": "2026-08-11T16:21:45.286Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CreateRelatorioHandler.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\Rota\\Handler\\CreateRelatorioHandler.cs",
+              "ViewState": "AgIAAFEAAAAAAAAAAAAIwCEAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T16:18:44.93Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "AlterarUsuarioCommand.cs",
+              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAARAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-11T13:40:14.748Z",
               "EditorCaption": ""
             },
             {

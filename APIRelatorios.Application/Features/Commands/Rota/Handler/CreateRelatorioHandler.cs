@@ -16,7 +16,7 @@ namespace APIRelatorios.Application.Features.Commands.Rota.Handler;
 public class CreateRelatorioHandler
     : ICommandHandler<CreateRelatorioWordCommand, byte[]>
 {
-    private readonly IRelatorioDeIrregularidades _relatorio;
+    private readonly ITabelasFiscalizacao _relatorio;
     private readonly IEvidenciaRotaQuery _rotaQuery;
     private readonly IImagesQuery _imageQuery;
     private readonly IBuscarByteImagemService _byteImage;
@@ -26,7 +26,7 @@ public class CreateRelatorioHandler
 
     public CreateRelatorioHandler(
         IEvidenciaRotaQuery rotaQuery,
-        IRelatorioDeIrregularidades relatorio,
+        ITabelasFiscalizacao relatorio,
         IBuscarByteImagemService byteImage,
         IValidateIds validateIds,
         IRotaQuery rotaquery,
