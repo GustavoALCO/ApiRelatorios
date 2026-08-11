@@ -73,7 +73,7 @@ internal class RowComponentes
         table.Append(
             new TableRow(
                 TitleRowComponents.TextoTitulo("Item"),
-                TitleRowComponents.TextoTitulo("Descrição da Irregularidade"),
+                TitleRowComponents.TextoTitulo("Descrição"),
                 TitleRowComponents.TextoTitulo("Fotos Ilustrativas")
             )
         );

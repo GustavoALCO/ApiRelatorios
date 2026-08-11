@@ -1,47 +1,48 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
 using APIRelatorios.Infra.Relatorios.Componentes;
 using APIRelatorios.Infra.Relatorios.Context;
-using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 
 namespace APIRelatorios.Infra.Relatorios.Corpo;
 
-internal class BodyRelatorio
+public class BodyAmostraRelatorio
 {
-    internal static Body Criar(
+    internal static Body CriarTabelasAmostra(
                 RelatorioContext ctx,
                 IDictionary<string, List<DadosRelatorioDTO>> dadosPorTema
         )
     {
         var body = new Body();
 
-        foreach (var tema in dadosPorTema)
+        // Inicia Loop para declarar as variaveis para criar o Arquivo docx
+        foreach (var grupo in dadosPorTema)
         {
-            // Título do tema
-            body.Append(CriarTituloTema(tema.Key));
-
-            // Tabela do tema
             body.Append(
-                RowComponentes.CriarTabela(tema.Value)
+                CriarTituloTema(grupo.Key)
             );
 
-        }
+            // Pega apenas UM registro para a tabela principal
+            var registroPrincipal = grupo.Value.First();
 
-        foreach (var tema in dadosPorTema)
-        {
-            // Título do tema
-            body.Append(CriarTituloTema(tema.Key));
-
-            // Tabela do tema
             body.Append(
-                RowImagesComponentes.CriarTabelasImagem(ctx,
-                    tema.Value)
+                RowComponentes.CriarTabela(
+                    new List<DadosRelatorioDTO>
+                    {
+                        registroPrincipal
+                    }
+                )
             );
 
+            // Aqui envia TODOS os registros,
+            // portanto todas as imagens do grupo
+            body.Append(
+                RowImagesComponentes.CriarTabelasImagem(
+                    ctx,
+                    grupo.Value
+                )
+            );
         }
 
-
-        // Propriedades finais do documento
         body.Append(new SectionProperties());
 
         return body;
@@ -66,4 +67,3 @@ internal class BodyRelatorio
         );
     }
 }
-

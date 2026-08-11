@@ -50,7 +50,8 @@ public class BuscarTodasAmostrasHandler : IQueryHandler<BuscarTodasAmostrasQuery
             Equipamento = amostra.Equipamento,
             DataFabricacao = amostra.DataFabricacao,
             Observacao = amostra.Observacao,
-            Fotos = amostra.Fotos
+            Fotos = amostra.Fotos,
+            Sincronizado = amostra.Sincronizado
         });
     }
 }

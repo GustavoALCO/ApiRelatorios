@@ -1,5 +1,5 @@
 ﻿using APIRelatorios.Application.Contracts.DTOs;
-using APIRelatorios.Dommain.Helpers;
+using APIRelatorios.Application.Interfaces;
 using APIRelatorios.Dommain.Interfaces.Services;
 using APIRelatorios.Infra.Relatorios.Context;
 using APIRelatorios.Infra.Relatorios.Corpo;
@@ -10,18 +10,16 @@ using Microsoft.Extensions.Logging;
 
 namespace APIRelatorios.Infra.Relatorios.Index;
 
-public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
+public class TabelasAmostra : ITabelasAmostra
 {
-    private readonly ILogger<RelatorioDeIrregulariedades> _logger;
+    private readonly ILogger<TabelasAmostra> _logger;
 
-    public RelatorioDeIrregulariedades(
-        ILogger<RelatorioDeIrregulariedades> logger)
+    public TabelasAmostra(ILogger<TabelasAmostra> logger)
     {
         _logger = logger;
     }
 
-    public async Task<byte[]> BuildAsync(
-        IEnumerable<DadosRelatorioDTO> dto)
+    public async Task<byte[]> BuildAmostraAsync(IEnumerable<DadosRelatorioDTO> dto)
     {
         using var ms = new MemoryStream();
 
@@ -43,12 +41,12 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
                 {
                     _logger.LogWarning(
                         """
-                        Evidência sem Tema.
-                        NumeroImagem: {NumeroImagem}
-                        Alimentador: {Alimentador}
-                        Observacao: {Observacao}
-                        Irregularidades: {Irregularidades}
-                        """,
+                    Evidência sem Tema.
+                    NumeroImagem: {NumeroImagem}
+                    Alimentador: {Alimentador}
+                    Observacao: {Observacao}
+                    Irregularidades: {Irregularidades}
+                    """,
                         d.NumeroImagem,
                         d.Alimentador,
                         d.Observacao,
@@ -60,13 +58,13 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
                 {
                     _logger.LogWarning(
                         """
-                        Evidência com TemaCheck porém sem irregularidades.
-                        TemaCheck: {TemaCheck}
-                        NumeroImagem: {NumeroImagem}
-                        Alimentador: {Alimentador}
-                        Observacao: {Observacao}
-                        Irregularidades: {Irregularidades}
-                        """,
+                    Evidência com TemaCheck porém sem irregularidades.
+                    TemaCheck: {TemaCheck}
+                    NumeroImagem: {NumeroImagem}
+                    Alimentador: {Alimentador}
+                    Observacao: {Observacao}
+                    Irregularidades: {Irregularidades}
+                    """,
                         d.Tema,
                         d.NumeroImagem,
                         d.Alimentador,
@@ -96,7 +94,7 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
             );
 
             var bodyRelatorio =
-                BodyRelatorio.Criar(ctx, dadosAgrupados);
+                BodyAmostraRelatorio.CriarTabelasAmostra(ctx, dadosAgrupados);
 
             var bodyFinal = mainPart.Document.Body;
 
@@ -112,4 +110,5 @@ public class RelatorioDeIrregulariedades : IRelatorioDeIrregularidades
 
         return ms.ToArray();
     }
+
 }

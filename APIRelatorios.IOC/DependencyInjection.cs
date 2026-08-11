@@ -100,7 +100,7 @@ public static class DependencyInjection
 
         services.AddScoped<ISavedImages, SavedImage>();
 
-        services.AddScoped<IRelatorioDeIrregularidades, RelatorioDeIrregulariedades>();
+        services.AddScoped<IRelatorioDeIrregularidades, TabelasFiscalizacao>();
 
         services.AddHttpClient<IBuscarByteImagemService, BuscarByteImagemService>()
                 .SetHandlerLifetime(TimeSpan.FromMinutes(5));

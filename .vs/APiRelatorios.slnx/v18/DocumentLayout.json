@@ -1,22 +1,10 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
+  "WorkspaceRootPath": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\amostra\\handler\\buscarjsonamostrascoletadashandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\amostra\\handler\\buscarjsonamostrascoletadashandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\amostra\\handler\\buscartodasamostrashandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\amostra\\handler\\buscartodasamostrashandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\amostra\\handler\\buscaramostraporidhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\amostra\\handler\\buscaramostraporidhandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\amostra\\buscarjsonamostrascoletadasquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\amostra\\buscarjsonamostrascoletadasquery.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\commands\\user\\alterarusuariocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\commands\\user\\alterarusuariocommand.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -26,63 +14,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "BuscarJsonAmostrasColetadasQuery.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\BuscarJsonAmostrasColetadasQuery.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Amostra\\BuscarJsonAmostrasColetadasQuery.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\BuscarJsonAmostrasColetadasQuery.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Amostra\\BuscarJsonAmostrasColetadasQuery.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAIBJwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T20:04:37.801Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "BuscarTodasAmostrasHandler.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarTodasAmostrasHandler.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarTodasAmostrasHandler.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarTodasAmostrasHandler.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarTodasAmostrasHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAABdAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T20:03:17.149Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BuscarAmostraPorIdHandler.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarAmostraPorIdHandler.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarAmostraPorIdHandler.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarAmostraPorIdHandler.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarAmostraPorIdHandler.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAABWAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T19:59:14.613Z",
-              "EditorCaption": ""
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "BuscarJsonAmostrasColetadasHandler.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
-              "ViewState": "AgIAACoAAAAAAAAAAAAqwEoAAAAAAAAAAAAAAA==",
+              "Title": "AlterarUsuarioCommand.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Commands\\User\\AlterarUsuarioCommand.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-04T19:53:43.332Z",
+              "WhenOpened": "2026-08-11T12:45:03.865Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }

@@ -10,6 +10,7 @@ public readonly record struct DadosRelatorioDTO
     // Alimentador Obtido pela rota ou substituindo na Evidencia
     string Alimentador,
 
+    // Campo para adicionar a lista em string das constatações encontradas
     string? Irregularidades,
 
     // Observação da evidencia

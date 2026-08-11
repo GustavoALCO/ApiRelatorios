@@ -24,7 +24,7 @@ public class ZipService : IZipService
         using (var zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
         {
             // 📄 DOCX
-            var docEntry = zip.CreateEntry("relatorio.docx");
+            var docEntry = zip.CreateEntry("Tabelas.docx");
 
             using (var entryStream = docEntry.Open())
             using (var fileStream = new MemoryStream(docxBytes))
@@ -49,12 +49,34 @@ public class ZipService : IZipService
 
                 using var entryStream = entry.Open();
 
-                // 🔥 aqui está o streaming real
                 using var imageStream = await image.StreamFactory();
 
                 await imageStream.CopyToAsync(entryStream);
 
                 index++;
+            }
+        }
+
+        memoryStream.Position = 0;
+        return memoryStream.ToArray();
+    }
+
+    public async Task<byte[]> CreateZipDocxAsync(
+        byte[] docxBytes)
+    {
+        using var memoryStream = new MemoryStream();
+
+        _logger.LogInformation("Começando Processo de ZIP");
+
+        using (var zip = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+        {
+            // 📄 DOCX
+            var docEntry = zip.CreateEntry("Tabelas.docx");
+
+            using (var entryStream = docEntry.Open())
+            using (var fileStream = new MemoryStream(docxBytes))
+            {
+                await fileStream.CopyToAsync(entryStream);
             }
         }
 

@@ -17,11 +17,11 @@ public class CreateRelatorioHandler : ICommandHandler<CreateRelatorioAmostraComm
 
     private readonly IBuscarByteImagemService _buscarByteImageService;
 
-    private readonly IRelatorioDeIrregularidades _relatorio;
+    private readonly ITabelasAmostra _relatorio;
 
     private readonly IZipService _zipService;
 
-    public CreateRelatorioHandler(IAmostraQuery amostraQuery, ILogger<CreateRelatorioHandler> logger, IBuscarByteImagemService buscarByteImageService, IRelatorioDeIrregularidades relatorio, IZipService zipService)
+    public CreateRelatorioHandler(IAmostraQuery amostraQuery, ILogger<CreateRelatorioHandler> logger, IBuscarByteImagemService buscarByteImageService, ITabelasAmostra relatorio, IZipService zipService)
     {
         _amostraQuery = amostraQuery;
         _logger = logger;
@@ -36,24 +36,24 @@ public class CreateRelatorioHandler : ICommandHandler<CreateRelatorioAmostraComm
 
         var amostra = await _amostraQuery.GetAmostraCheck(command.idrota) ?? throw new AmostraNotFoundException();
 
-        _logger.LogInformation("Amostras que foram modificadas buscada com sucesso");
-
-        List<(Func<Task<Stream>> StreamFactory, string Nome)> listImages = new();
+        _logger.LogInformation("Amostras que foram alteradas buscada com sucesso");
 
         List<DadosRelatorioDTO> dto = new();
 
-        foreach(var am in amostra)
+        int numeroAmostra = 0;
+        foreach (var am in amostra)
         {
-            int index = 0;
+            numeroAmostra++;
+            int numeroImagem = 0;
             
             foreach(var image in am.Fotos)
             {
-                index++;
+                numeroImagem++;
 
                 var byteImage = await _buscarByteImageService.BaixarImagemAsync(image);
 
 
-                //montando campo de observacao
+                _logger.LogInformation($"Montando Campo de Observação da SeqIsa : {am.SeqISA}");
                 var irregularidades = new List<string>();
 
                 if (am.TUC1 != null)
@@ -90,6 +90,9 @@ public class CreateRelatorioHandler : ICommandHandler<CreateRelatorioAmostraComm
                     irregularidades.Add($"Observacao: {am.Observacao}");
 
                 var texto = string.Join(", ", irregularidades);
+
+                _logger.LogInformation("Final o processo de montar Observação");
+
                 DadosRelatorioDTO dadosImplantados = new()
                 {
                     Foto = byteImage,
@@ -98,38 +101,25 @@ public class CreateRelatorioHandler : ICommandHandler<CreateRelatorioAmostraComm
 
                     Tema = am.SeqBaseFisica,
 
-                    NumeroImagem = index.ToString(),
+                    NumeroImagem = $"{numeroAmostra} - {numeroImagem}",
 
                     Identificação = am.DescricaoTec,
 
                     Localização = $"{am.Endereco} - {am.Municipio}",
 
-                    Observacao = $"{am.DescricaoTec} - {texto}",
-
+                    Observacao = $"{am.DescricaoTec} - {texto}"
                 };
 
-                dto.Add( dadosImplantados );
-
-                var originalUrl = image;
-
-                listImages.Add((
-                    async () =>
-                    {
-                        var bytes = await _buscarByteImageService.BaixarImagemAsync(originalUrl);
-                        return new MemoryStream(bytes);
-                    },
-                    $"{am.SeqISA}-{index}.jpg"
-                ));
-
+                dto.Add( dadosImplantados);
+                _logger.LogInformation($"SeqIsa : {am.SeqISA}\n" +
+                    "adicionado a lista para gerar tabelas");
             }
             
         }
 
-        var bytesRelatorio = await _relatorio.BuildAsync(dto);
+        var bytesRelatorio = await _relatorio.BuildAmostraAsync(dto);
 
-        var bytesZip = await _zipService.CreateZipWithImagesAsync(
-    bytesRelatorio,
-    listImages);
+        var bytesZip = await _zipService.CreateZipDocxAsync(bytesRelatorio);
         
         return bytesZip;
     }

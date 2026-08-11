@@ -63,7 +63,8 @@ public class BuscarJsonAmostrasColetadasHandler : IQueryHandler<BuscarJsonAmostr
                 Equipamento = item.Equipamento,
                 DataFabricacao = item.DataFabricacao,
                 Observacao = item.Observacao,
-                Fotos = item.Fotos
+                Fotos = item.Fotos,
+                Sincronizado = item.Sincronizado,
             };
 
             amostrasDTO.Add(amostraDTO);
