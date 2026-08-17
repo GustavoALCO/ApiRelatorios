@@ -7,7 +7,7 @@ internal class CellComponentes
     internal static TableCell Texto(
         string texto,
         string? texto2,
-        JustificationValues alinhamento = JustificationValues.Center,
+        JustificationValues? alinhamento = null,
         bool negritoTexto1 = false,
         bool negritoTexto2 = false)
     {

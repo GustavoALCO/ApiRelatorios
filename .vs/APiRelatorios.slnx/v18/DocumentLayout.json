@@ -1,34 +1,30 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\",
+  "WorkspaceRootPath": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\rowcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\rowcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\corpo\\bodyamostrarelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\corpo\\bodyamostrarelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\corpo\\bodyrelatoriofiscalizacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\corpo\\bodyrelatoriofiscalizacao.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\cellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\cellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\cellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\componentes\\imagescellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\componentes\\imagescellcomponentes.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\apirelatorios.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\apirelatorios.application.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\user\\handler\\buscartodosusuarioshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\user\\handler\\buscartodosusuarioshandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\features\\queries\\amostra\\handler\\buscarjsonamostrascoletadashandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\features\\queries\\amostra\\handler\\buscarjsonamostrascoletadashandler.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|c:\\users\\alves\\downloads\\trabalho\\apirelatorios\\apirelatorios.application\\contracts\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{70418E1F-FE05-B185-5EF9-4A2F2287A3AE}|APIRelatorios.Application\\APIRelatorios.Application.csproj|solutionrelative:apirelatorios.application\\contracts\\dtos\\usuariodto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.webapi\\controllers\\amostracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{937AFF92-614E-4A96-B02B-4C3239F562E9}|APIRelatorios.WebAPI\\APIRelatorios.WebAPI.csproj|solutionrelative:apirelatorios.webapi\\controllers\\amostracontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{43780BC1-1FBA-E7B1-F48E-F14540C9DC95}|APIRelatorios.IOC\\APIRelatorios.IOC.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.ioc\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{43780BC1-1FBA-E7B1-F48E-F14540C9DC95}|APIRelatorios.IOC\\APIRelatorios.IOC.csproj|solutionrelative:apirelatorios.ioc\\dependencyinjection.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|c:\\users\\gustavo.correa\\downloads\\trabalho\\apirelatorios\\apirelatorios.infra\\relatorios\\corpo\\bodyamostrarelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{55729593-4F72-108B-4ACE-5AAC8644F493}|APIRelatorios.Infra\\APIRelatorios.Infra.csproj|solutionrelative:apirelatorios.infra\\relatorios\\corpo\\bodyamostrarelatorio.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -43,97 +39,84 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "RowComponentes.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\RowComponentes.cs",
-              "ViewState": "AgIAADoAAAAAAAAAAAAQwEcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T17:36:34.192Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "BodyRelatorioFiscalizacao.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorioFiscalizacao.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorioFiscalizacao.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorioFiscalizacao.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyRelatorioFiscalizacao.cs",
-              "ViewState": "AgIAABAAAAAAAAAAAAAQwAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T17:02:30.445Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "CellComponentes.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
               "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
               "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\CellComponentes.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABQAAAAZAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T17:02:25.125Z",
+              "WhenOpened": "2026-08-17T13:00:45.186Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "BodyAmostraRelatorio.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
-              "ViewState": "AgIAAAgAAAAAAAAAAAAAwBsAAAAqAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T16:58:14.767Z",
+              "Title": "APIRelatorios.Application",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\APIRelatorios.Application.csproj",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\APIRelatorios.Application.csproj",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\APIRelatorios.Application.csproj*",
+              "RelativeToolTip": "APIRelatorios.Application\\APIRelatorios.Application.csproj*",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
+              "WhenOpened": "2026-08-17T12:57:33.874Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 4,
-              "Title": "ImagesCellComponentes.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\ImagesCellComponentes.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Componentes\\ImagesCellComponentes.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Componentes\\ImagesCellComponentes.cs",
-              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Componentes\\ImagesCellComponentes.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAmwI0AAAAJAAAAAAAAAA==",
+              "Title": "DependencyInjection.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.IOC\\DependencyInjection.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.IOC\\DependencyInjection.cs",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.IOC\\DependencyInjection.cs",
+              "RelativeToolTip": "APIRelatorios.IOC\\DependencyInjection.cs",
+              "ViewState": "AgIAAFYAAAAAAAAAAAAwwBAAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T16:56:25.639Z",
+              "WhenOpened": "2026-08-17T12:51:12.002Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "AmostraController.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "RelativeToolTip": "APIRelatorios.WebAPI\\Controllers\\AmostraController.cs",
+              "ViewState": "AgIAACgAAAAAAAAAAAASwDEAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T12:40:22.355Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "BuscarJsonAmostrasColetadasHandler.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
+              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\Amostra\\Handler\\BuscarJsonAmostrasColetadasHandler.cs",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAAAJkAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-08-17T12:33:29.454Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 5,
-              "Title": "BuscarTodosUsuariosHandler.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\User\\Handler\\BuscarTodosUsuariosHandler.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Features\\Queries\\User\\Handler\\BuscarTodosUsuariosHandler.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Features\\Queries\\User\\Handler\\BuscarTodosUsuariosHandler.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Features\\Queries\\User\\Handler\\BuscarTodosUsuariosHandler.cs",
-              "ViewState": "AgIAAAwAAAAAAAAAAAA1wCAAAAAOAAAAAAAAAA==",
+              "Title": "BodyAmostraRelatorio.cs",
+              "DocumentMoniker": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
+              "RelativeDocumentMoniker": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
+              "ToolTip": "C:\\Users\\gustavo.correa\\Downloads\\trabalho\\ApiRelatorios\\APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
+              "RelativeToolTip": "APIRelatorios.Infra\\Relatorios\\Corpo\\BodyAmostraRelatorio.cs",
+              "ViewState": "AgIAAA0AAAAAAAAAAAAgwC8AAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T16:54:51.055Z",
+              "WhenOpened": "2026-08-17T12:31:24.011Z",
               "EditorCaption": ""
             },
             {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UsuarioDTO.cs",
-              "DocumentMoniker": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Contracts\\DTOs\\UsuarioDTO.cs",
-              "RelativeDocumentMoniker": "APIRelatorios.Application\\Contracts\\DTOs\\UsuarioDTO.cs",
-              "ToolTip": "C:\\Users\\alves\\Downloads\\Trabalho\\ApiRelatorios\\APIRelatorios.Application\\Contracts\\DTOs\\UsuarioDTO.cs",
-              "RelativeToolTip": "APIRelatorios.Application\\Contracts\\DTOs\\UsuarioDTO.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2026-08-12T16:54:38.161Z",
-              "EditorCaption": ""
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{3ae79031-e1bc-11d0-8f78-00a0c9110057}"
             }
           ]
         }
