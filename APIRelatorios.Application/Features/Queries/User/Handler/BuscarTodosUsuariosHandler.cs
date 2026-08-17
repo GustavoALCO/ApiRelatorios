@@ -25,8 +25,11 @@ public class BuscarTodosUsuariosHandler
         {
             var dto = new UsuarioDTO
             {
-                Name = $"{fiscal.Name} {fiscal.LastName}",
-                UserId = fiscal.UserId
+                Name = fiscal.Name,
+                Lastname = fiscal.LastName,
+                UserId = fiscal.UserId,
+                IsAdmin = fiscal.IsAdmin,
+                IsActive = fiscal.IsValid,
             };
 
             fiscaisDTO.Add(dto);

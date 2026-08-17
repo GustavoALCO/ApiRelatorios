@@ -2,7 +2,13 @@
 
 public readonly record struct UsuarioDTO
 (
-     int UserId,
+    int UserId,
 
-     string Name 
+    string Name ,
+
+    string Lastname,
+
+    bool IsAdmin,
+
+    bool IsActive
 );

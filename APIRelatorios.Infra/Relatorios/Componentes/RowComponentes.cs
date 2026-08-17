@@ -64,9 +64,9 @@ internal class RowComponentes
 
         table.AppendChild(
             new TableGrid(
-                new GridColumn { Width = "1130" },
-                new GridColumn { Width = "5670" },
-                new GridColumn { Width = "1930" }
+                new GridColumn { Width = "1187" },
+                new GridColumn { Width = "6056" },
+                new GridColumn { Width = "1927" }
             )
         );
 

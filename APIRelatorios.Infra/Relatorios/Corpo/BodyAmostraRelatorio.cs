@@ -33,10 +33,9 @@ public class BodyAmostraRelatorio
                 )
             );
 
-            // Aqui envia TODOS os registros,
-            // portanto todas as imagens do grupo
+            // Aqui envia TODOS os registros
             body.Append(
-                RowImagesComponentes.CriarTabelasImagem(
+                RowOnlyImagesComponent.CriarTabelasImagem(
                     ctx,
                     grupo.Value
                 )
