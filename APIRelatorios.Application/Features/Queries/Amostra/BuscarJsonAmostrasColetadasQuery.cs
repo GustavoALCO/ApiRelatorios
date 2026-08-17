@@ -7,5 +7,5 @@ namespace APIRelatorios.Application.Features.Queries.Amostra;
 public record struct BuscarJsonAmostrasColetadasQuery
 (
     Guid idrota
-) : IQuery<IEnumerable<AmostraDTO>>;    
+) : IQuery<byte[]>;    
     

@@ -51,9 +51,13 @@ public class AmostraController : ControllerBase
     [HttpPost("GerarJson")]
     public async Task<IActionResult> GerarJson([FromBody] BuscarJsonAmostrasColetadasQuery command)
     {
-        var resultado = await _dispatcher.Query<BuscarJsonAmostrasColetadasQuery, IEnumerable<AmostraDTO>>(command);
+        var resultado = await _dispatcher.Query<BuscarJsonAmostrasColetadasQuery, byte[]>(command);
 
-        return Ok(resultado);
+        return File(
+        resultado,
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
+        "AmostrasColetadasAPP.xlsx"
+        );
     }
 
     [Authorize]

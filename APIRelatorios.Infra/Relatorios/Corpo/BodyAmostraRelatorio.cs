@@ -25,7 +25,7 @@ public class BodyAmostraRelatorio
             var registroPrincipal = grupo.Value.First();
 
             body.Append(
-                RowComponentes.CriarTabela(
+                RowComponentesAmostra.CriarTabela(
                     new List<DadosRelatorioDTO>
                     {
                         registroPrincipal
