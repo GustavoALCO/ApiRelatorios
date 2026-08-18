@@ -49,11 +49,6 @@ internal class RowOnlyImagesComponent
                     Width = "9170"
                 },
 
-                new TableLayout
-                {
-                    Type = TableLayoutValues.Fixed
-                },
-
                 new TableBorders(
                     new TopBorder
                     {
@@ -61,13 +56,13 @@ internal class RowOnlyImagesComponent
                         Size = 4
                     },
 
-                    new BottomBorder
+                    new LeftBorder
                     {
                         Val = BorderValues.Single,
                         Size = 4
                     },
 
-                    new LeftBorder
+                    new BottomBorder
                     {
                         Val = BorderValues.Single,
                         Size = 4
@@ -90,7 +85,12 @@ internal class RowOnlyImagesComponent
                         Val = BorderValues.Single,
                         Size = 4
                     }
-                )
+                ),
+
+                new TableLayout
+                {
+                    Type = TableLayoutValues.Fixed
+                }
             )
         );
 

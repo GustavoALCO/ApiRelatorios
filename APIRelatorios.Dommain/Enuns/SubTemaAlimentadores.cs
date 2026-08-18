@@ -29,6 +29,7 @@ public enum SubTemaAlimentadores
     PosteSemEstabilidadeNaBase,
     LocacaoInadequadaDePoste,
     PosteMadeiraPodridaOcaOuComAberturas,
+    PosteDeFibra,
 
     // Cruzetas
     CruzetasDanificadas,
@@ -40,6 +41,10 @@ public enum SubTemaAlimentadores
     IsoladoresComSujeiraOuFuligem,
     IsoladoresTortos,
     FixacaoIsoladoresNaCruzeta,
+    IsoladoresQuebrado,
+    AusenciaIsoladores,
+    IsoladorPolimero,
+
 
     // Condutores
     EstadoFisicoCondutores,
@@ -47,11 +52,13 @@ public enum SubTemaAlimentadores
     AfastamentoArvoresEstruturas,
     InstalacaoSuportesEspacadores,
     AusenciaCaboNeutro,
+    VaoMuitoGrande,
 
     // Segurança
     CaboPartido,
     ProximidadeRedeComEdificacoes,
     CondutoresMetalicosProximosOuTocandoRede,
+    RedeDentroDePropriedadeParticular,
 
     // Aterramento
     PresencaEstadoCondutorAterramento,
@@ -70,6 +77,7 @@ public enum SubTemaAlimentadores
     IntegridadeFisica,
     ContatosEManobrabilidade,
     SinalizacaoDePosicao,
+    Furto,
 
     // Para-raios
     AusenciaParaRaios,

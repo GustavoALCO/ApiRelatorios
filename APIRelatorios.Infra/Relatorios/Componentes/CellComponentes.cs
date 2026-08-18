@@ -11,11 +11,16 @@ internal class CellComponentes
         bool negritoTexto1 = false,
         bool negritoTexto2 = false)
     {
-        var paragraph = new Paragraph(
-            new ParagraphProperties(
-                new Justification { Val = alinhamento }
-            )
-        );
+        var paragraphProperties = new ParagraphProperties();
+
+        if (alinhamento.HasValue)
+        {
+            paragraphProperties.Append(
+                new Justification { Val = alinhamento.Value }
+            );
+        }
+
+        var paragraph = new Paragraph(paragraphProperties);
 
         // Primeiro texto
         paragraph.Append(
@@ -46,15 +51,15 @@ internal class CellComponentes
 
         return new TableCell(
             new TableCellProperties(
-                new TableCellVerticalAlignment
-                {
-                    Val = TableVerticalAlignmentValues.Center
-                },
                 new Shading
                 {
                     Val = ShadingPatternValues.Clear,
                     Color = "auto",
                     Fill = "F8F8FF"
+                },
+                new TableCellVerticalAlignment
+                {
+                    Val = TableVerticalAlignmentValues.Center
                 }
             ),
             paragraph

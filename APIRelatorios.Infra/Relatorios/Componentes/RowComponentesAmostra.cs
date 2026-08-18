@@ -18,11 +18,6 @@ internal class RowComponentesAmostra
                     Width = "9170"
                 },
 
-                new TableLayout
-                {
-                    Type = TableLayoutValues.Fixed
-                },
-
                 new TableBorders(
                     new TopBorder
                     {
@@ -30,13 +25,13 @@ internal class RowComponentesAmostra
                         Size = 4
                     },
 
-                    new BottomBorder
+                    new LeftBorder
                     {
                         Val = BorderValues.Single,
                         Size = 4
                     },
 
-                    new LeftBorder
+                    new BottomBorder
                     {
                         Val = BorderValues.Single,
                         Size = 4
@@ -59,7 +54,12 @@ internal class RowComponentesAmostra
                         Val = BorderValues.Single,
                         Size = 4
                     }
-                )
+                ),
+
+                new TableLayout
+                {
+                    Type = TableLayoutValues.Fixed
+                }
             )
         );
 

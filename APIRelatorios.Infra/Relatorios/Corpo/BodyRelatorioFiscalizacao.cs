@@ -51,12 +51,12 @@ internal class BodyRelatorioFiscalizacao
     {
         return new Paragraph(
             new ParagraphProperties(
-                new Justification { Val = JustificationValues.Center },
-                 new SpacingBetweenLines
-                 {
-                     After = "400",
-                     Before = "400"
-                 }
+                new SpacingBetweenLines
+                {
+                    After = "400",
+                    Before = "400"
+                },
+                new Justification { Val = JustificationValues.Center }
             ),
 
             new Run(

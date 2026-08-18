@@ -33,7 +33,8 @@ public static class SubTemaAlimentadoresMapper
             { SubTemaAlimentadores.PostesDesalinhadosOuForaDePrumo, "Poste desalinhado ou fora de prumo" },
             { SubTemaAlimentadores.PosteSemEstabilidadeNaBase, "Poste com estabilidade na base comprometida" },
             { SubTemaAlimentadores.LocacaoInadequadaDePoste, "Poste instalado em local inadequado" },
-            { SubTemaAlimentadores.PosteMadeiraPodridaOcaOuComAberturas, "Poste de madeira com podridão, oco ou com aberturas" },
+            { SubTemaAlimentadores.PosteMadeiraPodridaOcaOuComAberturas, "Poste de madeira com podridão, oco, cupim ou com aberturas" },
+            { SubTemaAlimentadores.PosteDeFibra, "Poste de fibra de vidro danificado" },
 
             // Cruzetas
             { SubTemaAlimentadores.CruzetasDanificadas, "Cruzeta danificada" },
@@ -45,6 +46,9 @@ public static class SubTemaAlimentadoresMapper
             { SubTemaAlimentadores.IsoladoresComSujeiraOuFuligem, "Isoladores com sujeira ou fuligem" },
             { SubTemaAlimentadores.IsoladoresTortos, "Isoladores desalinhados ou fletidos" },
             { SubTemaAlimentadores.FixacaoIsoladoresNaCruzeta, "Isolador com fixação na cruzeta comprometida" },
+            { SubTemaAlimentadores.IsoladoresQuebrado, "Isoladore quebrado" },
+            { SubTemaAlimentadores.AusenciaIsoladores, "Ausência de Isolador"},
+            { SubTemaAlimentadores.IsoladorPolimero, "Isolador de polímero em rede nua" },
 
             // Condutores
             { SubTemaAlimentadores.EstadoFisicoCondutores, "Condutor com danos físicos" },
@@ -52,11 +56,13 @@ public static class SubTemaAlimentadoresMapper
             { SubTemaAlimentadores.AfastamentoArvoresEstruturas, "Afastamento inadequado de árvores ou estruturas" },
             { SubTemaAlimentadores.InstalacaoSuportesEspacadores, "Suportes ou espaçadores instalados inadequadamente, soltos, quebrados ou ausentes" },
             { SubTemaAlimentadores.AusenciaCaboNeutro, "Ausência de cabo neutro" },
+            { SubTemaAlimentadores.VaoMuitoGrande, "Vão muito grande entre os condutores" },
 
             // Segurança
             { SubTemaAlimentadores.CaboPartido, "Cabo partido" },
             { SubTemaAlimentadores.ProximidadeRedeComEdificacoes, "Rede elétrica próxima de edificações ou de estruturas" },
             { SubTemaAlimentadores.CondutoresMetalicosProximosOuTocandoRede, "Condutores metálicos próximos ou tocando a rede elétrica" },
+            { SubTemaAlimentadores.RedeDentroDePropriedadeParticular, "Rede elétrica dentro de propriedade particular" },
 
             // Aterramento
             { SubTemaAlimentadores.PresencaEstadoCondutorAterramento, "Condutor de aterramento ausente ou em más condições" },
@@ -75,6 +81,7 @@ public static class SubTemaAlimentadoresMapper
             { SubTemaAlimentadores.IntegridadeFisica, "Chave ou religador com integridade física comprometida" },
             { SubTemaAlimentadores.ContatosEManobrabilidade, "Chave ou religador com problemas nos contatos ou na manobrabilidade" },
             { SubTemaAlimentadores.SinalizacaoDePosicao, "Chave ou religador com sinalização de posição inadequada" },
+            { SubTemaAlimentadores.Furto, "Furto de equipamentos" },
 
             // Para-raios
             { SubTemaAlimentadores.AusenciaParaRaios, "Ausência de para-raios" },
