@@ -14,6 +14,8 @@ public class BuscarRotaFiltersQuery
 
     public TipoFiscalizacao? tipoFiscalizacao { get; set; }
 
+    public bool isValid {get; set;}
+
     public int page { get; set; }
     public int pagesize {  get; set; }
 }

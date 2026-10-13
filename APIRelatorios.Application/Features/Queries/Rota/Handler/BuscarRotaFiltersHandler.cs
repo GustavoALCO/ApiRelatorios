@@ -201,6 +201,15 @@ public class BuscarRotaFiltersHandler
                     commands.tipoFiscalizacao.Value
             );
         }
+        if (commands.isValid != false)
+        {
+            _logger.LogInformation(
+                "Aplicando Tipo de Rota Valida: {isvalid}",
+                commands.isValid
+            );
+
+            query = query.Where(rota => rota.isValid == commands.isValid);
+        }
         else
         {
             _logger.LogInformation(
