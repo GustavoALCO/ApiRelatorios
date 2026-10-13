@@ -30,6 +30,8 @@ public class UpdateNomeRotaHandler
 
         rota.AlterarNomeRota(updNome.nomeRota);
 
+        rota.AlterarAlimentador(updNome.alimentador);
+
         await _commands.UpdateRotaAsync(rota);
     }
 }

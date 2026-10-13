@@ -13,7 +13,7 @@ public class UpdateNomeRotaValidate :AbstractValidator<UpdateNomeRotaCommand>
             .NotNull().WithMessage("É necessario passar um id")
             .WithMessage("Erro ao identificar rota");
 
-        RuleFor(x => x.rotaId)
+        RuleFor(x => x.nomeRota)
             .NotEmpty().WithMessage("É necessario passar um nome para atualizar")
             .NotNull().WithMessage("É necessario passar um nome para atualizar");
     }

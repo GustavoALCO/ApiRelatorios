@@ -11,6 +11,7 @@ public class AlterarUsuarioValidate : AbstractValidator<AlterarUsuarioCommand>
         RuleFor(x => x.userId)
             .NotEmpty().WithMessage("Deve passar o Id")
             .NotNull().WithMessage("Deve passar o Id")
+            .GreaterThan(0).WithMessage("O Id deve ser maior que zero")
             ;
     }
 }

@@ -69,10 +69,10 @@ public class CreateRelatorioHandler : ICommandHandler<CreateRelatorioAmostraComm
                     irregularidades.Add($"TUC4: {am.TUC4}");
 
                 if (am.TUC5 != null)
-                    irregularidades.Add($"TUC4: {am.TUC5}");
+                    irregularidades.Add($"TUC5: {am.TUC5}");
 
                 if (am.TUC6 != null)
-                    irregularidades.Add($"TUC5: {am.TUC6}");
+                    irregularidades.Add($"TUC6: {am.TUC6}");
 
                 if(am.NumSerie != null)
                     irregularidades.Add($"NumSerie: {am.NumSerie}");

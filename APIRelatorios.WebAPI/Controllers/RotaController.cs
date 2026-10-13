@@ -96,8 +96,8 @@ public class RotaController : ControllerBase
     }
 
     [Authorize]
-    [HttpDelete("{rotaId}")]
-    public async Task<IActionResult> Delete( DeleteRotaCommand rotaId)
+    [HttpDelete()]
+    public async Task<IActionResult> Delete([FromQuery] DeleteRotaCommand rotaId)
     {
 
         await _dispatcher.Send<DeleteRotaCommand>(rotaId);

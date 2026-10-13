@@ -48,9 +48,16 @@ public class Rota
             UserId = userId
         });
     }
-    public void AlterarNomeRota(string nomeRota)
+    public void AlterarNomeRota(string? nomeRota)
     {
-        NomeRota = nomeRota;    
+        if(nomeRota != null)
+            NomeRota = nomeRota;    
+    }
+
+    public void AlterarAlimentador(string? nomeAlimentador)
+    {
+        if(nomeAlimentador != null)
+            Alimentador = nomeAlimentador;    
     }
 
     public void finalizandoRota(DateTime dataFinal, double km)

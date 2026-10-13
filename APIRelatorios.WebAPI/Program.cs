@@ -16,7 +16,6 @@ builder.WebHost.ConfigureKestrel(options =>
 //Exceptions
 builder.Services.AddProblemDetails();
 
-
 builder.Services.AddExceptionHandler<AzureErrorExceptionsHandler>();
 
 builder.Services.AddExceptionHandler<AuthenticationExceptionHandler>();

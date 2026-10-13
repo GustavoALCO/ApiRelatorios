@@ -17,6 +17,10 @@ public class CreateEvidenciaValidations
             .WithMessage(
                 "É obrigatorio passar um Base64 como imagem");
 
+        RuleForEach(x => x.Base64)
+            .Must(validateBase64.IsValidBase64String)
+            .WithMessage("Uma ou mais imagens não estão em Base64 válido");
+
         RuleFor(x => x.Latitude)
             .NotNull()
             .WithMessage(
