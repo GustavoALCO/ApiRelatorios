@@ -30,6 +30,6 @@ public class DeleteRotaHandler
         // Altera o estado da rota para excluída
         rota.ExcluirRota();
 
-        await _commands.DeleteRotaAsync(rota);
+        await _commands.UpdateRotaAsync(rota);
     }
 }

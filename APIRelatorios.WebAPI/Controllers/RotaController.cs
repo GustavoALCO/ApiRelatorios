@@ -99,10 +99,8 @@ public class RotaController : ControllerBase
     [HttpDelete()]
     public async Task<IActionResult> Delete([FromQuery] DeleteRotaCommand rotaId)
     {
-
         await _dispatcher.Send<DeleteRotaCommand>(rotaId);
         return Ok();
-
     }
 
     [Authorize]
